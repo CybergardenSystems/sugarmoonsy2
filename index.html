@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sugar Moon Sweets – Bio-Sirup-Manufaktur Fulda | Online Shop</title>
+<meta name="description" content="Handgemachte Bio-Sirupe & Limonaden aus Fulda. Jetzt online bestellen – natürlich, kreativ, mit Liebe.">
+<meta property="og:title" content="Sugar Moon Sweets – Bio-Sirup-Manufaktur Fulda">
+<meta property="og:description" content="Handgemachte Bio-Sirupe & Limonaden aus Fulda. Jetzt online bestellen.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sugarmoonsweets.de">
+<meta property="og:image" content="https://sugarmoonsweets.de/wp-content/uploads/2025/11/ce30e98e-633c-4ed7-b5b3-050b0465be3e-520x1024.jpg">
+<meta name="theme-color" content="#C6892F">
+<link rel="icon" href="https://sugarmoonsweets.de/favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --honey:#C6892F;--honey-light:#DDA854;--honey-glow:#F0D08A;--honey-pale:rgba(198,137,47,0.08);
+  --dark:#1E1108;--dark-mid:#3D2B1C;--dark-soft:#6B5545;
+  --cream:#FDF8F0;--cream-deep:#F3EADB;--cream-warm:#EBE0CF;
+  --ivory:#FFFDF8;
+  --sage:#5E8C5A;--sage-pale:rgba(94,140,90,0.08);
+  --plum:#8768AB;--plum-pale:rgba(135,104,171,0.08);
+  --rose:#C07A6E;
+  --text:#241A10;--text-2:#5C4D3F;--text-3:#9A8E82;
+  --white:#fff;--radius:16px;--radius-lg:24px;
+  --shadow-sm:0 2px 12px rgba(30,17,8,0.04);
+  --shadow-md:0 8px 30px rgba(30,17,8,0.06);
+  --shadow-lg:0 20px 60px rgba(30,17,8,0.08);
+  --shadow-xl:0 30px 80px rgba(30,17,8,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--ivory);overflow-x:hidden;line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;line-height:1.15;font-optical-sizing:auto}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+
+/* ────── NAV ────── */
+.nav{position:fixed;top:0;width:100%;z-index:100;padding:0;transition:all .5s cubic-bezier(.22,1,.36,1)}
+.nav-inner{max-width:1320px;margin:.8rem auto;display:flex;justify-content:space-between;align-items:center;padding:.65rem 1.8rem;border-radius:100px;background:rgba(30,17,8,.85);backdrop-filter:blur(20px);border:1px solid rgba(198,137,47,.1);box-shadow:0 4px 30px rgba(0,0,0,.12);transition:all .5s cubic-bezier(.22,1,.36,1)}
+.nav.stuck .nav-inner{margin:.5rem auto;background:rgba(30,17,8,.92);box-shadow:0 4px 40px rgba(0,0,0,.18);border-color:rgba(198,137,47,.15)}
+.logo{display:flex;align-items:center;gap:.55rem;text-decoration:none}
+.logo svg{width:36px;height:36px;transition:transform .3s}
+.logo:hover svg{transform:rotate(-6deg) scale(1.06)}
+.logo-text{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--cream);letter-spacing:-.01em}
+.logo-text em{font-style:normal;color:var(--honey)}
+.nav-mid{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-mid a{text-decoration:none;color:rgba(253,248,240,.5);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:all .3s;position:relative;padding:.3rem 0}
+.nav-mid a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:1px;background:var(--honey);transition:all .35s cubic-bezier(.22,1,.36,1);transform:translateX(-50%)}
+.nav-mid a:hover{color:var(--honey-light)}
+.nav-mid a:hover::after{width:80%}
+.nav-end{display:flex;align-items:center;gap:.6rem}
+.nav-shop{background:var(--honey);color:#fff;padding:.5rem 1.3rem;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .3s;border:none;cursor:pointer;box-shadow:0 2px 12px rgba(198,137,47,.25)}
+.nav-shop:hover{background:var(--honey-light);transform:translateY(-1px);box-shadow:0 4px 18px rgba(198,137,47,.35)}
+.cart-icon{position:relative;background:rgba(253,248,240,.06);border:1px solid rgba(253,248,240,.08);cursor:pointer;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .25s;font-size:1rem}
+.cart-icon:hover{background:rgba(198,137,47,.15);border-color:rgba(198,137,47,.25)}
+.cart-dot{position:absolute;top:-4px;right:-4px;width:17px;height:17px;border-radius:50%;background:var(--honey);color:#fff;font-size:.58rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:transform .3s;border:2px solid var(--dark)}
+.cart-dot.pop{animation:bop .35s ease}
+@keyframes bop{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}
+.burger{display:none;background:none;border:none;cursor:pointer;width:32px;height:32px;position:relative}
+.burger span{display:block;width:18px;height:1.5px;background:var(--cream);position:absolute;left:7px;transition:all .3s}
+.burger span:nth-child(1){top:10px}
+.burger span:nth-child(2){top:15px}
+.burger span:nth-child(3){top:20px}
+
+/* ────── HERO ────── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;background:var(--cream)}
+.hero-decor{position:absolute;inset:0;pointer-events:none}
+.hero-decor .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45}
+.orb-a{width:55vw;height:55vw;top:-18%;right:-14%;background:radial-gradient(circle,rgba(198,137,47,.2),transparent 70%);animation:orbFloat 22s ease-in-out infinite alternate}
+.orb-b{width:35vw;height:35vw;bottom:-5%;left:-8%;background:radial-gradient(circle,rgba(94,140,90,.1),transparent 70%);animation:orbFloat 28s ease-in-out infinite alternate-reverse}
+.orb-c{width:28vw;height:28vw;top:20%;left:30%;background:radial-gradient(circle,rgba(135,104,171,.07),transparent 70%);animation:orbFloat 18s ease-in-out 3s infinite alternate}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(25px,-20px) scale(1.06)}}
+
+/* Hero top: text + image side by side */
+.hero-top{max-width:1320px;margin:0 auto;padding:8.5rem 2.5rem 2.5rem;display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;position:relative;z-index:2}
+.hero-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:100px;font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);border:1px solid rgba(94,140,90,.22);background:var(--sage-pale);margin-bottom:1.8rem;animation:riseIn .7s ease both}
+.hero h1{font-size:clamp(2.8rem,5.2vw,4.4rem);color:var(--dark);margin-bottom:1.2rem;letter-spacing:-.03em;animation:riseIn .7s ease .12s both}
+.hero h1 em{font-style:italic;color:var(--honey)}
+.hero-sub{font-size:1.08rem;color:var(--text-2);max-width:460px;margin-bottom:2rem;line-height:1.8;font-weight:300;animation:riseIn .7s ease .24s both}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;animation:riseIn .7s ease .36s both}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;border-radius:100px;font-weight:600;font-size:.88rem;text-decoration:none;transition:all .3s;border:none;cursor:pointer;font-family:inherit;letter-spacing:.01em}
+.btn-fill{background:var(--honey);color:#fff;box-shadow:0 4px 22px rgba(198,137,47,.28)}
+.btn-fill:hover{background:var(--dark);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--dark);border:1.5px solid var(--dark)}
+.btn-line:hover{background:var(--dark);color:var(--cream)}
+
+/* Hero trust strip under buttons */
+.hero-trust{display:flex;gap:1.8rem;margin-top:2rem;flex-wrap:wrap;animation:riseIn .7s ease .48s both}
+.ht-item{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--text-3);font-weight:400}
+.ht-item span{font-size:1rem}
+
+/* Hero visual — always visible, centered product showcase */
+.hero-vis{position:relative;display:flex;justify-content:center;align-items:center;animation:riseIn .9s ease .2s both}
+.hero-frame{position:relative;width:400px;height:400px}
+.hero-logo-bg{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;filter:drop-shadow(0 25px 60px rgba(30,17,8,.2)) drop-shadow(0 0 80px rgba(198,137,47,.1));animation:logoSpin 60s linear infinite}
+@keyframes logoSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.hero-frame-ring{position:absolute;inset:-12px;border-radius:50%;border:1.5px solid rgba(198,137,47,.15);animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.015);opacity:1}}
+.hero-img{position:absolute;z-index:2;top:50%;left:50%;transform:translate(-50%,-48%);width:200px;height:auto;max-height:360px;object-fit:contain;filter:drop-shadow(0 20px 45px rgba(0,0,0,.2));border-radius:10px}
+.hero-chip{position:absolute;z-index:3;background:var(--white);padding:.6rem 1rem;border-radius:14px;box-shadow:var(--shadow-md);font-size:.76rem;font-weight:500;display:flex;align-items:center;gap:.4rem;color:var(--dark);white-space:nowrap}
+.hero-chip.c1{top:8%;right:-6%;animation:chipFloat 5s ease-in-out infinite}
+.hero-chip.c2{bottom:20%;left:-10%;animation:chipFloat 6s ease-in-out .8s infinite}
+.hero-chip.c3{top:50%;right:-12%;animation:chipFloat 5.5s ease-in-out 1.4s infinite}
+@keyframes chipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* Hero bottom: popular product previews */
+.hero-bottom{max-width:1320px;margin:0 auto;padding:1.5rem 2.5rem 3.5rem;position:relative;z-index:2;animation:riseIn .7s ease .6s both}
+.hero-picks-label{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:1rem;text-align:center}
+.hero-picks{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.hero-pick{display:flex;align-items:center;gap:.7rem;background:var(--white);border:1px solid rgba(30,17,8,.04);border-radius:16px;padding:.7rem 1.2rem .7rem .7rem;cursor:pointer;transition:all .35s;text-decoration:none;color:var(--text)}
+.hero-pick:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--honey)}
+.hero-pick-emoji{width:44px;height:44px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;transition:transform .35s}
+.hero-pick:hover .hero-pick-emoji{transform:scale(1.1) rotate(-5deg)}
+.hero-pick-info{display:flex;flex-direction:column}
+.hero-pick-name{font-family:'Fraunces',serif;font-size:.88rem;font-weight:600;color:var(--dark);line-height:1.2}
+.hero-pick-price{font-size:.72rem;color:var(--honey);font-weight:600}
+
+@keyframes riseIn{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+
+/* ────── MARQUEE ────── */
+.marquee{background:var(--dark);padding:.85rem 0;overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:scroll 35s linear infinite}
+.marquee-item{display:inline-flex;align-items:center;gap:.5rem;color:rgba(253,248,240,.55);font-size:.8rem;font-weight:400;letter-spacing:.04em;padding:0 2rem}
+.marquee-item span{color:var(--honey);font-size:.65rem}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ────── SECTION ────── */
+section{padding:6rem 2.5rem}
+.mx{max-width:1200px;margin:0 auto}
+.label{display:inline-flex;align-items:center;gap:.5rem;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--honey);margin-bottom:.8rem}
+.label::before{content:'';width:18px;height:1.5px;background:var(--honey)}
+.stitle{font-size:clamp(2rem,3.5vw,2.9rem);color:var(--dark);margin-bottom:.8rem;letter-spacing:-.02em}
+.ssub{font-size:1.02rem;color:var(--text-2);max-width:520px;line-height:1.8;font-weight:300}
+
+/* ────── FEATURES ────── */
+.feat{background:var(--ivory)}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3rem}
+.feat-c{padding:2.2rem 1.8rem;border-radius:var(--radius-lg);background:var(--cream);border:1px solid rgba(198,137,47,.04);transition:all .4s;position:relative;overflow:hidden}
+.feat-c::after{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--honey),var(--sage));transform:scaleX(0);transform-origin:left;transition:transform .45s}
+.feat-c:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.feat-c:hover::after{transform:scaleX(1)}
+.feat-i{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1.2rem}
+.feat-c:nth-child(1) .feat-i{background:var(--honey-pale)}
+.feat-c:nth-child(2) .feat-i{background:var(--sage-pale)}
+.feat-c:nth-child(3) .feat-i{background:var(--plum-pale)}
+.feat-c h3{font-size:1.1rem;margin-bottom:.4rem;color:var(--dark)}
+.feat-c p{font-size:.85rem;color:var(--text-2);font-weight:300;line-height:1.7}
+
+/* ────── SHOP ────── */
+.shop{background:linear-gradient(180deg,var(--cream) 0%,var(--ivory) 100%)}
+.shop-hdr{text-align:center;margin-bottom:1.5rem}
+.shop-hdr .ssub{margin:0 auto}
+.filters{display:flex;justify-content:center;gap:.35rem;margin-bottom:2.8rem;flex-wrap:wrap}
+.fbtn{background:var(--white);border:1px solid rgba(30,17,8,.07);padding:.42rem 1.05rem;border-radius:100px;font-size:.76rem;font-weight:500;cursor:pointer;transition:all .25s;color:var(--text-2);font-family:inherit;letter-spacing:.02em}
+.fbtn.on,.fbtn:hover{background:var(--dark);color:var(--cream);border-color:var(--dark)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.4rem}
+
+/* PRODUCT CARD — larger, more visual, shop-oriented */
+.card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;transition:all .4s cubic-bezier(.22,1,.36,1);position:relative;display:flex;flex-direction:column;border:1px solid rgba(30,17,8,.03)}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.card-badge{position:absolute;top:.8rem;left:.8rem;background:var(--honey);color:#fff;font-size:.6rem;font-weight:700;padding:.2rem .55rem;border-radius:100px;letter-spacing:.06em;text-transform:uppercase;z-index:2}
+.card-visual{background:var(--cream);padding:2rem 1rem 1.2rem;text-align:center;position:relative;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.card-visual.has-img{padding:0;min-height:0}
+.card-emoji{font-size:4rem;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1);filter:drop-shadow(0 6px 12px rgba(0,0,0,.06))}
+.card:hover .card-emoji{transform:scale(1.12) rotate(-5deg) translateY(-4px)}
+.card-prod-img{width:100%;height:auto;display:block;object-fit:cover;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.card:hover .card-prod-img{transform:scale(1.04)}
+.card-season{display:inline-block;margin-top:.7rem;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;background:var(--white);color:var(--plum)}
+.card-body{padding:1.4rem 1.4rem 1.2rem;flex:1;display:flex;flex-direction:column}
+.card-name{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;color:var(--dark);margin-bottom:.25rem}
+.card-desc{font-size:.82rem;color:var(--text-3);font-weight:300;margin-bottom:.8rem;line-height:1.55}
+.card-price-row{display:flex;align-items:baseline;gap:.4rem;margin-bottom:.5rem}
+.card-price{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:700;color:var(--honey)}
+.card-unit{font-size:.72rem;color:var(--text-3);font-weight:400}
+.card-sizes{display:flex;gap:.3rem;margin-bottom:.8rem}
+.card-sz{padding:.22rem .6rem;border-radius:100px;border:1.5px solid rgba(30,17,8,.09);background:var(--white);font-size:.68rem;font-weight:500;cursor:pointer;transition:all .2s;color:var(--text-2);font-family:inherit}
+.card-sz.on{background:var(--dark);color:#fff;border-color:var(--dark)}
+.card-bottom{display:flex;align-items:center;gap:.5rem;margin-top:auto}
+.qc{display:flex;align-items:center;border:1.5px solid rgba(30,17,8,.09);border-radius:10px;overflow:hidden}
+.qb{width:30px;height:30px;border:none;background:var(--white);cursor:pointer;font-size:.85rem;color:var(--dark);display:flex;align-items:center;justify-content:center;transition:background .2s;font-family:inherit}
+.qb:hover{background:var(--cream)}
+.qn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600;background:var(--cream);font-family:inherit}
+.atc{flex:1;background:var(--honey);color:#fff;border:none;padding:.55rem .8rem;border-radius:10px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:.3rem}
+.atc:hover{background:var(--dark);transform:translateY(-1px)}
+.atc.ok{background:var(--sage);pointer-events:none}
+
+.extras-note{text-align:center;margin-top:3rem}
+.extras-img{max-width:300px;width:100%;border-radius:var(--radius);box-shadow:var(--shadow-sm);margin:0 auto 1rem}
+.extras-note p{color:var(--text-3);font-size:.88rem;font-weight:300}
+
+/* ────── LEMO ────── */
+.lemo{background:linear-gradient(155deg,#ECE2F3 0%,var(--cream) 55%,var(--ivory) 100%);position:relative;overflow:hidden}
+.lemo::before{content:'';position:absolute;top:-15%;right:-8%;width:35vw;height:35vw;border-radius:50%;background:radial-gradient(circle,rgba(135,104,171,.07),transparent 70%);pointer-events:none}
+.lemo-cards{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.lemo-card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;border:1px solid rgba(30,17,8,.04);transition:all .4s;display:flex;flex-direction:column}
+.lemo-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.lemo-card-img{padding:2rem 1.5rem 1rem;display:flex;justify-content:center;align-items:center;min-height:260px}
+.lemo-card-lav{background:linear-gradient(180deg,#E8DFF3 0%,#F3EEF9 100%)}
+.lemo-card-kra{background:linear-gradient(180deg,#DEF0DA 0%,#EFF7ED 100%)}
+.lemo-card-img img{max-height:230px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 10px 25px rgba(0,0,0,.1));transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.lemo-card:hover .lemo-card-img img{transform:scale(1.04) translateY(-4px)}
+.lemo-card-body{padding:1.5rem 1.6rem 1.4rem;flex:1;display:flex;flex-direction:column}
+.lemo-card-tag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border-radius:100px;margin-bottom:.6rem;width:fit-content}
+.lemo-card h3{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:700;color:var(--dark);margin-bottom:.15rem}
+.lemo-card-type{font-size:.82rem;color:var(--text-3);margin-bottom:1rem;font-weight:400}
+.lemo-card-details{display:flex;flex-direction:column;gap:.3rem;margin-bottom:1rem}
+.lemo-card-details span{font-size:.78rem;color:var(--text-2);font-weight:400}
+.lemo-card-zutaten{font-size:.72rem;color:var(--text-3);line-height:1.6;padding:.8rem;background:var(--cream);border-radius:10px;margin-bottom:1.2rem;font-weight:300}
+.lemo-card-zutaten strong{font-weight:600;color:var(--text-2)}
+.lemo-card-zutaten small{color:var(--text-3);font-size:.65rem}
+.lemo-card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.lemo-card-price{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--dark)}
+.lbtn{padding:.6rem 1.2rem;border-radius:100px;border:none;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:inherit;display:flex;align-items:center;gap:.35rem}
+.lbtn:hover{transform:translateY(-2px)}
+.lbtn-a{background:var(--plum);color:#fff;box-shadow:0 4px 15px rgba(135,104,171,.2)}
+.lbtn-b{background:var(--sage);color:#fff;box-shadow:0 4px 15px rgba(94,140,90,.2)}
+
+/* ────── STORY ────── */
+.story{background:var(--dark);color:var(--cream);position:relative;overflow:hidden}
+.story::before{content:'';position:absolute;top:-40%;right:-12%;width:50%;height:180%;background:radial-gradient(ellipse,rgba(198,137,47,.06),transparent 60%);pointer-events:none}
+.story-g{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+.story .label{color:var(--honey-light)}
+.story .label::before{background:var(--honey-light)}
+.story .stitle{color:var(--cream)}
+.story p{color:rgba(253,248,240,.6);margin-bottom:1.3rem;font-size:.98rem;font-weight:300;line-height:1.8}
+.story strong{color:var(--honey-light);font-weight:500}
+.story em{color:rgba(253,248,240,.75)}
+.story-photo-wrap{position:relative;border-radius:var(--radius-lg);overflow:hidden}
+.story-photo{width:100%;border-radius:var(--radius-lg);box-shadow:0 25px 60px rgba(0,0,0,.2)}
+.story-bar{position:absolute;bottom:0;left:0;right:0;display:flex;background:rgba(30,17,8,.82);backdrop-filter:blur(14px);border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+.sb-i{flex:1;padding:1rem;text-align:center;border-right:1px solid rgba(253,248,240,.06)}
+.sb-i:last-child{border-right:none}
+.sb-n{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;color:var(--honey-light);display:block}
+.sb-l{font-size:.68rem;color:rgba(253,248,240,.4);display:block;margin-top:.1rem;letter-spacing:.03em}
+
+/* ────── REVIEWS ────── */
+.rev{background:var(--ivory)}
+.rev-hdr{text-align:center;margin-bottom:2.8rem}
+.rev-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.rev-c{background:var(--white);border-radius:var(--radius-lg);padding:2rem 1.6rem;border:1px solid rgba(30,17,8,.03);transition:all .35s;position:relative}
+.rev-c::before{content:'\201C';position:absolute;top:.7rem;left:1.2rem;font-family:'Fraunces',serif;font-size:3.5rem;color:var(--honey-glow);line-height:1}
+.rev-c:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.rev-stars{color:var(--honey);font-size:.78rem;margin-bottom:.7rem;letter-spacing:2px}
+.rev-txt{font-size:.88rem;color:var(--text-2);line-height:1.75;font-style:italic;margin-bottom:1rem;font-weight:300}
+.rev-who{font-weight:600;font-size:.82rem;color:var(--dark)}
+
+/* ────── CTA ────── */
+.cta-s{background:linear-gradient(135deg,var(--honey) 0%,var(--honey-light) 100%);text-align:center;position:relative;overflow:hidden}
+.cta-s .stitle{color:#fff}
+.cta-s p{color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:2.2rem;max-width:460px;margin-left:auto;margin-right:auto;font-weight:300}
+.cta-s .btn-fill{background:#fff;color:var(--honey);box-shadow:var(--shadow-sm)}
+.cta-s .btn-fill:hover{background:var(--dark);color:#fff}
+
+/* ────── FOOTER ────── */
+footer{background:var(--dark);color:rgba(253,248,240,.45);padding:4rem 2.5rem 1.8rem}
+.ft-g{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+.ft-brand{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:var(--cream);margin-bottom:.7rem}
+.ft-brand em{font-style:normal;color:var(--honey)}
+.ft-d{font-size:.82rem;line-height:1.7;color:rgba(253,248,240,.35)}
+.ft-col h4{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(253,248,240,.25);margin-bottom:1rem;font-family:'Outfit',sans-serif}
+.ft-col a{display:block;color:rgba(253,248,240,.45);text-decoration:none;font-size:.82rem;margin-bottom:.45rem;transition:color .25s}
+.ft-col a:hover{color:var(--honey-light)}
+.ft-b{max-width:1200px;margin:0 auto;border-top:1px solid rgba(253,248,240,.05);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:rgba(253,248,240,.25);flex-wrap:wrap;gap:.5rem}
+.ft-b a{color:rgba(253,248,240,.25);text-decoration:none;margin-left:1.2rem;transition:color .25s}
+.ft-b a:hover{color:var(--honey-light)}
+
+/* ────── CART SIDEBAR ────── */
+.c-ov{position:fixed;inset:0;background:rgba(30,17,8,.4);z-index:200;opacity:0;visibility:hidden;transition:all .3s;backdrop-filter:blur(4px)}
+.c-ov.open{opacity:1;visibility:visible}
+.c-sb{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:92vw;background:var(--ivory);z-index:201;transform:translateX(100%);transition:transform .45s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,.06)}
+.c-sb.open{transform:translateX(0)}
+.c-top{padding:1.3rem 1.6rem;border-bottom:1px solid rgba(30,17,8,.05);display:flex;justify-content:space-between;align-items:center}
+.c-top h3{font-size:1.15rem;color:var(--dark)}
+.c-x{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text-3);transition:color .2s}
+.c-x:hover{color:var(--rose)}
+.c-list{flex:1;overflow-y:auto;padding:1rem 1.6rem}
+.c-item{display:grid;grid-template-columns:auto 1fr auto;gap:.65rem;padding:.85rem 0;border-bottom:1px solid rgba(30,17,8,.04);align-items:center}
+.c-item-e{font-size:1.5rem}
+.c-item-n{font-weight:500;font-size:.85rem;color:var(--dark)}
+.c-item-d{font-size:.7rem;color:var(--text-3)}
+.c-item-r{text-align:right}
+.c-item-p{font-weight:600;color:var(--honey);font-size:.88rem}
+.c-item-acts{display:flex;align-items:center;gap:.2rem;margin-top:.2rem;justify-content:flex-end}
+.cib{width:22px;height:22px;border:1px solid rgba(30,17,8,.08);border-radius:5px;background:var(--white);cursor:pointer;font-size:.72rem;display:flex;align-items:center;justify-content:center;color:var(--dark);transition:all .2s}
+.cib:hover{border-color:var(--honey);color:var(--honey)}
+.ciq{font-weight:600;font-size:.72rem;min-width:14px;text-align:center}
+.cirm{background:none;border:none;color:var(--text-3);cursor:pointer;font-size:.8rem;padding:0 .1rem;transition:color .2s}
+.cirm:hover{color:var(--rose)}
+.c-empty{text-align:center;padding:3rem 1rem;color:var(--text-3)}
+.c-empty-i{font-size:2.2rem;margin-bottom:.6rem;opacity:.3}
+.c-bot{padding:1.2rem 1.6rem;border-top:1px solid rgba(30,17,8,.05);background:var(--white)}
+.c-tot{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.c-tot-l{font-size:.92rem;font-weight:500}
+.c-tot-p{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:700;color:var(--dark)}
+.c-go{width:100%;padding:.85rem;border:none;border-radius:12px;background:var(--dark);color:#fff;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:inherit}
+.c-go:hover{background:var(--honey)}
+.c-note{font-size:.68rem;color:var(--text-3);text-align:center;margin-top:.5rem}
+
+/* ────── ORDER ────── */
+.o-ov{position:fixed;inset:0;background:rgba(30,17,8,.45);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s;backdrop-filter:blur(6px);padding:1rem}
+.o-ov.open{opacity:1;visibility:visible}
+.o-m{background:var(--ivory);border-radius:var(--radius-lg);max-width:520px;width:100%;max-height:90vh;overflow-y:auto;padding:2.2rem;position:relative;transform:translateY(22px);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.o-ov.open .o-m{transform:translateY(0)}
+.o-x{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-3)}
+.o-m h2{font-size:1.4rem;color:var(--dark);margin-bottom:.3rem}
+.o-desc{color:var(--text-3);font-size:.88rem;margin-bottom:1.6rem;font-weight:300}
+.o-sum{background:var(--cream);border-radius:14px;padding:1rem 1.2rem;margin-bottom:1.6rem}
+.osi{display:flex;justify-content:space-between;padding:.3rem 0;font-size:.8rem}
+.osi:not(:last-child){border-bottom:1px solid rgba(30,17,8,.04)}
+.ost{display:flex;justify-content:space-between;padding-top:.6rem;margin-top:.3rem;border-top:2px solid var(--dark);font-weight:700;font-size:1rem;color:var(--dark)}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:.72rem;font-weight:600;color:var(--dark);margin-bottom:.3rem;letter-spacing:.03em}
+.fg input,.fg textarea{width:100%;padding:.65rem .85rem;border:1.5px solid rgba(30,17,8,.08);border-radius:10px;font-size:.88rem;font-family:inherit;transition:border-color .25s;background:var(--white);color:var(--text)}
+.fg input:focus,.fg textarea:focus{outline:none;border-color:var(--honey)}
+.fg textarea{resize:vertical;min-height:68px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.o-sub{width:100%;padding:.85rem;border:none;border-radius:12px;background:var(--honey);color:#fff;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:inherit;margin-top:.2rem}
+.o-sub:hover{background:var(--dark)}
+.o-ok{text-align:center;padding:1.8rem 0;display:none}
+.o-ok.show{display:block;animation:riseIn .5s ease}
+.o-ok-i{font-size:3.2rem;margin-bottom:.7rem}
+.o-ok h3{font-size:1.3rem;color:var(--dark);margin-bottom:.3rem}
+.o-ok p{color:var(--text-2);line-height:1.7;font-weight:300;font-size:.92rem}
+
+/* ────── TOAST ────── */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(90px);background:var(--dark);color:#fff;padding:.75rem 1.6rem;border-radius:12px;font-size:.82rem;font-weight:400;z-index:500;box-shadow:var(--shadow-lg);transition:transform .4s cubic-bezier(.22,1,.36,1);white-space:nowrap;display:flex;align-items:center;gap:.4rem}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ────── 3D SCROLL SYSTEM ────── */
+
+/* Scroll-driven reveal classes */
+.rv{opacity:0;transform:translateY(50px) rotateX(8deg) scale(.95);transition:all .9s cubic-bezier(.22,1,.36,1);transform-origin:center bottom}
+.rv.vis{opacity:1;transform:translateY(0) rotateX(0) scale(1)}
+
+/* Staggered children */
+.rv-stagger .rv:nth-child(1){transition-delay:0s}
+.rv-stagger .rv:nth-child(2){transition-delay:.12s}
+.rv-stagger .rv:nth-child(3){transition-delay:.24s}
+.rv-stagger .rv:nth-child(4){transition-delay:.36s}
+.rv-stagger .rv:nth-child(5){transition-delay:.48s}
+
+/* 3D tilt cards on hover */
+.tilt-card{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease;transform-style:preserve-3d}
+
+/* Parallax layers */
+
+/* Floating 3D elements */
+
+/* Section depth layers */
+
+
+/* 3D card flip on scroll into view */
+
+
+/* Scroll progress indicator */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--honey),var(--honey-light),var(--honey-glow));z-index:9999;width:0%;transition:width .1s linear;box-shadow:0 0 10px rgba(198,137,47,.5)}
+
+/* 3D section transitions */
+.feat-c:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+
+.rev-c:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+
+}
+
+/* Hero scroll shrink */
+.hero-frame{transition:transform .3s ease}
+
+/* Section entrance animations (scroll-triggered) */
+.slide-in-left{opacity:0;transform:translateX(-80px) rotateY(8deg);transition:all 1s cubic-bezier(.22,1,.36,1)}
+.slide-in-left.vis{opacity:1;transform:translateX(0) rotateY(0)}
+.slide-in-right{opacity:0;transform:translateX(80px) rotateY(-8deg);transition:all 1s cubic-bezier(.22,1,.36,1)}
+.slide-in-right.vis{opacity:1;transform:translateX(0) rotateY(0)}
+.scale-in{opacity:0;transform:scale(.8) rotateX(10deg);transition:all .9s cubic-bezier(.22,1,.36,1)}
+.scale-in.vis{opacity:1;transform:scale(1) rotateX(0)}
+
+/* Smooth zoom for story photo */
+.story-photo{transition:transform 8s cubic-bezier(.22,1,.36,1)}
+.story-photo-wrap:hover .story-photo{transform:scale(1.06)}
+
+/* Lemo card 3D */
+.lemo-card:hover{transform:translateY(-6px);box-shadow:0 25px 60px rgba(30,17,8,.1)}
+
+
+@media(max-width:1080px){
+}
+@media(max-width:768px){
+}
+@media(max-width:1080px){
+  .hero-top{grid-template-columns:1fr;text-align:center;padding-top:7rem;padding-bottom:2rem}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero-ctas{justify-content:center}
+  .hero-trust{justify-content:center}
+  .hero-vis{margin-top:1rem}
+  .hero-frame{width:300px;height:300px}
+  .hero-img{width:155px;max-height:270px}
+  .hero-chip{display:none}
+  .hero-picks{gap:.7rem}
+  .feat-grid{grid-template-columns:1fr;max-width:460px}
+  .lemo-g,.story-g{grid-template-columns:1fr}
+  .lemo-cards{grid-template-columns:1fr}
+  .lemo-vis{order:-1;display:flex;justify-content:center}
+  .rev-g{grid-template-columns:1fr;max-width:460px;margin:0 auto}
+  .ft-g{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-inner{margin:.5rem .8rem;padding:.55rem 1.2rem}
+  .nav-mid{display:none}
+  .nav-mid.open{display:flex;position:fixed;inset:0;background:rgba(30,17,8,.96);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;z-index:99;border-radius:0}
+  .nav-mid.open a{color:rgba(253,248,240,.7);font-size:1rem;letter-spacing:.12em}
+  .nav-mid.open a:hover{color:var(--honey-light)}
+  .burger{display:block}
+  .nav-shop{display:none}
+  section{padding:3.8rem 1.1rem}
+  .hero-top{padding:5.5rem 1.1rem 1.5rem;gap:2rem}
+  .hero-bottom{padding:1rem 1.1rem 2rem}
+  .hero-pick{padding:.5rem .9rem .5rem .5rem}
+  .hero-pick-emoji{width:36px;height:36px;font-size:1.1rem}
+  .hero-pick-name{font-size:.78rem}
+  .hero-picks-label{font-size:.65rem}
+  .grid{grid-template-columns:1fr 1fr}
+  .ft-g{grid-template-columns:1fr}
+  .ft-b{flex-direction:column;text-align:center}
+  .fr{grid-template-columns:1fr}
+  .lemo-btns{flex-direction:column}
+  .marquee-item{padding:0 1.2rem;font-size:.72rem}
+}
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr}
+  .hero h1{font-size:2.4rem}
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Sugar Moon Sweets",
+  "description": "Bio-Sirup-Manufaktur aus Fulda. Handgemachte Sirupe und Limonaden.",
+  "url": "https://sugarmoonsweets.de",
+  "email": "info@sugarmoonsweets.de",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Fulda",
+    "addressCountry": "DE"
+  },
+  "priceRange": "€€",
+  "image": "https://sugarmoonsweets.de/wp-content/uploads/2025/11/ce30e98e-633c-4ed7-b5b3-050b0465be3e-520x1024.jpg"
+}
+</script>
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scrollProg"></div>
+
+
+
+<!-- NAV -->
+<nav class="nav" id="nb" role="navigation" aria-label="Hauptnavigation">
+ <div class="nav-inner">
+  <a href="#" class="logo">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+      <!-- Outer circle -->
+      <circle cx="100" cy="100" r="97" fill="#1E1108"/>
+      <!-- Double ring border -->
+      <circle cx="100" cy="100" r="95" stroke="#C6892F" stroke-width=".6" opacity=".2"/>
+      <circle cx="100" cy="100" r="89" stroke="#C6892F" stroke-width=".35" opacity=".15"/>
+      <!-- Decorative dots around the ring -->
+      <circle cx="100" cy="7" r="1.5" fill="#C6892F" opacity=".3"/>
+      <circle cx="130" cy="10" r="1" fill="#C6892F" opacity=".2"/>
+      <circle cx="70" cy="10" r="1" fill="#C6892F" opacity=".2"/>
+      <circle cx="155" cy="20" r="1.2" fill="#C6892F" opacity=".2"/>
+      <circle cx="45" cy="20" r="1.2" fill="#C6892F" opacity=".2"/>
+      <circle cx="7" cy="100" r="1.5" fill="#C6892F" opacity=".15"/>
+      <circle cx="193" cy="100" r="1.5" fill="#C6892F" opacity=".15"/>
+      <!-- Ornamental divider lines -->
+      <line x1="30" y1="75" x2="42" y2="75" stroke="#C6892F" stroke-width=".4" opacity=".2"/>
+      <line x1="158" y1="75" x2="170" y2="75" stroke="#C6892F" stroke-width=".4" opacity=".2"/>
+      <!-- Large crescent moon — the centerpiece -->
+      <path d="M118 30C90 38 70 60 70 88C70 116 90 138 118 146C96 140 80 118 80 93C80 68 96 48 118 30Z" fill="#C6892F"/>
+      <path d="M118 30C90 38 70 60 70 88C70 116 90 138 118 146" stroke="#DDA854" stroke-width=".5" fill="none" opacity=".4"/>
+      <!-- Inner crescent highlight -->
+      <path d="M110 42C92 48 80 64 80 84C80 104 92 118 110 126" stroke="#F0D08A" stroke-width=".3" fill="none" opacity=".2" stroke-dasharray="2 3"/>
+      <!-- Sirup drop — golden drop falling from the moon's tip -->
+      <path d="M102 65C102 65 94 80 94 87C94 91.4 97.6 95 102 95C106.4 95 110 91.4 110 87C110 80 102 65 102 65Z" fill="#DDA854"/>
+      <ellipse cx="102" cy="86" rx="5" ry="4.5" fill="#F0D08A" opacity=".3"/>
+      <ellipse cx="100" cy="83" rx="2" ry="1.5" fill="#F0D08A" opacity=".25"/>
+      <!-- Second smaller drop -->
+      <path d="M114 100C114 100 111 106 111 109C111 110.7 112.3 112 114 112C115.7 112 117 110.7 117 109C117 106 114 100 114 100Z" fill="#DDA854" opacity=".6"/>
+      <!-- Stars scattered around -->
+      <!-- 4-point star shapes -->
+      <g opacity=".7"><path d="M140 42L141.2 45.5L145 46L141.2 46.5L140 50L138.8 46.5L135 46L138.8 45.5Z" fill="#DDA854"/></g>
+      <g opacity=".5"><path d="M152 62L152.8 64.5L155 65L152.8 65.5L152 68L151.2 65.5L149 65L151.2 64.5Z" fill="#DDA854"/></g>
+      <g opacity=".6"><path d="M145 82L145.6 83.8L147.5 84L145.6 84.2L145 86L144.4 84.2L142.5 84L144.4 83.8Z" fill="#F0D08A"/></g>
+      <!-- Tiny round stars -->
+      <circle cx="155" cy="48" r="1" fill="#DDA854" opacity=".4"/>
+      <circle cx="160" cy="75" r=".8" fill="#DDA854" opacity=".3"/>
+      <circle cx="148" cy="95" r="1.1" fill="#DDA854" opacity=".35"/>
+      <circle cx="135" cy="105" r=".7" fill="#DDA854" opacity=".25"/>
+      <circle cx="157" cy="55" r=".5" fill="#F0D08A" opacity=".4"/>
+      <circle cx="130" cy="35" r=".6" fill="#F0D08A" opacity=".35"/>
+      <!-- Botanical elements — leaves curving along bottom -->
+      <path d="M50 130C50 130 60 118 70 122C80 126 72 138 62 136C52 134 50 130 50 130Z" fill="#5E8C5A" opacity=".6"/>
+      <path d="M50 130C58 127 66 122" stroke="#4A7A4A" stroke-width=".4" fill="none" opacity=".4"/>
+      <path d="M55 135C55 135 62 130 67 133C72 136 67 141 62 140C57 139 55 135 55 135Z" fill="#5E8C5A" opacity=".4"/>
+      <!-- Right side small botanical -->
+      <path d="M142 125C142 125 148 119 153 122C158 125 153 131 148 130C143 129 142 125 142 125Z" fill="#5E8C5A" opacity=".45"/>
+      <path d="M142 125C147 123 151 120" stroke="#4A7A4A" stroke-width=".35" fill="none" opacity=".3"/>
+      <!-- SUGAR MOON text — curved along top -->
+      <path id="topArc" d="M32 82 A72 72 0 0 1 168 82" fill="none"/>
+      <text font-family="serif" font-size="12.5" fill="#C6892F" letter-spacing="5" font-weight="700">
+        <textPath href="#topArc" startOffset="50%" text-anchor="middle">SUGAR MOON</textPath>
+      </text>
+      <!-- SWEETS text — curved along bottom -->
+      <path id="botArc" d="M42 145 Q100 185 158 145" fill="none"/>
+      <text font-family="serif" font-size="11" fill="#C6892F" letter-spacing="6.5" font-weight="600">
+        <textPath href="#botArc" startOffset="50%" text-anchor="middle">SWEETS</textPath>
+      </text>
+      <!-- Small decorative diamond separators near text -->
+      <path d="M38 108L40 106L42 108L40 110Z" fill="#C6892F" opacity=".3"/>
+      <path d="M158 108L160 106L162 108L160 110Z" fill="#C6892F" opacity=".3"/>
+      <!-- Est. line -->
+      <text x="100" y="117" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#C6892F" opacity=".4" letter-spacing="2">· FULDA ·</text>
+    </svg>
+    <span class="logo-text">Sugar<em>Moon</em> Sweets</span>
+  </a>
+  <ul class="nav-mid" id="nLinks">
+    <li><a href="#story">Über uns</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#limo">Bio-Limo</a></li>
+    <li><a href="#rev">Bewertungen</a></li>
+  </ul>
+  <div class="nav-end">
+    <button class="cart-icon" onclick="toggleCart()" aria-label="Warenkorb">🛒<span class="cart-dot" id="cDot" aria-live="polite" aria-label="Artikel im Warenkorb">0</span></button>
+    <a href="#shop" class="nav-shop">Jetzt bestellen</a>
+    <button class="burger" id="burgerBtn" onclick="document.getElementById('nLinks').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('nLinks').classList.contains('open'))" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+ </div>
+</nav>
+
+<main id="main-content">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-decor" aria-hidden="true"><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div></div>
+  <div class="hero-top">
+    <div>
+      <div class="hero-pill">🌿 Bio-zertifiziert · Handgemacht in Fulda</div>
+      <h1>Sirup mit <em>Seele</em> — jetzt online bestellen</h1>
+      <p class="hero-sub">Handgemachte Bio-Sirupe für Kaffee, Cocktails & Desserts. Aus erlesenen Zutaten, ohne künstliche Zusätze — direkt von unserer Manufaktur zu dir.</p>
+      <div class="hero-ctas">
+        <a href="#shop" class="btn btn-fill">Zum Shop →</a>
+        <a href="#story" class="btn btn-line">Unsere Geschichte</a>
+      </div>
+      <div class="hero-trust">
+        <div class="ht-item"><span>🌱</span> 100% Bio</div>
+        <div class="ht-item"><span>✋</span> Handgemacht</div>
+        <div class="ht-item"><span>📦</span> Direkt zu dir</div>
+        <div class="ht-item"><span>⭐</span> 5-Sterne Bewertungen</div>
+      </div>
+    </div>
+    <div class="hero-vis">
+      <div class="hero-frame">
+        <div class="hero-frame-ring"></div>
+        <!-- Logo as background -->
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-logo-bg">
+          <circle cx="100" cy="100" r="97" fill="#1E1108"/>
+          <circle cx="100" cy="100" r="95" stroke="#C6892F" stroke-width=".6" opacity=".2"/>
+          <circle cx="100" cy="100" r="89" stroke="#C6892F" stroke-width=".35" opacity=".15"/>
+          <circle cx="100" cy="7" r="1.5" fill="#C6892F" opacity=".3"/>
+          <circle cx="130" cy="10" r="1" fill="#C6892F" opacity=".2"/>
+          <circle cx="70" cy="10" r="1" fill="#C6892F" opacity=".2"/>
+          <circle cx="155" cy="20" r="1.2" fill="#C6892F" opacity=".2"/>
+          <circle cx="45" cy="20" r="1.2" fill="#C6892F" opacity=".2"/>
+          <circle cx="7" cy="100" r="1.5" fill="#C6892F" opacity=".15"/>
+          <circle cx="193" cy="100" r="1.5" fill="#C6892F" opacity=".15"/>
+          <line x1="30" y1="75" x2="42" y2="75" stroke="#C6892F" stroke-width=".4" opacity=".2"/>
+          <line x1="158" y1="75" x2="170" y2="75" stroke="#C6892F" stroke-width=".4" opacity=".2"/>
+          <path d="M118 30C90 38 70 60 70 88C70 116 90 138 118 146C96 140 80 118 80 93C80 68 96 48 118 30Z" fill="#C6892F"/>
+          <path d="M118 30C90 38 70 60 70 88C70 116 90 138 118 146" stroke="#DDA854" stroke-width=".5" fill="none" opacity=".4"/>
+          <path d="M110 42C92 48 80 64 80 84C80 104 92 118 110 126" stroke="#F0D08A" stroke-width=".3" fill="none" opacity=".2" stroke-dasharray="2 3"/>
+          <path d="M102 65C102 65 94 80 94 87C94 91.4 97.6 95 102 95C106.4 95 110 91.4 110 87C110 80 102 65 102 65Z" fill="#DDA854"/>
+          <ellipse cx="102" cy="86" rx="5" ry="4.5" fill="#F0D08A" opacity=".3"/>
+          <ellipse cx="100" cy="83" rx="2" ry="1.5" fill="#F0D08A" opacity=".25"/>
+          <path d="M114 100C114 100 111 106 111 109C111 110.7 112.3 112 114 112C115.7 112 117 110.7 117 109C117 106 114 100 114 100Z" fill="#DDA854" opacity=".6"/>
+          <g opacity=".7"><path d="M140 42L141.2 45.5L145 46L141.2 46.5L140 50L138.8 46.5L135 46L138.8 45.5Z" fill="#DDA854"/></g>
+          <g opacity=".5"><path d="M152 62L152.8 64.5L155 65L152.8 65.5L152 68L151.2 65.5L149 65L151.2 64.5Z" fill="#DDA854"/></g>
+          <g opacity=".6"><path d="M145 82L145.6 83.8L147.5 84L145.6 84.2L145 86L144.4 84.2L142.5 84L144.4 83.8Z" fill="#F0D08A"/></g>
+          <circle cx="155" cy="48" r="1" fill="#DDA854" opacity=".4"/>
+          <circle cx="160" cy="75" r=".8" fill="#DDA854" opacity=".3"/>
+          <circle cx="148" cy="95" r="1.1" fill="#DDA854" opacity=".35"/>
+          <circle cx="135" cy="105" r=".7" fill="#DDA854" opacity=".25"/>
+          <circle cx="157" cy="55" r=".5" fill="#F0D08A" opacity=".4"/>
+          <circle cx="130" cy="35" r=".6" fill="#F0D08A" opacity=".35"/>
+          <path d="M50 130C50 130 60 118 70 122C80 126 72 138 62 136C52 134 50 130 50 130Z" fill="#5E8C5A" opacity=".6"/>
+          <path d="M50 130C58 127 66 122" stroke="#4A7A4A" stroke-width=".4" fill="none" opacity=".4"/>
+          <path d="M55 135C55 135 62 130 67 133C72 136 67 141 62 140C57 139 55 135 55 135Z" fill="#5E8C5A" opacity=".4"/>
+          <path d="M142 125C142 125 148 119 153 122C158 125 153 131 148 130C143 129 142 125 142 125Z" fill="#5E8C5A" opacity=".45"/>
+          <path d="M142 125C147 123 151 120" stroke="#4A7A4A" stroke-width=".35" fill="none" opacity=".3"/>
+          <path id="topArc2" d="M32 82 A72 72 0 0 1 168 82" fill="none"/>
+          <text font-family="serif" font-size="12.5" fill="#C6892F" letter-spacing="5" font-weight="700">
+            <textPath href="#topArc2" startOffset="50%" text-anchor="middle">SUGAR MOON</textPath>
+          </text>
+          <path id="botArc2" d="M42 145 Q100 185 158 145" fill="none"/>
+          <text font-family="serif" font-size="11" fill="#C6892F" letter-spacing="6.5" font-weight="600">
+            <textPath href="#botArc2" startOffset="50%" text-anchor="middle">SWEETS</textPath>
+          </text>
+          <path d="M38 108L40 106L42 108L40 110Z" fill="#C6892F" opacity=".3"/>
+          <path d="M158 108L160 106L162 108L160 110Z" fill="#C6892F" opacity=".3"/>
+          <text x="100" y="117" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#C6892F" opacity=".4" letter-spacing="2">· FULDA ·</text>
+        </svg>
+        <!-- Product image floating on top -->
+        <img src="https://sugarmoonsweets.de/wp-content/uploads/2025/11/ce30e98e-633c-4ed7-b5b3-050b0465be3e-520x1024.jpg" alt="Sugar Moon Sweets Sirupe" class="hero-img"/>
+        <div class="hero-chip c1">🌿 100% Bio</div>
+        <div class="hero-chip c2">☕ Für Kaffee</div>
+        <div class="hero-chip c3">🍸 Für Cocktails</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-picks-label">✦ Beliebte Sorten entdecken</div>
+    <div class="hero-picks">
+      <a href="#shop" class="hero-pick"><div class="hero-pick-emoji">🎃</div><div class="hero-pick-info"><span class="hero-pick-name">Pumpkin Spice</span><span class="hero-pick-price">ab 5,50 €</span></div></a>
+      <a href="#shop" class="hero-pick"><div class="hero-pick-emoji">🍮</div><div class="hero-pick-info"><span class="hero-pick-name">Karamell</span><span class="hero-pick-price">ab 5,50 €</span></div></a>
+      <a href="#shop" class="hero-pick"><div class="hero-pick-emoji">💜</div><div class="hero-pick-info"><span class="hero-pick-name">Lavendel</span><span class="hero-pick-price">ab 5,50 €</span></div></a>
+      <a href="#shop" class="hero-pick"><div class="hero-pick-emoji">🍦</div><div class="hero-pick-info"><span class="hero-pick-name">Vanille</span><span class="hero-pick-price">ab 5,50 €</span></div></a>
+      <a href="#shop" class="hero-pick"><div class="hero-pick-emoji">🟢</div><div class="hero-pick-info"><span class="hero-pick-name">Pistazie</span><span class="hero-pick-price">ab 5,50 €</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="marquee-track" id="mq"></div></div>
+
+<!-- FEATURES -->
+<section class="feat">
+  <div class="mx">
+    <div class="label">Warum Sugar Moon</div>
+    <h2 class="stitle">Genuss, dem du vertrauen kannst</h2>
+    <div class="feat-grid rv-stagger">
+      <div class="feat-c rv"><div class="feat-i">🌱</div><h3>Bio-zertifiziert</h3><p>Erlesene Zutaten, ganz ohne künstliche Geschmacksverstärker. Qualität, die man schmeckt.</p></div>
+      <div class="feat-c rv"><div class="feat-i">✨</div><h3>Handgemacht in Fulda</h3><p>Jede Flasche entsteht in unserer Manufaktur — familiengeführt, mit Herzblut und Sorgfalt.</p></div>
+      <div class="feat-c rv"><div class="feat-i">🗓️</div><h3>Saisonale Kreationen</h3><p>Von Lavendel im Sommer bis Lebkuchen im Winter — immer neue, kreative Geschmäcker.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="shop" id="shop">
+  <div class="mx">
+    <div class="shop-hdr">
+      <div class="label">Online-Shop</div>
+      <h2 class="stitle">Wähle deine Lieblingssirupe</h2>
+      <p class="ssub" style="margin:0 auto">Direkt von der Manufaktur — wähle Größe und Menge, ab in den Warenkorb und fertig.</p>
+    </div>
+    <div class="filters">
+      <button class="fbtn on" onclick="filterProducts('all',this)">Alle Sorten</button>
+      <button class="fbtn" onclick="filterProducts('gj',this)">Ganzjährig</button>
+      <button class="fbtn" onclick="filterProducts('fs',this)">Frühling & Sommer</button>
+      <button class="fbtn" onclick="filterProducts('he',this)">Herbst</button>
+      <button class="fbtn" onclick="filterProducts('wi',this)">Winter</button>
+    </div>
+    <div class="grid" id="pG"></div>
+    <div class="extras-note" style="margin-top:3rem">
+      <img src="https://sugarmoonsweets.de/wp-content/uploads/2025/11/50mlLM_1.jpg" alt="50ml Fläschchen" class="extras-img"/>
+      <p>Die <strong>50ml-Fläschchen</strong> findest du bei jeder Sorte als Größenoption — perfekt zum Verschenken!</p>
+    </div>
+  </div>
+</section>
+
+<!-- LEMO -->
+<section class="lemo" id="limo">
+  <div class="mx">
+    <div style="text-align:center;margin-bottom:3rem" class="rv">
+      <div class="label">Neu im Sortiment</div>
+      <h2 class="stitle">Bio-Limonade — Natur im Glas</h2>
+      <p class="ssub" style="margin:0 auto">Zusammen mit unserem Partner <strong>Hunfelt Bräu</strong> — erfrischend, ehrlich und 100% natürlich. DE-ÖKO-006 zertifiziert.</p>
+    </div>
+    <div class="lemo-cards">
+      <div class="lemo-card rv">
+        <div class="lemo-card-img lemo-card-lav">
+          <img src="https://sugarmoonsweets.de/wp-content/uploads/lila-laune-limonade.jpg" alt="Lila & Laune – Bio Lavendellimonade"/>
+        </div>
+        <div class="lemo-card-body">
+          <div class="lemo-card-tag" style="background:var(--plum-pale);color:var(--plum)">Lavendel</div>
+          <h3>Lila & Laune</h3>
+          <p class="lemo-card-type">Lavendellimonade · 330ml</p>
+          <div class="lemo-card-details">
+            <span>🚫 Ohne Konservierungsmittel</span>
+            <span>🌱 Ohne künstliche Aromen</span>
+            <span>🥕 Vegan · Kein Alkohol</span>
+          </div>
+          <div class="lemo-card-zutaten">
+            <strong>Zutaten:</strong> Wasser, Zitronensaftkonzentrat*, Zucker, Lavendelsirup* <br><small>*aus kontrolliert ökologischem Anbau</small>
+          </div>
+          <div class="lemo-card-bottom">
+            <span class="lemo-card-price">3,50 €</span>
+            <button class="lbtn lbtn-a" onclick="addToCart('Lila & Laune','💜','lav-limo','330ml',3.50)">💜 In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+      <div class="lemo-card rv">
+        <div class="lemo-card-img lemo-card-kra">
+          <img src="https://sugarmoonsweets.de/wp-content/uploads/kraut-heiter-limonade.jpg" alt="Kraut & Heiter – Bio Kräuterlimonade"/>
+        </div>
+        <div class="lemo-card-body">
+          <div class="lemo-card-tag" style="background:var(--sage-pale);color:var(--sage)">Kräuter</div>
+          <h3>Kraut & Heiter</h3>
+          <p class="lemo-card-type">Kräuterlimonade · 330ml</p>
+          <div class="lemo-card-details">
+            <span>🚫 Ohne Konservierungsmittel</span>
+            <span>🌱 Ohne künstliche Aromen</span>
+            <span>🥕 Vegan · Kein Alkohol</span>
+          </div>
+          <div class="lemo-card-zutaten">
+            <strong>Zutaten:</strong> Wasser, Zitronensaftkonzentrat*, Zucker, Kräutersirup* <br><small>*aus kontrolliert ökologischem Anbau</small>
+          </div>
+          <div class="lemo-card-bottom">
+            <span class="lemo-card-price">3,50 €</span>
+            <button class="lbtn lbtn-b" onclick="addToCart('Kraut & Heiter','🌿','herb-limo','330ml',3.50)">🌿 In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="mx">
+    <div class="story-g">
+      <div class="slide-in-left">
+        <div class="label">Unsere Geschichte</div>
+        <h2 class="stitle">Von einer Küche in Fulda in eure Tassen</h2>
+        <p>Ich bin <strong>Jessica</strong>, eine Amerikanerin, die der Liebe wegen nach Fulda kam. Mein Mann <strong>Sebastian</strong> ist waschechter Deutscher — praktisch, gründlich und voller Ideen.</p>
+        <p>Als ich eines Herbstmorgens vergeblich nach einem Pumpkin Spice Latte suchte, begann ich zu experimentieren. Sebastian dachte größer: <em>„Was, wenn wir diesen Geschmack mit anderen teilen?"</em></p>
+        <p>Heute bringen wir mit handgemachten Sirups viele kreative Geschmacksrichtungen nach Fulda — und darüber hinaus.</p>
+      </div>
+      <div class="story-photo-wrap slide-in-right">
+        <img src="https://sugarmoonsweets.de/wp-content/uploads/2025/12/Advent-Rothemann_2025_1-1024x687.jpg" alt="Adventsmarkt" class="story-photo"/>
+        <div class="story-bar">
+          <div class="sb-i"><span class="sb-n">9+</span><span class="sb-l">Sorten</span></div>
+          <div class="sb-i"><span class="sb-n">100%</span><span class="sb-l">Bio</span></div>
+          <div class="sb-i"><span class="sb-n">Fulda</span><span class="sb-l">Mit Herz</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="rev" id="rev">
+  <div class="mx">
+    <div class="rev-hdr"><div class="label">Kundenstimmen</div><h2 class="stitle">Was unsere Kunden sagen</h2></div>
+    <div class="rev-g">
+      <div class="rev-c rv"><div class="rev-stars">★★★★★</div><p class="rev-txt">Ich gebe einen Schuss in meinen Morgen-Latte, und es fühlt sich an wie ein Cafébesuch – nur gemütlich zuhause. Mein Favorit: Lavendel!</p><span class="rev-who">— C. Messler</span></div>
+      <div class="rev-c rv"><div class="rev-stars">★★★★★</div><p class="rev-txt">Die Sirups sind weltklasse, aber die Lavendel-Bionade ist unbeschreiblich. Meine ganze Familie ist begeistert!</p><span class="rev-who">— Paul Weiß</span></div>
+      <div class="rev-c rv"><div class="rev-stars">★★★★★</div><p class="rev-txt">Endlich mal was Neues! Hab schon gedacht, es gibt keine kreativen Menschen mehr. Bestellung ist raus!</p><span class="rev-who">— Andreas Kunze</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-s">
+  <div class="mx scale-in">
+    <h2 class="stitle">Bereit für deinen Lieblingssirup?</h2>
+    <p>Bestelle jetzt und entdecke handgemachten Genuss, den du nicht mehr missen möchtest.</p>
+    <a href="#shop" class="btn btn-fill">Zum Shop →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-g">
+    <div><div class="ft-brand">Sugar<em>Moon</em> Sweets</div><p class="ft-d">Bio-Sirup-Manufaktur aus Fulda. Handgemacht, zertifiziert, mit Liebe.</p></div>
+    <div class="ft-col"><h4>Shop</h4><a href="#shop">Sirups</a><a href="#limo">Bio-Limonade</a></div>
+    <div class="ft-col"><h4>Unternehmen</h4><a href="#story">Über uns</a><a href="#rev">Bewertungen</a><a href="https://sugarmoonsweets.de/wo-wir-ausstellen/">Ausstellungen</a></div>
+    <div class="ft-col"><h4>Kontakt</h4><a href="mailto:info@sugarmoonsweets.de">info@sugarmoonsweets.de</a><a href="https://sugarmoonsweets.de">sugarmoonsweets.de</a></div>
+  </div>
+  <div class="ft-b"><span>© 2026 Sugar Moon Sweets</span><div><a href="https://sugarmoonsweets.de/impressum">Impressum</a><a href="https://sugarmoonsweets.de/datenschutzerklaerung">Datenschutz</a><a href="https://sugarmoonsweets.de/Bio-Zertifizierung">Bio-Zertifizierung</a></div></div>
+</footer>
+
+</main>
+
+<!-- CART -->
+<div class="c-ov" id="cOv" onclick="toggleCart()"></div>
+<div class="c-sb" id="cSb" role="dialog" aria-label="Warenkorb">
+  <div class="c-top"><h3>Warenkorb</h3><button class="c-x" onclick="toggleCart()">✕</button></div>
+  <div class="c-list" id="cList"></div>
+  <div class="c-bot" id="cBot" style="display:none">
+    <div class="c-tot"><span class="c-tot-l">Gesamt</span><span class="c-tot-p" id="cTot">0,00 €</span></div>
+    <button class="c-go" onclick="openOrder()">Zur Bestellung →</button>
+    <p class="c-note">Versandkosten werden individuell berechnet</p>
+  </div>
+</div>
+
+<!-- ORDER -->
+<div class="o-ov" id="oOv" role="dialog" aria-label="Bestellung">
+  <div class="o-m">
+    <button class="o-x" onclick="closeOrder()">✕</button>
+    <div id="oF">
+      <h2>Bestellung abschicken</h2>
+      <p class="o-desc">Wir melden uns per E-Mail mit Zahlungs- und Versanddetails.</p>
+      <div class="o-sum" id="oSum"></div>
+      <div class="fr"><div class="fg"><label>Vorname *</label><input id="fn"></div><div class="fg"><label>Nachname *</label><input id="ln"></div></div>
+      <div class="fg"><label>E-Mail *</label><input type="email" id="em"></div>
+      <div class="fg"><label>Telefon (optional)</label><input type="tel" id="ph"></div>
+      <div class="fg"><label>Straße & Hausnr. *</label><input id="ad"></div>
+      <div class="fr"><div class="fg"><label>PLZ *</label><input id="pl"></div><div class="fg"><label>Ort *</label><input id="ct"></div></div>
+      <div class="fg"><label>Anmerkungen</label><textarea id="nt" placeholder="z.B. Geschenkverpackung..."></textarea></div>
+      <button class="o-sub" onclick="submitOrder()">Bestellung absenden →</button>
+    </div>
+    <div class="o-ok" id="oOk">
+      <div class="o-ok-i">🎉</div>
+      <h3>Vielen Dank!</h3>
+      <p>Deine Bestellung ist eingegangen. Wir melden uns in Kürze per E-Mail.</p>
+      <button class="btn btn-fill" style="margin-top:1.2rem" onclick="closeOrder();cart=[];updateCart()">Weiter einkaufen</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ── Product Data ──
+const P=[
+  {id:'karamell',n:'Bio-Karamell',d:'Cremig, süß & unwiderstehlich. Perfekt für Kaffee und Desserts.',e:'🍮',pr:{'250ml':13,'50ml':5.50},s:'Ganzjährig',c:'gj'},
+  {id:'vanille',n:'Bio-Vanille',d:'Klassisch, weich & natürlich. Der zeitlose Allrounder.',e:'🍦',pr:{'250ml':13,'50ml':5.50},s:'Ganzjährig',c:'gj'},
+  {id:'lavendel',n:'Bio-Lavendel',d:'Fein-blumig & aromatisch. Ein Hauch Provence.',e:'💜',pr:{'250ml':14,'50ml':5.50},s:'März – August',c:'fs'},
+  {id:'pistazie',n:'Bio-Pistazie',d:'Nussig, edel & intensiv. Für besondere Momente.',e:'🟢',pr:{'250ml':14,'50ml':5.50},s:'März – August',c:'fs'},
+  {id:'bratapfel',n:'Bio-Bratapfel',d:'Fruchtig, zimtig & winterlich. Apfel trifft Zimt.',e:'🍎',pr:{'250ml':14,'50ml':5.50},s:'Sep – Nov',c:'he'},
+  {id:'pumpkin',n:'Bio-Pumpkin Spice',d:'Würzig, herbstlich & wohlig. Unser Bestseller!',e:'🎃',pr:{'250ml':14,'50ml':5.50},s:'Sep – Nov',c:'he',t:'Bestseller'},
+  {id:'zimt',n:'Bio-Zimt',d:'Warm & aromatisch. Der Geschmack von Winter.',e:'🫚',pr:{'250ml':13,'50ml':5.50},s:'Nov – Feb',c:'wi'},
+  {id:'lebkuchen',n:'Bio-Lebkuchen',d:'Kräftig & würzig. Voller Weihnachtsstimmung.',e:'🎄',pr:{'250ml':13,'50ml':5.50},s:'Dez – Jan',c:'wi',img:'https://sugarmoonsweets.de/wp-content/uploads/lebkuchen-sirup.jpg'},
+  {id:'spekulatius',n:'Bio-Spekulatius',d:'Fein, buttrig & zimtig. Gewürzkeks im Glas.',e:'🍪',pr:{'250ml':13,'50ml':5.50},s:'Dez – Jan',c:'wi',img:'https://sugarmoonsweets.de/wp-content/uploads/spekulatius-sirup.jpg'},
+  {id:'extrakt',n:'Bio-Vanilleextrakt',d:'Perfekt zum Backen, Verfeinern & Genießen.',e:'🌰',pr:{'100ml':7.80},s:'Ganzjährig',c:'gj'},
+];
+
+let cart=[],szs={},tq={},cf='all';
+const formatMoney = n => n.toFixed(2).replace('.',',')+' €';
+const gs=(id,pr)=>{if(!szs[id])szs[id]=Object.keys(pr)[0];return szs[id]};
+
+// ── Marquee Trust Strip ──
+(function(){
+  const items=['🌿 Bio-zertifiziert','✋ Handgemacht in Fulda','🍯 9+ Sorten','☕ Für Kaffee & Cocktails','🎁 Perfekt als Geschenk','📦 Direkt bestellen'];
+  const track=document.getElementById('mq');
+  const html=items.map(i=>`<span class="marquee-item"><span>✦</span>${i}</span>`).join('');
+  track.innerHTML=html+html;
+})();
+
+// ── Render Product Cards ──
+function renderProducts(f){
+  cf=f||cf;const g=document.getElementById('pG');
+  const l=cf==='all'?P:P.filter(p=>p.c===cf);
+  g.innerHTML=l.map(p=>{
+    const ss=Object.keys(p.pr),cs=gs(p.id,p.pr),pr=p.pr[cs];
+    return`<div class="card">
+      ${p.t?`<span class="card-badge">${p.t}</span>`:''}
+      <div class="card-visual ${p.img ? 'has-img' : ''}">
+        ${p.img ? '<img src="'+p.img+'" alt="'+p.n+'" class="card-prod-img"/>' : '<span class="card-emoji">'+p.e+'</span>'}
+        ${p.img ? '' : '<span class="card-season">'+p.s+'</span>'}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.n}</div>
+        <div class="card-desc">${p.d}</div>
+        <div class="card-price-row"><span class="card-price">${formatMoney(pr)}</span><span class="card-unit">/ ${cs}</span></div>
+        ${ss.length>1?`<div class="card-sizes">${ss.map(s=>`<button class="card-sz ${s===cs?'on':''}" onclick="szs['${p.id}']='${s}';renderProducts()">${s}</button>`).join('')}</div>`:''}
+        <div class="card-bottom">
+          <div class="qc"><button class="qb" onclick="changeQty('${p.id}',-1)">−</button><span class="qn" id="q-${p.id}">${tq[p.id]||1}</span><button class="qb" onclick="changeQty('${p.id}',1)">+</button></div>
+          <button class="atc" id="ab-${p.id}" onclick="addProduct('${p.id}')">In den Warenkorb</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function changeQty(id,d){tq[id]=Math.max(1,(tq[id]||1)+d);const e=document.getElementById('q-'+id);if(e)e.textContent=tq[id]}
+function addProduct(id){const p=P.find(x=>x.id===id);if(!p)return;const s=gs(id,p.pr);addToCart(p.n,p.e,id,s,p.pr[s],tq[id]||1);tq[id]=1;renderProducts()}
+function addToCart(n,e,id,sz,pr,q=1){
+  const k=id+'-'+sz,ex=cart.find(i=>i.k===k);
+  if(ex)ex.q+=q;else cart.push({k,id,n,e,sz,pr,q});
+  updateCart();toast(`${e} ${q}× ${n} (${sz}) hinzugefügt`);
+  const b=document.getElementById('ab-'+id);
+  if(b){b.classList.add('ok');b.textContent='✓ Hinzugefügt';setTimeout(()=>{b.classList.remove('ok');b.textContent='In den Warenkorb'},1200)}
+}
+
+function updateCart(){
+  const tot=cart.reduce((s,i)=>s+i.q,0),tp=cart.reduce((s,i)=>s+i.pr*i.q,0);
+  const dot=document.getElementById('cDot');dot.textContent=tot;dot.classList.remove('pop');void dot.offsetWidth;dot.classList.add('pop');
+  const cl=document.getElementById('cList'),cb=document.getElementById('cBot');
+  if(!cart.length){cl.innerHTML='<div class="c-empty"><div class="c-empty-i">🛒</div><p>Noch leer — stöbere im Shop!</p></div>';cb.style.display='none'}
+  else{cl.innerHTML=cart.map((it,i)=>`<div class="c-item"><span class="c-item-e">${it.e}</span><div><div class="c-item-n">${it.n}</div><div class="c-item-d">${it.sz} · ${formatMoney(it.pr)}/Stk</div></div><div class="c-item-r"><div class="c-item-p">${formatMoney(it.pr*it.q)}</div><div class="c-item-acts"><button class="cib" onclick="changeCartItemQty(${i},-1)">−</button><span class="ciq">${it.q}</span><button class="cib" onclick="changeCartItemQty(${i},1)">+</button><button class="cirm" onclick="removeCartItem(${i})">✕</button></div></div></div>`).join('');cb.style.display='block'}
+  document.getElementById('cTot').textContent=formatMoney(tp);
+}
+function changeCartItemQty(i,d){cart[i].q=Math.max(1,cart[i].q+d);updateCart()}
+function removeCartItem(i){cart.splice(i,1);updateCart()}
+function toggleCart(){document.getElementById('cOv').classList.toggle('open');document.getElementById('cSb').classList.toggle('open')}
+
+function openOrder(){
+  toggleCart();document.getElementById('oF').style.display='block';document.getElementById('oOk').classList.remove('show');
+  const s=document.getElementById('oSum'),tp=cart.reduce((s,i)=>s+i.pr*i.q,0);
+  s.innerHTML=cart.map(i=>`<div class="osi"><span>${i.e} ${i.q}× ${i.n} (${i.sz})</span><span style="font-weight:600;color:var(--dark)">${formatMoney(i.pr*i.q)}</span></div>`).join('')+`<div class="ost"><span>Gesamt</span><span>${formatMoney(tp)}</span></div>`;
+  setTimeout(()=>document.getElementById('oOv').classList.add('open'),50);
+}
+function closeOrder(){document.getElementById('oOv').classList.remove('open')}
+function submitOrder(){
+  const v=id=>document.getElementById(id).value.trim();
+  const fn=v('fn'),ln=v('ln'),em=v('em'),ph=v('ph'),ad=v('ad'),pl=v('pl'),ct=v('ct'),nt=v('nt');
+  if(!fn||!ln||!em||!ad||!pl||!ct){toast('⚠️ Bitte alle Pflichtfelder ausfüllen');return}
+  if(!em.includes('@')){toast('⚠️ Gültige E-Mail eingeben');return}
+  const tp=cart.reduce((s,i)=>s+i.pr*i.q,0);
+  let t=`Neue Bestellung — ${fn} ${ln}\n\n`;
+  t+=cart.map(i=>`${i.q}x ${i.n} (${i.sz}) — ${formatMoney(i.pr*i.q)}`).join('\n');
+  t+=`\n\nGesamt: ${formatMoney(tp)}\n\nName: ${fn} ${ln}\nE-Mail: ${em}\n`;
+  if(ph)t+=`Tel: ${ph}\n`;
+  t+=`\nAdresse:\n${ad}\n${pl} ${ct}\n`;
+  if(nt)t+=`\nAnmerkung: ${nt}\n`;
+  window.location.href=`mailto:info@sugarmoonsweets.de?subject=${encodeURIComponent('Bestellung — '+fn+' '+ln)}&body=${encodeURIComponent(t)}`;
+  document.getElementById('oF').style.display='none';document.getElementById('oOk').classList.add('show');
+}
+
+function filterProducts(c,b){document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderProducts(c)}
+function toast(m){const t=document.getElementById('toast');t.innerHTML=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
+// ── Navigation Scroll Effect ──
+window.addEventListener('scroll',()=>document.getElementById('nb').classList.toggle('stuck',window.scrollY>60));
+
+// ══════ Scroll Effects ══════
+
+// Scroll progress bar
+function updateScrollProgress(){
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  const p=(window.scrollY/h)*100;
+  document.getElementById('scrollProg').style.width=p+'%';
+}
+
+// Parallax elements — move at different speeds
+function updateParallax() {
+  const sy = window.scrollY;
+
+  // Hero parallax — text moves slower, visual moves faster
+  const heroTop = document.querySelector('.hero-top');
+  const heroVis = document.querySelector('.hero-vis');
+  const heroPicks = document.querySelector('.hero-bottom');
+  if (heroTop && sy < window.innerHeight) {
+    const r = sy / window.innerHeight;
+    heroTop.querySelector('div:first-child').style.transform = `translateY(${sy * 0.15}px)`;
+    if (heroVis) heroVis.style.transform = `translateY(${sy * 0.08}px) scale(${1 - r * 0.08})`;
+    if (heroPicks) heroPicks.style.transform = `translateY(${sy * 0.2}px)`;
+    if (heroPicks) heroPicks.style.opacity = Math.max(0, 1 - r * 1.5);
+  }
+
+  // Story section depth
+  const storyPhoto = document.querySelector('.story-photo');
+  if (storyPhoto) {
+    const rect = storyPhoto.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const r = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+      storyPhoto.style.transform = `scale(${1 + r * 0.04})`;
+    }
+  }
+}
+
+// Intersection observer for scroll reveals (with 3D transforms)
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      // Stagger children if parent has rv-stagger
+      const parent=entry.target.closest('.rv-stagger');
+      if(parent){
+        const siblings=[...parent.querySelectorAll('.rv,.slide-in-left,.slide-in-right,.scale-in')];
+        const idx=siblings.indexOf(entry.target);
+        setTimeout(()=>entry.target.classList.add('vis'),idx*120);
+      }else{
+        entry.target.classList.add('vis');
+      }
+      obs.unobserve(entry.target);
+    }
+  });
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+
+document.querySelectorAll('.rv,.slide-in-left,.slide-in-right,.scale-in').forEach(el=>obs.observe(el));
+
+// Mouse-driven 3D tilt for hero
+const heroFrame=document.querySelector('.hero-frame');
+if(heroFrame){
+  document.querySelector('.hero').addEventListener('mousemove',e=>{
+    const rect=heroFrame.getBoundingClientRect();
+    const cx=rect.left+rect.width/2;
+    const cy=rect.top+rect.height/2;
+    const dx=(e.clientX-cx)/rect.width;
+    const dy=(e.clientY-cy)/rect.height;
+    heroFrame.style.transform=`rotateY(${dx*12}deg) rotateX(${-dy*8}deg) translateZ(10px)`;
+  });
+  document.querySelector('.hero').addEventListener('mouseleave',()=>{
+    heroFrame.style.transform='rotateY(0) rotateX(0) translateZ(0)';
+    heroFrame.style.transition='transform .6s cubic-bezier(.22,1,.36,1)';
+    setTimeout(()=>heroFrame.style.transition='transform .15s ease-out',600);
+  });
+  heroFrame.style.transition='transform .15s ease-out';
+}
+
+});
+
+
+// Scroll event — combine all scroll handlers
+let ticking=false;
+window.addEventListener('scroll',()=>{
+  if(!ticking){
+    requestAnimationFrame(()=>{
+      updateScrollProgress();
+      updateParallax();
+      ticking=false;
+    });
+    ticking=true;
+  }
+});
+
+  
+  // Dynamic shadow
+  const sv=Math.abs(smoothVelocity);
+  const shadowBlur=Math.min(40,15+sv*2);
+  const shadowY=Math.min(25,10+sv);
+  bottleSvg.style.filter='drop-shadow(0 '+shadowY+'px '+shadowBlur+'px rgba(30,17,8,.25))';
+}
+
+// Initial call
+updateScrollProgress();
+updateParallax();
+// ── Smooth Scroll for Anchor Links ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) {
+      t.scrollIntoView({ behavior: 'smooth' });
+      // Close mobile menu
+      document.getElementById('nLinks').classList.remove('open');
+      const burger = document.getElementById('burgerBtn');
+      if (burger) burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+
+renderProducts('all');updateCart();
+</script>
+</body>
+</html>
