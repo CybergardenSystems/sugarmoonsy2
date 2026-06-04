@@ -26,7 +26,7 @@ export function Toast() {
       className="pointer-events-none fixed inset-x-0 bottom-6 z-[120] flex justify-center px-4"
     >
       <div
-        className={`flex items-center gap-2 rounded-full border border-honey/25 bg-night-2/95 px-5 py-2.5 text-sm text-moon shadow-2xl backdrop-blur transition-all duration-400 ${
+        className={`flex items-center gap-2 rounded-full border border-honey/25 bg-night-2/95 px-5 py-2.5 text-sm text-moon shadow-2xl backdrop-blur transition-all duration-300 ${
           message ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
         }`}
       >

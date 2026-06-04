@@ -29,6 +29,7 @@ export function CartLayer() {
         role="dialog"
         aria-label="Warenkorb"
         aria-modal={isOpen}
+        inert={!isOpen}
         className={cn(
           "fixed right-0 top-0 z-[111] flex h-full w-[26rem] max-w-[92vw] flex-col border-l border-honey/12 bg-night-2 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
           isOpen ? "translate-x-0" : "translate-x-full",

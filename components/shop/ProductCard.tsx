@@ -18,6 +18,7 @@ export const accentVar: Record<AccentKey, string> = {
   lavender: "var(--color-lavender)",
   plum: "var(--color-plum)",
   moon: "var(--color-silver)",
+  pumpkin: "var(--color-pumpkin)",
 };
 
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {

@@ -12,10 +12,16 @@ import { media } from "@/data/media";
 export function HeroBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoOk, setVideoOk] = useState(false);
-  const [reduce, setReduce] = useState(false);
+  const [useVideo, setUseVideo] = useState(false);
 
   useEffect(() => {
-    setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    // Video nur, wenn sinnvoll: keine reduced-motion, gen. Viewport, kein Data-Saver.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const wide = window.matchMedia("(min-width: 768px)").matches;
+    const saveData =
+      (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
+        ?.saveData === true;
+    setUseVideo(!reduce && wide && !saveData);
   }, []);
 
   return (
@@ -23,12 +29,12 @@ export function HeroBackground() {
       {/* Fallback / Tiefe — immer vorhanden */}
       <MoonScene />
 
-      {/* Higgsfield-Video (nur ohne reduced-motion) */}
-      {!reduce && (
+      {/* Higgsfield-Video (nur Desktop, ohne reduced-motion / Data-Saver) */}
+      {useVideo && (
         <video
           ref={videoRef}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-            videoOk ? "opacity-55" : "opacity-0"
+            videoOk ? "opacity-[0.55]" : "opacity-0"
           }`}
           src={media.heroVideo}
           autoPlay

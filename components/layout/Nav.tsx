@@ -103,6 +103,7 @@ export function Nav() {
 
       {/* Mobile overlay */}
       <div
+        inert={!menuOpen}
         className={cn(
           "fixed inset-0 z-[-1] flex flex-col items-center justify-center gap-7 bg-night/97 backdrop-blur-xl transition-all duration-500 md:hidden",
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0",

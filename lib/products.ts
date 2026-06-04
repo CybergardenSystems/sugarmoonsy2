@@ -13,7 +13,8 @@ export type AccentKey =
   | "sage"
   | "lavender"
   | "plum"
-  | "moon";
+  | "moon"
+  | "pumpkin";
 
 export interface Size {
   label: string;
@@ -173,7 +174,7 @@ export const products: Product[] = [
       { label: "250 ml", price: 14 },
       { label: "50 ml", price: 5.5 },
     ],
-    accent: "pumpkin" as AccentKey,
+    accent: "pumpkin",
     photo: null,
     pairing: "Tee · Milchreis · Punsch",
   }),
@@ -191,7 +192,7 @@ export const products: Product[] = [
       { label: "250 ml", price: 14 },
       { label: "50 ml", price: 5.5 },
     ],
-    accent: "pumpkin" as AccentKey,
+    accent: "pumpkin",
     badge: "Bestseller",
     photo: null,
     pairing: "Latte · Cheesecake · Chai",
