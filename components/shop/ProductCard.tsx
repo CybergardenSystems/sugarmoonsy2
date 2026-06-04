@@ -6,6 +6,7 @@ import { useState } from "react";
 import type { AccentKey, Product } from "@/lib/products";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { MoonMark } from "@/components/brand/MoonMark";
+import { photoSrc } from "@/lib/photos";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/cn";
 
@@ -27,6 +28,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
 
   const active = product.sizes.find((s) => s.label === size) ?? product.sizes[0];
   const ac = accentVar[product.accent] ?? "var(--color-honey)";
+  const src = photoSrc(product);
 
   const onAdd = () => {
     add(
@@ -62,12 +64,12 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         aria-label={`${product.name} ansehen`}
         className="relative block aspect-[4/5] overflow-hidden"
       >
-        {product.photo ? (
+        {src ? (
           <>
-            {/* dunkles Photo-Well — die Fotos sind bereits moody getont */}
+            {/* dunkles Photo-Well — die Fotos sind bereits moody/dark-studio */}
             <div className="absolute inset-0 bg-night-3" />
             <Image
-              src={`/media/products/${product.photo}`}
+              src={src}
               alt={`${product.name} — Flasche mit grünem Mond-Etikett`}
               fill
               sizes="(max-width:768px) 50vw, 300px"

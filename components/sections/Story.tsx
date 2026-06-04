@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { stats } from "@/data/site";
+import { photoSrcById } from "@/lib/photos";
 
 export function Story({ full = false }: { full?: boolean }) {
   return (
@@ -45,7 +46,7 @@ export function Story({ full = false }: { full?: boolean }) {
           <div className="relative overflow-hidden rounded-2xl border border-honey/12">
             <div className="relative aspect-[4/3] bg-night-3">
               <Image
-                src="/media/products/geschenk-lebkuchenmann.jpg"
+                src={photoSrcById("geschenk-lebkuchenmann", "geschenk-lebkuchenmann.jpg")!}
                 alt="Handgemachte 50 ml Geschenkflasche im Lebkuchenmännchen-Glas mit handgeschriebenem Anhänger"
                 fill
                 sizes="(max-width:1024px) 100vw, 560px"

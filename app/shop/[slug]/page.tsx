@@ -6,6 +6,7 @@ import { getProduct, products } from "@/lib/products";
 import { BuyPanel } from "@/components/shop/BuyPanel";
 import { MoonMark } from "@/components/brand/MoonMark";
 import { accentVar } from "@/components/shop/ProductCard";
+import { photoSrc } from "@/lib/photos";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -35,6 +36,7 @@ export default async function ProductPage({
   if (!product) notFound();
 
   const ac = accentVar[product.accent];
+  const src = photoSrc(product);
 
   return (
     <article className="pt-32 pb-28">
@@ -50,11 +52,11 @@ export default async function ProductPage({
           {/* Visual */}
           <div className="relative overflow-hidden rounded-3xl border border-honey/12">
             <div className="relative aspect-[4/5]">
-              {product.photo ? (
+              {src ? (
                 <>
                   <div className="absolute inset-0 bg-night-3" />
                   <Image
-                    src={`/media/products/${product.photo}`}
+                    src={src}
                     alt={`${product.name} — Flasche mit Mond-Etikett`}
                     fill
                     sizes="(max-width:1024px) 100vw, 600px"

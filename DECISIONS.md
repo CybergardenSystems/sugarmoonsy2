@@ -27,3 +27,9 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
 ## Phase 4 — Build
 - **D9:** Mond + goldener Tropfen via **SVG + Canvas2D + GSAP** statt WebGL/R3F (Performance, Zuverlässigkeit, schlankes JS-Budget, 60fps). WebGL-Shader als spätere Enhancement-Option dokumentiert.
 - **D10:** Fonts via `next/font` (Fraunces) + `geist`-Package (Sans/Mono) — self-hosted, kein CLS.
+
+## Higgsfield-Assets
+- **D11:** Hero-Hintergrund = Higgsfield-Video (Kling 3.0, „golden drop / nocturne"). Eingebunden per öffentlicher CDN-URL (`data/media.ts`), da die Build-Umgebung Higgsfield-Hosts blockiert (`403`). MoonScene als Fallback/reduced-motion.
+- **D12:** Netzwerk-Constraint dokumentiert: Sandbox kann Higgsfield-CDN & Vercel-API nicht erreichen (`Host not in allowlist`), Ergebnisse kommen als CDN-Link (keine Bytes). Deshalb (a) lokale Bild-Tönung via `scripts/darkroom.py` als Fallback, (b) für KI-Relight musste das Repo kurz public sein, damit Higgsfield die Foto-URLs lesen kann.
+- **D13:** 10 echte Produktfotos via `nano_banana_pro` auf dunklen Studio-BG relightet (Referenz = raw-GitHub-URL der Originale). Ergebnisse in `data/enhanced.ts` (Higgsfield-CDN-URL), bevorzugt vor lokalem Fallback (`lib/photos.ts`). Host in `next.config` remotePatterns erlaubt.
+- **D14:** Hotlink-Tradeoff: Higgsfield-CDN-Objekte wirken permanent (keine Signatur-Query), sind aber nicht selbst-gehostet. Für volle Kontrolle später Bilder herunterladen → `/public/media/products/` → `data/enhanced.ts` leeren.
