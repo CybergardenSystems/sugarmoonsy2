@@ -141,6 +141,37 @@ Standardgröße **250 ml** + Geschenkgröße **50 ml** (5,50 €) bei jeder Sort
 
 ---
 
+## 8b. Echte Produktfotografie & Marken-Wahrheit (vom Inhaber, via Chat — Update)
+
+> Der Inhaber hat 11 echte Produktfotos geliefert. **Kritische Marken-Erkenntnis, die EXTRACT/DIRECTION präzisiert.**
+
+**Etiketten-Design (authoritative Brand-Identity):**
+- Tiefes **Tannen-/Pinien-Grün** als Label-Grund (≈ `#1E3A2E`–`#24463A`), Variante **Schwarz** beim Vanille-Extrakt.
+- **Gold-Sichelmond** (dünner, fast geschlossener Ring/Crescent) + **Goldstaub/Sparkle** im oberen Label-Drittel.
+- Wortmarke: **„Sugar Moon"** in elegantem Gold-Script + „SWEETS" gesperrt darunter.
+- Sortenname in weißer Script + gesperrter Gold-Versalien (z.B. „Bio · VANILLE · SIRUP") + kleine Gold-Botanik-Illustration (Vanilleblüte, Zimtstangen, Pistazie, Lebkuchenmann, Kokos, Beeren).
+- Flaschen: Klarglas, Goldschraubkappe, amber/bernsteinfarbener Inhalt; helle Studio-Aufnahme auf weiß-grauem Holz.
+
+→ **Konsequenz für DIRECTION (Route A):** Night-Canvas auf **tiefes Tannengrün** statt warmes Near-Black umstellen; Logo als **dünner Gold-Crescent + Goldstaub** neu zeichnen (passend zum Etikett). Palette = Pinien-Grün-Nacht + Honiggold + Mondlicht-Creme. Siehe DIRECTION §3 (aktualisiert).
+
+**Erweitertes Sortiment (über Legacy hinaus — echte Sorten):**
+| Sorte | Hinweis |
+|---|---|
+| Bio-Vanille | grünes Label, Vanilleblüte |
+| Bio-Zimt | grünes Label, Zimtstangen |
+| Bio-Pistazie | grünes Label, Pistazie |
+| Bio-Spekulatius | grünes Label, Gebäck |
+| Bio-Lebkuchen | grünes Label, Lebkuchenmann |
+| Bio-Lavendelsirup **mit Blaubeere** | grünes Label — Legacy „Lavendel" = präziser: mit Blaubeere |
+| Bio-Sirup **mit Kokosraspeln** | dunkelgrünes Label, weiß-trüb — NEU |
+| Bio-**Blaubeer-Basilikum**sirup | grünes Label, dunkel-violett — NEU |
+| Bio-Vanille-**Extrakt** | schwarzes Rundlabel, eckige Flasche, 100ml |
+| 50ml **Geschenk-Lebkuchenmännchen** | figürliche Glasflasche + handgeschriebener Kraft-Anhänger (z.B. „Zimt") |
+
+**Asset-Status:** Fotos liegen als Chat-Anhänge vor — **nicht** als Dateien im Repo-Dateisystem (Bytes nicht zugreifbar). Für die Einbindung via `next/image` müssen die Original-Dateien in `./source-assets/products/` (oder `public/media/`) **im Repo** landen. Siehe `source-assets/README.md`.
+
+---
+
 ## 9. Verworfen (bewusst NICHT übernommen)
 Altes HTML-Markup · gesamtes Legacy-CSS (`:root`-Tokens, alle Klassen) · Vanilla-JS (Cart/Filter/Parallax/IntersectionObserver) · die Single-File-Architektur · Emoji-als-Produktbild-Pattern · Layout-Entscheidungen (3-Spalten-Karten, mittige Sektionen) · die selbstgebauten „3D"-Scroll-Hacks. **Null Zeilen Code werden übernommen.**
 
