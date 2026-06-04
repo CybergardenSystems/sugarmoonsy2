@@ -6,14 +6,15 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { HeroBackground } from "./HeroBackground";
 import { heroPicks } from "@/lib/products";
 
-const trust = [
-  { icon: "🌱", label: "100% Bio" },
-  { icon: "✋", label: "Handgemacht" },
-  { icon: "📦", label: "Direkt zu dir" },
-  { icon: "★", label: "5-Sterne bewertet" },
+const trust: { icon: IconName; label: string }[] = [
+  { icon: "leaf", label: "100% Bio" },
+  { icon: "craft", label: "Handgemacht" },
+  { icon: "delivery", label: "Direkt zu dir" },
+  { icon: "star", label: "5-Sterne bewertet" },
 ];
 
 export function Hero() {
@@ -27,7 +28,6 @@ export function Hero() {
 
     gsap.registerPlugin(ScrollTrigger, SplitText);
     const ctx = gsap.context(() => {
-      // Headline split reveal (masked lines slide up)
       let split: SplitText | null = null;
       if (headline.current) {
         split = new SplitText(headline.current, { type: "lines", mask: "lines" });
@@ -40,7 +40,6 @@ export function Hero() {
         });
       }
 
-      // Staggered fade for hero meta
       gsap.from("[data-hero-fade]", {
         opacity: 0,
         y: 24,
@@ -50,7 +49,6 @@ export function Hero() {
         delay: 0.45,
       });
 
-      // The golden drop falls as you scroll through the hero
       if (drop.current) {
         gsap.to(drop.current, {
           yPercent: 1400,
@@ -74,21 +72,18 @@ export function Hero() {
   return (
     <section
       ref={root}
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-28"
+      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pb-10 pt-28 sm:pt-32"
     >
       <HeroBackground />
 
-      {/* Signature: the golden drop hanging from the moon's tip */}
+      {/* Signature: der goldene Tropfen an der Mondspitze */}
       <div
         ref={drop}
         aria-hidden
         className="pointer-events-none absolute right-[20%] top-[42%] z-10 hidden md:block"
       >
-        <svg width="20" height="30" viewBox="0 0 20 30" fill="none">
-          <path
-            d="M10 0C10 0 1 14 1 21a9 9 0 0 0 18 0C19 14 10 0 10 0Z"
-            fill="url(#drop-g)"
-          />
+        <svg width="18" height="28" viewBox="0 0 20 30" fill="none">
+          <path d="M10 0C10 0 1 14 1 21a9 9 0 0 0 18 0C19 14 10 0 10 0Z" fill="url(#drop-g)" />
           <defs>
             <linearGradient id="drop-g" x1="10" y1="0" x2="10" y2="30">
               <stop stopColor="#F4D9A0" />
@@ -98,36 +93,34 @@ export function Hero() {
         </svg>
       </div>
 
-      <div className="shell relative z-20 grid items-center gap-10 pb-10 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="shell relative z-20 grid items-center gap-10 lg:grid-cols-[1.12fr_0.88fr]">
         <div>
           <span
             data-hero-fade
-            className="mb-7 inline-flex items-center gap-2 rounded-full border border-honey/25 bg-honey/5 px-4 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-honey"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-honey/20 bg-honey/[0.06] px-3.5 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-honey/90 sm:text-[0.64rem]"
           >
-            🌿 Bio-zertifiziert · Handgemacht in Fulda
+            <Icon name="leaf" size={13} />
+            Bio-zertifiziert · Handgemacht in Fulda
           </span>
 
           <h1
             ref={headline}
-            className="font-display text-[clamp(2.7rem,7vw,5.4rem)] leading-[1.02] text-moon"
+            className="text-balance font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[1.03] text-moon"
           >
-            Sirup mit <em className="italic text-honey glow-honey">Seele</em> —
-            gebraut vom Mond.
+            Sirup mit <em className="italic text-honey glow-honey">Seele</em> — gebraut
+            vom Mond.
           </h1>
 
-          <p
-            data-hero-fade
-            className="lede mt-6 max-w-md"
-          >
-            Handgemachte Bio-Sirupe für Kaffee, Cocktails & Desserts. Aus erlesenen
-            Zutaten, ohne künstliche Zusätze — direkt aus unserer Manufaktur in Fulda
-            zu dir.
+          <p data-hero-fade className="lede mt-6 max-w-md">
+            Handgemachte Bio-Sirupe für Kaffee, Cocktails &amp; Desserts. Aus erlesenen
+            Zutaten, ohne künstliche Zusätze — direkt aus unserer Manufaktur in Fulda zu
+            dir.
           </p>
 
-          <div data-hero-fade className="mt-8 flex flex-wrap gap-3">
+          <div data-hero-fade className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <MagneticButton href="/shop" variant="fill">
               Zum Shop
-              <span aria-hidden>→</span>
+              <Icon name="arrow" size={16} />
             </MagneticButton>
             <MagneticButton href="/story" variant="line">
               Unsere Geschichte
@@ -136,33 +129,34 @@ export function Hero() {
 
           <ul
             data-hero-fade
-            className="mt-9 flex flex-wrap gap-x-7 gap-y-3 text-[0.8rem] text-moon-mute"
+            className="mt-10 grid max-w-md grid-cols-2 gap-x-6 gap-y-3.5 text-[0.82rem] text-moon-dim sm:flex sm:max-w-none sm:flex-wrap sm:gap-x-7"
           >
             {trust.map((t) => (
-              <li key={t.label} className="flex items-center gap-1.5">
-                <span className="text-honey">{t.icon}</span>
+              <li key={t.label} className="flex items-center gap-2">
+                <Icon name={t.icon} size={16} className="shrink-0 text-honey/75" />
                 {t.label}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Right column kept airy — the moon owns this space */}
+        {/* rechte Spalte luftig — der Mond besitzt diesen Raum */}
         <div className="hidden lg:block" aria-hidden />
       </div>
 
-      {/* Popular picks */}
-      <div data-hero-fade className="shell relative z-20 pb-14">
-        <p className="mb-4 text-center font-mono text-[0.62rem] uppercase tracking-[0.22em] text-moon-mute">
-          ✦ Beliebte Sorten
+      {/* Beliebte Sorten — auf Mobil horizontal scrollbar statt gequetscht */}
+      <div data-hero-fade className="shell relative z-20 mt-14">
+        <p className="mb-4 flex items-center justify-center gap-1.5 font-mono text-[0.66rem] uppercase tracking-[0.2em] text-moon-mute">
+          <Icon name="spark" size={11} className="text-honey" />
+          Beliebte Sorten
         </p>
-        <div className="flex flex-wrap justify-center gap-2.5">
+        <div className="-mx-[var(--spacing-edge)] flex gap-2 overflow-x-auto px-[var(--spacing-edge)] pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0 sm:overflow-visible">
           {heroPicks.map((p) => (
             <Link
               key={p.id}
               href={`/shop/${p.slug}`}
               data-cursor="view"
-              className="group flex items-center gap-2 rounded-full border border-honey/12 bg-night-2/60 px-4 py-2 backdrop-blur transition-colors hover:border-honey/40"
+              className="group flex shrink-0 items-center gap-2 rounded-full border border-white/8 bg-night-2/60 px-4 py-2 backdrop-blur transition-colors hover:border-honey/40"
             >
               <span className="font-display text-sm text-moon transition-colors group-hover:text-honey">
                 {p.name.replace("Bio-", "")}
@@ -175,8 +169,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* scroll cue */}
-      <div className="absolute inset-x-0 bottom-5 z-20 flex justify-center" aria-hidden>
+      <div className="absolute inset-x-0 bottom-5 z-20 hidden justify-center sm:flex" aria-hidden>
         <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-moon-mute">
           Scrollen
         </span>

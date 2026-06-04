@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Product } from "@/lib/products";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
+import { Icon } from "@/components/ui/Icon";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/cn";
 
@@ -59,15 +60,15 @@ export function BuyPanel({ product }: { product: Product }) {
             aria-label="Weniger"
             className="flex h-11 w-11 items-center justify-center text-moon transition-colors hover:text-honey"
           >
-            −
+            <Icon name="minus" size={16} />
           </button>
-          <span className="w-7 text-center">{qty}</span>
+          <span className="w-7 text-center tabular-nums">{qty}</span>
           <button
             onClick={() => setQty((q) => q + 1)}
             aria-label="Mehr"
             className="flex h-11 w-11 items-center justify-center text-moon transition-colors hover:text-honey"
           >
-            +
+            <Icon name="plus" size={16} />
           </button>
         </div>
         <button

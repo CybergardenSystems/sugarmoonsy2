@@ -2,16 +2,17 @@
 
 import { limonaden, type Limonade } from "@/lib/limonaden";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { toast } from "@/lib/toast";
 
 const accentMap = {
-  lavender: { glow: "var(--color-lavender)", chip: "text-lavender" },
-  sage: { glow: "var(--color-sage)", chip: "text-sage" },
+  lavender: { glow: "var(--color-lavender)", chip: "text-lavender", icon: "droplet" as IconName },
+  sage: { glow: "var(--color-sage)", chip: "text-sage", icon: "leaf" as IconName },
 } as const;
 
 export function LimoCards() {
   return (
-    <div className="mt-14 grid gap-5 md:grid-cols-2">
+    <div className="mt-10 grid gap-3 sm:mt-14 sm:gap-5 md:grid-cols-2">
       {limonaden.map((l) => (
         <Card key={l.id} limo={l} />
       ))}
@@ -36,7 +37,7 @@ function Card({ limo }: { limo: Limonade }) {
 
   return (
     <article
-      className="group relative overflow-hidden rounded-2xl border border-honey/10 bg-night-2/60 p-7 transition-all duration-500 hover:-translate-y-1 hover:border-honey/25"
+      className="group relative overflow-hidden rounded-2xl border border-honey/10 bg-night-2/60 p-5 transition-all duration-500 hover:-translate-y-1 hover:border-honey/25 sm:p-7"
       style={{ ["--ac" as string]: a.glow }}
     >
       <div
@@ -50,16 +51,20 @@ function Card({ limo }: { limo: Limonade }) {
             <span className={`font-mono text-[0.62rem] uppercase tracking-[0.16em] ${a.chip}`}>
               {limo.type}
             </span>
-            <h3 className="mt-1 font-display text-2xl text-moon">{limo.name}</h3>
+            <h3 className="mt-1 text-balance font-display text-2xl text-moon">{limo.name}</h3>
             <p className="font-mono text-[0.7rem] text-moon-mute">{limo.volume}</p>
           </div>
-          <span className="text-4xl">{limo.emoji}</span>
+          <Icon
+            name={a.icon}
+            className="h-10 w-10 shrink-0 opacity-70 transition-opacity duration-500 group-hover:opacity-100"
+            style={{ color: a.glow }}
+          />
         </div>
 
         <ul className="mt-5 space-y-1.5">
           {limo.traits.map((t) => (
             <li key={t} className="flex items-center gap-2 text-[0.82rem] text-moon-dim">
-              <span className="text-honey">✓</span>
+              <Icon name="check" size={14} className="shrink-0 text-honey" />
               {t}
             </li>
           ))}

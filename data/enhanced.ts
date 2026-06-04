@@ -26,4 +26,10 @@ export const enhancedPhotos: Record<string, string> = {
     BASE + "hf_20260604_221151_d1a4e826-6f82-4fc7-a534-bc0c347180cf.png",
   "geschenk-lebkuchenmann":
     BASE + "hf_20260604_221154_f080f130-6b69-46ef-9e74-dff9c68ef2ba.png",
+
+  // Studio-Renderings (text-to-image) für die Sorten ohne Originalfoto.
+  karamell: BASE + "hf_20260604_225447_9a23e6b1-a402-43a4-8049-6c57ff385f3c.png",
+  bratapfel: BASE + "hf_20260604_225449_316a1d26-49dc-4509-9554-47de5c8efadf.png",
+  "pumpkin-spice":
+    BASE + "hf_20260604_225451_5186ca6a-c7d5-4fc7-9bbc-ba007397569e.jpeg",
 };

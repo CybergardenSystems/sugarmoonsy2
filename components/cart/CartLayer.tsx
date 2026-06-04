@@ -5,6 +5,26 @@ import { useCart, formatMoney } from "./CartProvider";
 import { site } from "@/data/site";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/cn";
+import { Icon } from "@/components/ui/Icon";
+import { MoonMark } from "@/components/brand/MoonMark";
+
+function CloseIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
 
 /** Warenkorb-Sheet + Bestell-Modal (mailto-Flow, kein Backend). */
 export function CartLayer() {
@@ -40,16 +60,16 @@ export function CartLayer() {
           <button
             onClick={close}
             aria-label="Schließen"
-            className="text-moon-mute transition-colors hover:text-honey"
+            className="-mr-1.5 flex h-10 w-10 items-center justify-center rounded-full text-moon-mute transition-colors hover:text-honey sm:h-9 sm:w-9"
           >
-            ✕
+            <CloseIcon />
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center text-moon-mute">
-              <span className="mb-3 text-3xl opacity-40">🌙</span>
+              <MoonMark size={48} className="mb-4 opacity-70" />
               <p className="text-sm">Noch leer — stöbere im Shop.</p>
             </div>
           ) : (
@@ -66,11 +86,11 @@ export function CartLayer() {
                     </p>
                     <div className="mt-2 flex items-center gap-2">
                       <QtyBtn onClick={() => setQty(it.key, it.qty - 1)} label="Weniger">
-                        −
+                        <Icon name="minus" size={14} />
                       </QtyBtn>
-                      <span className="w-5 text-center text-sm">{it.qty}</span>
+                      <span className="w-6 text-center text-sm tabular-nums">{it.qty}</span>
                       <QtyBtn onClick={() => setQty(it.key, it.qty + 1)} label="Mehr">
-                        +
+                        <Icon name="plus" size={14} />
                       </QtyBtn>
                       <button
                         onClick={() => remove(it.key)}
@@ -103,9 +123,10 @@ export function CartLayer() {
                 setOrderOpen(true);
               }}
               data-cursor="drop"
-              className="w-full rounded-xl bg-honey py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-honey-glow"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-honey py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-honey-glow"
             >
-              Zur Bestellung →
+              Zur Bestellung
+              <Icon name="arrow" size={16} />
             </button>
             <p className="mt-2 text-center text-[0.68rem] text-moon-mute">
               Versandkosten werden individuell berechnet.
@@ -146,7 +167,7 @@ function QtyBtn({
     <button
       onClick={onClick}
       aria-label={label}
-      className="flex h-6 w-6 items-center justify-center rounded-md border border-honey/15 text-sm text-moon transition-colors hover:border-honey hover:text-honey"
+      className="flex h-10 w-10 items-center justify-center rounded-md border border-honey/15 text-moon transition-colors hover:border-honey hover:text-honey sm:h-7 sm:w-7"
     >
       {children}
     </button>
@@ -180,11 +201,11 @@ function OrderModal({
       nt = g("nt");
 
     if (!fn || !ln || !em || !ad || !pl || !ct) {
-      toast("⚠️ Bitte alle Pflichtfelder ausfüllen");
+      toast("Bitte alle Pflichtfelder ausfüllen");
       return;
     }
     if (!em.includes("@")) {
-      toast("⚠️ Gültige E-Mail eingeben");
+      toast("Gültige E-Mail eingeben");
       return;
     }
 
@@ -209,14 +230,16 @@ function OrderModal({
         <button
           onClick={onClose}
           aria-label="Schließen"
-          className="absolute right-5 top-5 text-moon-mute transition-colors hover:text-honey"
+          className="absolute right-3.5 top-3.5 flex h-10 w-10 items-center justify-center rounded-full text-moon-mute transition-colors hover:text-honey sm:h-9 sm:w-9"
         >
-          ✕
+          <CloseIcon />
         </button>
 
         {done ? (
           <div className="py-8 text-center">
-            <div className="mb-4 text-4xl">🌙</div>
+            <div className="mb-4 flex justify-center">
+              <MoonMark size={72} />
+            </div>
             <h2 className="font-display text-2xl text-moon">Vielen Dank!</h2>
             <p className="mx-auto mt-2 max-w-xs text-sm text-moon-dim">
               Deine Bestellung ist auf dem Weg zu uns. Wir melden uns in Kürze per
@@ -269,9 +292,10 @@ function OrderModal({
               <Field name="nt" label="Anmerkungen" textarea />
               <button
                 type="submit"
-                className="w-full rounded-xl bg-honey py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-honey-glow"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-honey py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-honey-glow"
               >
-                Bestellung absenden →
+                Bestellung absenden
+                <Icon name="arrow" size={16} />
               </button>
             </form>
           </>

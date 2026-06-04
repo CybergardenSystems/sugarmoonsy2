@@ -8,11 +8,11 @@ import { cn } from "@/lib/cn";
 type Variant = "fill" | "line" | "ghost";
 
 const base =
-  "group relative inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-[0.9rem] font-medium tracking-tight transition-colors duration-300 will-change-transform";
+  "group relative inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-[0.9rem] font-medium tracking-tight transition-[background-color,border-color,color,box-shadow] duration-300 will-change-transform active:translate-y-px";
 
 const variants: Record<Variant, string> = {
-  fill: "bg-honey text-ink hover:bg-honey-glow",
-  line: "border border-honey/40 text-moon hover:border-honey hover:text-honey",
+  fill: "bg-honey text-ink shadow-[0_10px_30px_-8px_rgba(232,178,94,0.45)] hover:bg-honey-glow hover:shadow-[0_14px_36px_-8px_rgba(232,178,94,0.55)]",
+  line: "border border-honey/35 text-moon hover:border-honey/70 hover:text-honey hover:shadow-[0_0_24px_-6px_rgba(232,178,94,0.4)]",
   ghost: "text-moon-dim hover:text-honey",
 };
 

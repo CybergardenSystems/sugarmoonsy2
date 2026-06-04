@@ -3,9 +3,9 @@ import { LimoCards } from "./LimoCards";
 
 export function LimoSection() {
   return (
-    <section id="limonaden" className="relative overflow-hidden py-24 sm:py-32">
+    <section id="limonaden" className="section relative overflow-hidden">
       {/* lavendel-getönter Schein für diesen Abschnitt */}
-      <div className="pointer-events-none absolute right-0 top-0 h-[40rem] w-[40rem] rounded-full bg-lavender/5 blur-[120px]" />
+      <div className="glow-blob right-0 top-0 bg-lavender/5" />
       <div className="shell relative">
         <SectionHeading
           eyebrow="Neu im Sortiment"

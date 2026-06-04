@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/brand/Logo";
 import { useCart } from "@/components/cart/CartProvider";
+import { Icon } from "@/components/ui/Icon";
 import { nav } from "@/data/site";
 import { cn } from "@/lib/cn";
 
@@ -54,11 +55,11 @@ export function Nav() {
           <button
             onClick={open}
             aria-label={`Warenkorb, ${count} Artikel`}
-            className="relative flex h-9 w-9 items-center justify-center rounded-full border border-honey/15 text-moon transition-colors hover:border-honey/40 hover:text-honey"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-honey/15 text-moon transition-colors hover:border-honey/40 hover:text-honey sm:h-9 sm:w-9"
           >
-            <CartGlyph />
+            <Icon name="cart" size={17} />
             {count > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-[1.1rem] min-w-[1.1rem] items-center justify-center rounded-full bg-honey px-1 text-[0.6rem] font-bold text-ink">
+              <span className="absolute -right-0.5 -top-0.5 flex h-[1.15rem] min-w-[1.15rem] items-center justify-center rounded-full bg-honey px-1 text-[0.62rem] font-bold leading-none text-ink ring-2 ring-night-2">
                 {count}
               </span>
             )}
@@ -75,7 +76,7 @@ export function Nav() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menü"
             aria-expanded={menuOpen}
-            className="flex h-9 w-9 items-center justify-center md:hidden"
+            className="flex h-10 w-10 items-center justify-center md:hidden"
           >
             <span className="relative block h-3 w-5">
               <span
@@ -105,42 +106,51 @@ export function Nav() {
       <div
         inert={!menuOpen}
         className={cn(
-          "fixed inset-0 z-[-1] flex flex-col items-center justify-center gap-7 bg-night/97 backdrop-blur-xl transition-all duration-500 md:hidden",
+          "fixed inset-0 z-[-1] flex flex-col bg-night/97 backdrop-blur-xl transition-opacity duration-500 md:hidden",
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
-        {nav.map((item) => (
+        <div className="flex flex-1 flex-col justify-center px-8">
+          <span className="mb-8 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-moon-mute">
+            Navigation
+          </span>
+          <ul className="flex flex-col gap-1">
+            {nav.map((item, i) => {
+              const active = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "group flex items-baseline gap-4 py-3 font-display text-4xl transition-all duration-500",
+                      menuOpen
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-3 opacity-0",
+                      active ? "text-honey" : "text-moon hover:text-honey",
+                    )}
+                    style={{ transitionDelay: menuOpen ? `${80 + i * 60}ms` : "0ms" }}
+                  >
+                    <span className="font-mono text-xs text-moon-mute group-hover:text-honey/70">
+                      0{i + 1}
+                    </span>
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div className="border-t border-honey/10 px-8 py-8">
           <Link
-            key={item.href}
-            href={item.href}
-            className="font-display text-3xl text-moon transition-colors hover:text-honey"
+            href="/shop"
+            className="flex items-center justify-center gap-2 rounded-full bg-honey py-4 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:bg-honey-glow"
           >
-            {item.label}
+            Jetzt bestellen
+            <Icon name="arrow" size={15} />
           </Link>
-        ))}
-        <Link
-          href="/shop"
-          className="mt-3 rounded-full bg-honey px-7 py-3 font-mono text-xs uppercase tracking-widest text-ink"
-        >
-          Jetzt bestellen
-        </Link>
+        </div>
       </div>
     </header>
-  );
-}
-
-function CartGlyph() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M3 4h2l2.4 12.3a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.78L21 8H6.2"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="9.5" cy="20" r="1.4" fill="currentColor" />
-      <circle cx="17.5" cy="20" r="1.4" fill="currentColor" />
-    </svg>
   );
 }

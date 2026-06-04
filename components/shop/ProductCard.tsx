@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import type { AccentKey, Product } from "@/lib/products";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
-import { MoonMark } from "@/components/brand/MoonMark";
+import { Icon } from "@/components/ui/Icon";
 import { photoSrc } from "@/lib/photos";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/cn";
@@ -90,9 +90,9 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <Link href={`/shop/${product.slug}`}>
-          <h3 className="font-display text-xl text-moon transition-colors group-hover:text-honey">
+          <h3 className="text-balance font-display text-lg text-moon transition-colors group-hover:text-honey sm:text-xl">
             {product.name}
           </h3>
         </Link>
@@ -108,7 +108,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         </div>
 
         {product.sizes.length > 1 && (
-          <div className="mt-3 flex gap-1.5">
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {product.sizes.map((s) => (
               <button
                 key={s.label}
@@ -131,30 +131,36 @@ export function ProductCard({ product, priority = false }: { product: Product; p
             <button
               onClick={() => setQty((q) => Math.max(1, q - 1))}
               aria-label="Weniger"
-              className="flex h-8 w-8 items-center justify-center text-moon transition-colors hover:text-honey"
+              className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
             >
-              −
+              <Icon name="minus" size={16} />
             </button>
-            <span className="w-6 text-center text-sm">{qty}</span>
+            <span className="w-6 text-center text-sm tabular-nums">{qty}</span>
             <button
               onClick={() => setQty((q) => q + 1)}
               aria-label="Mehr"
-              className="flex h-8 w-8 items-center justify-center text-moon transition-colors hover:text-honey"
+              className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
             >
-              +
+              <Icon name="plus" size={16} />
             </button>
           </div>
           <button
             onClick={onAdd}
             data-cursor="drop"
             className={cn(
-              "flex-1 rounded-lg py-2.5 text-[0.8rem] font-semibold transition-colors",
+              "flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg text-[0.8rem] font-semibold transition-colors md:h-9",
               added
                 ? "bg-sage text-ink"
                 : "bg-honey text-ink hover:bg-honey-glow",
             )}
           >
-            {added ? "✓ Hinzugefügt" : "In den Warenkorb"}
+            {added ? (
+              <>
+                <Icon name="check" size={15} /> Hinzugefügt
+              </>
+            ) : (
+              "In den Warenkorb"
+            )}
           </button>
         </div>
       </div>
@@ -164,16 +170,82 @@ export function ProductCard({ product, priority = false }: { product: Product; p
 
 function Placeholder({ accent, season }: { accent: string; season: string }) {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center bg-night-3">
+    <div className="absolute inset-0 overflow-hidden bg-night-3">
+      {/* Akzent-Schein, von der Sorte gefärbt */}
       <div
-        className="absolute inset-0 opacity-60"
+        className="absolute inset-0"
         style={{
-          background: `radial-gradient(60% 50% at 50% 42%, ${accent}22, transparent 70%)`,
+          background: `radial-gradient(68% 52% at 50% 38%, ${accent}2e, transparent 70%)`,
         }}
       />
-      <MoonMark size={104} className="relative opacity-90" />
-      <span className="relative mt-3 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-moon-mute">
-        Foto folgt
+      {/* feines Haarlinien-Raster für editoriale Tiefe */}
+      <div
+        className="absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--color-moon) 1px, transparent 1px), linear-gradient(90deg, var(--color-moon) 1px, transparent 1px)",
+          backgroundSize: "34px 34px",
+          maskImage: "radial-gradient(circle at 50% 42%, black, transparent 78%)",
+        }}
+      />
+      {/* Vignette unten, damit die Saison-Caption sitzt */}
+      <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-night-2 to-transparent" />
+
+      {/* zentrierte Flaschen-Silhouette mit sortengefärbtem Mond-Emblem */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <svg
+          viewBox="0 0 60 130"
+          className="h-[60%] max-h-44 w-auto drop-shadow-[0_10px_28px_rgba(0,0,0,0.5)]"
+          style={{ color: accent }}
+          aria-hidden="true"
+        >
+          {/* Flaschenkorpus */}
+          <path
+            d="M24 6h12v10c0 4 6 9 6 18v66a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8V34c0-9 6-14 6-18z"
+            fill="currentColor"
+            fillOpacity="0.06"
+            stroke="currentColor"
+            strokeOpacity="0.4"
+            strokeWidth="1.1"
+          />
+          {/* Verschluss */}
+          <rect x="23" y="2" width="14" height="6" rx="2" fill="currentColor" fillOpacity="0.45" />
+          {/* Etikett-Feld */}
+          <rect
+            x="19"
+            y="56"
+            width="22"
+            height="36"
+            rx="3"
+            fill="var(--color-night)"
+            fillOpacity="0.6"
+            stroke="currentColor"
+            strokeOpacity="0.28"
+            strokeWidth="0.7"
+          />
+          {/* Sichelmond-Emblem auf dem Etikett, in der Akzentfarbe */}
+          <path
+            d="M35 67a8 8 0 1 0 0 14 6 6 0 0 1 0-14z"
+            fill="currentColor"
+            fillOpacity="0.9"
+          />
+          {/* zwei feine Etikett-Linien */}
+          <path
+            d="M24 86h12M27 89.5h6"
+            stroke="currentColor"
+            strokeOpacity="0.35"
+            strokeWidth="0.8"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+
+      {/* editoriale Wortmarke — macht die Kachel bewusst gestaltet, kein „fehlendes Bild" */}
+      <span
+        className="absolute left-1/2 top-[14%] -translate-x-1/2 whitespace-nowrap font-mono text-[0.54rem] uppercase tracking-[0.34em] text-moon-mute"
+        aria-hidden="true"
+      >
+        Sugar Moon
       </span>
       <span className="sr-only">{season}</span>
     </div>

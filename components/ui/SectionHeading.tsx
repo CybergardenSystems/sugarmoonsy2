@@ -19,7 +19,7 @@ export function SectionHeading({
       <Reveal>
         <span className={cn("eyebrow", center && "justify-center")}>{eyebrow}</span>
       </Reveal>
-      <Reveal as="h2" delay={0.05} className="mt-4 font-display text-[clamp(2rem,4vw,3.2rem)] text-moon">
+      <Reveal as="h2" delay={0.05} className="mt-4 font-display text-[clamp(2rem,4vw,3.2rem)] leading-[1.08] text-balance text-moon">
         {title}
       </Reveal>
       {sub && (

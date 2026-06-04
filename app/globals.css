@@ -132,6 +132,22 @@
   padding-inline: var(--spacing-edge);
 }
 
+/* Consistent vertical section rhythm (mobile-first, scales up) */
+.section {
+  padding-block: clamp(4rem, 2.5rem + 8vw, 8.5rem);
+}
+
+/* Responsive decorative glow — never causes horizontal overflow */
+.glow-blob {
+  position: absolute;
+  width: clamp(15rem, 58vw, 40rem);
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  filter: blur(clamp(50px, 9vw, 120px));
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Eyebrow label with gold rule */
 .eyebrow {
   display: inline-flex;
@@ -155,8 +171,11 @@
 .lede {
   color: var(--color-moon-dim);
   font-weight: 300;
-  font-size: clamp(1.02rem, 1.3vw, 1.22rem);
-  line-height: 1.7;
+  font-size: clamp(1.04rem, 1.35vw, 1.24rem);
+  line-height: 1.66;
+  letter-spacing: -0.005em;
+  max-width: 60ch;
+  text-wrap: pretty;
 }
 
 /* Subtle gold hairline border */
@@ -170,7 +189,7 @@
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.07;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -182,9 +201,9 @@
   z-index: 1;
   pointer-events: none;
   background: radial-gradient(
-    130% 100% at 50% 0%,
-    transparent 55%,
-    color-mix(in oklab, var(--color-ink) 70%, transparent) 100%
+    125% 100% at 50% 0%,
+    transparent 46%,
+    color-mix(in oklab, var(--color-ink) 78%, transparent) 100%
   );
 }
 

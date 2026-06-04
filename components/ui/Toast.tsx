@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Icon } from "@/components/ui/Icon";
 
 export function Toast() {
   const [message, setMessage] = useState<string | null>(null);
@@ -30,7 +31,7 @@ export function Toast() {
           message ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
         }`}
       >
-        <span className="text-honey">✦</span>
+        <Icon name="check" size={14} className="text-honey" />
         {message}
       </div>
     </div>

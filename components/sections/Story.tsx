@@ -5,9 +5,9 @@ import { photoSrcById } from "@/lib/photos";
 
 export function Story({ full = false }: { full?: boolean }) {
   return (
-    <section id="story" className="relative overflow-hidden py-24 sm:py-32">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-honey/[0.04] blur-[120px]" />
-      <div className="shell relative grid items-center gap-12 lg:grid-cols-2">
+    <section id="story" className="section relative overflow-hidden">
+      <div className="glow-blob left-1/2 top-0 -translate-x-1/2 bg-honey/[0.04]" />
+      <div className="shell relative grid items-center gap-10 sm:gap-12 lg:grid-cols-2">
         <div>
           <Reveal>
             <span className="eyebrow">Unsere Geschichte</span>

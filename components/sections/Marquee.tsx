@@ -1,4 +1,5 @@
 import { marqueeItems } from "@/data/site";
+import { Icon } from "@/components/ui/Icon";
 
 export function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
@@ -8,9 +9,9 @@ export function Marquee() {
         {items.map((item, i) => (
           <span
             key={i}
-            className="flex items-center gap-3 px-7 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-moon-dim"
+            className="flex items-center gap-3 px-7 font-mono text-[0.8rem] uppercase tracking-[0.14em] text-moon-dim sm:text-[0.72rem]"
           >
-            <span className="text-honey">✦</span>
+            <Icon name="spark" size={11} className="text-honey" />
             {item}
           </span>
         ))}
