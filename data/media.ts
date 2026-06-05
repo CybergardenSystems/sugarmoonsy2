@@ -14,3 +14,12 @@ export const media = {
   heroVideoPortrait:
     "https://d8j0ntlcm91z4.cloudfront.net/user_39b5wB7nN2eeHNQBagWbEKccwjN/hf_20260605_073505_56b8ab18-7a90-466b-b9ac-1cbc5459b289.mp4",
 } as const;
+
+/** Bio-Limonaden-Flaschen (echte Hunfelt-Bräu-Fotos, lokal gehostet). */
+export const limoPhotos: Record<string, string> = {
+  "lila-laune": "/media/products/lila-laune.jpg",
+  "kraut-heiter": "/media/products/kraut-heiter.jpg",
+};
+
+/** Atmosphäre-Bild für die „Über uns"-Story: Jessica & Sebastian am Adventsmarkt. */
+export const storyImage = "/media/story.jpg";

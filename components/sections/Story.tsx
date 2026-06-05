@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { stats } from "@/data/site";
-import { photoSrcById } from "@/lib/photos";
+import { storyImage } from "@/data/media";
 
 export function Story({ full = false }: { full?: boolean }) {
   return (
@@ -46,12 +46,14 @@ export function Story({ full = false }: { full?: boolean }) {
           <div className="relative overflow-hidden rounded-2xl border border-honey/12">
             <div className="relative aspect-[4/3] bg-night-3">
               <Image
-                src={photoSrcById("geschenk-lebkuchenmann", "geschenk-lebkuchenmann.jpg")!}
-                alt="Handgemachte 50 ml Geschenkflasche im Lebkuchenmännchen-Glas mit handgeschriebenem Anhänger"
+                src={storyImage}
+                alt="Jessica und Sebastian von Sugar Moon Sweets an ihrem Stand auf dem Adventsmarkt in Fulda"
                 fill
                 sizes="(max-width:1024px) 100vw, 560px"
                 className="object-cover object-center"
               />
+              {/* sanfter Scrim, damit das helle Foto zum dunklen Look passt */}
+              <div className="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/20" />
             </div>
             <div className="absolute inset-x-0 bottom-0 grid grid-cols-3 border-t border-honey/15 bg-night/70 backdrop-blur-md">
               {stats.map((s, i) => (
@@ -68,7 +70,7 @@ export function Story({ full = false }: { full?: boolean }) {
             </div>
           </div>
           <p className="mt-3 text-center font-mono text-[0.6rem] uppercase tracking-wide text-moon-mute">
-            50 ml Geschenkflasche · handgeschriebener Anhänger
+            Jessica &amp; Sebastian · Adventsmarkt Fulda
           </p>
         </Reveal>
       </div>
