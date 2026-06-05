@@ -226,6 +226,58 @@
   transform: none;
 }
 
+/* Legal / long-form text (Impressum, Datenschutz) */
+.legal {
+  color: var(--color-moon-dim);
+}
+.legal h2 {
+  font-family: var(--font-display);
+  color: var(--color-moon);
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+  margin-top: 2.75rem;
+  margin-bottom: 0.7rem;
+}
+.legal h2:first-child {
+  margin-top: 0;
+}
+.legal h3 {
+  color: var(--color-honey);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+.legal p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  font-size: 0.95rem;
+}
+.legal a {
+  color: var(--color-honey);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+.legal ul {
+  margin: 0.4rem 0 1.1rem 1.15rem;
+  list-style: disc;
+}
+.legal li {
+  margin-bottom: 0.3rem;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+.legal strong {
+  color: var(--color-moon);
+  font-weight: 600;
+}
+.legal address {
+  font-style: normal;
+  line-height: 1.85;
+  font-size: 0.95rem;
+}
+
 /* Hide content visually but keep for screen readers */
 .sr-only {
   position: absolute;
