@@ -55,32 +55,38 @@ export function BuyPanel({ product }: { product: Product }) {
         </div>
       )}
 
-      <div className="mt-6 flex items-center gap-3">
-        <div className="flex items-center rounded-lg border border-honey/15">
+      {product.comingSoon ? (
+        <div className="mt-6 flex items-center justify-center gap-2 rounded-lg border border-honey/25 bg-honey/5 py-3.5 text-sm font-semibold text-honey/80">
+          <Icon name="check" size={16} /> Bald verfügbar — Coming Soon
+        </div>
+      ) : (
+        <div className="mt-6 flex items-center gap-3">
+          <div className="flex items-center rounded-lg border border-honey/15">
+            <button
+              onClick={() => setQty((q) => Math.max(1, q - 1))}
+              aria-label="Weniger"
+              className="flex h-11 w-11 items-center justify-center text-moon transition-colors hover:text-honey"
+            >
+              <Icon name="minus" size={16} />
+            </button>
+            <span className="w-7 text-center tabular-nums">{qty}</span>
+            <button
+              onClick={() => setQty((q) => q + 1)}
+              aria-label="Mehr"
+              className="flex h-11 w-11 items-center justify-center text-moon transition-colors hover:text-honey"
+            >
+              <Icon name="plus" size={16} />
+            </button>
+          </div>
           <button
-            onClick={() => setQty((q) => Math.max(1, q - 1))}
-            aria-label="Weniger"
-            className="flex h-11 w-11 items-center justify-center text-moon transition-colors hover:text-honey"
+            onClick={onAdd}
+            data-cursor="drop"
+            className="flex-1 rounded-lg bg-honey py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-honey-glow"
           >
-            <Icon name="minus" size={16} />
-          </button>
-          <span className="w-7 text-center tabular-nums">{qty}</span>
-          <button
-            onClick={() => setQty((q) => q + 1)}
-            aria-label="Mehr"
-            className="flex h-11 w-11 items-center justify-center text-moon transition-colors hover:text-honey"
-          >
-            <Icon name="plus" size={16} />
+            In den Warenkorb · {formatMoney(active.price * qty)}
           </button>
         </div>
-        <button
-          onClick={onAdd}
-          data-cursor="drop"
-          className="flex-1 rounded-lg bg-honey py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-honey-glow"
-        >
-          In den Warenkorb · {formatMoney(active.price * qty)}
-        </button>
-      </div>
+      )}
     </div>
   );
 }

@@ -29,8 +29,8 @@ export default function ImpressumPage() {
             <h3>Kontakt</h3>
             <p>
               E-Mail:{" "}
-              <a href="mailto:scherf.sebastian@sugarmoonsweets.de">
-                scherf.sebastian@sugarmoonsweets.de
+              <a href="mailto:sebastian.scherf@sugarmoonsweets.de">
+                sebastian.scherf@sugarmoonsweets.de
               </a>
             </p>
 

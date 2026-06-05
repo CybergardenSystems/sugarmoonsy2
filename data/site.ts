@@ -3,7 +3,7 @@
 export const site = {
   name: "Sugar Moon Sweets",
   tagline: "Bio-Sirup-Manufaktur aus Fulda",
-  email: "info@sugarmoonsweets.de",
+  email: "sebastian.scherf@sugarmoonsweets.de",
   domain: "sugarmoonsweets.de",
   url: "https://sugarmoonsweets.de",
   city: "Fulda",
@@ -40,7 +40,7 @@ export const usps = [
 export const marqueeItems = [
   "Bio-zertifiziert",
   "Handgemacht in Fulda",
-  "12 Sorten",
+  "11 Sorten",
   "Für Kaffee & Cocktails",
   "Perfekt als Geschenk",
   "Direkt bestellen",
@@ -48,7 +48,7 @@ export const marqueeItems = [
 ];
 
 export const stats = [
-  { value: "12", label: "Sorten" },
+  { value: "11", label: "Sorten" },
   { value: "100%", label: "Bio" },
   { value: "Fulda", label: "Mit Herz" },
 ];

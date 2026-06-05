@@ -22,7 +22,7 @@ export function ShopTeaser() {
           />
           <Reveal className="hidden shrink-0 md:block">
             <MagneticButton href="/shop" variant="line">
-              Alle 12 Sorten
+              Alle 11 Sorten
               <Icon name="arrow" size={16} aria-hidden />
             </MagneticButton>
           </Reveal>
@@ -38,7 +38,7 @@ export function ShopTeaser() {
 
         <div className="mt-10 flex justify-center md:hidden">
           <MagneticButton href="/shop" variant="line">
-            Alle 12 Sorten ansehen
+            Alle 11 Sorten ansehen
             <Icon name="arrow" size={16} aria-hidden />
           </MagneticButton>
         </div>

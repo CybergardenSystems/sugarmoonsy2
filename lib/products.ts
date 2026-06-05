@@ -31,10 +31,13 @@ export interface Product {
   /** Längerer Text für die Detailseite. */
   story: string;
   season: string;
-  seasonKey: SeasonKey;
+  /** Eine Sorte kann in mehreren Saison-Filtern auftauchen (z. B. ganzjährig + Sommer). */
+  seasonKeys: SeasonKey[];
   sizes: Size[];
   accent: AccentKey;
   badge?: string;
+  /** Noch nicht bestellbar — wird als „Bald verfügbar" gezeigt. */
+  comingSoon?: boolean;
   /** Dateiname in /media/products/ oder null (→ Platzhalter). */
   photo: string | null;
   /** Pairing-Idee (Kaffee / Cocktail / Dessert). */
@@ -61,32 +64,14 @@ export const products: Product[] = [
     story:
       "Unsere Vanille ist der ruhige Vollmond im Sortiment: weich, rund, immer da. Aus echter Bourbon-Vanille, ohne künstliche Aromen — der Sirup, der in jeden Kaffee, jedes Dessert und jeden Teig passt.",
     season: "Ganzjährig",
-    seasonKey: "gj",
+    seasonKeys: ["gj"],
     sizes: [
-      { label: "250 ml", price: 13 },
+      { label: "250 ml", price: 15 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "honey",
     photo: "vanille.jpg",
     pairing: "Latte · Panna Cotta · Pancakes",
-  }),
-  P({
-    id: "karamell",
-    slug: "bio-karamell",
-    name: "Bio-Karamell",
-    flavor: "Cremig, süß & unwiderstehlich",
-    description: "Perfekt für Kaffee und Desserts — tiefes, gebranntes Karamell.",
-    story:
-      "Langsam eingekochter Zucker, bis er bernsteinfarben leuchtet wie der Mond über Fulda. Cremig, süß, mit einer feinen Bitternote, die Kaffee und Eis veredelt.",
-    season: "Ganzjährig",
-    seasonKey: "gj",
-    sizes: [
-      { label: "250 ml", price: 13 },
-      { label: "50 ml", price: 5.5 },
-    ],
-    accent: "amber",
-    photo: null,
-    pairing: "Cappuccino · Eis · Cheesecake",
   }),
   P({
     id: "pistazie",
@@ -97,9 +82,9 @@ export const products: Product[] = [
     story:
       "Edel und intensiv: geröstete Pistazien, behutsam zu Sirup gebracht. Ein Hauch Mittelmeer für den Flat White oder den Aperitif unter Sternen.",
     season: "März – August",
-    seasonKey: "fs",
+    seasonKeys: ["fs"],
     sizes: [
-      { label: "250 ml", price: 14 },
+      { label: "250 ml", price: 16 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "sage",
@@ -113,11 +98,11 @@ export const products: Product[] = [
     flavor: "Fein-blumig & fruchtig",
     description: "Ein Hauch Provence bei Nacht — Lavendel trifft dunkle Blaubeere.",
     story:
-      "Blühender Lavendel und dunkle Blaubeere — die Sorte, die unsere Kund:innen am häufigsten ihren Lieblingssirup nennen. Provence-Romantik in einem nächtlichen Violett.",
-    season: "März – August",
-    seasonKey: "fs",
+      "Blühender Lavendel und dunkle Blaubeere — die Sorte, die unsere Kund:innen am häufigsten ihren Lieblingssirup nennen. Provence-Romantik in einem nächtlichen Violett. Ganzjährig erhältlich und besonders beliebt in Frühling & Sommer.",
+    season: "Ganzjährig",
+    seasonKeys: ["gj", "fs"],
     sizes: [
-      { label: "250 ml", price: 14 },
+      { label: "250 ml", price: 16 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "lavender",
@@ -133,9 +118,9 @@ export const products: Product[] = [
     story:
       "Dunkle Blaubeere, frisches Basilikum — ein Kontrast, der wach macht. Tiefviolett, krautig, überraschend erwachsen. Unser Geheimtipp für Cocktails.",
     season: "März – August",
-    seasonKey: "fs",
+    seasonKeys: ["fs"],
     sizes: [
-      { label: "250 ml", price: 14 },
+      { label: "250 ml", price: 16 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "plum",
@@ -149,11 +134,11 @@ export const products: Product[] = [
     flavor: "Cremig-exotisch mit Kokosraspeln",
     description: "Sonne im Glas — milde Kokos mit echten Raspeln.",
     story:
-      "Mild, cremig, mit echten Kokosraspeln: der hellste Sirup im Sortiment, fast milchig wie ein Neumond. Macht aus jedem Kaffee einen kleinen Urlaub.",
-    season: "Ganzjährig",
-    seasonKey: "gj",
+      "Mild, cremig, mit echten Kokosraspeln: der hellste Sirup im Sortiment, fast milchig wie ein Neumond. Macht aus jedem Kaffee einen kleinen Urlaub — unsere Sommer-Sorte.",
+    season: "Juni – August",
+    seasonKeys: ["fs"],
     sizes: [
-      { label: "250 ml", price: 13 },
+      { label: "250 ml", price: 15 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "moon",
@@ -169,12 +154,14 @@ export const products: Product[] = [
     story:
       "Gebackener Apfel, Zimt, eine Spur Nelke: der Geschmack von Herbstabenden mit Kerzenlicht. Warm in den Tee, großzügig über den Milchreis.",
     season: "Sep – Nov",
-    seasonKey: "he",
+    seasonKeys: ["he"],
     sizes: [
-      { label: "250 ml", price: 14 },
+      { label: "250 ml", price: 16 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "pumpkin",
+    badge: "Coming Soon",
+    comingSoon: true,
     photo: null,
     pairing: "Tee · Milchreis · Punsch",
   }),
@@ -187,9 +174,9 @@ export const products: Product[] = [
     story:
       "Der Sirup, mit dem alles begann: An einem Herbstmorgen in Fulda suchte Jessica vergeblich nach einem Pumpkin Spice Latte — und begann, ihn selbst zu machen. Kürbis, Zimt, Muskat, Ingwer. Unser Bestseller.",
     season: "Sep – Nov",
-    seasonKey: "he",
+    seasonKeys: ["he"],
     sizes: [
-      { label: "250 ml", price: 14 },
+      { label: "250 ml", price: 16 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "pumpkin",
@@ -206,9 +193,9 @@ export const products: Product[] = [
     story:
       "Buttriger Gewürzkeks, eingefangen als Sirup — fast schwarz, tief und weihnachtlich. Ein Löffel im Kaffee und die Küche riecht nach Dezember.",
     season: "Dez – Jan",
-    seasonKey: "wi",
+    seasonKeys: ["wi"],
     sizes: [
-      { label: "250 ml", price: 13 },
+      { label: "250 ml", price: 15 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "cinnamon",
@@ -224,9 +211,9 @@ export const products: Product[] = [
     story:
       "Honig, Nelke, Zimt, Piment: der ganze Weihnachtsmarkt in einer Flasche. Kräftig und würzig — auch als 50 ml Geschenk im Lebkuchenmännchen-Glas erhältlich.",
     season: "Dez – Jan",
-    seasonKey: "wi",
+    seasonKeys: ["wi"],
     sizes: [
-      { label: "250 ml", price: 13 },
+      { label: "250 ml", price: 15 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "cinnamon",
@@ -242,9 +229,9 @@ export const products: Product[] = [
     story:
       "Echte Zimtstangen, langsam ausgezogen: warm, aromatisch, beruhigend. Der Sirup für lange Winterabende und cremigen Milchschaum.",
     season: "Nov – Feb",
-    seasonKey: "wi",
+    seasonKeys: ["wi"],
     sizes: [
-      { label: "250 ml", price: 13 },
+      { label: "250 ml", price: 15 },
       { label: "50 ml", price: 5.5 },
     ],
     accent: "cinnamon",
@@ -260,7 +247,7 @@ export const products: Product[] = [
     story:
       "Kein Sirup, sondern pure Tiefe: konzentrierter Vanille-Extrakt aus echter Schote, im eleganten schwarzen Mond-Etikett. Zum Backen, Verfeinern und Genießen.",
     season: "Ganzjährig",
-    seasonKey: "gj",
+    seasonKeys: ["gj"],
     sizes: [{ label: "100 ml", price: 7.8 }],
     accent: "honey",
     photo: "vanille-extrakt.jpg",
@@ -273,7 +260,7 @@ export function getProduct(slug: string): Product | undefined {
 }
 
 export function productsBySeason(key: SeasonKey | "all"): Product[] {
-  return key === "all" ? products : products.filter((p) => p.seasonKey === key);
+  return key === "all" ? products : products.filter((p) => p.seasonKeys.includes(key));
 }
 
 /** Die „beliebten Sorten" für den Hero-Quickpick. */

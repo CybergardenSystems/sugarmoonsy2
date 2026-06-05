@@ -128,43 +128,51 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           </div>
         )}
 
-        <div className="mt-auto flex items-center gap-2 pt-4">
-          <div className="flex items-center rounded-lg border border-honey/15">
+        {product.comingSoon ? (
+          <div className="mt-auto pt-4">
+            <div className="flex h-10 items-center justify-center gap-1.5 rounded-lg border border-honey/25 bg-honey/5 text-[0.8rem] font-semibold text-honey/80">
+              <Icon name="check" size={15} /> Bald verfügbar
+            </div>
+          </div>
+        ) : (
+          <div className="mt-auto flex items-center gap-2 pt-4">
+            <div className="flex items-center rounded-lg border border-honey/15">
+              <button
+                onClick={() => setQty((q) => Math.max(1, q - 1))}
+                aria-label="Weniger"
+                className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
+              >
+                <Icon name="minus" size={16} />
+              </button>
+              <span className="w-6 text-center text-sm tabular-nums">{qty}</span>
+              <button
+                onClick={() => setQty((q) => q + 1)}
+                aria-label="Mehr"
+                className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
+              >
+                <Icon name="plus" size={16} />
+              </button>
+            </div>
             <button
-              onClick={() => setQty((q) => Math.max(1, q - 1))}
-              aria-label="Weniger"
-              className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
+              onClick={onAdd}
+              data-cursor="drop"
+              className={cn(
+                "flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg text-[0.8rem] font-semibold transition-colors md:h-9",
+                added
+                  ? "bg-sage text-ink"
+                  : "bg-honey text-ink hover:bg-honey-glow",
+              )}
             >
-              <Icon name="minus" size={16} />
-            </button>
-            <span className="w-6 text-center text-sm tabular-nums">{qty}</span>
-            <button
-              onClick={() => setQty((q) => q + 1)}
-              aria-label="Mehr"
-              className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
-            >
-              <Icon name="plus" size={16} />
+              {added ? (
+                <>
+                  <Icon name="check" size={15} /> Hinzugefügt
+                </>
+              ) : (
+                "In den Warenkorb"
+              )}
             </button>
           </div>
-          <button
-            onClick={onAdd}
-            data-cursor="drop"
-            className={cn(
-              "flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg text-[0.8rem] font-semibold transition-colors md:h-9",
-              added
-                ? "bg-sage text-ink"
-                : "bg-honey text-ink hover:bg-honey-glow",
-            )}
-          >
-            {added ? (
-              <>
-                <Icon name="check" size={15} /> Hinzugefügt
-              </>
-            ) : (
-              "In den Warenkorb"
-            )}
-          </button>
-        </div>
+        )}
       </div>
     </article>
   );
