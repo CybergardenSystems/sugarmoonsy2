@@ -23,8 +23,8 @@ export default function DatenschutzPage() {
 
             <h2>1. Verantwortliche Stelle</h2>
             <p>
-              <a href="mailto:jessica.scherf@sugarmoonsweets.de">
-                jessica.scherf@sugarmoonsweets.de
+              <a href="mailto:sebastian.scherf@sugarmoonsweets.de">
+                sebastian.scherf@sugarmoonsweets.de
               </a>
             </p>
 
@@ -103,8 +103,8 @@ export default function DatenschutzPage() {
             <p>
               Bei Fragen zur Verarbeitung Ihrer personenbezogenen Daten oder zur
               Geltendmachung Ihrer Rechte kontaktieren Sie uns bitte unter{" "}
-              <a href="mailto:jessica.scherf@sugarmoonsweets.de">
-                jessica.scherf@sugarmoonsweets.de
+              <a href="mailto:sebastian.scherf@sugarmoonsweets.de">
+                sebastian.scherf@sugarmoonsweets.de
               </a>
               .
             </p>
