@@ -6,6 +6,7 @@ import { LimoSection } from "@/components/sections/LimoSection";
 import { Story } from "@/components/sections/Story";
 import { Reviews } from "@/components/sections/Reviews";
 import { CTA } from "@/components/sections/CTA";
+import { GoldenSpine } from "@/components/layout/GoldenSpine";
 import { site } from "@/data/site";
 
 const jsonLd = {
@@ -31,6 +32,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <GoldenSpine />
       <Hero />
       <Marquee />
       <Manifest />

@@ -5,6 +5,7 @@ import type { Product } from "@/lib/products";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
 import { toast } from "@/lib/toast";
+import { flyToCart } from "@/lib/flyToCart";
 import { cn } from "@/lib/cn";
 
 export function BuyPanel({ product }: { product: Product }) {
@@ -13,7 +14,8 @@ export function BuyPanel({ product }: { product: Product }) {
   const [qty, setQty] = useState(1);
   const active = product.sizes.find((s) => s.label === size) ?? product.sizes[0];
 
-  const onAdd = () => {
+  const onAdd = (e: React.MouseEvent) => {
+    flyToCart(e.clientX, e.clientY);
     add(
       { id: product.id, name: product.name, size: active.label, price: active.price, photo: product.photo },
       qty,

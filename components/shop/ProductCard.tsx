@@ -8,6 +8,7 @@ import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
 import { photoSrc } from "@/lib/photos";
 import { toast } from "@/lib/toast";
+import { flyToCart } from "@/lib/flyToCart";
 import { cn } from "@/lib/cn";
 
 export const accentVar: Record<AccentKey, string> = {
@@ -31,7 +32,8 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   const ac = accentVar[product.accent] ?? "var(--color-honey)";
   const src = photoSrc(product);
 
-  const onAdd = () => {
+  const onAdd = (e: React.MouseEvent) => {
+    flyToCart(e.clientX, e.clientY);
     add(
       {
         id: product.id,

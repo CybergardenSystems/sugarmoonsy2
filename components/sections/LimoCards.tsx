@@ -4,6 +4,7 @@ import { limonaden, type Limonade } from "@/lib/limonaden";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { toast } from "@/lib/toast";
+import { flyToCart } from "@/lib/flyToCart";
 
 const accentMap = {
   lavender: { glow: "var(--color-lavender)", chip: "text-lavender", icon: "droplet" as IconName },
@@ -24,7 +25,8 @@ function Card({ limo }: { limo: Limonade }) {
   const { add } = useCart();
   const a = accentMap[limo.accent];
 
-  const onAdd = () => {
+  const onAdd = (e: React.MouseEvent) => {
+    flyToCart(e.clientX, e.clientY);
     add({
       id: `limo-${limo.id}`,
       name: limo.name,

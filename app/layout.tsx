@@ -11,6 +11,7 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Cursor } from "@/components/layout/Cursor";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { FlyToCart } from "@/components/layout/FlyToCart";
 import { Toast } from "@/components/ui/Toast";
 
 const fraunces = Fraunces({
@@ -70,6 +71,7 @@ export default function RootLayout({
             <main id="main">{children}</main>
             <Footer />
             <CartLayer />
+            <FlyToCart />
             <Toast />
           </SmoothScroll>
         </CartProvider>

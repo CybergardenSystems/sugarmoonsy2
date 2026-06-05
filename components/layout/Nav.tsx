@@ -54,6 +54,7 @@ export function Nav() {
         <div className="flex items-center gap-2">
           <button
             onClick={open}
+            data-cart-icon
             aria-label={`Warenkorb, ${count} Artikel`}
             className="relative flex h-10 w-10 items-center justify-center rounded-full border border-honey/15 text-moon transition-colors hover:border-honey/40 hover:text-honey sm:h-9 sm:w-9"
           >
