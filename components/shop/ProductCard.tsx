@@ -97,11 +97,13 @@ export function ProductCard({
           {product.flavor}
         </p>
 
-        <div className="mt-3 flex items-baseline gap-1.5">
-          <span className="font-display text-2xl text-honey">
+        <div className="mt-3 flex items-baseline gap-1.5 whitespace-nowrap">
+          <span className="font-display text-xl text-honey sm:text-2xl">
             {formatMoney(active.price)}
           </span>
-          <span className="font-mono text-[0.7rem] text-moon-mute">/ {active.label}</span>
+          <span className="font-mono text-[0.68rem] text-moon-mute">
+            / {active.label}
+          </span>
         </div>
 
         {product.sizes.length > 1 && (
@@ -135,8 +137,8 @@ export function ProductCard({
             </div>
           </div>
         ) : (
-          <div className="mt-auto flex items-center gap-2 pt-4">
-            <div className="flex items-center rounded-lg border border-honey/15">
+          <div className="mt-auto flex flex-col gap-2 pt-4 sm:flex-row sm:items-center">
+            <div className="flex items-center self-start rounded-lg border border-honey/15">
               <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
                 aria-label="Weniger"
@@ -159,7 +161,7 @@ export function ProductCard({
               onClick={onAdd}
               data-cursor="drop"
               className={cn(
-                "flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg text-[0.8rem] font-semibold transition-colors md:h-9",
+                "flex h-10 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-lg text-[0.8rem] font-semibold transition-colors sm:w-auto sm:flex-1 md:h-9",
                 added
                   ? "bg-sage text-ink"
                   : "bg-honey text-ink shadow-[0_8px_22px_-8px_rgba(232,178,94,0.35)] hover:bg-honey-glow",
