@@ -4,10 +4,17 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
-    // Higgsfield-CDN (für später eingebundene, KI-aufgewertete Produktbilder)
-    remotePatterns: [
-      { protocol: "https", hostname: "d8j0ntlcm91z4.cloudfront.net" },
-    ],
+  },
+  // 301-Redirect-Map: alte WordPress-URLs → neue Informationsarchitektur,
+  // damit bestehende Rankings/Backlinks nicht verbrennen (siehe
+  // docs/rebuild/CONTENT_INVENTORY.md §IA). Trailing-Slash-Varianten
+  // normalisiert Next automatisch.
+  async redirects() {
+    return [
+      { source: "/datenschutzerklaerung", destination: "/datenschutz", statusCode: 301 },
+      { source: "/Bio-Zertifizierung", destination: "/bio-zertifizierung", statusCode: 301 },
+      { source: "/wo-wir-ausstellen", destination: "/ausstellungen", statusCode: 301 },
+    ];
   },
 };
 
