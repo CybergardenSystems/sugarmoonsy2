@@ -10,6 +10,9 @@ export const media = {
   heroVideo: "/media/hero.mp4",
   /** Hochformat-Variante (Mobile, 9:16). */
   heroVideoPortrait: "/media/hero-portrait.mp4",
+  /** Erste Frames der Loops als sofort ladende Poster (LCP-Anker). */
+  heroPoster: "/media/hero-poster.webp",
+  heroPosterPortrait: "/media/hero-portrait-poster.webp",
 } as const;
 
 /** Bio-Limonaden-Flaschen (echte Hunfelt-Bräu-Fotos, lokal gehostet). */

@@ -7,7 +7,6 @@ export interface Limonade {
   volume: string;
   price: number;
   accent: "lavender" | "sage";
-  emoji: string;
   traits: string[];
   ingredients: string;
   organic: string;
@@ -21,7 +20,6 @@ export const limonaden: Limonade[] = [
     volume: "330 ml",
     price: 3.5,
     accent: "lavender",
-    emoji: "💜",
     traits: [
       "Ohne Konservierungsmittel",
       "Ohne künstliche Aromen",
@@ -37,7 +35,6 @@ export const limonaden: Limonade[] = [
     volume: "330 ml",
     price: 3.5,
     accent: "sage",
-    emoji: "🌿",
     traits: [
       "Ohne Konservierungsmittel",
       "Ohne künstliche Aromen",

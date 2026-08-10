@@ -122,6 +122,12 @@ Standardgröße **250 ml** + Geschenkgröße **50 ml** (5,50 €) bei jeder Sort
 
 ## 8. Asset-Inventar (echte Assets)
 
+> ⚠️ **ÜBERHOLT (Stand der Extraktions-Session).** §8 und §8b beschreiben die
+> Netzwerk-/Dateilage zum Zeitpunkt der Extraktion. Inzwischen liegen die
+> Inhaber-Fotos als Repo-Dateien vor und alle Medien sind self-hosted —
+> aktueller Stand: `ASSET_INVENTORY.md`. Die Abschnitte bleiben als
+> historische Quellen-Doku unverändert stehen.
+
 **⚠️ Wichtig:** Alle Legacy-Bilder liegen als externe URLs auf `sugarmoonsweets.de`. Dieser Host ist in der Netzwerk-Policy dieser Umgebung **nicht erlaubt** (`Host not in allowlist`) → **Download in dieser Session nicht möglich.** Das `./source-assets/`-Verzeichnis enthält **keine** vom Nutzer bereitgestellten Fotos.
 
 | Asset | URL (Legacy) | Einsatz | Status |

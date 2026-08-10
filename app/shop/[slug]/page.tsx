@@ -65,12 +65,14 @@ export default async function ProductPage({
     <article className="pt-32 pb-28">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
       <div className="shell">
         <Link
           href="/shop"
-          className="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-moon-mute transition-colors hover:text-honey"
+          className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-moon-mute transition-colors hover:text-honey"
         >
           ← Zurück zum Shop
         </Link>
@@ -103,7 +105,7 @@ export default async function ProductPage({
                     }}
                   />
                   <MoonMark size={160} className="relative" />
-                  <span className="relative mt-4 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-moon-mute">
+                  <span className="relative mt-4 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-moon-mute">
                     Produktfoto folgt
                   </span>
                 </div>
@@ -114,7 +116,7 @@ export default async function ProductPage({
           {/* Detail */}
           <div>
             <span
-              className="font-mono text-[0.66rem] uppercase tracking-[0.18em]"
+              className="font-mono text-[0.72rem] uppercase tracking-[0.18em]"
               style={{ color: ac }}
             >
               {product.season}
@@ -128,13 +130,13 @@ export default async function ProductPage({
 
             <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-honey/10 pt-6">
               <div>
-                <dt className="font-mono text-[0.6rem] uppercase tracking-wider text-moon-mute">
+                <dt className="font-mono text-xs uppercase tracking-wider text-moon-mute">
                   Passt zu
                 </dt>
                 <dd className="mt-1 text-sm text-moon">{product.pairing}</dd>
               </div>
               <div>
-                <dt className="font-mono text-[0.6rem] uppercase tracking-wider text-moon-mute">
+                <dt className="font-mono text-xs uppercase tracking-wider text-moon-mute">
                   Qualität
                 </dt>
                 <dd className="mt-1 text-sm text-moon">Bio · ohne künstliche Zusätze</dd>

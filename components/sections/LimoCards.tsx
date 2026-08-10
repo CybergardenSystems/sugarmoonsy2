@@ -7,6 +7,8 @@ import { Icon } from "@/components/ui/Icon";
 import { limoPhotos } from "@/data/media";
 import { toast } from "@/lib/toast";
 import { flyToCart } from "@/lib/flyToCart";
+import { cn } from "@/lib/cn";
+import { primaryBtn } from "@/lib/buttonStyles";
 
 const accentMap = {
   lavender: { glow: "var(--color-lavender)", chip: "text-lavender" },
@@ -51,13 +53,11 @@ function Card({ limo }: { limo: Limonade }) {
       />
 
       <div className="relative flex-1 p-5 sm:p-7">
-        <span
-          className={`font-mono text-[0.62rem] uppercase tracking-[0.16em] ${a.chip}`}
-        >
+        <span className={`font-mono text-[0.7rem] uppercase tracking-[0.16em] ${a.chip}`}>
           {limo.type}
         </span>
         <h3 className="mt-1 text-balance font-display text-2xl text-moon">{limo.name}</h3>
-        <p className="font-mono text-[0.7rem] text-moon-mute">
+        <p className="font-mono text-[0.72rem] text-moon-mute">
           {limo.volume} · mit Hunfelt Bräu
         </p>
 
@@ -70,10 +70,10 @@ function Card({ limo }: { limo: Limonade }) {
           ))}
         </ul>
 
-        <p className="mt-4 rounded-xl border border-honey/8 bg-night-3/50 p-3.5 text-[0.74rem] leading-relaxed text-moon-mute">
+        <p className="mt-4 rounded-xl border border-honey/8 bg-night-3/50 p-3.5 text-[0.8rem] leading-relaxed text-moon-mute">
           <span className="text-moon-dim">Zutaten:</span> {limo.ingredients}
           <br />
-          <span className="text-[0.66rem]">{limo.organic}</span>
+          <span className="text-[0.72rem]">{limo.organic}</span>
         </p>
 
         <div className="mt-5 flex items-center justify-between gap-3">
@@ -83,7 +83,7 @@ function Card({ limo }: { limo: Limonade }) {
           <button
             onClick={onAdd}
             data-cursor="drop"
-            className="rounded-xl bg-honey px-5 py-2.5 text-[0.8rem] font-semibold text-ink transition-colors hover:bg-honey-glow"
+            className={cn(primaryBtn, "px-5 py-2.5")}
           >
             In den Warenkorb
           </button>

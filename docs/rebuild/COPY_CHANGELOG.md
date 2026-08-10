@@ -21,7 +21,7 @@
 | Bio-Bratapfel | regulär bestellbar | **„Coming Soon"**, nicht bestellbar |
 | Saison-Modell | eine Saison je Sorte | Mehrfach-Saisons (`seasonKeys[]`), z. B. Lavendel ganzjährig **und** Frühling/Sommer; Kokos nur Sommer |
 | Kontakt-E-Mail | info@sugarmoonsweets.de | **sebastian.scherf@sugarmoonsweets.de** (Footer, Shop, Ausstellungen, Impressum, Datenschutz) |
-| Impressum / Datenschutz | im Legacy-File nicht enthalten (externe WP-Seiten) | echte Texte vom Inhaber, **1:1 übernommen, kein Wort geändert** |
+| Impressum / Datenschutz | im Legacy-File nicht enthalten (externe WP-Seiten) | echte Texte vom Inhaber, wortidentisch übernommen — **mit einer dokumentierten Ausnahme:** die Kontakt-Mailadressen (`scherf.sebastian@…` im Impressum, `jessica.scherf@…` 2× im Datenschutz) wurden in den späteren Inhaber-Doku-Commits (65d8692, f962388) auf `sebastian.scherf@sugarmoonsweets.de` normalisiert. Da die Adresse im Impressum rechtlich verbindlich ist, steht die Rückbestätigung der korrekten Schreibweise als **Launch-Frage** im FINAL_REPORT |
 | Ausstellungen | Seite lag nicht im Legacy-File vor | echte „Wo wir ausstellen"-Copy vom Inhaber + Vorschlag-CTA |
 
 ## 2. Kreative Professionalisierung (Information erhalten) `[Kreativ]`
@@ -35,7 +35,7 @@
 | Shop-Sub | „Direkt von der Manufaktur — wähle Größe und Menge, ab in den Warenkorb und fertig." | leicht gestrafft, gleicher Inhalt; `/shop` ergänzt „Die 50 ml-Fläschchen gibt es bei jeder Sorte, perfekt zum Verschenken." | 50-ml-Geschenk-Hinweis ist Legacy-Substanz („perfekt zum Verschenken") |
 | USP-Sektion | Titel + 3 USPs | wörtlich übernommen, neue Sub-Zeile „Drei Versprechen, so verlässlich wie der Lauf des Mondes …" ergänzt | reine Ergänzung |
 | Story (Startseite) | 3 Absätze About-Text | **wörtlich** übernommen | identisch |
-| Story (`/story`, erweitert) | — | ein zusätzlicher Absatz: „Jede Flasche entsteht in kleinen Chargen, von Hand abgefüllt und mit unserem Mond-Etikett versehen. Bio-zertifiziert, saisonal gedacht, ohne künstliche Zusätze…" | alle Aussagen durch Legacy-USPs (handgemacht, bio, saisonal, ohne Zusätze) und echte Etiketten gedeckt |
+| Story (`/story`, erweitert) | — | ein zusätzlicher Absatz (Fassung nach Council R1, siehe §5): „Jede Flasche entsteht in unserer Manufaktur — familiengeführt, mit Herzblut und Sorgfalt — und trägt unser Mond-Etikett. Bio-zertifiziert, saisonal gedacht, ohne künstliche Zusätze." | jede Aussage wörtlich durch Legacy-USPs und die echten Etiketten gedeckt |
 | Reviews | 3 Zitate | **wörtlich** übernommen | identisch |
 | CTA-Sektion | „Bereit für deinen Lieblingssirup?" + Sub | **wörtlich** übernommen | identisch |
 | Produkt-Kurztexte | 1 Satz je Sorte | `flavor` (Karten-Untertitel) übernimmt die Legacy-Sinneseindrücke; `description`/`story` erweitern sprachlich | Faktenlage siehe §3 — nach Parität-Korrektur nur noch sensorische Sprache |
@@ -69,10 +69,41 @@ zurückgeführt — Belegbasis ist ausschließlich `CONTENT_INVENTORY.md`
 - Pairing-Zeilen („Passt zu: Latte · Tiramisu · …") — als Serviervorschläge
   gekennzeichnete Empfehlungen, keine Produktfakten.
 
-## 4. Unverändert (0 Änderungen)
+## 4. Unverändert
 
-- **Impressum** und **Datenschutzerklärung**: 1:1 der Inhaber-Texte.
+- **Impressum** und **Datenschutzerklärung**: wortidentisch zur
+  Inhaber-Lieferung — einzige Ausnahme sind die oben in §1 dokumentierten
+  Mailadress-Normalisierungen.
 - Alle Preise, Größen, Zutatenlisten der Limonaden, DE-ÖKO-006-Kürzel,
   Traits („Ohne Konservierungsmittel…"), Partner Hunfelt Bräu.
 - Reviews, About-Story, CTA, USP-Texte, Kennzahlen (11 / 100 % / Fulda).
 - Sprache der Seite: Deutsch, Du-Ansprache (wie Legacy).
+
+
+## 5. Nachträge aus Council Runde 1 (Vollständigkeit)
+
+Vom Content-Auditor als undokumentiert identifiziert — hiermit nachgetragen.
+Wo möglich wurde die Legacy-Substanz **wiederhergestellt** statt nur dokumentiert:
+
+| Stelle | Legacy | Zwischenstand (undokumentiert) | Jetzt |
+|---|---|---|---|
+| Meta-Title (Startseite) | „… Bio-Sirup-Manufaktur Fulda \| Online Shop" | ohne „\| Online Shop" | **wiederhergestellt** |
+| Meta-Description | „… Jetzt online bestellen – natürlich, kreativ, mit Liebe." | ohne „Jetzt online bestellen" | **wiederhergestellt** |
+| Footer-Spalte „Kontakt" (Mail + sichtbare Domain) | vorhanden | ersatzlos entfallen | **wiederhergestellt** (4. Spalte) |
+| 50-ml-Geschenkhinweis auf der Startseite | in der Shop-Sektion | nur noch auf `/shop` | **wiederhergestellt** (unter dem Shop-Teaser, Legacy-Wortlaut) |
+| Hero-Trust „5-Sterne Bewertungen" | wörtlich | „5-Sterne bewertet" | **wiederhergestellt** |
+| Lavendel-`flavor` „Fein-blumig & aromatisch" | wörtlich | „Fein-blumig & fruchtig" | **wiederhergestellt** |
+| Footer-Label „Sirups" | „Sirups" | „Sirupe" | bleibt „Sirupe" — Rechtschreib-Normalisierung, hiermit dokumentiert |
+| Story-Bild-Caption/Alt | Legacy-Datei `Advent-Rothemann_2025`, alt „Adventsmarkt" | „Adventsmarkt **Fulda**" (erfundener Ort) | korrigiert auf **„Adventsmarkt Rothemann"** |
+| `/story`-Zusatzabsatz | — | „in kleinen Chargen, von Hand abgefüllt" (unbelegt) | auf belegten USP-Wortlaut zurückgeführt („in unserer Manufaktur — familiengeführt, mit Herzblut und Sorgfalt") |
+| Superlative/Zuordnungen | — | „hellster/dunkelster Sirup", „Unser Geheimtipp", „50-ml-Geschenk im Lebkuchenmännchen-Glas" (pro Sorte unbelegt) | sensorische Sprache ohne Rang-/Zuordnungs-Claims |
+| `/ausstellungen`-CTA-Prosa | — (Seite lag nicht im Legacy-File vor) | neu formulierte Einladung („Markt, Hoffest, Adventsmarkt oder Pop-up …") in Du-Form neben Inhaber-Text in Ihr-Form | Ansprache an Inhaber-Text angeglichen (Ihr-Form); hiermit als neue Copy dokumentiert |
+| `LegalNotice`-Boilerplate | — | Platzhalter-Hinweistext (Bio-Zertifizierung) | hiermit als neue, nicht-legacy Copy dokumentiert |
+| `/story`-PageHeader | — (Seite existierte nicht) | fehlte (keine h1) | neue H1 „Die Manufaktur hinter dem Mond" + Sub — neue Copy, dokumentiert |
+| Bestellflow-Texte | Modal + mailto ohne Statusversprechen | „Deine Bestellung ist auf dem Weg zu uns" (faktisch falsch, mailto garantiert keinen Versand) | ehrliche Formulierung: „Bitte sende die E-Mail ab — erst dann erreicht uns deine Bestellung" + Kopier-Fallback |
+
+**Weiter offen (Inhaber-Bestätigung nötig, siehe FINAL_REPORT):**
+Preise/Saison für Bio-Kokos und Bio-Blaubeer-Basilikum (aktuell begründete
+Defaults 15/16 € analog der Tier-Logik, DECISIONS D20) · verbindliche
+Kontakt-Mailadresse der Rechtstexte (D21) · Inhalte der
+Bio-Zertifizierungs-Seite.

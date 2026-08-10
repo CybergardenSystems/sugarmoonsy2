@@ -9,7 +9,7 @@ export const site = {
   city: "Fulda",
   country: "DE",
   description:
-    "Handgemachte Bio-Sirupe & Limonaden aus Fulda — natürlich, kreativ, mit Liebe.",
+    "Handgemachte Bio-Sirupe & Limonaden aus Fulda. Jetzt online bestellen — natürlich, kreativ, mit Liebe.",
 } as const;
 
 export const nav = [
@@ -63,6 +63,12 @@ export const footerLinks = {
     { href: "/story", label: "Über uns" },
     { href: "/#bewertungen", label: "Bewertungen" },
     { href: "/ausstellungen", label: "Ausstellungen" },
+  ],
+  // Legacy-Parität: die Kontakt-Spalte (Mail + sichtbare Domain) stand im
+  // Original-Footer und bleibt erhalten (Council R1, Content#7).
+  kontakt: [
+    { href: `mailto:${site.email}`, label: site.email },
+    { href: "https://sugarmoonsweets.de", label: "sugarmoonsweets.de" },
   ],
   rechtliches: [
     { href: "/impressum", label: "Impressum" },

@@ -3,7 +3,15 @@ import { Reveal } from "@/components/ui/Reveal";
 import { stats } from "@/data/site";
 import { storyImage } from "@/data/media";
 
-export function Story({ full = false }: { full?: boolean }) {
+export function Story({
+  full = false,
+  headingLevel = "h2",
+}: {
+  full?: boolean;
+  /** Auf /story trägt der PageHeader die h1 — die Section rendert dann h2 weiter unten. */
+  headingLevel?: "h1" | "h2";
+}) {
+  const Heading = headingLevel;
   return (
     <section id="story" className="section relative overflow-hidden">
       <div className="glow-blob left-1/2 top-0 -translate-x-1/2 bg-honey/[0.04]" />
@@ -13,7 +21,7 @@ export function Story({ full = false }: { full?: boolean }) {
             <span className="eyebrow">Unsere Geschichte</span>
           </Reveal>
           <Reveal
-            as="h2"
+            as={Heading}
             delay={0.05}
             className="mt-4 font-display text-[clamp(2rem,4vw,3.2rem)] text-moon"
           >
@@ -40,9 +48,9 @@ export function Story({ full = false }: { full?: boolean }) {
             </Reveal>
             {full && (
               <Reveal as="p" delay={0.25}>
-                Jede Flasche entsteht in kleinen Chargen, von Hand abgefüllt und mit
-                unserem Mond-Etikett versehen. Bio-zertifiziert, saisonal gedacht, ohne
-                künstliche Zusätze — so, wie wir es selbst trinken möchten.
+                Jede Flasche entsteht in unserer Manufaktur — familiengeführt, mit
+                Herzblut und Sorgfalt — und trägt unser Mond-Etikett. Bio-zertifiziert,
+                saisonal gedacht, ohne künstliche Zusätze.
               </Reveal>
             )}
           </div>
@@ -53,7 +61,7 @@ export function Story({ full = false }: { full?: boolean }) {
             <div className="relative aspect-[4/3] bg-night-3">
               <Image
                 src={storyImage}
-                alt="Jessica und Sebastian von Sugar Moon Sweets an ihrem Stand auf dem Adventsmarkt in Fulda"
+                alt="Jessica und Sebastian von Sugar Moon Sweets an ihrem Stand auf dem Adventsmarkt in Rothemann"
                 fill
                 sizes="(max-width:1024px) 100vw, 560px"
                 className="object-cover object-center"
@@ -78,7 +86,7 @@ export function Story({ full = false }: { full?: boolean }) {
             </div>
           </div>
           <p className="mt-3 text-center font-mono text-[0.6rem] uppercase tracking-wide text-moon-mute">
-            Jessica &amp; Sebastian · Adventsmarkt Fulda
+            Jessica &amp; Sebastian · Adventsmarkt Rothemann
           </p>
         </Reveal>
       </div>

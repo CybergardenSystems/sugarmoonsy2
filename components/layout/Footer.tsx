@@ -5,6 +5,7 @@ import { site, footerLinks } from "@/data/site";
 const columns: { title: string; links: { href: string; label: string }[] }[] = [
   { title: "Shop", links: footerLinks.shop },
   { title: "Unternehmen", links: footerLinks.unternehmen },
+  { title: "Kontakt", links: footerLinks.kontakt },
   { title: "Rechtliches", links: footerLinks.rechtliches },
 ];
 
@@ -12,7 +13,7 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-honey/10 bg-ink pt-20 pb-8">
       <div className="shell">
-        <div className="grid gap-8 sm:gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
+        <div className="grid gap-8 sm:gap-12 md:grid-cols-[1.6fr_1fr_1fr_1.2fr_1fr]">
           <div className="max-w-sm">
             <Logo />
             <p className="mt-5 text-sm leading-relaxed text-moon-mute">
@@ -30,18 +31,27 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:contents">
             {columns.map((col) => (
               <div key={col.title}>
-                <h4 className="mb-4 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-moon-mute">
+                <h3 className="mb-4 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-moon-mute">
                   {col.title}
-                </h4>
+                </h3>
                 <ul className="space-y-2.5">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <Link
-                        href={l.href}
-                        className="text-sm text-moon-dim transition-colors hover:text-honey"
-                      >
-                        {l.label}
-                      </Link>
+                      {l.href.startsWith("/") ? (
+                        <Link
+                          href={l.href}
+                          className="text-sm text-moon-dim transition-colors hover:text-honey"
+                        >
+                          {l.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={l.href}
+                          className="break-all text-sm text-moon-dim transition-colors hover:text-honey"
+                        >
+                          {l.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>

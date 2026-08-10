@@ -1,3 +1,10 @@
+> ⚠️ **VERALTET — HISTORISCHES DOKUMENT.** Dieser Report beschreibt den
+> Stand einer früheren Build-Runde und enthält Aussagen, die auf den heutigen
+> Code **nicht mehr zutreffen** (u. a. saveData-Gate, CDN-Hotlinks, „12
+> Sorten", Karamell, Kontrast-/Touch-Target-Zusagen, Skip-Link). Der
+> verbindliche Prüfstand ist `COUNCIL_ROUND_1.md` ff. — der Skeptiker der
+> Runde 1 hat die überholten Claims einzeln widerlegt.
+
 # QA.md — Phase 5 Council Review
 
 Gnadenlose Prüfung gegen die Definition of Done (§6–§8 des Master-Prompts).

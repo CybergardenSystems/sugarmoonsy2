@@ -20,17 +20,19 @@ export function GoldenSpine() {
   const progressRef = useRef<HTMLDivElement>(null);
   const hydrated = useHydrated();
   const reduce = useMediaQuery("(prefers-reduced-motion: reduce)");
-  const enabled = hydrated && !reduce;
+  const desktop = useMediaQuery("(min-width: 768px)");
+  const enabled = hydrated && !reduce && desktop;
 
   useEffect(() => {
     if (!enabled) return;
 
     let raf = 0;
     let ticking = false;
+    // Layout-Reads nicht pro Frame: max nur bei Resize neu berechnen.
+    let max = document.documentElement.scrollHeight - window.innerHeight;
 
     const apply = () => {
       ticking = false;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
       const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
 
       const rail = railRef.current;
@@ -55,13 +57,18 @@ export function GoldenSpine() {
       }
     };
 
+    const onResize = () => {
+      max = document.documentElement.scrollHeight - window.innerHeight;
+      onScroll();
+    };
+
     apply();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, [enabled]);
 

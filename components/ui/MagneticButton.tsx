@@ -1,14 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, type ReactNode } from "react";
-import { gsap } from "gsap";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 type Variant = "fill" | "line" | "ghost";
+type Size = "sm" | "md" | "lg";
 
 const base =
-  "group relative inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-[0.9rem] font-medium tracking-tight transition-[background-color,border-color,color,box-shadow] duration-300 will-change-transform active:translate-y-px";
+  "group relative inline-flex items-center justify-center gap-2 rounded-xl font-medium tracking-tight transition-[background-color,border-color,color,box-shadow] duration-300 will-change-transform active:translate-y-px";
+
+const sizes: Record<Size, string> = {
+  sm: "px-5 py-2.5 text-[0.85rem]",
+  md: "px-7 py-3.5 text-[0.9rem]",
+  lg: "px-8 py-4 text-[0.95rem]",
+};
 
 const variants: Record<Variant, string> = {
   fill: "bg-honey text-ink shadow-[0_10px_30px_-8px_rgba(232,178,94,0.45)] hover:bg-honey-glow hover:shadow-[0_14px_36px_-8px_rgba(232,178,94,0.55)]",
@@ -21,6 +27,7 @@ interface Props {
   href?: string;
   onClick?: () => void;
   variant?: Variant;
+  size?: Size;
   className?: string;
   strength?: number;
   type?: "button" | "submit";
@@ -32,6 +39,7 @@ export function MagneticButton({
   href,
   onClick,
   variant = "fill",
+  size = "md",
   className,
   strength = 0.35,
   type = "button",
@@ -39,25 +47,47 @@ export function MagneticButton({
 }: Props) {
   const ref = useRef<HTMLElement>(null);
   const inner = useRef<HTMLSpanElement>(null);
+  // Magnet-Effekt als rAF-Lerp statt GSAP — hält gsap aus dem Layout-Bundle
+  // (Council R1, Tech#5).
+  const target = useRef({ x: 0, y: 0 });
+  const current = useRef({ x: 0, y: 0 });
+  const raf = useRef(0);
+
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
+
+  const tick = () => {
+    const el = ref.current;
+    if (!el) return;
+    const c = current.current;
+    const t = target.current;
+    c.x += (t.x - c.x) * 0.18;
+    c.y += (t.y - c.y) * 0.18;
+    el.style.transform = `translate(${c.x.toFixed(2)}px, ${c.y.toFixed(2)}px)`;
+    if (inner.current) {
+      inner.current.style.transform = `translate(${(c.x * 0.3).toFixed(2)}px, ${(c.y * 0.3).toFixed(2)}px)`;
+    }
+    if (Math.abs(t.x - c.x) > 0.2 || Math.abs(t.y - c.y) > 0.2) {
+      raf.current = requestAnimationFrame(tick);
+    }
+  };
 
   const onMove = (e: React.MouseEvent) => {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const r = el.getBoundingClientRect();
-    const x = (e.clientX - r.left - r.width / 2) * strength;
-    const y = (e.clientY - r.top - r.height / 2) * strength;
-    gsap.to(el, { x, y, duration: 0.5, ease: "power3.out" });
-    gsap.to(inner.current, { x: x * 0.3, y: y * 0.3, duration: 0.5, ease: "power3.out" });
+    target.current = {
+      x: (e.clientX - r.left - r.width / 2) * strength,
+      y: (e.clientY - r.top - r.height / 2) * strength,
+    };
+    cancelAnimationFrame(raf.current);
+    raf.current = requestAnimationFrame(tick);
   };
 
   const onLeave = () => {
-    gsap.to([ref.current, inner.current], {
-      x: 0,
-      y: 0,
-      duration: 0.6,
-      ease: "elastic.out(1, 0.4)",
-    });
+    target.current = { x: 0, y: 0 };
+    cancelAnimationFrame(raf.current);
+    raf.current = requestAnimationFrame(tick);
   };
 
   const content = (
@@ -67,7 +97,7 @@ export function MagneticButton({
   );
 
   const shared = {
-    className: cn(base, variants[variant], className),
+    className: cn(base, sizes[size], variants[variant], className),
     onMouseMove: onMove,
     onMouseLeave: onLeave,
     "data-cursor": "drop",

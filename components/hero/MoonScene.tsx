@@ -61,29 +61,44 @@ export function MoonScene() {
     };
 
     let raf = 0;
-    let running = true;
+    let running = false;
     const tick = (t: number) => {
-      if (running) draw(t);
+      draw(t);
       raf = requestAnimationFrame(tick);
     };
+    const start = () => {
+      if (running || reduce) return;
+      running = true;
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
 
-    const io = new IntersectionObserver(([e]) => (running = e.isIntersecting), {
+    // Außerhalb des Viewports die Schleife wirklich anhalten (kein Leerlauf-rAF).
+    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), {
       threshold: 0,
     });
     io.observe(canvas);
 
     seed();
-    if (reduce) {
-      draw(0);
-    } else {
-      raf = requestAnimationFrame(tick);
-    }
+    if (reduce) draw(0);
+    else start();
 
-    const onResize = () => seed();
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        seed();
+        if (reduce) draw(0);
+      }, 160);
+    };
     window.addEventListener("resize", onResize);
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
+      clearTimeout(resizeTimer);
       window.removeEventListener("resize", onResize);
       io.disconnect();
     };
@@ -93,18 +108,43 @@ export function MoonScene() {
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       <canvas ref={canvasRef} className="absolute inset-0" />
 
-      {/* Mond — glühende Scheibe, oben rechts */}
-      <div
-        className="absolute right-[6%] top-[14%] aspect-square w-[44vw] max-w-[560px] min-w-[260px] rounded-full"
-        style={{
-          background:
-            "radial-gradient(42% 42% at 37% 33%, #fbf3df 0%, #f0d49a 26%, #d9a85a 44%, #c6892f 62%, #5d3f1b 100%)",
-          boxShadow:
-            "0 0 120px 30px rgba(232,178,94,0.18), inset -22px -14px 60px rgba(8,15,11,0.55)",
-        }}
-      />
-      {/* Mond-Schein-Halo */}
-      <div className="absolute right-[2%] top-[8%] aspect-square w-[58vw] max-w-[760px] rounded-full bg-honey/10 blur-[90px]" />
+      {/* Mond — schmale Gold-Sichel, konsistent zur Bildmarke/Etikett
+          (Council R1: die alte Vollscheibe widersprach dem Crescent-Logo) */}
+      <svg
+        className="absolute right-[6%] top-[12%] w-[40vw] min-w-[240px] max-w-[520px]"
+        viewBox="0 0 200 200"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="ms-gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#F4D9A0" />
+            <stop offset="0.55" stopColor="#E8B25E" />
+            <stop offset="1" stopColor="#C6892F" />
+          </linearGradient>
+          <radialGradient id="ms-glow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0.55" stopColor="#E8B25E" stopOpacity="0.16" />
+            <stop offset="1" stopColor="#E8B25E" stopOpacity="0" />
+          </radialGradient>
+          <mask id="ms-crescent">
+            <circle cx="100" cy="100" r="64" fill="#fff" />
+            <circle cx="82" cy="86" r="60" fill="#000" />
+          </mask>
+        </defs>
+        {/* weiter Schein */}
+        <circle cx="100" cy="100" r="100" fill="url(#ms-glow)" />
+        {/* Erdschein-Ring der dunklen Mondseite */}
+        <circle
+          cx="100"
+          cy="100"
+          r="64"
+          fill="none"
+          stroke="#E8B25E"
+          strokeOpacity="0.14"
+          strokeWidth="1"
+        />
+        {/* die Sichel selbst */}
+        <circle cx="100" cy="100" r="64" fill="url(#ms-gold)" mask="url(#ms-crescent)" />
+      </svg>
       {/* obere Tiefe */}
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/60 to-transparent" />
     </div>

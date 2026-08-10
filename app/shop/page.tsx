@@ -5,7 +5,7 @@ import { ShopGrid } from "@/components/shop/ShopGrid";
 export const metadata: Metadata = {
   title: "Shop — Bio-Sirupe",
   description:
-    "Alle 11 handgemachten Bio-Sirupe aus Fulda: Vanille, Pistazie, Lavendel mit Blaubeere, Pumpkin Spice, Spekulatius und mehr.",
+    "Alle 11 Sorten aus der Fuldaer Manufaktur: Vanille, Pistazie, Lavendel mit Blaubeere, Pumpkin Spice, Spekulatius und mehr.",
   alternates: { canonical: "/shop" },
 };
 
@@ -15,7 +15,7 @@ export default function ShopPage() {
       <PageHeader
         eyebrow="Online-Shop"
         title="Alle Sorten, gebraut vom Mond"
-        sub="11 handgemachte Bio-Sirupe — wähle Größe und Menge, ab in den Warenkorb. Die 50 ml-Fläschchen gibt es bei jeder Sorte, perfekt zum Verschenken."
+        sub="11 Sorten, handgemacht in Fulda — wähle Größe und Menge, ab in den Warenkorb. Die 50-ml-Fläschchen gibt es bei jeder Sorte, perfekt zum Verschenken."
       />
       <section className="pb-28">
         <div className="shell">

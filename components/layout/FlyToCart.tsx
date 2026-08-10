@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
-import { gsap } from "gsap";
 
 /**
  * Hört auf 'sms-fly' und lässt einen goldenen Tropfen von der Klickstelle in
  * das Warenkorb-Icon (data-cart-icon) fliegen — Abschluss des Tropfen-Motivs
- * im Moment der Conversion. Reduced-motion → kein Flug (Toast/Count genügen).
+ * im Moment der Conversion. Web Animations API statt GSAP (kein Bundle-Ballast
+ * auf allen Routen). Reduced-motion → kein Flug (Toast/Count genügen).
  */
 export function FlyToCart() {
   useEffect(() => {
@@ -19,6 +19,7 @@ export function FlyToCart() {
       const r = cart.getBoundingClientRect();
       const tx = r.left + r.width / 2;
       const ty = r.top + r.height / 2;
+      const peakY = Math.min(y, ty) - 60;
 
       const el = document.createElement("div");
       el.setAttribute("aria-hidden", "true");
@@ -28,30 +29,29 @@ export function FlyToCart() {
         '<svg width="14" height="21" viewBox="0 0 20 30" fill="none"><path d="M10 0C10 0 1 14 1 21a9 9 0 0 0 18 0C19 14 10 0 10 0Z" fill="#E8B25E"/></svg>';
       document.body.appendChild(el);
 
-      const peak = Math.min(x, tx) - 40;
-      gsap.set(el, { x, y, xPercent: -50, yPercent: -50 });
-      gsap
-        .timeline({
-          onComplete: () => {
-            el.remove();
-            gsap.fromTo(
-              cart,
-              { scale: 1 },
-              {
-                scale: 1.28,
-                duration: 0.18,
-                yoyo: true,
-                repeat: 1,
-                ease: "power2.out",
-                transformOrigin: "center",
-              },
-            );
+      const anim = el.animate(
+        [
+          { transform: `translate(${x - 7}px, ${y - 10}px) scale(1)`, opacity: 1 },
+          {
+            transform: `translate(${(x + tx) / 2 - 7}px, ${peakY}px) scale(0.85)`,
+            opacity: 0.95,
+            offset: 0.45,
           },
-        })
-        .to(el, { x: tx, duration: 0.72, ease: "power1.inOut" }, 0)
-        .to(el, { y: peak, duration: 0.34, ease: "power2.out" }, 0)
-        .to(el, { y: ty, duration: 0.4, ease: "power2.in" }, 0.32)
-        .to(el, { scale: 0.4, opacity: 0.5, duration: 0.72, ease: "power1.in" }, 0);
+          { transform: `translate(${tx - 7}px, ${ty - 10}px) scale(0.4)`, opacity: 0.5 },
+        ],
+        { duration: 720, easing: "cubic-bezier(0.5, 0, 0.6, 1)" },
+      );
+      anim.onfinish = () => {
+        el.remove();
+        cart.animate(
+          [
+            { transform: "scale(1)" },
+            { transform: "scale(1.28)" },
+            { transform: "scale(1)" },
+          ],
+          { duration: 360, easing: "ease-out" },
+        );
+      };
     };
 
     window.addEventListener("sms-fly", onFly);

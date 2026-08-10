@@ -4,10 +4,14 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { Icon } from "@/components/ui/Icon";
 import { products } from "@/lib/products";
+import { hasPhoto } from "@/lib/photos";
 
-/** Auswahl fürs Schaufenster auf der Startseite — Foto-Sorten zuerst. */
+/** Auswahl fürs Schaufenster auf der Startseite — Foto-Sorten zuerst.
+ *  Wichtig: hasPhoto() berücksichtigt auch die relighteten Bilder —
+ *  die Rohfeld-Sortierung ließ ausgerechnet den Bestseller verschwinden
+ *  (Council R1). */
 const featured = [...products]
-  .sort((a, b) => Number(Boolean(b.photo)) - Number(Boolean(a.photo)))
+  .sort((a, b) => Number(hasPhoto(b)) - Number(hasPhoto(a)))
   .slice(0, 8);
 
 export function ShopTeaser() {
@@ -28,13 +32,18 @@ export function ShopTeaser() {
           </Reveal>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-5 lg:grid-cols-4">
           {featured.map((p, i) => (
             <Reveal key={p.id} delay={(i % 4) * 0.08}>
-              <ProductCard product={p} priority={i < 4} />
+              <ProductCard product={p} />
             </Reveal>
           ))}
         </div>
+
+        <p className="mt-6 text-center text-sm text-moon-dim">
+          Die 50-ml-Fläschchen findest du bei jeder Sorte als Größenoption — perfekt zum
+          Verschenken!
+        </p>
 
         <div className="mt-10 flex justify-center md:hidden">
           <MagneticButton href="/shop" variant="line">

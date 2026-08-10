@@ -5,9 +5,14 @@
 
 ## 1. Produktfotos (Inhaber-Originale)
 
-Anlieferung: 13 echte Fotos vom Inhaber (helle Studio-Aufnahmen auf Holz).
-Unangetastete Originale: `source-assets/products/*.jpg` **und**
-`public/media/originals/*.jpg` (Doppel-Sicherung).
+Anlieferung: **13 Dateien** vom Inhaber in `source-assets/products/` —
+10 Produkt-/Flaschenmotive + `adventsmarkt-jessica-sebastian.jpg` +
+`limonaden-original.jpg` (Gruppenbild) + `zimt-alt.jpg` (Alternativtake).
+(CONTENT_INVENTORY §8b spricht von „11 Fotos": 10 Flaschenmotive + Adventsmarkt;
+Gruppenbild und Alternativtake kamen zusätzlich.)
+`public/media/originals/` spiegelt die **10 Flaschenmotive** zusätzlich;
+die drei übrigen Dateien liegen nur in `source-assets/products/` —
+ebenfalls unangetastet im Repo.
 
 | Sorte / Motiv | Original | Getönt (Fallback) | Relit (aktiv im Shop) |
 |---|---|---|---|
@@ -22,7 +27,7 @@ Unangetastete Originale: `source-assets/products/*.jpg` **und**
 | Bio-Vanille-Extrakt | `…/vanille-extrakt.jpg` | `…/vanille-extrakt.jpg` | `…/vanille-extrakt.webp` |
 | 50ml-Geschenk (Lebkuchenmann) | `…/geschenk-lebkuchenmann.jpg` | `…/geschenk-lebkuchenmann.jpg` | `…/geschenk-lebkuchenmann.webp` |
 | Limonaden-Gruppenfoto | `…/limonaden-original.jpg` | — | — (Quelle für Limo-Einzelbilder) |
-| Adventsmarkt (Jessica & Sebastian) | `…/adventsmarkt-jessica-sebastian.jpg` | — | → `public/media/story.jpg` |
+| Adventsmarkt **Rothemann** (Jessica & Sebastian) | `…/adventsmarkt-jessica-sebastian.jpg` | — | → `public/media/story.jpg` (Legacy-Quelle: `Advent-Rothemann_2025`) |
 
 **Pipeline-Herkunft:**
 - *Getönt* („darkroom"): lokale Tonwert-Anpassung der Originale auf den
@@ -51,8 +56,9 @@ Unangetastete Originale: `source-assets/products/*.jpg` **und**
 
 | Motiv | Datei | Größe | Verwendung |
 |---|---|---|---|
-| Hero-Loop Querformat | `public/media/hero.mp4` | 3,2 MB H.264 | Hero ≥768 px, nicht bei reduced-motion/Data-Saver |
-| Hero-Loop Hochformat 9:16 | `public/media/hero-portrait.mp4` | 3,8 MB H.264 | Hero <768 px |
+| Hero-Loop Querformat | `public/media/hero.mp4` | 3,2 MB H.264 | Hero ≥768 px; lädt nicht bei reduced-motion, `saveData` oder 2G (Gate in `HeroBackground.tsx`) |
+| Hero-Loop Hochformat 9:16 | `public/media/hero-portrait.mp4` | 3,8 MB H.264 | Hero <768 px; gleiche Gates |
+| Hero-Poster (quer/hoch) | `public/media/hero-poster.webp`, `hero-portrait-poster.webp` | je ~7 KB | Sofort ladender LCP-Anker unter dem Video. **Hinweis:** Marken-Gradient-Standbilder, keine Video-Frames (Sandbox-Chromium ohne H.264, kein ffmpeg — siehe DECISIONS D19) |
 
 ## 5. Marke & Sonstiges
 

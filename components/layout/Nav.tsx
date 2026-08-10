@@ -1,19 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/brand/Logo";
 import { useCart } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
 import { nav } from "@/data/site";
 import { cn } from "@/lib/cn";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 
 export function Nav() {
   const [stuck, setStuck] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { count, open } = useCart();
   const pathname = usePathname();
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Fokus bleibt im offenen Vollbild-Menü (Council R1, B3); Escape schließt.
+  useFocusTrap(menuRef, menuOpen, () => setMenuOpen(false));
+
+  // Scroll hinter dem offenen Menü sperren.
+  useEffect(() => {
+    if (!menuOpen) return;
+    document.documentElement.classList.add("sms-locked");
+    return () => document.documentElement.classList.remove("sms-locked");
+  }, [menuOpen]);
 
   useEffect(() => {
     const onScroll = () => setStuck(window.scrollY > 40);
@@ -29,15 +41,6 @@ export function Nav() {
     setPrevPath(pathname);
     setMenuOpen(false);
   }
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [menuOpen]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-[90] flex justify-center px-3 pt-3 sm:px-4 sm:pt-4">
@@ -57,7 +60,7 @@ export function Nav() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="group relative font-mono text-[0.68rem] uppercase tracking-[0.18em] text-moon-dim transition-colors hover:text-honey"
+                className="group relative font-mono text-[0.72rem] uppercase tracking-[0.18em] text-moon-dim transition-colors hover:text-honey"
               >
                 {item.label}
                 <span className="absolute -bottom-1.5 left-1/2 h-px w-0 -translate-x-1/2 bg-honey transition-all duration-300 group-hover:w-full" />
@@ -83,15 +86,16 @@ export function Nav() {
 
           <Link
             href="/shop"
-            className="hidden rounded-full bg-honey px-5 py-2 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-ink transition-colors hover:bg-honey-glow sm:inline-block"
+            className="hidden rounded-full bg-honey px-5 py-2 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-ink transition-colors hover:bg-honey-glow sm:inline-block"
           >
             Bestellen
           </Link>
 
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Menü"
+            aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             className="flex h-10 w-10 items-center justify-center md:hidden"
           >
             <span className="relative block h-3 w-5">
@@ -120,6 +124,8 @@ export function Nav() {
 
       {/* Mobile overlay */}
       <div
+        id="mobile-menu"
+        ref={menuRef}
         inert={!menuOpen}
         className={cn(
           "fixed inset-0 z-[-1] flex flex-col bg-night/97 backdrop-blur-xl transition-opacity duration-500 md:hidden",

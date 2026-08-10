@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -9,12 +9,21 @@ const FOCUSABLE =
  * Fokus-Management für Dialoge/Sheets: fokussiert beim Öffnen das erste
  * fokussierbare Element, hält Tab/Shift+Tab im Container, schließt auf
  * Escape und stellt beim Schließen den vorherigen Fokus wieder her.
+ *
+ * `onClose` wird über eine Ref entkoppelt, damit eine instabile
+ * Funktionsidentität den Trap nicht bei jedem Render neu aufbaut
+ * (Council R1: Fokus sprang bei jedem Re-Render zurück).
  */
 export function useFocusTrap(
   ref: RefObject<HTMLElement | null>,
   active: boolean,
   onClose: () => void,
 ) {
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
   useEffect(() => {
     if (!active) return;
     const container = ref.current;
@@ -29,7 +38,7 @@ export function useFocusTrap(
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
-        onClose();
+        onCloseRef.current();
         return;
       }
       if (e.key !== "Tab") return;
@@ -57,5 +66,5 @@ export function useFocusTrap(
       document.removeEventListener("keydown", onKeyDown, true);
       previous?.focus?.();
     };
-  }, [ref, active, onClose]);
+  }, [ref, active]);
 }

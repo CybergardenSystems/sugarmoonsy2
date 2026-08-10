@@ -57,10 +57,8 @@ export const SEASONS: { key: SeasonKey | "all"; label: string }[] = [
   { key: "wi", label: "Winter" },
 ];
 
-const P = (p: Product) => p;
-
 export const products: Product[] = [
-  P({
+  {
     id: "vanille",
     slug: "bio-vanille",
     name: "Bio-Vanille",
@@ -77,8 +75,8 @@ export const products: Product[] = [
     accent: "honey",
     photo: "vanille.jpg",
     pairing: "Latte · Panna Cotta · Pancakes",
-  }),
-  P({
+  },
+  {
     id: "pistazie",
     slug: "bio-pistazie",
     name: "Bio-Pistazie",
@@ -95,12 +93,12 @@ export const products: Product[] = [
     accent: "sage",
     photo: "pistazie.jpg",
     pairing: "Flat White · Tiramisu · Spritz",
-  }),
-  P({
+  },
+  {
     id: "lavendel-blaubeere",
     slug: "bio-lavendel-blaubeere",
     name: "Bio-Lavendel mit Blaubeere",
-    flavor: "Fein-blumig & fruchtig",
+    flavor: "Fein-blumig & aromatisch",
     description: "Ein Hauch Provence bei Nacht — Lavendel trifft dunkle Blaubeere.",
     story:
       "Blühender Lavendel und dunkle Blaubeere — Provence-Romantik in einem nächtlichen Violett. Ganzjährig erhältlich und besonders beliebt in Frühling & Sommer.",
@@ -113,15 +111,15 @@ export const products: Product[] = [
     accent: "lavender",
     photo: "lavendel-blaubeere.jpg",
     pairing: "Latte · Limonade · Gin Tonic",
-  }),
-  P({
+  },
+  {
     id: "blaubeer-basilikum",
     slug: "bio-blaubeer-basilikum",
     name: "Bio-Blaubeer-Basilikum",
     flavor: "Dunkle Beere & frisches Kraut",
     description: "Überraschend, tief, elegant — Beere trifft Basilikum.",
     story:
-      "Dunkle Blaubeere, frisches Basilikum — ein Kontrast, der wach macht. Tiefviolett, krautig, überraschend erwachsen. Unser Geheimtipp für Cocktails.",
+      "Dunkle Blaubeere, frisches Basilikum — ein Kontrast, der wach macht. Tiefviolett, krautig, überraschend erwachsen. Wie gemacht für Cocktails.",
     season: "März – August",
     seasonKeys: ["fs"],
     sizes: [
@@ -131,15 +129,15 @@ export const products: Product[] = [
     accent: "plum",
     photo: "blaubeer-basilikum.jpg",
     pairing: "Tonic · Sekt · Soda",
-  }),
-  P({
+  },
+  {
     id: "kokos",
     slug: "bio-kokos",
     name: "Bio-Kokos",
     flavor: "Cremig-exotisch mit Kokosraspeln",
     description: "Sonne im Glas — milde Kokos mit echten Raspeln.",
     story:
-      "Mild, cremig, mit echten Kokosraspeln: der hellste Sirup im Sortiment, fast milchig wie ein Neumond. Macht aus jedem Kaffee einen kleinen Urlaub — unsere Sommer-Sorte.",
+      "Mild und cremig, mit echten Kokosraspeln — hell und sanft wie Mondlicht. Macht aus jedem Kaffee einen kleinen Urlaub: unsere Sommer-Sorte.",
     season: "Juni – August",
     seasonKeys: ["fs"],
     sizes: [
@@ -149,8 +147,8 @@ export const products: Product[] = [
     accent: "moon",
     photo: "kokos.jpg",
     pairing: "Iced Latte · Curry · Smoothie",
-  }),
-  P({
+  },
+  {
     id: "bratapfel",
     slug: "bio-bratapfel",
     name: "Bio-Bratapfel",
@@ -169,8 +167,8 @@ export const products: Product[] = [
     comingSoon: true,
     photo: null,
     pairing: "Tee · Milchreis · Punsch",
-  }),
-  P({
+  },
+  {
     id: "pumpkin-spice",
     slug: "bio-pumpkin-spice",
     name: "Bio-Pumpkin Spice",
@@ -188,13 +186,13 @@ export const products: Product[] = [
     badge: "Bestseller",
     photo: null,
     pairing: "Latte · Cheesecake · Chai",
-  }),
-  P({
+  },
+  {
     id: "spekulatius",
     slug: "bio-spekulatius",
     name: "Bio-Spekulatius",
     flavor: "Fein, buttrig & zimtig",
-    description: "Gewürzkeks im Glas — der dunkelste Sirup im Sortiment.",
+    description: "Gewürzkeks im Glas — tief, dunkel, weihnachtlich.",
     story:
       "Buttriger Gewürzkeks, eingefangen als Sirup — fast schwarz, tief und weihnachtlich. Ein Löffel im Kaffee und die Küche riecht nach Dezember.",
     season: "Dez – Jan",
@@ -206,15 +204,15 @@ export const products: Product[] = [
     accent: "cinnamon",
     photo: "spekulatius.jpg",
     pairing: "Kaffee · Kakao · Waffeln",
-  }),
-  P({
+  },
+  {
     id: "lebkuchen",
     slug: "bio-lebkuchen",
     name: "Bio-Lebkuchen",
     flavor: "Kräftig & würzig",
     description: "Kräftig & würzig — voller Weihnachtsstimmung.",
     story:
-      "Der ganze Weihnachtsmarkt in einer Flasche: kräftig, würzig, voller Weihnachtsstimmung — auch als 50-ml-Geschenk im Lebkuchenmännchen-Glas erhältlich.",
+      "Der ganze Weihnachtsmarkt in einer Flasche: kräftig, würzig, voller Weihnachtsstimmung — auch als 50-ml-Fläschchen zum Verschenken erhältlich.",
     season: "Dez – Jan",
     seasonKeys: ["wi"],
     sizes: [
@@ -224,8 +222,8 @@ export const products: Product[] = [
     accent: "cinnamon",
     photo: "lebkuchen.jpg",
     pairing: "Glühwein · Kakao · Plätzchen",
-  }),
-  P({
+  },
+  {
     id: "zimt",
     slug: "bio-zimt",
     name: "Bio-Zimt",
@@ -242,8 +240,8 @@ export const products: Product[] = [
     accent: "cinnamon",
     photo: "zimt.jpg",
     pairing: "Latte · Apfelsaft · Porridge",
-  }),
-  P({
+  },
+  {
     id: "vanille-extrakt",
     slug: "bio-vanille-extrakt",
     name: "Bio-Vanille-Extrakt",
@@ -257,7 +255,7 @@ export const products: Product[] = [
     accent: "honey",
     photo: "vanille-extrakt.jpg",
     pairing: "Teig · Creme · Eis",
-  }),
+  },
 ];
 
 export function getProduct(slug: string): Product | undefined {
@@ -275,6 +273,8 @@ export const heroPicks = [
   "vanille",
   "pistazie",
   "spekulatius",
-].map((id) => products.find((p) => p.id === id)!);
-
-export const PRICE_FROM = 5.5;
+].map((id) => {
+  const p = products.find((x) => x.id === id);
+  if (!p) throw new Error(`heroPick "${id}" existiert nicht im Katalog`);
+  return p;
+});

@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import type { Product } from "@/lib/products";
+import { photoSrc } from "@/lib/photos";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
 import { toast } from "@/lib/toast";
 import { flyToCart } from "@/lib/flyToCart";
 import { cn } from "@/lib/cn";
+import { primaryBtn } from "@/lib/buttonStyles";
 
 export function BuyPanel({ product }: { product: Product }) {
   const { add } = useCart();
@@ -22,7 +24,7 @@ export function BuyPanel({ product }: { product: Product }) {
         name: product.name,
         size: active.label,
         price: active.price,
-        photo: product.photo,
+        photo: photoSrc(product),
       },
       qty,
     );
@@ -41,14 +43,15 @@ export function BuyPanel({ product }: { product: Product }) {
 
       {product.sizes.length > 1 && (
         <div className="mt-4">
-          <p className="mb-2 font-mono text-[0.6rem] uppercase tracking-wider text-moon-mute">
+          <p className="mb-2 font-mono text-xs uppercase tracking-wider text-moon-dim">
             Größe
           </p>
-          <div className="flex gap-2">
+          <div className="flex gap-2" role="group" aria-label="Größe wählen">
             {product.sizes.map((s) => (
               <button
                 key={s.label}
                 onClick={() => setSize(s.label)}
+                aria-pressed={s.label === size}
                 className={cn(
                   "rounded-full border px-4 py-1.5 font-mono text-xs transition-colors",
                   s.label === size
@@ -77,7 +80,9 @@ export function BuyPanel({ product }: { product: Product }) {
             >
               <Icon name="minus" size={16} />
             </button>
-            <span className="w-7 text-center tabular-nums">{qty}</span>
+            <span className="w-7 text-center tabular-nums" aria-live="polite">
+              {qty}
+            </span>
             <button
               onClick={() => setQty((q) => q + 1)}
               aria-label="Mehr"
@@ -89,7 +94,7 @@ export function BuyPanel({ product }: { product: Product }) {
           <button
             onClick={onAdd}
             data-cursor="drop"
-            className="flex-1 rounded-lg bg-honey py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-honey-glow"
+            className={cn(primaryBtn, "flex-1 py-3.5")}
           >
             In den Warenkorb · {formatMoney(active.price * qty)}
           </button>

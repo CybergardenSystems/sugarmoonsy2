@@ -34,6 +34,35 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 const STORAGE_KEY = "sms-cart-v1";
+export const MAX_QTY = 99;
+
+/** Schema-Guard für localStorage-Daten (Council R1, B5): nur valide Items laden. */
+function isCartItem(x: unknown): x is CartItem {
+  if (typeof x !== "object" || x === null) return false;
+  const i = x as Record<string, unknown>;
+  return (
+    typeof i.key === "string" &&
+    typeof i.id === "string" &&
+    typeof i.name === "string" &&
+    typeof i.size === "string" &&
+    typeof i.price === "number" &&
+    Number.isFinite(i.price) &&
+    typeof i.qty === "number" &&
+    Number.isInteger(i.qty) &&
+    i.qty >= 1 &&
+    (i.photo === null || typeof i.photo === "string")
+  );
+}
+
+function parseStoredCart(raw: string): CartItem[] | null {
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed) || !parsed.every(isCartItem)) return null;
+    return parsed.map((i) => ({ ...i, qty: Math.min(MAX_QTY, i.qty) }));
+  } catch {
+    return null;
+  }
+}
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -46,8 +75,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- Hydration aus externem Speicher, siehe oben
-      if (raw) setItems(JSON.parse(raw));
+      if (raw) {
+        const stored = parseStoredCart(raw);
+        if (stored) {
+          // eslint-disable-next-line react-hooks/set-state-in-effect -- Hydration aus externem Speicher, siehe oben
+          setItems(stored);
+        } else {
+          // Kaputtes/fremdes Schema würde sonst bei jedem Besuch erneut crashen.
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
     } catch {
       /* ignore corrupt storage */
     }
@@ -64,10 +101,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [items, hydrated]);
 
-  // Lock body scroll while the sheet is open.
+  // Scroll hinter dem Sheet sperren — Lenis-unabhängig (Council R1: die
+  // Klasse `.lenis` setzt Lenis selbst; bei reduced-motion existiert sie nie,
+  // `.lenis.lenis-stopped` matchte dann nicht und die Seite scrollte weiter).
   useEffect(() => {
+    document.documentElement.classList.toggle("sms-locked", isOpen);
     document.documentElement.classList.toggle("lenis-stopped", isOpen);
-    return () => document.documentElement.classList.remove("lenis-stopped");
+    return () => {
+      document.documentElement.classList.remove("sms-locked", "lenis-stopped");
+    };
   }, [isOpen]);
 
   const add: CartContextValue["add"] = useCallback((item, qty = 1) => {
@@ -75,16 +117,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => {
       const existing = prev.find((i) => i.key === key);
       if (existing) {
-        return prev.map((i) => (i.key === key ? { ...i, qty: i.qty + qty } : i));
+        return prev.map((i) =>
+          i.key === key ? { ...i, qty: Math.min(MAX_QTY, i.qty + qty) } : i,
+        );
       }
-      return [...prev, { ...item, key, qty }];
+      return [...prev, { ...item, key, qty: Math.min(MAX_QTY, qty) }];
     });
     setIsOpen(true);
   }, []);
 
   const setQty = useCallback((key: string, qty: number) => {
     setItems((prev) =>
-      prev.map((i) => (i.key === key ? { ...i, qty: Math.max(1, qty) } : i)),
+      prev.map((i) =>
+        i.key === key ? { ...i, qty: Math.min(MAX_QTY, Math.max(1, qty)) } : i,
+      ),
     );
   }, []);
 

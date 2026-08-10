@@ -35,7 +35,7 @@ export function ProductCard({
         name: product.name,
         size: active.label,
         price: active.price,
-        photo: product.photo,
+        photo: src,
       },
       qty,
     );
@@ -51,7 +51,7 @@ export function ProductCard({
       style={{ ["--ac" as string]: ac }}
     >
       {product.badge && (
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-honey px-2.5 py-0.5 font-mono text-[0.58rem] font-bold uppercase tracking-wide text-ink">
+        <span className="absolute left-3 top-3 z-10 rounded-full bg-honey px-2.5 py-0.5 font-mono text-[0.66rem] font-bold uppercase tracking-wide text-ink">
           {product.badge}
         </span>
       )}
@@ -68,9 +68,9 @@ export function ProductCard({
             <div className="absolute inset-0 bg-night-3" />
             <Image
               src={src}
-              alt={`${product.name} — Flasche mit grünem Mond-Etikett`}
+              alt={`${product.name} — Flasche mit Mond-Etikett`}
               fill
-              sizes="(max-width:768px) 50vw, 300px"
+              sizes="(max-width:1023px) 50vw, (max-width:1279px) 33vw, 300px"
               priority={priority}
               className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
             />
@@ -80,7 +80,7 @@ export function ProductCard({
           <Placeholder accent={ac} season={product.season} />
         )}
         <span
-          className="absolute bottom-3 left-3 rounded-full bg-night/70 px-2.5 py-0.5 font-mono text-[0.58rem] uppercase tracking-wide backdrop-blur"
+          className="absolute bottom-3 left-3 rounded-full bg-night/70 px-2.5 py-0.5 font-mono text-[0.66rem] uppercase tracking-wide backdrop-blur"
           style={{ color: ac }}
         >
           {product.season}
@@ -101,19 +101,22 @@ export function ProductCard({
           <span className="font-display text-2xl text-honey">
             {formatMoney(active.price)}
           </span>
-          <span className="font-mono text-[0.66rem] text-moon-mute">
-            / {active.label}
-          </span>
+          <span className="font-mono text-[0.7rem] text-moon-mute">/ {active.label}</span>
         </div>
 
         {product.sizes.length > 1 && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
+          <div
+            className="mt-3 flex flex-wrap gap-1.5"
+            role="group"
+            aria-label="Größe wählen"
+          >
             {product.sizes.map((s) => (
               <button
                 key={s.label}
                 onClick={() => setSize(s.label)}
+                aria-pressed={s.label === size}
                 className={cn(
-                  "rounded-full border px-2.5 py-1 font-mono text-[0.62rem] transition-colors",
+                  "rounded-full border px-2.5 py-1 font-mono text-[0.7rem] transition-colors",
                   s.label === size
                     ? "border-honey bg-honey/15 text-honey"
                     : "border-honey/15 text-moon-dim hover:border-honey/40",
@@ -141,7 +144,9 @@ export function ProductCard({
               >
                 <Icon name="minus" size={16} />
               </button>
-              <span className="w-6 text-center text-sm tabular-nums">{qty}</span>
+              <span className="w-6 text-center text-sm tabular-nums" aria-live="polite">
+                {qty}
+              </span>
               <button
                 onClick={() => setQty((q) => q + 1)}
                 aria-label="Mehr"
@@ -155,7 +160,9 @@ export function ProductCard({
               data-cursor="drop"
               className={cn(
                 "flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg text-[0.8rem] font-semibold transition-colors md:h-9",
-                added ? "bg-sage text-ink" : "bg-honey text-ink hover:bg-honey-glow",
+                added
+                  ? "bg-sage text-ink"
+                  : "bg-honey text-ink shadow-[0_8px_22px_-8px_rgba(232,178,94,0.35)] hover:bg-honey-glow",
               )}
             >
               {added ? (
