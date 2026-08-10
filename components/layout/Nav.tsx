@@ -22,7 +22,13 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setMenuOpen(false), [pathname]);
+  // Menü bei Routenwechsel schließen — „adjust state during render"-Pattern
+  // (react.dev), statt setState im Effect.
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (prevPath !== pathname) {
+    setPrevPath(pathname);
+    setMenuOpen(false);
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-[90] flex justify-center px-3 pt-3 sm:px-4 sm:pt-4">
@@ -124,9 +130,7 @@ export function Nav() {
                     href={item.href}
                     className={cn(
                       "group flex items-baseline gap-4 py-3 font-display text-4xl transition-all duration-500",
-                      menuOpen
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-3 opacity-0",
+                      menuOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
                       active ? "text-honey" : "text-moon hover:text-honey",
                     )}
                     style={{ transitionDelay: menuOpen ? `${80 + i * 60}ms` : "0ms" }}

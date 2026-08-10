@@ -40,10 +40,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
-  // Load persisted cart once on mount.
+  // Persistierten Warenkorb einmalig nach der Hydration laden. Der Set nach
+  // Mount ist hier bewusst: ein Lazy-Init aus localStorage würde SSR- und
+  // Client-Markup auseinanderlaufen lassen (Hydration-Mismatch am Badge).
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- Hydration aus externem Speicher, siehe oben
       if (raw) setItems(JSON.parse(raw));
     } catch {
       /* ignore corrupt storage */
@@ -72,9 +75,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => {
       const existing = prev.find((i) => i.key === key);
       if (existing) {
-        return prev.map((i) =>
-          i.key === key ? { ...i, qty: i.qty + qty } : i,
-        );
+        return prev.map((i) => (i.key === key ? { ...i, qty: i.qty + qty } : i));
       }
       return [...prev, { ...item, key, qty }];
     });
@@ -96,10 +97,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const close = useCallback(() => setIsOpen(false), []);
 
   const count = useMemo(() => items.reduce((s, i) => s + i.qty, 0), [items]);
-  const total = useMemo(
-    () => items.reduce((s, i) => s + i.price * i.qty, 0),
-    [items],
-  );
+  const total = useMemo(() => items.reduce((s, i) => s + i.price * i.qty, 0), [items]);
 
   const value = useMemo(
     () => ({ items, count, total, isOpen, add, setQty, remove, clear, open, close }),

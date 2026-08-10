@@ -51,7 +51,9 @@ function Card({ limo }: { limo: Limonade }) {
       />
 
       <div className="relative flex-1 p-5 sm:p-7">
-        <span className={`font-mono text-[0.62rem] uppercase tracking-[0.16em] ${a.chip}`}>
+        <span
+          className={`font-mono text-[0.62rem] uppercase tracking-[0.16em] ${a.chip}`}
+        >
           {limo.type}
         </span>
         <h3 className="mt-1 text-balance font-display text-2xl text-moon">{limo.name}</h3>
@@ -75,7 +77,9 @@ function Card({ limo }: { limo: Limonade }) {
         </p>
 
         <div className="mt-5 flex items-center justify-between gap-3">
-          <span className="font-display text-2xl text-moon">{formatMoney(limo.price)}</span>
+          <span className="font-display text-2xl text-moon">
+            {formatMoney(limo.price)}
+          </span>
           <button
             onClick={onAdd}
             data-cursor="drop"

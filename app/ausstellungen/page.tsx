@@ -34,9 +34,9 @@ export default function AusstellungenPage() {
                 Schlag uns ein Event vor
               </h2>
               <p className="lede mt-4">
-                Markt, Hoffest, Adventsmarkt oder Pop-up — wenn du eine Veranstaltung
-                rund um Fulda kennst, auf der unsere Bio-Sirupe gut aufgehoben wären,
-                schreib uns einfach. Jeder Hinweis hilft.
+                Markt, Hoffest, Adventsmarkt oder Pop-up — wenn du eine Veranstaltung rund
+                um Fulda kennst, auf der unsere Bio-Sirupe gut aufgehoben wären, schreib
+                uns einfach. Jeder Hinweis hilft.
               </p>
               <div className="mt-8">
                 <MagneticButton href={mailto} variant="fill">

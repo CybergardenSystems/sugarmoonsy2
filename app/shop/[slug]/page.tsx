@@ -71,7 +71,9 @@ export default async function ProductPage({
                 >
                   <div
                     className="absolute inset-0 opacity-60"
-                    style={{ background: `radial-gradient(50% 45% at 50% 40%, ${ac}22, transparent 70%)` }}
+                    style={{
+                      background: `radial-gradient(50% 45% at 50% 40%, ${ac}22, transparent 70%)`,
+                    }}
                   />
                   <MoonMark size={160} className="relative" />
                   <span className="relative mt-4 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-moon-mute">

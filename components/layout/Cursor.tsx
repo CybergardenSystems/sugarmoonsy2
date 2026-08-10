@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useHydrated, useMediaQuery } from "@/lib/useMediaQuery";
 
 /**
  * Custom Cursor mit Zuständen: default (Goldpunkt), hover/link (Ring),
@@ -10,14 +11,14 @@ import { useEffect, useRef, useState } from "react";
 export function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const [enabled, setEnabled] = useState(false);
   const [label, setLabel] = useState("");
+  const hydrated = useHydrated();
+  const fine = useMediaQuery("(pointer: fine)");
+  const reduce = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const enabled = hydrated && fine && !reduce;
 
   useEffect(() => {
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduce) return;
-    setEnabled(true);
+    if (!enabled) return;
 
     const dot = dotRef.current!;
     const ring = ringRef.current!;
@@ -56,7 +57,7 @@ export function Cursor() {
       cancelAnimationFrame(raf);
       document.documentElement.style.cursor = "";
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 

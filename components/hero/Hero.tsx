@@ -83,7 +83,10 @@ export function Hero() {
         className="pointer-events-none absolute right-[20%] top-[42%] z-10 hidden md:block"
       >
         <svg width="18" height="28" viewBox="0 0 20 30" fill="none">
-          <path d="M10 0C10 0 1 14 1 21a9 9 0 0 0 18 0C19 14 10 0 10 0Z" fill="url(#drop-g)" />
+          <path
+            d="M10 0C10 0 1 14 1 21a9 9 0 0 0 18 0C19 14 10 0 10 0Z"
+            fill="url(#drop-g)"
+          />
           <defs>
             <linearGradient id="drop-g" x1="10" y1="0" x2="10" y2="30">
               <stop stopColor="#F4D9A0" />
@@ -117,7 +120,10 @@ export function Hero() {
             dir.
           </p>
 
-          <div data-hero-fade className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div
+            data-hero-fade
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+          >
             <MagneticButton href="/shop" variant="fill">
               Zum Shop
               <Icon name="arrow" size={16} />
@@ -169,7 +175,10 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-5 z-20 hidden justify-center sm:flex" aria-hidden>
+      <div
+        className="absolute inset-x-0 bottom-5 z-20 hidden justify-center sm:flex"
+        aria-hidden
+      >
         <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-moon-mute">
           Scrollen
         </span>

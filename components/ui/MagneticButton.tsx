@@ -76,11 +76,7 @@ export function MagneticButton({
 
   if (href) {
     return (
-      <Link
-        href={href}
-        ref={ref as React.Ref<HTMLAnchorElement>}
-        {...shared}
-      >
+      <Link href={href} ref={ref as React.Ref<HTMLAnchorElement>} {...shared}>
         {content}
       </Link>
     );

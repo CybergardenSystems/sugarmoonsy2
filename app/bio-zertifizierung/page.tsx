@@ -13,8 +13,8 @@ export default function BioPage() {
         sub="Unsere Sirupe und Limonaden sind bio-zertifiziert — die Limonaden tragen das Kontrollstellen-Kürzel DE-ÖKO-006."
       />
       <LegalNotice>
-        Details zur Öko-Kontrollstelle, Zertifikatsnummern und Prüfberichte werden
-        hier veröffentlicht.
+        Details zur Öko-Kontrollstelle, Zertifikatsnummern und Prüfberichte werden hier
+        veröffentlicht.
       </LegalNotice>
     </>
   );

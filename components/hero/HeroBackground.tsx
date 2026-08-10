@@ -1,38 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { MoonScene } from "./MoonScene";
 import { media } from "@/data/media";
+import { useHydrated, useMediaQuery } from "@/lib/useMediaQuery";
 
 /**
  * Hero-Hintergrund: cinematisches Higgsfield-Video als Basis (Hochformat auf
  * Mobile, Querformat auf Desktop), darunter die animierte MoonScene als
  * Fallback (reduced-motion oder Video lädt nicht). Dunkle Overlays sichern die
- * Text-Lesbarkeit.
+ * Text-Lesbarkeit. Das Video wird erst clientseitig gerendert, damit SSR-Markup
+ * nie ein Video an reduced-motion-Nutzer ausliefert.
  */
 export function HeroBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoOk, setVideoOk] = useState(false);
-  const [src, setSrc] = useState<string | null>(null);
-
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const portrait = window.matchMedia("(max-width: 767px)").matches;
-    setSrc(portrait ? media.heroVideoPortrait : media.heroVideo);
-  }, []);
-
-  // Quelle bei Orientierungs-/Größenwechsel aktualisieren.
-  useEffect(() => {
-    if (!src) return;
-    const onResize = () => {
-      const portrait = window.matchMedia("(max-width: 767px)").matches;
-      const next = portrait ? media.heroVideoPortrait : media.heroVideo;
-      setSrc((prev) => (prev === next ? prev : next));
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [src]);
+  const hydrated = useHydrated();
+  const reduce = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const portrait = useMediaQuery("(max-width: 767px)");
+  const src =
+    !hydrated || reduce ? null : portrait ? media.heroVideoPortrait : media.heroVideo;
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>

@@ -16,8 +16,8 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-5 text-sm leading-relaxed text-moon-mute">
-              {site.tagline}. Handgemacht, zertifiziert, mit Liebe — gebraut vom
-              Mond über Fulda.
+              {site.tagline}. Handgemacht, zertifiziert, mit Liebe — gebraut vom Mond über
+              Fulda.
             </p>
             <a
               href={`mailto:${site.email}`}

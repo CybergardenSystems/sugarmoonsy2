@@ -22,9 +22,12 @@ export const limonaden: Limonade[] = [
     price: 3.5,
     accent: "lavender",
     emoji: "💜",
-    traits: ["Ohne Konservierungsmittel", "Ohne künstliche Aromen", "Vegan · Kein Alkohol"],
-    ingredients:
-      "Wasser, Zitronensaftkonzentrat*, Zucker, Lavendelsirup*",
+    traits: [
+      "Ohne Konservierungsmittel",
+      "Ohne künstliche Aromen",
+      "Vegan · Kein Alkohol",
+    ],
+    ingredients: "Wasser, Zitronensaftkonzentrat*, Zucker, Lavendelsirup*",
     organic: "*aus kontrolliert ökologischem Anbau",
   },
   {
@@ -35,7 +38,11 @@ export const limonaden: Limonade[] = [
     price: 3.5,
     accent: "sage",
     emoji: "🌿",
-    traits: ["Ohne Konservierungsmittel", "Ohne künstliche Aromen", "Vegan · Kein Alkohol"],
+    traits: [
+      "Ohne Konservierungsmittel",
+      "Ohne künstliche Aromen",
+      "Vegan · Kein Alkohol",
+    ],
     ingredients: "Wasser, Zitronensaftkonzentrat*, Zucker, Kräutersirup*",
     organic: "*aus kontrolliert ökologischem Anbau",
   },

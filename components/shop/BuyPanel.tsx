@@ -17,7 +17,13 @@ export function BuyPanel({ product }: { product: Product }) {
   const onAdd = (e: React.MouseEvent) => {
     flyToCart(e.clientX, e.clientY);
     add(
-      { id: product.id, name: product.name, size: active.label, price: active.price, photo: product.photo },
+      {
+        id: product.id,
+        name: product.name,
+        size: active.label,
+        price: active.price,
+        photo: product.photo,
+      },
       qty,
     );
     toast(`${qty}× ${product.name} (${active.label}) hinzugefügt`);
@@ -27,7 +33,9 @@ export function BuyPanel({ product }: { product: Product }) {
   return (
     <div className="mt-7 rounded-2xl border border-honey/12 bg-night-2/60 p-6">
       <div className="flex items-baseline gap-2">
-        <span className="font-display text-3xl text-honey">{formatMoney(active.price)}</span>
+        <span className="font-display text-3xl text-honey">
+          {formatMoney(active.price)}
+        </span>
         <span className="font-mono text-xs text-moon-mute">/ {active.label}</span>
       </div>
 

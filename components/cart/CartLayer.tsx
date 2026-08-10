@@ -75,10 +75,7 @@ export function CartLayer() {
           ) : (
             <ul className="space-y-4">
               {items.map((it) => (
-                <li
-                  key={it.key}
-                  className="flex gap-3 border-b border-honey/8 pb-4"
-                >
+                <li key={it.key} className="flex gap-3 border-b border-honey/8 pb-4">
                   <div className="flex-1">
                     <p className="font-display text-[0.98rem] text-moon">{it.name}</p>
                     <p className="font-mono text-[0.68rem] uppercase tracking-wide text-moon-mute">
@@ -88,7 +85,9 @@ export function CartLayer() {
                       <QtyBtn onClick={() => setQty(it.key, it.qty - 1)} label="Weniger">
                         <Icon name="minus" size={14} />
                       </QtyBtn>
-                      <span className="w-6 text-center text-sm tabular-nums">{it.qty}</span>
+                      <span className="w-6 text-center text-sm tabular-nums">
+                        {it.qty}
+                      </span>
                       <QtyBtn onClick={() => setQty(it.key, it.qty + 1)} label="Mehr">
                         <Icon name="plus" size={14} />
                       </QtyBtn>
@@ -242,8 +241,8 @@ function OrderModal({
             </div>
             <h2 className="font-display text-2xl text-moon">Vielen Dank!</h2>
             <p className="mx-auto mt-2 max-w-xs text-sm text-moon-dim">
-              Deine Bestellung ist auf dem Weg zu uns. Wir melden uns in Kürze per
-              E-Mail mit Zahlungs- und Versanddetails.
+              Deine Bestellung ist auf dem Weg zu uns. Wir melden uns in Kürze per E-Mail
+              mit Zahlungs- und Versanddetails.
             </p>
             <button
               onClick={onContinue}

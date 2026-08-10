@@ -7,14 +7,7 @@
 
 export type SeasonKey = "gj" | "fs" | "he" | "wi";
 export type AccentKey =
-  | "honey"
-  | "amber"
-  | "cinnamon"
-  | "sage"
-  | "lavender"
-  | "plum"
-  | "moon"
-  | "pumpkin";
+  "honey" | "amber" | "cinnamon" | "sage" | "lavender" | "plum" | "moon" | "pumpkin";
 
 export interface Size {
   label: string;

@@ -3,7 +3,8 @@ import { PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata: Metadata = {
   title: "Impressum",
-  description: "Anbieterkennzeichnung gemäß § 5 TMG — Sugar Moon Sweets, Inhaber Sebastian Scherf.",
+  description:
+    "Anbieterkennzeichnung gemäß § 5 TMG — Sugar Moon Sweets, Inhaber Sebastian Scherf.",
 };
 
 export default function ImpressumPage() {
@@ -45,16 +46,16 @@ export default function ImpressumPage() {
             <p>
               Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf
               diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10
-              TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
-              gespeicherte fremde Informationen zu überwachen oder nach Umständen zu
+              TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte
+              oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu
               forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
             </p>
             <p>
               Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen
               nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche
               Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
-              Rechtsverletzung möglich. Bei Bekanntwerden entsprechender Rechtsverletzungen
-              entfernen wir diese Inhalte umgehend.
+              Rechtsverletzung möglich. Bei Bekanntwerden entsprechender
+              Rechtsverletzungen entfernen wir diese Inhalte umgehend.
             </p>
 
             <h2>Haftung für Links</h2>
@@ -69,7 +70,11 @@ export default function ImpressumPage() {
             <p>
               Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung
               (OS) bereit:{" "}
-              <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://ec.europa.eu/consumers/odr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 https://ec.europa.eu/consumers/odr
               </a>
               <br />

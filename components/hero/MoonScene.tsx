@@ -67,10 +67,9 @@ export function MoonScene() {
       raf = requestAnimationFrame(tick);
     };
 
-    const io = new IntersectionObserver(
-      ([e]) => (running = e.isIntersecting),
-      { threshold: 0 },
-    );
+    const io = new IntersectionObserver(([e]) => (running = e.isIntersecting), {
+      threshold: 0,
+    });
     io.observe(canvas);
 
     seed();

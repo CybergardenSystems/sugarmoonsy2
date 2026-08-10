@@ -13,8 +13,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: site.name,
-  description:
-    "Bio-Sirup-Manufaktur aus Fulda. Handgemachte Sirupe und Limonaden.",
+  description: "Bio-Sirup-Manufaktur aus Fulda. Handgemachte Sirupe und Limonaden.",
   url: site.url,
   email: site.email,
   address: {

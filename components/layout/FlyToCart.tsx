@@ -22,7 +22,8 @@ export function FlyToCart() {
 
       const el = document.createElement("div");
       el.setAttribute("aria-hidden", "true");
-      el.style.cssText = "position:fixed;left:0;top:0;z-index:125;pointer-events:none;will-change:transform,opacity";
+      el.style.cssText =
+        "position:fixed;left:0;top:0;z-index:125;pointer-events:none;will-change:transform,opacity";
       el.innerHTML =
         '<svg width="14" height="21" viewBox="0 0 20 30" fill="none"><path d="M10 0C10 0 1 14 1 21a9 9 0 0 0 18 0C19 14 10 0 10 0Z" fill="#E8B25E"/></svg>';
       document.body.appendChild(el);
@@ -36,7 +37,14 @@ export function FlyToCart() {
             gsap.fromTo(
               cart,
               { scale: 1 },
-              { scale: 1.28, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out", transformOrigin: "center" },
+              {
+                scale: 1.28,
+                duration: 0.18,
+                yoyo: true,
+                repeat: 1,
+                ease: "power2.out",
+                transformOrigin: "center",
+              },
             );
           },
         })

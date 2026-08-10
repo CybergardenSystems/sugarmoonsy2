@@ -7,11 +7,7 @@ export function Reviews() {
   return (
     <section id="bewertungen" className="section relative">
       <div className="shell">
-        <SectionHeading
-          center
-          eyebrow="Kundenstimmen"
-          title="Was unsere Kunden sagen"
-        />
+        <SectionHeading center eyebrow="Kundenstimmen" title="Was unsere Kunden sagen" />
 
         <div className="mt-10 grid gap-3 sm:mt-14 sm:gap-5 md:grid-cols-3">
           {reviews.map((r, i) => (

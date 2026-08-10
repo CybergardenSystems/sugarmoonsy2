@@ -22,7 +22,13 @@ export const accentVar: Record<AccentKey, string> = {
   pumpkin: "var(--color-pumpkin)",
 };
 
-export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
+export function ProductCard({
+  product,
+  priority = false,
+}: {
+  product: Product;
+  priority?: boolean;
+}) {
   const { add } = useCart();
   const [size, setSize] = useState(product.sizes[0].label);
   const [qty, setQty] = useState(1);
@@ -106,7 +112,9 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           <span className="font-display text-2xl text-honey">
             {formatMoney(active.price)}
           </span>
-          <span className="font-mono text-[0.66rem] text-moon-mute">/ {active.label}</span>
+          <span className="font-mono text-[0.66rem] text-moon-mute">
+            / {active.label}
+          </span>
         </div>
 
         {product.sizes.length > 1 && (
@@ -158,9 +166,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
               data-cursor="drop"
               className={cn(
                 "flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg text-[0.8rem] font-semibold transition-colors md:h-9",
-                added
-                  ? "bg-sage text-ink"
-                  : "bg-honey text-ink hover:bg-honey-glow",
+                added ? "bg-sage text-ink" : "bg-honey text-ink hover:bg-honey-glow",
               )}
             >
               {added ? (
@@ -219,7 +225,15 @@ function Placeholder({ accent, season }: { accent: string; season: string }) {
             strokeWidth="1.1"
           />
           {/* Verschluss */}
-          <rect x="23" y="2" width="14" height="6" rx="2" fill="currentColor" fillOpacity="0.45" />
+          <rect
+            x="23"
+            y="2"
+            width="14"
+            height="6"
+            rx="2"
+            fill="currentColor"
+            fillOpacity="0.45"
+          />
           {/* Etikett-Feld */}
           <rect
             x="19"

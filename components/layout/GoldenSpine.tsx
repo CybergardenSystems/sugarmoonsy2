@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Drop } from "@/components/brand/Drop";
+import { useHydrated, useMediaQuery } from "@/lib/useMediaQuery";
 
 /**
  * Die „Goldene Spine": ein fixierter Tropfen wandert auf einer feinen Schiene
@@ -17,11 +18,12 @@ export function GoldenSpine() {
   const dropRef = useRef<HTMLDivElement>(null);
   const moonMaskRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  const [enabled, setEnabled] = useState(false);
+  const hydrated = useHydrated();
+  const reduce = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const enabled = hydrated && !reduce;
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setEnabled(true);
+    if (!enabled) return;
 
     let raf = 0;
     let ticking = false;
@@ -61,7 +63,7 @@ export function GoldenSpine() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 

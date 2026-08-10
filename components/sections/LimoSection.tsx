@@ -12,8 +12,9 @@ export function LimoSection() {
           title="Bio-Limonade — Natur im Glas"
           sub={
             <>
-              Zusammen mit unserem Partner <strong className="text-moon">Hunfelt Bräu</strong>{" "}
-              — erfrischend, ehrlich und 100 % natürlich. DE-ÖKO-006 zertifiziert.
+              Zusammen mit unserem Partner{" "}
+              <strong className="text-moon">Hunfelt Bräu</strong> — erfrischend, ehrlich
+              und 100 % natürlich. DE-ÖKO-006 zertifiziert.
             </>
           }
         />

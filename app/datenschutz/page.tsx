@@ -48,9 +48,9 @@ export default function DatenschutzPage() {
 
             <h2>3. Rechtsgrundlage der Verarbeitung</h2>
             <p>
-              Die Verarbeitung Ihrer Daten erfolgt auf Basis von Art. 6 Abs. 1 lit. b DSGVO
-              (Vertragserfüllung). Ohne die Bereitstellung dieser Daten ist eine Bestellung
-              nicht möglich.
+              Die Verarbeitung Ihrer Daten erfolgt auf Basis von Art. 6 Abs. 1 lit. b
+              DSGVO (Vertragserfüllung). Ohne die Bereitstellung dieser Daten ist eine
+              Bestellung nicht möglich.
             </p>
 
             <h2>4. Weitergabe der Daten</h2>
