@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Impressum",
   description:
     "Anbieterkennzeichnung gemäß § 5 TMG — Sugar Moon Sweets, Inhaber Sebastian Scherf.",
+  alternates: { canonical: "/impressum" },
 };
 
 export default function ImpressumPage() {

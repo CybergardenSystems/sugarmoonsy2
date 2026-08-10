@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Über uns",
   description:
     "Sugar Moon Sweets — von einer Küche in Fulda in eure Tassen. Die Geschichte von Jessica & Sebastian und ihrer Bio-Sirup-Manufaktur.",
+  alternates: { canonical: "/story" },
 };
 
 export default function StoryPage() {

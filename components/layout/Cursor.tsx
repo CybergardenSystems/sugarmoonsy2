@@ -50,12 +50,14 @@ export function Cursor() {
 
     window.addEventListener("mousemove", onMove);
     raf = requestAnimationFrame(loop);
-    document.documentElement.style.cursor = "none";
+    // Klasse statt Inline-Style: versteckt den nativen Cursor auch über
+    // Links/Buttons (deren UA-Style sonst `pointer` anzeigen würde).
+    document.documentElement.classList.add("sms-cursor");
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);
-      document.documentElement.style.cursor = "";
+      document.documentElement.classList.remove("sms-cursor");
     };
   }, [enabled]);
 

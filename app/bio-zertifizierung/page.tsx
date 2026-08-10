@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { LegalNotice } from "@/components/ui/LegalNotice";
 
-export const metadata: Metadata = { title: "Bio-Zertifizierung" };
+export const metadata: Metadata = {
+  title: "Bio-Zertifizierung",
+  alternates: { canonical: "/bio-zertifizierung" },
+};
 
 export default function BioPage() {
   return (

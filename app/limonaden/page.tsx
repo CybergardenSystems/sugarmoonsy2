@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Bio-Limonade",
   description:
     "Lila & Laune und Kraut & Heiter — Bio-Limonaden aus Fulda, gemeinsam mit Hunfelt Bräu. Ohne Konservierungsmittel, vegan, DE-ÖKO-006.",
+  alternates: { canonical: "/limonaden" },
 };
 
 export default function LimonadenPage() {

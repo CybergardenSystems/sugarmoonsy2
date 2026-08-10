@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Datenschutzerklärung",
   description:
     "Informationen zur Verarbeitung personenbezogener Daten bei Online-Bestellungen gemäß DSGVO.",
+  alternates: { canonical: "/datenschutz" },
 };
 
 export default function DatenschutzPage() {

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCart, formatMoney } from "./CartProvider";
 import { site } from "@/data/site";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/cn";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 import { Icon } from "@/components/ui/Icon";
 import { MoonMark } from "@/components/brand/MoonMark";
 
@@ -31,6 +32,10 @@ export function CartLayer() {
   const { items, total, isOpen, close, setQty, remove, clear } = useCart();
   const [orderOpen, setOrderOpen] = useState(false);
   const [done, setDone] = useState(false);
+  const sheetRef = useRef<HTMLElement>(null);
+
+  // Fokus bleibt im Sheet, solange es offen ist (und das Modal nicht darüber liegt).
+  useFocusTrap(sheetRef, isOpen && !orderOpen, close);
 
   return (
     <>
@@ -46,6 +51,7 @@ export function CartLayer() {
 
       {/* Sheet */}
       <aside
+        ref={sheetRef}
         role="dialog"
         aria-label="Warenkorb"
         aria-modal={isOpen}
@@ -185,6 +191,8 @@ function OrderModal({
   done: boolean;
 }) {
   const { items, total } = useCart();
+  const cardRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(cardRef, true, onClose);
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -224,8 +232,19 @@ function OrderModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[130] flex items-center justify-center bg-ink/70 p-4 backdrop-blur-md">
-      <div className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-honey/15 bg-night-2 p-7">
+    <div
+      className="fixed inset-0 z-[130] flex items-center justify-center bg-ink/70 p-4 backdrop-blur-md"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div
+        ref={cardRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Bestellung abschicken"
+        className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-honey/15 bg-night-2 p-7"
+      >
         <button
           onClick={onClose}
           aria-label="Schließen"

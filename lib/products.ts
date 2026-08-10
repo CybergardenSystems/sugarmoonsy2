@@ -37,6 +37,18 @@ export interface Product {
   pairing: string;
 }
 
+/** Akzentfarbe je Sorte als CSS-Variable (server-safe, von Karten & Detailseite genutzt). */
+export const accentVar: Record<AccentKey, string> = {
+  honey: "var(--color-honey)",
+  amber: "var(--color-amber)",
+  cinnamon: "var(--color-cinnamon)",
+  sage: "var(--color-sage)",
+  lavender: "var(--color-lavender)",
+  plum: "var(--color-plum)",
+  moon: "var(--color-silver)",
+  pumpkin: "var(--color-pumpkin)",
+};
+
 export const SEASONS: { key: SeasonKey | "all"; label: string }[] = [
   { key: "all", label: "Alle Sorten" },
   { key: "gj", label: "Ganzjährig" },

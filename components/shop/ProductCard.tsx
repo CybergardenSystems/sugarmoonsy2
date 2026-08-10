@@ -3,24 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import type { AccentKey, Product } from "@/lib/products";
+import { accentVar, type Product } from "@/lib/products";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
 import { photoSrc } from "@/lib/photos";
 import { toast } from "@/lib/toast";
 import { flyToCart } from "@/lib/flyToCart";
 import { cn } from "@/lib/cn";
-
-export const accentVar: Record<AccentKey, string> = {
-  honey: "var(--color-honey)",
-  amber: "var(--color-amber)",
-  cinnamon: "var(--color-cinnamon)",
-  sage: "var(--color-sage)",
-  lavender: "var(--color-lavender)",
-  plum: "var(--color-plum)",
-  moon: "var(--color-silver)",
-  pumpkin: "var(--color-pumpkin)",
-};
 
 export function ProductCard({
   product,

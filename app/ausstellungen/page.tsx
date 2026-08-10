@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Wo wir ausstellen",
   description:
     "Triff Sugar Moon Sweets auf Märkten und Veranstaltungen rund um Fulda — und schlag uns Events vor, auf denen wir nicht fehlen sollten.",
+  alternates: { canonical: "/ausstellungen" },
 };
 
 export default function AusstellungenPage() {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/hero/Hero";
 import { Marquee } from "@/components/sections/Marquee";
 import { Manifest } from "@/components/sections/Manifest";
@@ -8,6 +9,10 @@ import { Reviews } from "@/components/sections/Reviews";
 import { CTA } from "@/components/sections/CTA";
 import { GoldenSpine } from "@/components/layout/GoldenSpine";
 import { site } from "@/data/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const jsonLd = {
   "@context": "https://schema.org",

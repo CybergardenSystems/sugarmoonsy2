@@ -303,6 +303,12 @@
   animation: marquee 38s linear infinite;
 }
 
+/* Custom cursor: native Cursor überall ausblenden, solange er aktiv ist */
+html.sms-cursor,
+html.sms-cursor * {
+  cursor: none !important;
+}
+
 /* Custom cursor ring states */
 .cursor-ring[data-state="hover"] {
   width: 3.25rem;

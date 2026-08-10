@@ -30,6 +30,15 @@ export function Nav() {
     setMenuOpen(false);
   }
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   return (
     <header className="fixed inset-x-0 top-0 z-[90] flex justify-center px-3 pt-3 sm:px-4 sm:pt-4">
       <nav

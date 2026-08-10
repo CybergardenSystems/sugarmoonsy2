@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProduct, products } from "@/lib/products";
+import { accentVar, getProduct, products } from "@/lib/products";
 import { BuyPanel } from "@/components/shop/BuyPanel";
 import { MoonMark } from "@/components/brand/MoonMark";
-import { accentVar } from "@/components/shop/ProductCard";
 import { photoSrc } from "@/lib/photos";
+import { site } from "@/data/site";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -20,9 +20,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) return { title: "Sorte nicht gefunden" };
+  const src = photoSrc(product);
   return {
     title: product.name,
     description: product.description,
+    alternates: { canonical: `/shop/${product.slug}` },
+    openGraph: src ? { images: [{ url: src, alt: product.name }] } : undefined,
   };
 }
 
@@ -38,8 +41,32 @@ export default async function ProductPage({
   const ac = accentVar[product.accent];
   const src = photoSrc(product);
 
+  // Strukturierte Daten: Product + Offers (eine Offer je Größe).
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    ...(src ? { image: `${site.url}${src}` } : {}),
+    brand: { "@type": "Brand", name: site.name },
+    offers: product.sizes.map((s) => ({
+      "@type": "Offer",
+      name: s.label,
+      price: s.price.toFixed(2),
+      priceCurrency: "EUR",
+      availability: product.comingSoon
+        ? "https://schema.org/PreOrder"
+        : "https://schema.org/InStock",
+      url: `${site.url}/shop/${product.slug}`,
+    })),
+  };
+
   return (
     <article className="pt-32 pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="shell">
         <Link
           href="/shop"

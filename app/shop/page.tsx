@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Shop — Bio-Sirupe",
   description:
     "Alle 11 handgemachten Bio-Sirupe aus Fulda: Vanille, Pistazie, Lavendel mit Blaubeere, Pumpkin Spice, Spekulatius und mehr.",
+  alternates: { canonical: "/shop" },
 };
 
 export default function ShopPage() {
