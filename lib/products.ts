@@ -65,9 +65,9 @@ export const products: Product[] = [
     slug: "bio-vanille",
     name: "Bio-Vanille",
     flavor: "Klassisch, weich & natürlich",
-    description: "Der zeitlose Allrounder — warme Vanille aus echter Schote.",
+    description: "Der zeitlose Allrounder — klassisch, weich und natürlich.",
     story:
-      "Unsere Vanille ist der ruhige Vollmond im Sortiment: weich, rund, immer da. Aus echter Bourbon-Vanille, ohne künstliche Aromen — der Sirup, der in jeden Kaffee, jedes Dessert und jeden Teig passt.",
+      "Unsere Vanille ist der ruhige Vollmond im Sortiment: weich, rund, immer da. Ohne künstliche Aromen — der Sirup, der in jeden Kaffee, jedes Dessert und jeden Teig passt.",
     season: "Ganzjährig",
     seasonKeys: ["gj"],
     sizes: [
@@ -83,9 +83,9 @@ export const products: Product[] = [
     slug: "bio-pistazie",
     name: "Bio-Pistazie",
     flavor: "Nussig, edel & intensiv",
-    description: "Für besondere Momente — geröstete Pistazie, fein und tief.",
+    description: "Für besondere Momente — nussige Pistazie, fein und intensiv.",
     story:
-      "Edel und intensiv: geröstete Pistazien, behutsam zu Sirup gebracht. Ein Hauch Mittelmeer für den Flat White oder den Aperitif unter Sternen.",
+      "Edel und intensiv: Pistazie, behutsam zu Sirup gebracht. Ein Hauch Mittelmeer für den Flat White oder den Aperitif unter Sternen.",
     season: "März – August",
     seasonKeys: ["fs"],
     sizes: [
@@ -103,7 +103,7 @@ export const products: Product[] = [
     flavor: "Fein-blumig & fruchtig",
     description: "Ein Hauch Provence bei Nacht — Lavendel trifft dunkle Blaubeere.",
     story:
-      "Blühender Lavendel und dunkle Blaubeere — die Sorte, die unsere Kund:innen am häufigsten ihren Lieblingssirup nennen. Provence-Romantik in einem nächtlichen Violett. Ganzjährig erhältlich und besonders beliebt in Frühling & Sommer.",
+      "Blühender Lavendel und dunkle Blaubeere — Provence-Romantik in einem nächtlichen Violett. Ganzjährig erhältlich und besonders beliebt in Frühling & Sommer.",
     season: "Ganzjährig",
     seasonKeys: ["gj", "fs"],
     sizes: [
@@ -157,7 +157,7 @@ export const products: Product[] = [
     flavor: "Fruchtig, zimtig & winterlich",
     description: "Apfel trifft Zimt — der Duft von Herbstabenden.",
     story:
-      "Gebackener Apfel, Zimt, eine Spur Nelke: der Geschmack von Herbstabenden mit Kerzenlicht. Warm in den Tee, großzügig über den Milchreis.",
+      "Gebackener Apfel und Zimt: der Geschmack von Herbstabenden mit Kerzenlicht. Warm in den Tee, großzügig über den Milchreis.",
     season: "Sep – Nov",
     seasonKeys: ["he"],
     sizes: [
@@ -177,7 +177,7 @@ export const products: Product[] = [
     flavor: "Würzig, herbstlich & wohlig",
     description: "Unser Bestseller — der Sirup, mit dem alles begann.",
     story:
-      "Der Sirup, mit dem alles begann: An einem Herbstmorgen in Fulda suchte Jessica vergeblich nach einem Pumpkin Spice Latte — und begann, ihn selbst zu machen. Kürbis, Zimt, Muskat, Ingwer. Unser Bestseller.",
+      "Der Sirup, mit dem alles begann: An einem Herbstmorgen in Fulda suchte Jessica vergeblich nach einem Pumpkin Spice Latte — und begann, ihn selbst zu machen. Würzig, herbstlich, wohlig — unser Bestseller.",
     season: "Sep – Nov",
     seasonKeys: ["he"],
     sizes: [
@@ -212,9 +212,9 @@ export const products: Product[] = [
     slug: "bio-lebkuchen",
     name: "Bio-Lebkuchen",
     flavor: "Kräftig & würzig",
-    description: "Voller Weihnachtsstimmung — Honig, Nelke, Zimt.",
+    description: "Kräftig & würzig — voller Weihnachtsstimmung.",
     story:
-      "Honig, Nelke, Zimt, Piment: der ganze Weihnachtsmarkt in einer Flasche. Kräftig und würzig — auch als 50 ml Geschenk im Lebkuchenmännchen-Glas erhältlich.",
+      "Der ganze Weihnachtsmarkt in einer Flasche: kräftig, würzig, voller Weihnachtsstimmung — auch als 50-ml-Geschenk im Lebkuchenmännchen-Glas erhältlich.",
     season: "Dez – Jan",
     seasonKeys: ["wi"],
     sizes: [
@@ -230,9 +230,9 @@ export const products: Product[] = [
     slug: "bio-zimt",
     name: "Bio-Zimt",
     flavor: "Warm & aromatisch",
-    description: "Der Geschmack von Winter — echte Ceylon-Zimtstangen.",
+    description: "Der Geschmack von Winter — warm und aromatisch.",
     story:
-      "Echte Zimtstangen, langsam ausgezogen: warm, aromatisch, beruhigend. Der Sirup für lange Winterabende und cremigen Milchschaum.",
+      "Warm, aromatisch, beruhigend: der Sirup für lange Winterabende und cremigen Milchschaum.",
     season: "Nov – Feb",
     seasonKeys: ["wi"],
     sizes: [
@@ -248,9 +248,9 @@ export const products: Product[] = [
     slug: "bio-vanille-extrakt",
     name: "Bio-Vanille-Extrakt",
     flavor: "Pur zum Backen & Verfeinern",
-    description: "Konzentrierte Vanille aus echter Schote — fürs Backen gemacht.",
+    description: "Konzentrierte Vanille — perfekt zum Backen, Verfeinern & Genießen.",
     story:
-      "Kein Sirup, sondern pure Tiefe: konzentrierter Vanille-Extrakt aus echter Schote, im eleganten schwarzen Mond-Etikett. Zum Backen, Verfeinern und Genießen.",
+      "Kein Sirup, sondern pure Tiefe: konzentrierter Vanille-Extrakt im eleganten schwarzen Mond-Etikett. Zum Backen, Verfeinern und Genießen.",
     season: "Ganzjährig",
     seasonKeys: ["gj"],
     sizes: [{ label: "100 ml", price: 7.8 }],

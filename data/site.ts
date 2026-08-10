@@ -37,6 +37,8 @@ export const usps = [
   },
 ] as const;
 
+// Hinweis Content-Parität: „DE-ÖKO-006" gilt laut Legacy-Inhalt für die
+// Limonaden — das Kürzel erscheint deshalb nur im Limo-Kontext, nicht global.
 export const marqueeItems = [
   "Bio-zertifiziert",
   "Handgemacht in Fulda",
@@ -44,7 +46,6 @@ export const marqueeItems = [
   "Für Kaffee & Cocktails",
   "Perfekt als Geschenk",
   "Direkt bestellen",
-  "DE-ÖKO-006",
 ];
 
 export const stats = [

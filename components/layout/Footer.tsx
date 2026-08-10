@@ -54,9 +54,7 @@ export function Footer() {
           <span>
             © {new Date().getFullYear()} {site.name} · Fulda
           </span>
-          <span className="font-mono tracking-wide">
-            Bio-Sirup-Manufaktur · DE-ÖKO-006
-          </span>
+          <span className="font-mono tracking-wide">Bio-Sirup-Manufaktur aus Fulda</span>
         </div>
       </div>
     </footer>
