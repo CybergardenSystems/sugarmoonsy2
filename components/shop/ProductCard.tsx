@@ -59,7 +59,6 @@ export function ProductCard({
       <Link
         href={`/shop/${product.slug}`}
         data-cursor="view"
-        aria-label={`${product.name} ansehen`}
         className="relative block aspect-[4/5] overflow-hidden"
       >
         {src ? (

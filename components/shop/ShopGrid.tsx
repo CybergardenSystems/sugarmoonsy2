@@ -34,6 +34,7 @@ export function ShopGrid() {
         ))}
       </div>
 
+      <h2 className="sr-only">Produktliste</h2>
       <p className="sr-only" aria-live="polite">
         {list.length} Sorten angezeigt
       </p>
