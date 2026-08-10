@@ -67,7 +67,9 @@ export const footerLinks = {
   // Legacy-Parität: die Kontakt-Spalte (Mail + sichtbare Domain) stand im
   // Original-Footer und bleibt erhalten (Council R1, Content#7).
   kontakt: [
-    { href: `mailto:${site.email}`, label: site.email },
+    // Volle Adresse steht sichtbar im Marken-Block; hier Label statt
+    // Wortbruch in der schmalen Spalte (Council R2).
+    { href: `mailto:${site.email}`, label: "E-Mail schreiben" },
     { href: "https://sugarmoonsweets.de", label: "sugarmoonsweets.de" },
   ],
   rechtliches: [

@@ -8,6 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { lockScroll, unlockScroll } from "@/lib/scrollLock";
 
 export interface CartItem {
   key: string;
@@ -101,15 +102,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [items, hydrated]);
 
-  // Scroll hinter dem Sheet sperren — Lenis-unabhängig (Council R1: die
-  // Klasse `.lenis` setzt Lenis selbst; bei reduced-motion existiert sie nie,
-  // `.lenis.lenis-stopped` matchte dann nicht und die Seite scrollte weiter).
+  // Scroll hinter dem Sheet sperren — via zentraler Registry, die auch
+  // lenis.stop() ruft (Council R2: CSS-Klasse allein hält Lenis nicht auf).
   useEffect(() => {
-    document.documentElement.classList.toggle("sms-locked", isOpen);
-    document.documentElement.classList.toggle("lenis-stopped", isOpen);
-    return () => {
-      document.documentElement.classList.remove("sms-locked", "lenis-stopped");
-    };
+    if (!isOpen) return;
+    lockScroll();
+    return () => unlockScroll();
   }, [isOpen]);
 
   const add: CartContextValue["add"] = useCallback((item, qty = 1) => {

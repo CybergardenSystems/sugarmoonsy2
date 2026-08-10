@@ -8,7 +8,7 @@
 # QA.md — Phase 5 Council Review
 
 Gnadenlose Prüfung gegen die Definition of Done (§6–§8 des Master-Prompts).
-Status: **grün** nach Fix-Loop. Build erzeugt 24 Routen ohne Fehler/Warnungen.
+Status damals: „grün" nach Fix-Loop — **nach heutigem Stand widerlegt** (siehe Banner oben). Build erzeugte 24 Routen ohne Fehler/Warnungen.
 
 > Hinweis zur Methodik: Lighthouse/Headless-Messung war in dieser Sandbox nicht
 > möglich (Netzwerk-Policy blockiert externe Hosts, kein Headless-Chrome).

@@ -9,6 +9,7 @@ import { Icon } from "@/components/ui/Icon";
 import { nav } from "@/data/site";
 import { cn } from "@/lib/cn";
 import { useFocusTrap } from "@/lib/useFocusTrap";
+import { lockScroll, unlockScroll } from "@/lib/scrollLock";
 
 export function Nav() {
   const [stuck, setStuck] = useState(false);
@@ -20,11 +21,11 @@ export function Nav() {
   // Fokus bleibt im offenen Vollbild-Menü (Council R1, B3); Escape schließt.
   useFocusTrap(menuRef, menuOpen, () => setMenuOpen(false));
 
-  // Scroll hinter dem offenen Menü sperren.
+  // Scroll hinter dem offenen Menü sperren (inkl. lenis.stop()).
   useEffect(() => {
     if (!menuOpen) return;
-    document.documentElement.classList.add("sms-locked");
-    return () => document.documentElement.classList.remove("sms-locked");
+    lockScroll();
+    return () => unlockScroll();
   }, [menuOpen]);
 
   useEffect(() => {
@@ -132,6 +133,24 @@ export function Nav() {
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
+        <button
+          onClick={() => setMenuOpen(false)}
+          aria-label="Menü schließen"
+          className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-honey/20 text-moon transition-colors hover:border-honey/50 hover:text-honey"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
         <div className="flex flex-1 flex-col justify-center px-8">
           <span className="mb-8 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-moon-mute">
             Navigation

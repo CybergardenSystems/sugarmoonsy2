@@ -13,8 +13,8 @@ Legacy-Single-File-Website auf Next.js 16 / TypeScript strict / Tailwind v4 / GS
 | Design Brief / Direktion | [`DESIGN_BRIEF.md`](./DESIGN_BRIEF.md) | freigegeben (Route A) |
 | Entscheidungs-Log | [`DECISIONS.md`](./DECISIONS.md) | fortlaufend |
 | Copy-Änderungen Vorher/Nachher | [`COPY_CHANGELOG.md`](./COPY_CHANGELOG.md) | vollständig |
-| Council-Reports | [`COUNCIL_ROUND_1.md`](./COUNCIL_ROUND_1.md) ff. | Runde 1: 5× KEINE FREIGABE → Fix-Welle; Runde 2 = Cross-Verifikation |
-| Final Report | [`FINAL_REPORT.md`](./FINAL_REPORT.md) | wird als letztes Artefakt der Session geschrieben |
+| Council-Reports | [`COUNCIL_ROUND_1.md`](./COUNCIL_ROUND_1.md) · [`COUNCIL_ROUND_2.md`](./COUNCIL_ROUND_2.md) | R1: 44 Findings, 5× KEINE FREIGABE → Fix-Welle; R2: Cross-Verifikation, Auflagen erfüllt + gegengemessen |
+| Final Report | [`FINAL_REPORT.md`](./FINAL_REPORT.md) | vollständig (inkl. Launch-Fragen an den Inhaber) |
 | Historische QA-Runde (früherer Master-Prompt) | [`QA_PHASE5.md`](./QA_PHASE5.md) | archiviert, trägt Veraltet-Banner (mehrere Claims widerlegt, siehe COUNCIL_ROUND_1) |
 
 ## Legacy-Backup (`/_legacy`-Äquivalent)

@@ -131,7 +131,7 @@ export function ProductCard({
 
         {product.comingSoon ? (
           <div className="mt-auto pt-4">
-            <div className="flex h-10 items-center justify-center gap-1.5 rounded-lg border border-honey/25 bg-honey/5 text-[0.8rem] font-semibold text-honey/80">
+            <div className="flex h-10 items-center justify-center gap-1.5 rounded-xl border border-honey/25 bg-honey/5 text-[0.8rem] font-semibold text-honey/80">
               <Icon name="check" size={15} /> Bald verfügbar
             </div>
           </div>
@@ -160,7 +160,7 @@ export function ProductCard({
               onClick={onAdd}
               data-cursor="drop"
               className={cn(
-                "flex h-10 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-lg text-[0.8rem] font-semibold transition-colors sm:w-auto sm:flex-1 md:h-9",
+                "flex h-10 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl text-[0.8rem] font-semibold transition-colors sm:w-auto sm:flex-1 md:h-9",
                 added
                   ? "bg-sage text-ink"
                   : "bg-honey text-ink shadow-[0_8px_22px_-8px_rgba(232,178,94,0.35)] hover:bg-honey-glow",

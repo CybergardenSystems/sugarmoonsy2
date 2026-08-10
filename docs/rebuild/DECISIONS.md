@@ -72,3 +72,9 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   spätere Inhaber-Doku-Commits normalisierten auf `sebastian.scherf@…`.
   Diese letzte ausdrückliche Vorgabe bleibt stehen; die verbindliche
   Schreibweise ist als Launch-Frage dokumentiert (Council R1, Content#3).
+- **D22:** Button-Familie: Kauf-CTAs teilen Füllung, Textstil und 12-px-Radius
+  (`lib/buttonStyles.ts` + MagneticButton). Zwei bewusste Ausnahmen:
+  der Nav-Chip „Bestellen" (Mono/Uppercase/Pille) gehört zur
+  Navigations-Formsprache, nicht zur CTA-Familie; die Saison-Filter sind
+  Pill-Toggles (Zustand, kein Kauf). Karten-Stepper behalten den
+  10-px-Feld-Radius (Eingabe-Element). (Council R2, Design#8)

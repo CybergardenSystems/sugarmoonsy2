@@ -99,8 +99,11 @@ Wo möglich wurde die Legacy-Substanz **wiederhergestellt** statt nur dokumentie
 | Superlative/Zuordnungen | — | „hellster/dunkelster Sirup", „Unser Geheimtipp", „50-ml-Geschenk im Lebkuchenmännchen-Glas" (pro Sorte unbelegt) | sensorische Sprache ohne Rang-/Zuordnungs-Claims |
 | `/ausstellungen`-CTA-Prosa | — (Seite lag nicht im Legacy-File vor) | neu formulierte Einladung („Markt, Hoffest, Adventsmarkt oder Pop-up …") in Du-Form neben Inhaber-Text in Ihr-Form | Ansprache an Inhaber-Text angeglichen (Ihr-Form); hiermit als neue Copy dokumentiert |
 | `LegalNotice`-Boilerplate | — | Platzhalter-Hinweistext (Bio-Zertifizierung) | hiermit als neue, nicht-legacy Copy dokumentiert |
-| `/story`-PageHeader | — (Seite existierte nicht) | fehlte (keine h1) | neue H1 „Die Manufaktur hinter dem Mond" + Sub — neue Copy, dokumentiert |
+| `/story`-PageHeader | — (Seite existierte nicht) | fehlte (keine h1) | neue H1 „Die Manufaktur hinter dem Mond" + Sub „Wer Sugar Moon Sweets macht, warum es uns gibt — und was ein Pumpkin Spice Latte damit zu tun hat." — neue Copy, dokumentiert |
 | Bestellflow-Texte | Modal + mailto ohne Statusversprechen | „Deine Bestellung ist auf dem Weg zu uns" (faktisch falsch, mailto garantiert keinen Versand) | ehrliche Formulierung: „Bitte sende die E-Mail ab — erst dann erreicht uns deine Bestellung" + Kopier-Fallback |
+| Warenkorb-Leerzustand | — | „Noch leer — stöbere im Shop." (ohne Link) | neue Copy „Noch ist es still hier." + CTA „Zum Shop" — hiermit dokumentiert |
+| Marquee-Pause-Steuerung | — (Legacy-Marquee ohne Pause) | — | neue A11y-Labels „Laufschrift pausieren" / „Laufschrift fortsetzen" (WCAG 2.2.2) — hiermit dokumentiert |
+| Footer-Kontakt-Spalte | Mail-Adresse + Domain als Text | volle Adresse brach in der schmalen Spalte mitten im Wort | Spalte zeigt „E-Mail schreiben" (mailto) + „sugarmoonsweets.de"; die volle Adresse steht sichtbar direkt darüber im Marken-Block |
 
 **Weiter offen (Inhaber-Bestätigung nötig, siehe FINAL_REPORT):**
 Preise/Saison für Bio-Kokos und Bio-Blaubeer-Basilikum (aktuell begründete

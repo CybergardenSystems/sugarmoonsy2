@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart, formatMoney } from "./CartProvider";
@@ -299,7 +299,15 @@ function OrderModal({
   const [step, setStep] = useState<Step>("form");
   const [orderText, setOrderText] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const headingRef = useRef<HTMLHeadingElement>(null);
   useFocusTrap(cardRef, true, onClose);
+
+  // Step-Wechsel für AT zustellen: Fokus auf die Überschrift des neuen
+  // Screens (Council R2 — sonst fällt der Fokus auf BODY und die wichtigste
+  // Statusänderung des Shops bleibt unangesagt).
+  useEffect(() => {
+    if (step !== "form") headingRef.current?.focus();
+  }, [step]);
 
   const buildBody = (g: (k: string) => string) => {
     let body = `Neue Bestellung — ${g("fn")} ${g("ln")}\n\n`;
@@ -400,10 +408,18 @@ function OrderModal({
             <div className="mb-4 flex justify-center">
               <MoonMark size={64} />
             </div>
-            <h2 id={headingId} className="text-center font-display text-2xl text-moon">
+            <h2
+              id={headingId}
+              ref={headingRef}
+              tabIndex={-1}
+              className="text-center font-display text-2xl text-moon outline-none"
+            >
               {step === "sent" ? "Fast geschafft!" : "Ein Schritt noch"}
             </h2>
-            <p className="mx-auto mt-2 max-w-sm text-center text-sm leading-relaxed text-moon-dim">
+            <p
+              role="status"
+              className="mx-auto mt-2 max-w-sm text-center text-sm leading-relaxed text-moon-dim"
+            >
               {step === "sent" ? (
                 <>
                   Dein E-Mail-Programm sollte sich mit der fertigen Bestellung geöffnet

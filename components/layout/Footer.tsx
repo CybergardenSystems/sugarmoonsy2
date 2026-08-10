@@ -47,7 +47,7 @@ export function Footer() {
                       ) : (
                         <a
                           href={l.href}
-                          className="break-all text-sm text-moon-dim transition-colors hover:text-honey"
+                          className="text-sm text-moon-dim transition-colors hover:text-honey"
                         >
                           {l.label}
                         </a>

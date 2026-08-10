@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import type Lenis from "lenis";
+import { registerLenis } from "@/lib/scrollLock";
 
 /**
  * Lenis Smooth-Scroll, an den GSAP-Ticker gekoppelt und mit ScrollTrigger
@@ -39,6 +40,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       });
 
       lenis.on("scroll", ScrollTrigger.update);
+      registerLenis(lenis);
 
       const onTick = (time: number) => lenis?.raf(time * 1000);
       gsap.ticker.add(onTick);
@@ -76,6 +78,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       cleanup = () => {
         document.removeEventListener("click", anchorHandler);
         gsap.ticker.remove(onTick);
+        registerLenis(null);
         lenis?.destroy();
         lenis = null;
       };
