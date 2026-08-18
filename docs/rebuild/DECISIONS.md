@@ -78,3 +78,23 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   Navigations-Formsprache, nicht zur CTA-Familie; die Saison-Filter sind
   Pill-Toggles (Zustand, kein Kauf). Karten-Stepper behalten den
   10-px-Feld-Radius (Eingabe-Element). (Council R2, Design#8)
+- **D23:** **Jede Scrollfläche in einem Overlay braucht `data-lenis-prevent`.**
+  Der Scroll-Lock ruft `lenis.stop()`; im gestoppten Zustand ruft Lenis auf
+  *jeder* Touch- und Wheel-Geste `preventDefault()`
+  (`lenis.mjs`: `if (this.isStopped || this.isLocked) …`) — auch auf Gesten,
+  die im Dialog selbst starten. Damit war das Bestellformular auf dem Handy
+  unscrollbar. `data-lenis-prevent` wird eine Zeile vorher geprüft und gibt
+  die Geste an den Browser zurück; gesetzt auf Warenkorb-Sheet, Bestellmodal
+  und mobilem Menü. Ohne Sperre (normale Seite) ist Touch-Scrolling nativ,
+  weil `syncTouch` aus ist — horizontale Scroller wie die Hero-Chips sind
+  deshalb nicht betroffen (gemessen). Regel für neue Overlays: Attribut auf
+  den äußersten Container der Ebene setzen. (Feldbefund Inhaber, siehe
+  FINAL_REPORT §Nachtrag)
+- **D24:** Das Bestellmodal ist auf Handys ein Vollbild-Sheet mit eigener
+  Scrollfläche, nicht die zentrierte Karte: `max-h-[90vh]` bezog sich auf den
+  *großen* Viewport (Browserleiste eingeklappt), wodurch der Absenden-Button
+  unter der Leiste lag. Die Höhe folgt jetzt `visualViewport.height`
+  (`lib/useVisualViewport.ts`), damit die Bildschirmtastatur die Felder nicht
+  verdeckt — `dvh` schrumpft dafür nicht. Eingabefelder sind auf Handys
+  16 px groß, weil iOS Safari darunter beim Fokussieren automatisch
+  hineinzoomt. Ab 640 px bleibt die zentrierte Karte unverändert.

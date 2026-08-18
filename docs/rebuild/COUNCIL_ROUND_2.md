@@ -56,6 +56,16 @@ sie sind in `FINAL_REPORT.md` §Launch-Fragen aufgeführt (Preise
 Kokos/Blaubeer-Basilikum, verbindliche Rechtstext-Mailadresse, Inhalte der
 Bio-Zertifizierungs-Seite, Feld-CWV nach Deploy).
 
+**Nachtrag (Feldtest des Inhabers):** Die Abnahme des Scroll-Locks war
+unvollständig. Beide Runden haben gemessen, dass die Seite hinter dem Overlay
+stillsteht — nicht aber, dass die Overlay-Fläche selbst noch scrollbar sein
+muss. Genau das war sie nicht: `lenis.stop()` unterdrückt jede Touch-/Wheel-
+Geste, auch im Dialog. Befund, Ursache und Gegenmessung (28/28) stehen im
+`FINAL_REPORT.md` §Nachtrag; die Regel für künftige Overlays in `DECISIONS.md`
+D23/D24. Lehre fürs Verfahren: Eine Sperre ist erst dann verifiziert, wenn
+**beide** Seiten geprüft sind — was gesperrt sein soll *und* was weiter
+funktionieren muss.
+
 Damit gilt der Council-Prozess nach zwei Runden als abgeschlossen:
 Runde 1 fand mit fünf unabhängigen, adversarialen Reports 44 Findings;
 Runde 2 verifizierte die Fixes unabhängig, wies fünf Punkte zurück und

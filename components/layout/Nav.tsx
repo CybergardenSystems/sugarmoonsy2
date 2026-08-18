@@ -128,6 +128,9 @@ export function Nav() {
         id="mobile-menu"
         ref={menuRef}
         inert={!menuOpen}
+        // Gestoppte Lenis-Instanz würde sonst auch hier jede Scroll-Geste
+        // abfangen (siehe lib/scrollLock.ts).
+        data-lenis-prevent
         className={cn(
           "fixed inset-0 z-[-1] flex flex-col bg-night/97 backdrop-blur-xl transition-opacity duration-500 md:hidden",
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0",
@@ -151,33 +154,37 @@ export function Nav() {
             <path d="M6 6l12 12M18 6L6 18" />
           </svg>
         </button>
-        <div className="flex flex-1 flex-col justify-center px-8">
-          <span className="mb-8 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-moon-mute">
-            Navigation
-          </span>
-          <ul className="flex flex-col gap-1">
-            {nav.map((item, i) => {
-              const active = pathname === item.href;
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      "group flex items-baseline gap-4 py-3 font-display text-4xl transition-all duration-500",
-                      menuOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
-                      active ? "text-honey" : "text-moon hover:text-honey",
-                    )}
-                    style={{ transitionDelay: menuOpen ? `${80 + i * 60}ms` : "0ms" }}
-                  >
-                    <span className="font-mono text-xs text-moon-mute group-hover:text-honey/70">
-                      0{i + 1}
-                    </span>
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-8 py-6">
+          <div className="my-auto w-full">
+            <span className="mb-8 block font-mono text-[0.6rem] uppercase tracking-[0.3em] text-moon-mute">
+              Navigation
+            </span>
+            <ul className="flex flex-col gap-1">
+              {nav.map((item, i) => {
+                const active = pathname === item.href;
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "group flex items-baseline gap-4 py-3 font-display text-4xl transition-all duration-500",
+                        menuOpen
+                          ? "translate-y-0 opacity-100"
+                          : "translate-y-3 opacity-0",
+                        active ? "text-honey" : "text-moon hover:text-honey",
+                      )}
+                      style={{ transitionDelay: menuOpen ? `${80 + i * 60}ms` : "0ms" }}
+                    >
+                      <span className="font-mono text-xs text-moon-mute group-hover:text-honey/70">
+                        0{i + 1}
+                      </span>
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
 
         <div className="border-t border-honey/10 px-8 py-8">

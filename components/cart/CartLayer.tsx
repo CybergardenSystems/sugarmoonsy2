@@ -8,6 +8,8 @@ import { site } from "@/data/site";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/cn";
 import { useFocusTrap } from "@/lib/useFocusTrap";
+import { useMediaQuery } from "@/lib/useMediaQuery";
+import { useVisualViewportHeight } from "@/lib/useVisualViewport";
 import { primaryBtn, secondaryBtn } from "@/lib/buttonStyles";
 import { Icon } from "@/components/ui/Icon";
 import { MoonMark } from "@/components/brand/MoonMark";
@@ -61,6 +63,10 @@ export function CartLayer() {
         aria-label="Warenkorb"
         aria-modal={isOpen ? "true" : undefined}
         inert={!isOpen}
+        // Ohne diese Ausnahme verschluckt Lenis im gestoppten Zustand jede
+        // Touch-/Wheel-Geste (preventDefault) — die Liste ließe sich auf dem
+        // Handy nicht scrollen. Siehe lib/scrollLock.ts.
+        data-lenis-prevent
         className={cn(
           "fixed right-0 top-0 z-[111] flex h-full w-[26rem] max-w-[92vw] flex-col border-l border-honey/12 bg-night-2 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
           isOpen ? "translate-x-0" : "translate-x-full",
@@ -77,7 +83,7 @@ export function CartLayer() {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-6 py-4">
+        <div className="flex-1 overflow-y-auto overscroll-contain px-6 py-4">
           {items.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center text-moon-mute">
               <MoonMark size={48} className="mb-4 opacity-70" />
@@ -213,6 +219,8 @@ interface FieldSpec {
   textarea?: boolean;
   autoComplete?: string;
   colSpan?: boolean;
+  /** Steuert die Tastatur auf Mobilgeräten (Zahlenblock, @-Taste …). */
+  inputMode?: "text" | "numeric" | "tel" | "email";
 }
 
 const FIELDS: FieldSpec[] = [
@@ -238,6 +246,7 @@ const FIELDS: FieldSpec[] = [
     maxLength: 100,
     autoComplete: "email",
     colSpan: true,
+    inputMode: "email",
   },
   {
     name: "ph",
@@ -247,6 +256,7 @@ const FIELDS: FieldSpec[] = [
     maxLength: 30,
     autoComplete: "tel",
     colSpan: true,
+    inputMode: "tel",
   },
   {
     name: "ad",
@@ -262,6 +272,7 @@ const FIELDS: FieldSpec[] = [
     required: true,
     maxLength: 10,
     autoComplete: "postal-code",
+    inputMode: "numeric",
   },
   {
     name: "ct",
@@ -300,6 +311,8 @@ function OrderModal({
   const [orderText, setOrderText] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const isWide = useMediaQuery("(min-width: 640px)", true);
+  const viewportHeight = useVisualViewportHeight();
   useFocusTrap(cardRef, true, onClose);
 
   // Step-Wechsel für AT zustellen: Fokus auf die Überschrift des neuen
@@ -383,7 +396,10 @@ function OrderModal({
 
   return (
     <div
-      className="fixed inset-0 z-[130] flex items-center justify-center bg-ink/70 p-4 backdrop-blur-md"
+      className="fixed inset-0 z-[130] flex justify-center bg-ink/70 backdrop-blur-md sm:items-center sm:p-4"
+      // Lenis läuft im gestoppten Zustand und würde sonst jede Scroll-Geste
+      // im Dialog abfangen (lenis.mjs: isStopped → preventDefault).
+      data-lenis-prevent
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -393,125 +409,132 @@ function OrderModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={headingId}
-        className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-honey/15 bg-night-2 p-7"
+        // Auf dem Handy Vollbild: mehr Platz fürs Formular, und die Karte
+        // endet nie unter der Browserleiste. Die Höhe folgt dem sichtbaren
+        // Viewport, damit die Tastatur die Felder nicht verdeckt.
+        style={!isWide && viewportHeight ? { height: `${viewportHeight}px` } : undefined}
+        className="relative flex h-[100dvh] w-full flex-col overflow-hidden border-honey/15 bg-night-2 sm:h-auto sm:max-h-[90dvh] sm:max-w-lg sm:rounded-2xl sm:border"
       >
         <button
           onClick={onClose}
           aria-label="Bestelldialog schließen"
-          className="absolute right-3.5 top-3.5 flex h-10 w-10 items-center justify-center rounded-full text-moon-mute transition-colors hover:text-honey sm:h-9 sm:w-9"
+          // deckend, weil der Inhalt beim Scrollen darunter durchläuft
+          className="absolute right-3.5 top-3.5 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-night-2 text-moon-mute ring-1 ring-honey/15 transition-colors hover:text-honey sm:h-9 sm:w-9"
         >
           <CloseIcon />
         </button>
 
-        {step !== "form" ? (
-          <div className="py-4">
-            <div className="mb-4 flex justify-center">
-              <MoonMark size={64} />
-            </div>
-            <h2
-              id={headingId}
-              ref={headingRef}
-              tabIndex={-1}
-              className="text-center font-display text-2xl text-moon outline-none"
-            >
-              {step === "sent" ? "Fast geschafft!" : "Ein Schritt noch"}
-            </h2>
-            <p
-              role="status"
-              className="mx-auto mt-2 max-w-sm text-center text-sm leading-relaxed text-moon-dim"
-            >
-              {step === "sent" ? (
-                <>
-                  Dein E-Mail-Programm sollte sich mit der fertigen Bestellung geöffnet
-                  haben.{" "}
-                  <strong className="text-moon">Bitte sende die E-Mail dort ab</strong> —
-                  erst dann erreicht uns deine Bestellung.
-                </>
-              ) : (
-                <>
-                  Deine Bestellung ist zu umfangreich für den automatischen
-                  E-Mail-Entwurf. Kopiere den Bestelltext unten und sende ihn an{" "}
-                  <a className="text-honey underline" href={`mailto:${site.email}`}>
-                    {site.email}
-                  </a>
-                  .
-                </>
-              )}
-            </p>
-
-            <div className="mt-5 rounded-xl border border-honey/15 bg-ink/50 p-4">
-              <pre className="max-h-44 overflow-y-auto whitespace-pre-wrap font-mono text-xs leading-relaxed text-moon-dim">
-                {orderText}
-              </pre>
-            </div>
-
-            <div className="mt-4 flex flex-col gap-2">
-              <button onClick={copyOrder} className={cn(secondaryBtn, "w-full py-3")}>
-                Bestelltext kopieren
-              </button>
-              <button
-                onClick={() => {
-                  toast("Danke! Wir melden uns per E-Mail.");
-                  onOrderComplete();
-                }}
-                className={cn(primaryBtn, "w-full py-3")}
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-6 sm:px-7 sm:pb-7 sm:pt-7">
+          {step !== "form" ? (
+            <div className="py-4">
+              <div className="mb-4 flex justify-center">
+                <MoonMark size={64} />
+              </div>
+              <h2
+                id={headingId}
+                ref={headingRef}
+                tabIndex={-1}
+                className="text-center font-display text-2xl text-moon outline-none"
               >
-                E-Mail ist raus — Warenkorb leeren
-              </button>
-              <button
-                onClick={onContinueBrowsing}
-                className="w-full py-2 text-sm text-moon-mute transition-colors hover:text-moon"
+                {step === "sent" ? "Fast geschafft!" : "Ein Schritt noch"}
+              </h2>
+              <p
+                role="status"
+                className="mx-auto mt-2 max-w-sm text-center text-sm leading-relaxed text-moon-dim"
               >
-                Weiter stöbern (Warenkorb behalten)
-              </button>
-            </div>
-          </div>
-        ) : (
-          <>
-            <h2 id={headingId} className="font-display text-2xl text-moon">
-              Bestellung abschicken
-            </h2>
-            <p className="mt-1 text-sm text-moon-dim">
-              Wir melden uns per E-Mail mit Zahlungs- und Versanddetails.
-            </p>
+                {step === "sent" ? (
+                  <>
+                    Dein E-Mail-Programm sollte sich mit der fertigen Bestellung geöffnet
+                    haben.{" "}
+                    <strong className="text-moon">Bitte sende die E-Mail dort ab</strong>{" "}
+                    — erst dann erreicht uns deine Bestellung.
+                  </>
+                ) : (
+                  <>
+                    Deine Bestellung ist zu umfangreich für den automatischen
+                    E-Mail-Entwurf. Kopiere den Bestelltext unten und sende ihn an{" "}
+                    <a className="text-honey underline" href={`mailto:${site.email}`}>
+                      {site.email}
+                    </a>
+                    .
+                  </>
+                )}
+              </p>
 
-            <div className="my-5 rounded-xl border border-honey/10 bg-night-3/40 p-4">
-              {items.map((i) => (
-                <div
-                  key={i.key}
-                  className="flex justify-between py-1 text-sm text-moon-dim"
+              <div className="mt-5 rounded-xl border border-honey/15 bg-ink/50 p-4">
+                <pre className="max-h-44 overflow-y-auto overscroll-contain whitespace-pre-wrap font-mono text-xs leading-relaxed text-moon-dim">
+                  {orderText}
+                </pre>
+              </div>
+
+              <div className="mt-4 flex flex-col gap-2">
+                <button onClick={copyOrder} className={cn(secondaryBtn, "w-full py-3")}>
+                  Bestelltext kopieren
+                </button>
+                <button
+                  onClick={() => {
+                    toast("Danke! Wir melden uns per E-Mail.");
+                    onOrderComplete();
+                  }}
+                  className={cn(primaryBtn, "w-full py-3")}
                 >
-                  <span>
-                    {i.qty}× {i.name} ({i.size})
-                  </span>
-                  <span className="text-moon">{formatMoney(i.price * i.qty)}</span>
-                </div>
-              ))}
-              <div className="mt-2 flex justify-between border-t border-honey/15 pt-2 font-display text-lg text-moon">
-                <span>Gesamt</span>
-                <span>{formatMoney(total)}</span>
+                  E-Mail ist raus — Warenkorb leeren
+                </button>
+                <button
+                  onClick={onContinueBrowsing}
+                  className="w-full py-2 text-sm text-moon-mute transition-colors hover:text-moon"
+                >
+                  Weiter stöbern (Warenkorb behalten)
+                </button>
               </div>
             </div>
+          ) : (
+            <>
+              <h2 id={headingId} className="pr-10 font-display text-2xl text-moon">
+                Bestellung abschicken
+              </h2>
+              <p className="mt-1 text-sm text-moon-dim">
+                Wir melden uns per E-Mail mit Zahlungs- und Versanddetails.
+              </p>
 
-            <form ref={formRef} onSubmit={submit} noValidate className="space-y-3">
-              <p className="text-xs text-moon-mute">* Pflichtfeld</p>
-              <div className="grid grid-cols-2 gap-3">
-                {FIELDS.map((spec) => (
-                  <Field
-                    key={spec.name}
-                    spec={spec}
-                    idPrefix={idPrefix}
-                    error={errors[spec.name]}
-                  />
+              <div className="my-5 rounded-xl border border-honey/10 bg-night-3/40 p-4">
+                {items.map((i) => (
+                  <div
+                    key={i.key}
+                    className="flex justify-between py-1 text-sm text-moon-dim"
+                  >
+                    <span>
+                      {i.qty}× {i.name} ({i.size})
+                    </span>
+                    <span className="text-moon">{formatMoney(i.price * i.qty)}</span>
+                  </div>
                 ))}
+                <div className="mt-2 flex justify-between border-t border-honey/15 pt-2 font-display text-lg text-moon">
+                  <span>Gesamt</span>
+                  <span>{formatMoney(total)}</span>
+                </div>
               </div>
-              <button type="submit" className={cn(primaryBtn, "w-full py-3.5")}>
-                Bestellung absenden
-                <Icon name="arrow" size={16} />
-              </button>
-            </form>
-          </>
-        )}
+
+              <form ref={formRef} onSubmit={submit} noValidate className="space-y-3">
+                <p className="text-xs text-moon-mute">* Pflichtfeld</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {FIELDS.map((spec) => (
+                    <Field
+                      key={spec.name}
+                      spec={spec}
+                      idPrefix={idPrefix}
+                      error={errors[spec.name]}
+                    />
+                  ))}
+                </div>
+                <button type="submit" className={cn(primaryBtn, "w-full py-3.5")}>
+                  Bestellung absenden
+                  <Icon name="arrow" size={16} />
+                </button>
+              </form>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -529,7 +552,9 @@ function Field({
   const id = `${idPrefix}-${spec.name}`;
   const errId = `${id}-err`;
   const cls = cn(
-    "w-full rounded-lg border bg-ink/60 px-3.5 py-2.5 text-sm text-moon transition-colors placeholder:text-moon-mute focus:border-honey focus:outline-none focus:ring-1 focus:ring-honey",
+    // text-base (16 px) auf dem Handy ist Pflicht: darunter zoomt iOS Safari
+    // beim Fokussieren automatisch in die Seite hinein.
+    "w-full rounded-lg border bg-ink/60 px-3.5 py-2.5 text-base text-moon transition-colors placeholder:text-moon-mute focus:border-honey focus:outline-none focus:ring-1 focus:ring-honey sm:text-sm",
     error ? "border-amber/70" : "border-honey/55",
   );
   const shared = {
@@ -541,6 +566,7 @@ function Field({
     "aria-describedby": error ? errId : undefined,
     maxLength: spec.maxLength,
     autoComplete: spec.autoComplete,
+    inputMode: spec.inputMode,
     className: cls,
   } as const;
 

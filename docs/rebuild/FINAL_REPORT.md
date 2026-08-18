@@ -80,7 +80,45 @@ ausgelegt (CLS 0, Poster-LCP, kein Render-Blocking durch GSAP).
 - Optional: Produkt-JSON-LD um `shippingDetails`/`hasMerchantReturnPolicy`
   ergänzen, wenn Merchant-Rich-Results gewünscht sind.
 
-## 5. Artefakt-Verzeichnis
+## 5. Nachtrag: Feldbefund nach dem Council (Mobile-Scrolling)
+
+Der Inhaber hat auf einem echten Handy getestet und gemeldet, dass sich das
+**Bestellformular nicht scrollen** lässt. Der Befund war berechtigt — und er
+zeigt eine Lücke im Council-Verfahren: Runde 2 hat den Scroll-Lock in 6/6
+Kombinationen als „LOCKED" nachgewiesen, aber nur gemessen, dass die **Seite
+dahinter** stillsteht. Dass die **Dialogfläche selbst** noch scrollen muss,
+hat keiner der Verifizierer geprüft.
+
+**Ursache** (Code-Beleg, nicht Vermutung): `lockScroll()` ruft `lenis.stop()`.
+Im gestoppten Zustand ruft Lenis auf jeder Touch- und Wheel-Geste
+`preventDefault()` — auch auf Gesten, die im Dialog starten. Betroffen waren
+Warenkorb-Sheet, Bestellmodal und mobiles Menü; auf dem Desktop ebenso das
+Mausrad.
+
+**Messung vorher/nachher** (identischer Build, identische Wischgeste,
+iPhone-Emulation 390 × 844):
+
+| | vorher | nachher |
+|---|---|---|
+| `scrollTop` im Bestellformular nach 250-px-Wisch | **0 px** | **199 px** |
+| Warenkorbliste (8 Positionen) | **0 px** | **292 px** |
+| „Bestellung absenden" | bei y = 899 px (Viewport 844) — **unerreichbar** | im Sichtfeld |
+| Seite dahinter | 0 px (gesperrt) | 0 px (weiterhin gesperrt) |
+
+Kontrollversuch zum Ausschluss anderer Ursachen: derselbe Build mit
+deaktiviertem Lenis (`prefers-reduced-motion`) scrollte auf Anhieb 173 px.
+
+**Behoben** durch `data-lenis-prevent` auf den drei Overlay-Ebenen (D23) plus
+Mobile-Ergonomie des Formulars (D24): Vollbild-Sheet mit eigener Scrollfläche,
+Höhe an `visualViewport` gekoppelt (Tastatur), 16-px-Felder gegen den
+iOS-Auto-Zoom, passende Tastaturtypen (Zahlenblock für PLZ, @-Taste für
+E-Mail), immer sichtbarer Schließen-Button.
+
+**Gegenmessung: 28/28** — Warenkorb, Formular, Menü in beiden Motion-Modi auf
+dem Handy und am Desktop (Mausrad); Seiten-Lock weiterhin 0 px, Fokus-Falle
+(25× Tab) hält, Escape schließt; Overflow-Check erneut 20/20.
+
+## 6. Artefakt-Verzeichnis
 
 Prozess & Nachweise: `docs/rebuild/README.md` (Index) ·
 `COUNCIL_ROUND_1.md` (44 Findings, 5 adversariale Reports) ·

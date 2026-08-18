@@ -72,10 +72,13 @@
     scroll-margin-top: 6rem;
   }
 
-  /* Scroll-Sperre hinter Sheet/Menü — bewusst Lenis-unabhängig (R1/B-Scroll-Lock). */
+  /* Scroll-Sperre hinter Sheet/Menü — bewusst Lenis-unabhängig (R1/B-Scroll-Lock).
+     `overscroll-behavior` verhindert zusätzlich, dass eine Geste aus dem Dialog
+     heraus die Seite dahinter mitzieht (Ketten-Scrolling, v. a. iOS). */
   html.sms-locked,
   html.sms-locked body {
     overflow: hidden;
+    overscroll-behavior: none;
   }
 
   /* Lenis übernimmt das Smooth-Scrolling; native deaktivieren wenn aktiv. */
