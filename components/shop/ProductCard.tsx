@@ -47,7 +47,7 @@ export function ProductCard({
 
   return (
     <article
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-honey/10 bg-night-2/70 transition-all duration-500 hover:-translate-y-1.5 hover:border-honey/30"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-honey/10 bg-night-2/70 transition-[translate,border-color] duration-200 ease-out-expo hover:-translate-y-1.5 hover:border-honey/30"
       style={{ ["--ac" as string]: ac }}
     >
       {product.badge && (
@@ -71,17 +71,16 @@ export function ProductCard({
               fill
               sizes="(max-width:1023px) 50vw, (max-width:1279px) 33vw, 300px"
               priority={priority}
-              className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+              className="object-cover object-center transition-[scale] duration-[450ms] ease-out-expo group-hover:scale-[1.05]"
             />
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night-2 to-transparent" />
           </>
         ) : (
           <Placeholder accent={ac} season={product.season} />
         )}
-        <span
-          className="absolute bottom-3 left-3 rounded-full bg-night/70 px-2.5 py-0.5 font-mono text-[0.66rem] uppercase tracking-wide backdrop-blur"
-          style={{ color: ac }}
-        >
+        {/* Saison neutral in Mondlicht — die Sortenfarbe lebt im Ambient-Glow,
+            nicht in der Sachinformation (Design-Review, D25). */}
+        <span className="absolute bottom-3 left-3 rounded-full bg-night/70 px-2.5 py-0.5 font-mono text-[0.66rem] uppercase tracking-wide text-moon-dim backdrop-blur">
           {product.season}
         </span>
       </Link>
@@ -117,7 +116,7 @@ export function ProductCard({
                 onClick={() => setSize(s.label)}
                 aria-pressed={s.label === size}
                 className={cn(
-                  "rounded-full border px-2.5 py-1 font-mono text-[0.7rem] transition-colors",
+                  "rounded-full border px-2.5 py-1 font-mono text-[0.7rem] transition-[color,border-color,background-color,scale] duration-150 active:scale-95",
                   s.label === size
                     ? "border-honey bg-honey/15 text-honey"
                     : "border-honey/15 text-moon-dim hover:border-honey/40",
@@ -141,7 +140,7 @@ export function ProductCard({
               <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
                 aria-label="Weniger"
-                className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
+                className="flex h-10 w-10 items-center justify-center text-moon transition-[color,scale] duration-150 active:scale-90 hover:text-honey md:h-9 md:w-9"
               >
                 <Icon name="minus" size={16} />
               </button>
@@ -151,7 +150,7 @@ export function ProductCard({
               <button
                 onClick={() => setQty((q) => q + 1)}
                 aria-label="Mehr"
-                className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
+                className="flex h-10 w-10 items-center justify-center text-moon transition-[color,scale] duration-150 active:scale-90 hover:text-honey md:h-9 md:w-9"
               >
                 <Icon name="plus" size={16} />
               </button>
@@ -160,7 +159,7 @@ export function ProductCard({
               onClick={onAdd}
               data-cursor="drop"
               className={cn(
-                "flex h-10 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl text-[0.8rem] font-semibold transition-colors sm:w-auto sm:flex-1 md:h-9",
+                "flex h-10 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl text-[0.8rem] font-semibold transition-[background-color,color,scale] duration-150 ease-out-expo active:scale-[0.97] sm:w-auto sm:flex-1 md:h-9",
                 added
                   ? "bg-sage text-ink"
                   : "bg-honey text-ink shadow-[0_8px_22px_-8px_rgba(232,178,94,0.35)] hover:bg-honey-glow",

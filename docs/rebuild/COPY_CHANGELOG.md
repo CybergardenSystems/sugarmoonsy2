@@ -110,3 +110,12 @@ Preise/Saison für Bio-Kokos und Bio-Blaubeer-Basilikum (aktuell begründete
 Defaults 15/16 € analog der Tier-Logik, DECISIONS D20) · verbindliche
 Kontakt-Mailadresse der Rechtstexte (D21) · Inhalte der
 Bio-Zertifizierungs-Seite.
+
+### Nachträge Design-Review 2 (neue UI-Texte, kein Legacy-Bezug)
+
+| Neu | Kontext |
+|---|---|
+| „Weitere Sorten" · „Alle 11 Sorten" | Produktseiten-Regal unter der Kaufbox (vorher endete die Seite im Footer) |
+| „Bestellung eingegangen!" · „Danke! Deine Bestellung ist bei uns angekommen — wir melden uns per E-Mail mit Zahlungs- und Versanddetails." · „Bestellübersicht kopieren" · „Alles klar — weiter stöbern" · „Wird gesendet…" | Neuer Bestätigungs-Screen des Server-Versands (D26); der mailto-Fallback behält alle bisherigen Texte unverändert |
+| „Bio-zertifiziert · Fulda" (nur <640px) | Gekürzte Hero-Badge-Variante — die volle Zeile „Bio-zertifiziert · Handgemacht in Fulda" bleibt ab sm und brach mobil zweizeilig um; keine Information entfällt (Fulda bleibt, „Handgemacht" steht direkt darunter in der Trust-Zeile) |
+

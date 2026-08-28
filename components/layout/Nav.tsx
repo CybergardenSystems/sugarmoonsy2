@@ -48,7 +48,7 @@ export function Nav() {
       <nav
         aria-label="Hauptnavigation"
         className={cn(
-          "flex w-full max-w-6xl items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-500 sm:px-6",
+          "flex w-full max-w-6xl items-center justify-between rounded-full border px-4 py-2.5 transition-[background-color,border-color,box-shadow] duration-300 sm:px-6",
           stuck
             ? "border-honey/15 bg-night-2/85 shadow-[0_8px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl"
             : "border-transparent bg-night-2/30 backdrop-blur-md",
@@ -64,7 +64,7 @@ export function Nav() {
                 className="group relative font-mono text-[0.72rem] uppercase tracking-[0.18em] text-moon-dim transition-colors hover:text-honey"
               >
                 {item.label}
-                <span className="absolute -bottom-1.5 left-1/2 h-px w-0 -translate-x-1/2 bg-honey transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1.5 left-1/2 h-px w-0 -translate-x-1/2 bg-honey transition-[width] duration-200 ease-out-expo group-hover:w-full" />
               </Link>
             </li>
           ))}
@@ -102,19 +102,19 @@ export function Nav() {
             <span className="relative block h-3 w-5">
               <span
                 className={cn(
-                  "absolute left-0 block h-px w-5 bg-moon transition-all duration-300",
+                  "absolute left-0 block h-px w-5 bg-moon transition-[top,rotate,opacity] duration-200",
                   menuOpen ? "top-1.5 rotate-45" : "top-0",
                 )}
               />
               <span
                 className={cn(
-                  "absolute left-0 top-1.5 block h-px w-5 bg-moon transition-all duration-300",
+                  "absolute left-0 top-1.5 block h-px w-5 bg-moon transition-[top,rotate,opacity] duration-200",
                   menuOpen ? "opacity-0" : "opacity-100",
                 )}
               />
               <span
                 className={cn(
-                  "absolute left-0 block h-px w-5 bg-moon transition-all duration-300",
+                  "absolute left-0 block h-px w-5 bg-moon transition-[top,rotate,opacity] duration-200",
                   menuOpen ? "top-1.5 -rotate-45" : "top-3",
                 )}
               />
@@ -167,7 +167,7 @@ export function Nav() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "group flex items-baseline gap-4 py-3 font-display text-4xl transition-all duration-500",
+                        "group flex items-baseline gap-4 py-3 font-display text-4xl transition-[translate,opacity,color] duration-300 ease-out-expo",
                         menuOpen
                           ? "translate-y-0 opacity-100"
                           : "translate-y-3 opacity-0",

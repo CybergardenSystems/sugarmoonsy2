@@ -98,3 +98,24 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   verdeckt — `dvh` schrumpft dafür nicht. Eingabefelder sind auf Handys
   16 px groß, weil iOS Safari darunter beim Fokussieren automatisch
   hineinzoomt. Ab 640 px bleibt die zentrierte Karte unverändert.
+- **D25:** Saison-Angaben (Karten-Badge, PDP-Eyebrow) stehen neutral in
+  Mondlicht-Tönen statt in der Sortenfarbe: Farbe transportiert hier sonst
+  zwei Botschaften gleichzeitig (Sorte + Saison) und brachte mit Lavendel-
+  Violett einen Fremdton in die Gold/Grün-Systematik. Die Sortenfarbe lebt
+  weiter im Ambient-Glow und den Platzhaltern. (Design-Review 2)
+- **D26:** Bestellversand server-seitig über **Resend** (`app/api/order`),
+  strikt optional: ohne `RESEND_API_KEY` antwortet die Route 503 und der
+  Client fällt still auf den ehrlichen mailto-/Kopier-Flow (D17) zurück —
+  es gibt keinen Zustand, in dem Bestellen unmöglich ist. Versand als
+  Text-Mail an `SMS_ORDER_TO` (Default: site.email), `reply_to` = Kunde,
+  Server-Validierung spiegelt die Feld-Limits. Vor Aktivierung zu klären
+  (Inhaber): Resend-AVV/DPA und ggf. Ergänzung der Datenschutzerklärung —
+  der Rechtstext wird von uns nicht angefasst (§2-Regel).
+- **D27:** Tailwind v4 setzt `translate-*`/`rotate-*`/`scale-*` als **eigene
+  CSS-Properties** (`translate:`, `rotate:`, `scale:`), nicht mehr über
+  `transform`. Transition-Listen müssen diese Properties explizit nennen —
+  `transition-transform` animiert sie NICHT. Das Warenkorb-Sheet slidete
+  deshalb seit der Migration gar nicht (snappte unbemerkt); beim Ablösen der
+  `transition-all`-Klassen (Design-Review 2) korrigiert. Regel für neue
+  Komponenten: `transition-[translate]`/`[scale]`/`[rotate]` verwenden.
+

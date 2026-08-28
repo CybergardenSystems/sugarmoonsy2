@@ -34,7 +34,7 @@ export function ShopTeaser() {
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-5 lg:grid-cols-4">
           {featured.map((p, i) => (
-            <Reveal key={p.id} delay={(i % 4) * 0.08}>
+            <Reveal key={p.id} delay={(i % 4) * 0.08} className="h-full">
               <ProductCard product={p} />
             </Reveal>
           ))}

@@ -89,7 +89,12 @@ export function Hero() {
         <div>
           <span className="hero-fade mb-6 inline-flex items-center gap-2 rounded-full border border-honey/20 bg-honey/[0.06] px-3.5 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-honey/90 sm:text-[0.7rem]">
             <Icon name="leaf" size={13} />
-            Bio-zertifiziert · Handgemacht in Fulda
+            {/* Voller Wortlaut ab sm — auf schmalen Screens bricht die
+                gesperrte Pille sonst zweizeilig um (Design-Review). */}
+            <span className="whitespace-nowrap sm:hidden">Bio-zertifiziert · Fulda</span>
+            <span className="hidden whitespace-nowrap sm:inline">
+              Bio-zertifiziert · Handgemacht in Fulda
+            </span>
           </span>
 
           <h1 className="font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[1.06] text-moon">

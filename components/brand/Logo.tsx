@@ -17,7 +17,7 @@ export function Logo({
       <MoonMark
         size={compact ? 30 : 36}
         dust={!compact}
-        className="transition-transform duration-500 group-hover:-rotate-6"
+        className="transition-[rotate] duration-300 ease-out-expo group-hover:-rotate-6"
       />
       <span className="leading-none">
         <span className="block font-display text-[1.05rem] tracking-tight text-moon">

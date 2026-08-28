@@ -45,7 +45,7 @@ export function Toast() {
       <div
         aria-hidden={!current}
         className={cn(
-          "flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm text-moon shadow-2xl backdrop-blur transition-all duration-300",
+          "flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm text-moon shadow-2xl backdrop-blur transition-[translate,opacity,border-color] duration-300 ease-out-expo",
           isError ? "border-amber/50 bg-night-2/95" : "border-honey/25 bg-night-2/95",
           current ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
         )}

@@ -35,7 +35,7 @@ function CloseIcon() {
   );
 }
 
-/** Warenkorb-Sheet + Bestell-Modal (mailto-Flow, kein Backend). */
+/** Warenkorb-Sheet + Bestell-Modal (API-Versand via Resend, mailto-Fallback). */
 export function CartLayer() {
   const { items, total, isOpen, close, setQty, remove, clear } = useCart();
   const [orderOpen, setOrderOpen] = useState(false);
@@ -68,7 +68,7 @@ export function CartLayer() {
         // Handy nicht scrollen. Siehe lib/scrollLock.ts.
         data-lenis-prevent
         className={cn(
-          "fixed right-0 top-0 z-[111] flex h-full w-[26rem] max-w-[92vw] flex-col border-l border-honey/12 bg-night-2 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "fixed right-0 top-0 z-[111] flex h-full w-[26rem] max-w-[92vw] flex-col border-l border-honey/12 bg-night-2 transition-[translate] duration-500 ease-out-expo",
           isOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
@@ -173,6 +173,7 @@ export function CartLayer() {
       {orderOpen && (
         <OrderModal
           onClose={() => setOrderOpen(false)}
+          onOrderReceived={clear}
           onOrderComplete={() => {
             clear();
             setOrderOpen(false);
@@ -201,7 +202,7 @@ function QtyBtn({
     <button
       onClick={onClick}
       aria-label={label}
-      className="flex h-10 w-10 items-center justify-center rounded-md border border-honey/15 text-moon transition-colors hover:border-honey hover:text-honey sm:h-9 sm:w-9"
+      className="flex h-10 w-10 items-center justify-center rounded-md border border-honey/15 text-moon transition-[color,border-color,scale] duration-150 active:scale-90 hover:border-honey hover:text-honey sm:h-9 sm:w-9"
     >
       {children}
     </button>
@@ -291,15 +292,18 @@ const FIELDS: FieldSpec[] = [
   },
 ];
 
-type Step = "form" | "sent" | "fallback";
+type Step = "form" | "sent" | "fallback" | "confirmed";
 
 function OrderModal({
   onClose,
   onOrderComplete,
+  onOrderReceived,
   onContinueBrowsing,
 }: {
   onClose: () => void;
   onOrderComplete: () => void;
+  /** Server hat die Bestellung angenommen — Warenkorb darf sofort leeren. */
+  onOrderReceived: () => void;
   onContinueBrowsing: () => void;
 }) {
   const { items, total } = useCart();
@@ -309,6 +313,7 @@ function OrderModal({
   const headingId = `${idPrefix}-title`;
   const [step, setStep] = useState<Step>("form");
   const [orderText, setOrderText] = useState("");
+  const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const headingRef = useRef<HTMLHeadingElement>(null);
   const isWide = useMediaQuery("(min-width: 640px)", true);
@@ -334,7 +339,7 @@ function OrderModal({
     return body;
   };
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     const g = (k: string) => String(f.get(k) ?? "").trim();
@@ -360,6 +365,45 @@ function OrderModal({
     setOrderText(
       `An: ${site.email}\nBetreff: Bestellung — ${g("fn")} ${g("ln")}\n\n${body}`,
     );
+
+    // Bevorzugt: Server-Versand über /api/order (Resend). Antwortet die
+    // Route mit 503 (kein API-Key) oder scheitert sie, greift unverändert
+    // der ehrliche mailto-/Kopier-Flow (D17/D26).
+    setSending(true);
+    try {
+      const res = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(8000),
+        body: JSON.stringify({
+          customer: {
+            fn: g("fn"),
+            ln: g("ln"),
+            em: g("em"),
+            ph: g("ph"),
+            ad: g("ad"),
+            pl: g("pl"),
+            ct: g("ct"),
+            nt: g("nt"),
+          },
+          items: items.map((i) => ({
+            name: i.name,
+            size: i.size,
+            qty: i.qty,
+            price: i.price,
+          })),
+        }),
+      });
+      if (res.ok) {
+        onOrderReceived();
+        setStep("confirmed");
+        return;
+      }
+    } catch {
+      /* Netzwerk/Timeout — unten geht es per mailto weiter. */
+    } finally {
+      setSending(false);
+    }
 
     const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
       `Bestellung — ${g("fn")} ${g("ln")}`,
@@ -396,7 +440,7 @@ function OrderModal({
 
   return (
     <div
-      className="fixed inset-0 z-[130] flex justify-center bg-ink/70 backdrop-blur-md sm:items-center sm:p-4"
+      className="fixed inset-0 z-[130] flex justify-center bg-ink/70 backdrop-blur-md transition-opacity duration-200 starting:opacity-0 sm:items-center sm:p-4"
       // Lenis läuft im gestoppten Zustand und würde sonst jede Scroll-Geste
       // im Dialog abfangen (lenis.mjs: isStopped → preventDefault).
       data-lenis-prevent
@@ -413,7 +457,7 @@ function OrderModal({
         // endet nie unter der Browserleiste. Die Höhe folgt dem sichtbaren
         // Viewport, damit die Tastatur die Felder nicht verdeckt.
         style={!isWide && viewportHeight ? { height: `${viewportHeight}px` } : undefined}
-        className="relative flex h-[100dvh] w-full flex-col overflow-hidden border-honey/15 bg-night-2 sm:h-auto sm:max-h-[90dvh] sm:max-w-lg sm:rounded-2xl sm:border"
+        className="relative flex h-[100dvh] w-full flex-col overflow-hidden border-honey/15 bg-night-2 scale-100 transition-[opacity,scale] duration-200 ease-out-expo starting:scale-[0.98] starting:opacity-0 sm:h-auto sm:max-h-[90dvh] sm:max-w-lg sm:rounded-2xl sm:border"
       >
         <button
           onClick={onClose}
@@ -436,13 +480,24 @@ function OrderModal({
                 tabIndex={-1}
                 className="text-center font-display text-2xl text-moon outline-none"
               >
-                {step === "sent" ? "Fast geschafft!" : "Ein Schritt noch"}
+                {step === "confirmed"
+                  ? "Bestellung eingegangen!"
+                  : step === "sent"
+                    ? "Fast geschafft!"
+                    : "Ein Schritt noch"}
               </h2>
               <p
                 role="status"
                 className="mx-auto mt-2 max-w-sm text-center text-sm leading-relaxed text-moon-dim"
               >
-                {step === "sent" ? (
+                {step === "confirmed" ? (
+                  <>
+                    Danke! Deine Bestellung ist bei uns angekommen —{" "}
+                    <strong className="text-moon">
+                      wir melden uns per E-Mail mit Zahlungs- und Versanddetails.
+                    </strong>
+                  </>
+                ) : step === "sent" ? (
                   <>
                     Dein E-Mail-Programm sollte sich mit der fertigen Bestellung geöffnet
                     haben.{" "}
@@ -469,23 +524,36 @@ function OrderModal({
 
               <div className="mt-4 flex flex-col gap-2">
                 <button onClick={copyOrder} className={cn(secondaryBtn, "w-full py-3")}>
-                  Bestelltext kopieren
+                  {step === "confirmed"
+                    ? "Bestellübersicht kopieren"
+                    : "Bestelltext kopieren"}
                 </button>
-                <button
-                  onClick={() => {
-                    toast("Danke! Wir melden uns per E-Mail.");
-                    onOrderComplete();
-                  }}
-                  className={cn(primaryBtn, "w-full py-3")}
-                >
-                  E-Mail ist raus — Warenkorb leeren
-                </button>
-                <button
-                  onClick={onContinueBrowsing}
-                  className="w-full py-2 text-sm text-moon-mute transition-colors hover:text-moon"
-                >
-                  Weiter stöbern (Warenkorb behalten)
-                </button>
+                {step === "confirmed" ? (
+                  <button
+                    onClick={onContinueBrowsing}
+                    className={cn(primaryBtn, "w-full py-3")}
+                  >
+                    Alles klar — weiter stöbern
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => {
+                        toast("Danke! Wir melden uns per E-Mail.");
+                        onOrderComplete();
+                      }}
+                      className={cn(primaryBtn, "w-full py-3")}
+                    >
+                      E-Mail ist raus — Warenkorb leeren
+                    </button>
+                    <button
+                      onClick={onContinueBrowsing}
+                      className="w-full py-2 text-sm text-moon-mute transition-colors hover:text-moon"
+                    >
+                      Weiter stöbern (Warenkorb behalten)
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           ) : (
@@ -527,9 +595,19 @@ function OrderModal({
                     />
                   ))}
                 </div>
-                <button type="submit" className={cn(primaryBtn, "w-full py-3.5")}>
-                  Bestellung absenden
-                  <Icon name="arrow" size={16} />
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className={cn(primaryBtn, "w-full py-3.5 disabled:opacity-60")}
+                >
+                  {sending ? (
+                    "Wird gesendet…"
+                  ) : (
+                    <>
+                      Bestellung absenden
+                      <Icon name="arrow" size={16} />
+                    </>
+                  )}
                 </button>
               </form>
             </>

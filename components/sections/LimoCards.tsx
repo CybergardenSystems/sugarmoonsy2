@@ -44,7 +44,7 @@ function Card({ limo }: { limo: Limonade }) {
 
   return (
     <article
-      className="group relative flex overflow-hidden rounded-2xl border border-honey/10 bg-night-2/60 transition-all duration-500 hover:-translate-y-1 hover:border-honey/25"
+      className="group relative flex overflow-hidden rounded-2xl border border-honey/10 bg-night-2/60 transition-[translate,border-color] duration-200 ease-out-expo hover:-translate-y-1 hover:border-honey/25"
       style={{ ["--ac" as string]: a.glow }}
     >
       <div
@@ -76,14 +76,14 @@ function Card({ limo }: { limo: Limonade }) {
           <span className="text-[0.72rem]">{limo.organic}</span>
         </p>
 
-        <div className="mt-5 flex items-center justify-between gap-3">
-          <span className="font-display text-2xl text-moon">
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <span className="whitespace-nowrap font-display text-2xl text-moon">
             {formatMoney(limo.price)}
           </span>
           <button
             onClick={onAdd}
             data-cursor="drop"
-            className={cn(primaryBtn, "px-5 py-2.5")}
+            className={cn(primaryBtn, "w-full whitespace-nowrap px-5 py-2.5 sm:w-auto")}
           >
             In den Warenkorb
           </button>
@@ -91,14 +91,17 @@ function Card({ limo }: { limo: Limonade }) {
       </div>
 
       {/* echte Hunfelt-Bräu-Flasche */}
-      <div className="relative w-24 shrink-0 self-stretch overflow-hidden border-l border-honey/8 bg-night-3 sm:w-32">
+      <div className="relative w-28 shrink-0 self-stretch overflow-hidden border-l border-honey/8 bg-night-3 sm:w-44">
         {photo && (
           <Image
             src={photo}
             alt={`${limo.name} — ${limo.type} Flasche`}
             fill
-            sizes="128px"
-            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            // Die Spalte ist schmal, aber object-cover skaliert aufs
+            // HÖHEN-Maß (~420–600px Breite nötig) — eine 128px-Variante
+            // würde 3-fach hochgezoomt (Design-Review: unscharfe Flaschen).
+            sizes="(min-width: 640px) 512px, 640px"
+            className="object-cover object-center transition-[scale] duration-[450ms] ease-out-expo group-hover:scale-105"
           />
         )}
       </div>

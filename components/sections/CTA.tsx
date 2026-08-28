@@ -11,7 +11,9 @@ export function CTA() {
 
       <div className="shell relative text-center">
         <Reveal className="flex justify-center">
-          <MoonMark size={72} />
+          {/* Sichel bekommt hier echten Schein — als dunkle Scheibe ging das
+              Finale unter (Design-Review). */}
+          <MoonMark size={76} className="drop-shadow-[0_0_26px_rgba(232,178,94,0.4)]" />
         </Reveal>
         <Reveal
           as="h2"

@@ -2,11 +2,27 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { accentVar, getProduct, products } from "@/lib/products";
+import { accentVar, getProduct, products, type Product } from "@/lib/products";
 import { BuyPanel } from "@/components/shop/BuyPanel";
+import { ProductCard } from "@/components/shop/ProductCard";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Icon } from "@/components/ui/Icon";
 import { MoonMark } from "@/components/brand/MoonMark";
-import { photoSrc } from "@/lib/photos";
+import { hasPhoto, photoSrc } from "@/lib/photos";
 import { site } from "@/data/site";
+
+/** Deterministische Auswahl fürs „Weitere Sorten"-Regal: gleiche Saison
+ *  zuerst, dann Sorten mit Foto; Coming-Soon ans Ende. */
+function relatedProducts(current: Product, count = 4): Product[] {
+  const score = (p: Product) =>
+    (p.season === current.season ? 4 : 0) +
+    (hasPhoto(p) ? 2 : 0) +
+    (p.comingSoon ? -3 : 0);
+  return products
+    .filter((p) => p.slug !== current.slug)
+    .sort((a, b) => score(b) - score(a))
+    .slice(0, count);
+}
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -115,10 +131,7 @@ export default async function ProductPage({
 
           {/* Detail */}
           <div>
-            <span
-              className="font-mono text-[0.72rem] uppercase tracking-[0.18em]"
-              style={{ color: ac }}
-            >
+            <span className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-moon-dim">
               {product.season}
             </span>
             <h1 className="mt-2 font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-tight text-moon">
@@ -146,6 +159,28 @@ export default async function ProductPage({
             <BuyPanel product={product} />
           </div>
         </div>
+
+        {/* Kein toter Seitenschluss nach der Kaufbox (Design-Review):
+            das Regal hält im Sortiment, statt in den Footer zu entlassen. */}
+        <section aria-labelledby="related-heading" className="mt-24">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <h2
+              id="related-heading"
+              className="font-display text-3xl text-moon sm:text-4xl"
+            >
+              Weitere Sorten
+            </h2>
+            <MagneticButton href="/shop" variant="line">
+              Alle 11 Sorten
+              <Icon name="arrow" size={16} aria-hidden />
+            </MagneticButton>
+          </div>
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+            {relatedProducts(product).map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
       </div>
     </article>
   );

@@ -228,9 +228,10 @@ body::before {
   );
 }
 
-/* Honey glow text */
+/* Honey glow text — bewusst zart: bei 45 %/28px las sich der Schein auf
+   großen Serifen als Unschärfe statt als Leuchten (Design-Review). */
 .glow-honey {
-  text-shadow: 0 0 28px color-mix(in oklab, var(--color-honey) 45%, transparent);
+  text-shadow: 0 0 16px color-mix(in oklab, var(--color-honey) 30%, transparent);
 }
 
 /* Reveal primitive (IntersectionObserver setzt .is-visible).
