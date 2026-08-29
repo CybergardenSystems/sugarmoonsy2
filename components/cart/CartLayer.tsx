@@ -336,6 +336,8 @@ function OrderModal({
     if (g("ph")) body += `Tel: ${g("ph")}\n`;
     body += `\nAdresse:\n${g("ad")}\n${g("pl")} ${g("ct")}\n`;
     if (g("nt")) body += `\nAnmerkung: ${g("nt")}\n`;
+    // Das Formular lässt sich nur mit gesetztem Häkchen absenden (§ 312j BGB).
+    body += `\nVom Kunden bestätigt: zahlungspflichtige Bestellung.\n`;
     return body;
   };
 
@@ -352,6 +354,11 @@ function OrderModal({
     const em = g("em");
     if (em && !/^\S+@\S+\.\S+$/.test(em)) {
       nextErrors.em = "Bitte eine gültige E-Mail-Adresse eingeben.";
+    }
+    // Button-Lösung (§ 312j Abs. 3 BGB): bewusste Bestätigung der
+    // Zahlungspflicht vor dem Absenden.
+    if (!f.get("zp")) {
+      nextErrors.zp = "Bitte bestätige die zahlungspflichtige Bestellung.";
     }
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
@@ -581,6 +588,9 @@ function OrderModal({
                   <span>Gesamt</span>
                   <span>{formatMoney(total)}</span>
                 </div>
+                <p className="mt-1 text-right text-xs text-moon-mute">
+                  Versandkosten werden individuell berechnet.
+                </p>
               </div>
 
               <form ref={formRef} onSubmit={submit} noValidate className="space-y-3">
@@ -595,6 +605,40 @@ function OrderModal({
                     />
                   ))}
                 </div>
+                {/* Bewusste Bestätigung + Button-Beschriftung nach der
+                    Button-Lösung, § 312j Abs. 3 BGB. */}
+                <div className="pt-1">
+                  <label
+                    htmlFor={`${idPrefix}-zp`}
+                    className={cn(
+                      "flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition-colors",
+                      errors.zp ? "border-amber/70" : "border-honey/15",
+                    )}
+                  >
+                    <input
+                      id={`${idPrefix}-zp`}
+                      name="zp"
+                      type="checkbox"
+                      aria-invalid={errors.zp ? true : undefined}
+                      aria-describedby={errors.zp ? `${idPrefix}-zp-err` : undefined}
+                      className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-[var(--color-honey)]"
+                    />
+                    <span className="text-sm leading-relaxed text-moon-dim">
+                      Ich gebe eine{" "}
+                      <strong className="text-moon">zahlungspflichtige Bestellung</strong>{" "}
+                      auf.
+                    </span>
+                  </label>
+                  {errors.zp && (
+                    <p
+                      id={`${idPrefix}-zp-err`}
+                      role="alert"
+                      className="mt-1 text-xs text-amber"
+                    >
+                      {errors.zp}
+                    </p>
+                  )}
+                </div>
                 <button
                   type="submit"
                   disabled={sending}
@@ -604,7 +648,7 @@ function OrderModal({
                     "Wird gesendet…"
                   ) : (
                     <>
-                      Bestellung absenden
+                      Zahlungspflichtig bestellen
                       <Icon name="arrow" size={16} />
                     </>
                   )}
