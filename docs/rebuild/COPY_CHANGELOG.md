@@ -121,3 +121,28 @@ Bio-Zertifizierungs-Seite.
 | „Zahlungspflichtig bestellen" (Button, vorher „Bestellung absenden") · Checkbox „Ich gebe eine zahlungspflichtige Bestellung auf." · Fehlertext „Bitte bestätige die zahlungspflichtige Bestellung." · Bestelltext-Zeile „Vom Kunden bestätigt: zahlungspflichtige Bestellung." · Versandkosten-Hinweis in der Modal-Zusammenfassung (Wortlaut aus dem Warenkorb übernommen) | Button-Lösung § 312j Abs. 3 BGB, auf Inhaber-Wunsch (D28) |
 | Checkbox „Ich gebe eine zahlungspflichtige Bestellung auf." samt Fehlertext und Bestätigungszeile wieder **entfernt** (Inhaber-Wunsch; der Button „Zahlungspflichtig bestellen" bleibt und trägt § 312j allein) | D28 aktualisiert |
 
+### Datenschutzerklärung — Ergänzung um die real stattfindende Verarbeitung (Inhaber-Auftrag)
+
+Bis hierher galt: Rechtstexte 1:1, kein Wort geändert. Elias hat die
+Aktualisierung ausdrücklich beauftragt, nachdem Hosting (Vercel) und
+Mailversand (Resend) hinzugekommen sind. Vorgehen: **kein bestehender Satz
+des Inhabers wurde geändert oder gelöscht** — ergänzt wurden ausschließlich
+vier neue Abschnitte, die belegte Vorgänge beschreiben; die Folge-Abschnitte
+wurden nur neu durchnummeriert (5→9, 6→10, 7→11, 8→12).
+
+| Neuer Abschnitt | Belegt durch |
+|---|---|
+| §5 Hosting und Server-Logfiles (Vercel, USA; Art. 6 Abs. 1 lit. f; AVV + Standardvertragsklauseln) | Deployment liegt auf Vercel (Projekt `sugarmoonsy2`) |
+| §6 Übermittlung der Bestellung per E-Mail (Resend, EU-Region Irland; `reply_to` = Kunde; mailto-Fallback ohne Drittübermittlung; Postfach bei STRATO) | `app/api/order/route.ts`; Resend-Dashboard zeigt Region Irland; MX-Record `smtpin.rzone.de` gemessen |
+| §7 Warenkorb im Local Storage (`sms-cart-v1`, verbleibt auf dem Gerät, § 25 Abs. 2 Nr. 2 TDDDG) | `components/cart/CartProvider.tsx` |
+| §8 Keine Cookies, kein Tracking, keine externen Schriftarten | Repo-weit geprüft: kein Analytics-Paket, kein `document.cookie`; ausgeliefertes HTML enthält keine Google-Fonts-Verbindung (next/font liefert self-hosted aus) |
+
+**Vom Inhaber/Anwalt zu prüfen (nicht von uns entschieden):**
+1. §2 nennt „Zahlungsinformationen" — die Website erhebt keine Zahlungsdaten
+   (kein Zahlungsanbieter angebunden, Zahlung wird per E-Mail besprochen).
+2. §4 nennt Zahlungsdienstleister „z. B. PayPal, Stripe, Klarna" — keiner davon
+   ist angebunden.
+3. Firmierung/Anschrift von Vercel und Resend sowie der tatsächliche Abschluss
+   der Auftragsverarbeitungsverträge sind zu bestätigen; §5/§6 setzen beide
+   AVV als geschlossen voraus.
+
