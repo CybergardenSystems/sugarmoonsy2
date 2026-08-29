@@ -4,12 +4,14 @@ import { useEffect, useRef } from "react";
 import { useHydrated, useMediaQuery } from "@/lib/useMediaQuery";
 
 /**
- * Custom Cursor mit Zuständen: default (Goldpunkt), hover/link (Ring),
- * „drop" über Produkten, „text". Deaktiviert auf Touch / reduced-motion.
- * data-cursor="drop|view|text" steuert den Zustand pro Element.
+ * Begleiter-Ring zur Maus mit Zuständen: hover/link, „drop" über Produkten,
+ * „view". Deaktiviert auf Touch / reduced-motion.
+ *
+ * Bewusst NUR Begleiter: der native Zeiger bleibt immer sichtbar (D29) —
+ * das frühere `cursor: none` ließ Nutzer ohne funktionierenden Ersatz-Cursor
+ * blind zielen (Feldbefund: Warenkorb am Laptop nicht erreichbar).
  */
 export function Cursor() {
-  const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const hydrated = useHydrated();
@@ -20,7 +22,6 @@ export function Cursor() {
   useEffect(() => {
     if (!enabled) return;
 
-    const dot = dotRef.current!;
     const ring = ringRef.current!;
     let mx = 0;
     let my = 0;
@@ -42,11 +43,8 @@ export function Cursor() {
         seen = true;
         rx = mx;
         ry = my;
-        dot.style.opacity = "1";
         ring.style.opacity = "1";
-        document.documentElement.classList.add("sms-cursor");
       }
-      dot.style.transform = `translate(${mx}px, ${my}px)`;
 
       const target = (e.target as HTMLElement)?.closest<HTMLElement>(
         "[data-cursor], a, button",
@@ -59,10 +57,8 @@ export function Cursor() {
     const onLeaveWindow = () => {
       ring.dataset.state = "";
       setLabel("");
-      dot.style.opacity = "0";
       ring.style.opacity = "0";
       seen = false;
-      document.documentElement.classList.remove("sms-cursor");
     };
 
     const loop = () => {
@@ -82,7 +78,6 @@ export function Cursor() {
       document.documentElement.removeEventListener("mouseleave", onLeaveWindow);
       window.removeEventListener("blur", onLeaveWindow);
       cancelAnimationFrame(raf);
-      document.documentElement.classList.remove("sms-cursor");
     };
   }, [enabled]);
 
@@ -90,11 +85,6 @@ export function Cursor() {
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-[100]">
-      <div
-        ref={dotRef}
-        style={{ opacity: 0 }}
-        className="absolute -left-[3px] -top-[3px] h-1.5 w-1.5 rounded-full bg-honey"
-      />
       <div
         ref={ringRef}
         data-state=""

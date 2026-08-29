@@ -72,6 +72,13 @@
     scroll-margin-top: 6rem;
   }
 
+  /* Tailwind-v4-Preflight gibt Buttons cursor:default — für einen Shop
+     gehört auf Klickbares die Hand. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
   /* Scroll-Sperre hinter Sheet/Menü — bewusst Lenis-unabhängig (R1/B-Scroll-Lock).
      `overscroll-behavior` verhindert zusätzlich, dass eine Geste aus dem Dialog
      heraus die Seite dahinter mitzieht (Ketten-Scrolling, v. a. iOS). */
@@ -372,18 +379,11 @@ html.js .reveal.is-visible {
   animation-play-state: paused;
 }
 
-/* Custom cursor: nativen Cursor ausblenden, solange er aktiv ist —
-   aber nie in Eingabefeldern (I-Beam bleibt) und nie bei forced-colors. */
-html.sms-cursor,
-html.sms-cursor *:not(input):not(textarea):not(select):not([contenteditable]) {
-  cursor: none !important;
-}
-@media (forced-colors: active) {
-  html.sms-cursor,
-  html.sms-cursor * {
-    cursor: auto !important;
-  }
-}
+/* Custom cursor: NUR Begleiter-Ring — der native Zeiger bleibt IMMER
+   sichtbar. Das frühere `cursor: none` machte den Mauszeiger unsichtbar,
+   sobald der Ersatz-Cursor nicht zeichnete (Feldbefund Laptop/Safari:
+   „komme nicht an den Warenkorb"). Deko darf den echten Zeiger nie
+   ersetzen (D29). */
 
 /* Custom cursor ring states */
 .cursor-ring[data-state="hover"] {

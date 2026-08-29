@@ -607,13 +607,12 @@ function OrderModal({
                 </div>
                 {/* Bewusste Bestätigung + Button-Beschriftung nach der
                     Button-Lösung, § 312j Abs. 3 BGB. */}
-                <div className="pt-1">
+                {/* Bewusst ohne eigenen Rahmen-Kasten — der las sich als
+                    „Kästchen im Kästchen" (Inhaber-Feedback). */}
+                <div className="pt-2">
                   <label
                     htmlFor={`${idPrefix}-zp`}
-                    className={cn(
-                      "flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition-colors",
-                      errors.zp ? "border-amber/70" : "border-honey/15",
-                    )}
+                    className="flex cursor-pointer items-start gap-3"
                   >
                     <input
                       id={`${idPrefix}-zp`}
@@ -623,9 +622,16 @@ function OrderModal({
                       aria-describedby={errors.zp ? `${idPrefix}-zp-err` : undefined}
                       className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-[var(--color-honey)]"
                     />
-                    <span className="text-sm leading-relaxed text-moon-dim">
+                    <span
+                      className={cn(
+                        "text-sm leading-relaxed",
+                        errors.zp ? "text-amber" : "text-moon-dim",
+                      )}
+                    >
                       Ich gebe eine{" "}
-                      <strong className="text-moon">zahlungspflichtige Bestellung</strong>{" "}
+                      <strong className={errors.zp ? "text-amber" : "text-moon"}>
+                        zahlungspflichtige Bestellung
+                      </strong>{" "}
                       auf.
                     </span>
                   </label>
@@ -633,7 +639,7 @@ function OrderModal({
                     <p
                       id={`${idPrefix}-zp-err`}
                       role="alert"
-                      className="mt-1 text-xs text-amber"
+                      className="mt-1 pl-8 text-xs text-amber"
                     >
                       {errors.zp}
                     </p>
