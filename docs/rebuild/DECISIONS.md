@@ -119,14 +119,13 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   `transition-all`-Klassen (Design-Review 2) korrigiert. Regel für neue
   Komponenten: `transition-[translate]`/`[scale]`/`[rotate]` verwenden.
 - **D28:** Button-Lösung (§ 312j Abs. 3 BGB) auf Wunsch des Inhabers: Der
-  Bestell-Button heißt „Zahlungspflichtig bestellen" (die gesetzliche
-  Musterformulierung — rechtlich entscheidend ist die Button-Beschriftung),
-  davor eine Pflicht-Checkbox „Ich gebe eine zahlungspflichtige Bestellung
-  auf." mit Feldvalidierung (aria-invalid/role=alert). Die Bestätigung wird
-  im Bestelltext dokumentiert („Vom Kunden bestätigt: …"); die
-  Zusammenfassung direkt über dem Formular zeigt Positionen, Gesamtpreis und
-  den Versandkosten-Hinweis (§ 312j Abs. 2). Keine AGB-/Widerrufs-Checkbox:
-  solche Texte existieren nicht und werden nicht erfunden (§2-Regel) —
-  falls gewünscht, muss der Inhaber sie liefern. Keine Rechtsberatung;
-  finale Prüfung beim Inhaber/Anwalt.
+  Bestell-Button heißt „Zahlungspflichtig bestellen" — die gesetzliche
+  Musterformulierung; rechtlich entscheidend ist allein die
+  Button-Beschriftung. Eine zusätzliche Pflicht-Checkbox war kurzzeitig
+  eingebaut und wurde auf Inhaber-Wunsch wieder entfernt (gesetzlich nicht
+  gefordert). Die Zusammenfassung direkt über dem Formular zeigt Positionen,
+  Gesamtpreis und den Versandkosten-Hinweis (§ 312j Abs. 2). Keine
+  AGB-/Widerrufs-Checkbox: solche Texte existieren nicht und werden nicht
+  erfunden (§2-Regel) — falls gewünscht, muss der Inhaber sie liefern.
+  Keine Rechtsberatung; finale Prüfung beim Inhaber/Anwalt.
 

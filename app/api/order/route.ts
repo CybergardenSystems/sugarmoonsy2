@@ -114,8 +114,6 @@ function buildText(customer: OrderCustomer, items: OrderItem[]): string {
   if (customer.ph) body += `Tel: ${customer.ph}\n`;
   body += `\nAdresse:\n${customer.ad}\n${customer.pl} ${customer.ct}\n`;
   if (customer.nt) body += `\nAnmerkung: ${customer.nt}\n`;
-  // Der Client sendet erst nach gesetztem Zahlungspflicht-Häkchen (§ 312j BGB).
-  body += `\nVom Kunden bestätigt: zahlungspflichtige Bestellung.\n`;
   return body;
 }
 
