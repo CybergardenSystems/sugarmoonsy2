@@ -11,9 +11,15 @@ export function CTA() {
 
       <div className="shell relative text-center">
         <Reveal className="flex justify-center">
-          <MoonMark size={72} />
+          {/* Sichel bekommt hier echten Schein — als dunkle Scheibe ging das
+              Finale unter (Design-Review). */}
+          <MoonMark size={76} className="drop-shadow-[0_0_26px_rgba(232,178,94,0.4)]" />
         </Reveal>
-        <Reveal as="h2" delay={0.05} className="mx-auto mt-6 max-w-2xl font-display text-[clamp(2.2rem,5vw,4rem)] leading-[1.05] text-balance text-moon glow-honey">
+        <Reveal
+          as="h2"
+          delay={0.05}
+          className="mx-auto mt-6 max-w-2xl font-display text-[clamp(2.2rem,5vw,4rem)] leading-[1.05] text-balance text-moon glow-honey"
+        >
           Bereit für deinen Lieblingssirup?
         </Reveal>
         <Reveal delay={0.1} className="lede mx-auto mt-5 max-w-md text-balance">

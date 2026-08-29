@@ -22,7 +22,8 @@
   /* — Moonlight / text — */
   --color-moon: #f4eee0;
   --color-moon-dim: #c4bda8;
-  --color-moon-mute: #8d927f;
+  /* AA-fest auf allen Night-Flächen: 6,9:1 (night) … 4,6:1 (night-4) */
+  --color-moon-mute: #9ea48f;
   --color-silver: #dbe3e6;
 
   /* — Seasonal accents (Ambient-Shift, nie primär) — */
@@ -41,10 +42,13 @@
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-quint: cubic-bezier(0.65, 0, 0.35, 1);
 
-  /* — Radius — */
-  --radius-sm: 0.625rem;
-  --radius: 1rem;
-  --radius-lg: 1.5rem;
+  /* — Radius (monotone Skala; Council R1/B7) — */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
 
   /* — Breakpoint container — */
   --spacing-edge: clamp(1.1rem, 5vw, 4rem);
@@ -61,6 +65,27 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+  }
+
+  /* Anker-Ziele nicht unter der fixen Nav landen lassen (auch ohne Lenis). */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+
+  /* Tailwind-v4-Preflight gibt Buttons cursor:default — für einen Shop
+     gehört auf Klickbares die Hand. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  /* Scroll-Sperre hinter Sheet/Menü — bewusst Lenis-unabhängig (R1/B-Scroll-Lock).
+     `overscroll-behavior` verhindert zusätzlich, dass eine Geste aus dem Dialog
+     heraus die Seite dahinter mitzieht (Ketten-Scrolling, v. a. iOS). */
+  html.sms-locked,
+  html.sms-locked body {
+    overflow: hidden;
+    overscroll-behavior: none;
   }
 
   /* Lenis übernimmt das Smooth-Scrolling; native deaktivieren wenn aktiv. */
@@ -194,36 +219,90 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Ambient vignette to deepen the night */
-.vignette {
+/* Ambient vignette — hinter dem Content (negatives z-index), nie über
+   Text oder CTAs (Council R1/B6: das alte fixed-Overlay mit z-index:1
+   drückte Kauf-Buttons und Rechtstexte unter 3:1 Kontrast). */
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: -1;
   pointer-events: none;
   background: radial-gradient(
     125% 100% at 50% 0%,
-    transparent 46%,
-    color-mix(in oklab, var(--color-ink) 78%, transparent) 100%
+    transparent 52%,
+    color-mix(in oklab, var(--color-ink) 55%, transparent) 100%
   );
 }
 
-/* Honey glow text */
+/* Honey glow text — bewusst zart: bei 45 %/28px las sich der Schein auf
+   großen Serifen als Unschärfe statt als Leuchten (Design-Review). */
 .glow-honey {
-  text-shadow: 0 0 28px color-mix(in oklab, var(--color-honey) 45%, transparent);
+  text-shadow: 0 0 16px color-mix(in oklab, var(--color-honey) 30%, transparent);
 }
 
-/* Reveal primitive (driven by GSAP/IntersectionObserver via .is-visible) */
-.reveal {
+/* Reveal primitive (IntersectionObserver setzt .is-visible).
+   Versteckt wird NUR wenn JS läuft (html.js via Inline-Script im Layout) —
+   ohne JS bleibt aller Content sichtbar (Council R1: 36 unsichtbare
+   Sektionen ohne Script). Zusätzlich blendet ein reines CSS-Fallback
+   jedes Reveal nach 2,6 s selbstständig ein: schlägt ein Chunk oder der
+   Observer fehl, bleibt niemals Content unsichtbar. */
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+html.js .reveal {
   opacity: 0;
   transform: translateY(26px);
   transition:
     opacity 0.8s var(--ease-out-expo),
     transform 0.8s var(--ease-out-expo);
   will-change: opacity, transform;
+  animation: reveal-fallback 0.8s var(--ease-out-expo) 2.6s forwards;
 }
-.reveal.is-visible {
+html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
+  animation: none;
+}
+
+/* ===================== Hero-Intro (CSS-first) =====================
+   Läuft ohne JS-Wartezeit ab dem ersten Paint → keine LCP-Blockade durch
+   Hydration/SplitText (gemessen: 4,5 s Render-Delay), kein Flash of
+   visible-then-hidden. reduced-motion neutralisiert die Animationen über
+   den globalen Block unten. */
+@keyframes hero-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-line {
+  display: block;
+  overflow: hidden;
+}
+.hero-line > span {
+  display: block;
+  transform: translateY(110%);
+  animation: hero-rise 0.9s var(--ease-out-expo) forwards;
+}
+.hero-fade {
+  opacity: 0;
+  animation: hero-fade 0.8s var(--ease-out-expo) forwards;
 }
 
 /* Legal / long-form text (Impressum, Datenschutz) */
@@ -278,20 +357,12 @@
   font-size: 0.95rem;
 }
 
-/* Hide content visually but keep for screen readers */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
+/* Kein eigenes .sr-only definieren: Tailwind v4 liefert .sr-only und
+   .not-sr-only in @layer utilities. Eine unlayered Kopie hier gewann die
+   Kaskade gegen focus:not-sr-only und machte den Skip-Link unsichtbar
+   (Council R1/B2). */
 
-/* Marquee */
+/* Marquee — pausierbar (WCAG 2.2.2): per Hover/Fokus und per Toggle-Klasse */
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -302,6 +373,17 @@
   white-space: nowrap;
   animation: marquee 38s linear infinite;
 }
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee[data-paused="true"] .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Custom cursor: NUR Begleiter-Ring — der native Zeiger bleibt IMMER
+   sichtbar. Das frühere `cursor: none` machte den Mauszeiger unsichtbar,
+   sobald der Ersatz-Cursor nicht zeichnete (Feldbefund Laptop/Safari:
+   „komme nicht an den Warenkorb"). Deko darf den echten Zeiger nie
+   ersetzen (D29). */
 
 /* Custom cursor ring states */
 .cursor-ring[data-state="hover"] {

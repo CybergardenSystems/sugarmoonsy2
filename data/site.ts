@@ -9,7 +9,7 @@ export const site = {
   city: "Fulda",
   country: "DE",
   description:
-    "Handgemachte Bio-Sirupe & Limonaden aus Fulda — natürlich, kreativ, mit Liebe.",
+    "Handgemachte Bio-Sirupe & Limonaden aus Fulda. Jetzt online bestellen — natürlich, kreativ, mit Liebe.",
 } as const;
 
 export const nav = [
@@ -37,6 +37,8 @@ export const usps = [
   },
 ] as const;
 
+// Hinweis Content-Parität: „DE-ÖKO-006" gilt laut Legacy-Inhalt für die
+// Limonaden — das Kürzel erscheint deshalb nur im Limo-Kontext, nicht global.
 export const marqueeItems = [
   "Bio-zertifiziert",
   "Handgemacht in Fulda",
@@ -44,7 +46,6 @@ export const marqueeItems = [
   "Für Kaffee & Cocktails",
   "Perfekt als Geschenk",
   "Direkt bestellen",
-  "DE-ÖKO-006",
 ];
 
 export const stats = [
@@ -62,6 +63,14 @@ export const footerLinks = {
     { href: "/story", label: "Über uns" },
     { href: "/#bewertungen", label: "Bewertungen" },
     { href: "/ausstellungen", label: "Ausstellungen" },
+  ],
+  // Legacy-Parität: die Kontakt-Spalte (Mail + sichtbare Domain) stand im
+  // Original-Footer und bleibt erhalten (Council R1, Content#7).
+  kontakt: [
+    // Volle Adresse steht sichtbar im Marken-Block; hier Label statt
+    // Wortbruch in der schmalen Spalte (Council R2).
+    { href: `mailto:${site.email}`, label: "E-Mail schreiben" },
+    { href: "https://sugarmoonsweets.de", label: "sugarmoonsweets.de" },
   ],
   rechtliches: [
     { href: "/impressum", label: "Impressum" },

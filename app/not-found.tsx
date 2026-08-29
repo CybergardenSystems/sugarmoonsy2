@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { MoonMark } from "@/components/brand/MoonMark";
+import { primaryBtn } from "@/lib/buttonStyles";
+import { cn } from "@/lib/cn";
 
 export default function NotFound() {
   return (
@@ -9,10 +11,7 @@ export default function NotFound() {
       <p className="mt-3 max-w-sm text-moon-dim">
         Diese Seite liegt im Dunkeln — hier gibt es nichts zu sehen.
       </p>
-      <Link
-        href="/"
-        className="mt-7 rounded-xl bg-honey px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-honey-glow"
-      >
+      <Link href="/" className={cn(primaryBtn, "mt-7 px-6 py-3")}>
         Zurück zur Startseite
       </Link>
     </section>

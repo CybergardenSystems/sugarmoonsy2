@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import type { AccentKey, Product } from "@/lib/products";
+import { accentVar, type Product } from "@/lib/products";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
 import { photoSrc } from "@/lib/photos";
@@ -11,18 +11,13 @@ import { toast } from "@/lib/toast";
 import { flyToCart } from "@/lib/flyToCart";
 import { cn } from "@/lib/cn";
 
-export const accentVar: Record<AccentKey, string> = {
-  honey: "var(--color-honey)",
-  amber: "var(--color-amber)",
-  cinnamon: "var(--color-cinnamon)",
-  sage: "var(--color-sage)",
-  lavender: "var(--color-lavender)",
-  plum: "var(--color-plum)",
-  moon: "var(--color-silver)",
-  pumpkin: "var(--color-pumpkin)",
-};
-
-export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
+export function ProductCard({
+  product,
+  priority = false,
+}: {
+  product: Product;
+  priority?: boolean;
+}) {
   const { add } = useCart();
   const [size, setSize] = useState(product.sizes[0].label);
   const [qty, setQty] = useState(1);
@@ -40,7 +35,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         name: product.name,
         size: active.label,
         price: active.price,
-        photo: product.photo,
+        photo: src,
       },
       qty,
     );
@@ -52,11 +47,11 @@ export function ProductCard({ product, priority = false }: { product: Product; p
 
   return (
     <article
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-honey/10 bg-night-2/70 transition-all duration-500 hover:-translate-y-1.5 hover:border-honey/30"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-honey/10 bg-night-2/70 transition-[translate,border-color] duration-200 ease-out-expo hover:-translate-y-1.5 hover:border-honey/30"
       style={{ ["--ac" as string]: ac }}
     >
       {product.badge && (
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-honey px-2.5 py-0.5 font-mono text-[0.58rem] font-bold uppercase tracking-wide text-ink">
+        <span className="absolute left-3 top-3 z-10 rounded-full bg-honey px-2.5 py-0.5 font-mono text-[0.66rem] font-bold uppercase tracking-wide text-ink">
           {product.badge}
         </span>
       )}
@@ -64,7 +59,6 @@ export function ProductCard({ product, priority = false }: { product: Product; p
       <Link
         href={`/shop/${product.slug}`}
         data-cursor="view"
-        aria-label={`${product.name} ansehen`}
         className="relative block aspect-[4/5] overflow-hidden"
       >
         {src ? (
@@ -73,21 +67,20 @@ export function ProductCard({ product, priority = false }: { product: Product; p
             <div className="absolute inset-0 bg-night-3" />
             <Image
               src={src}
-              alt={`${product.name} — Flasche mit grünem Mond-Etikett`}
+              alt={`${product.name} — Flasche mit Mond-Etikett`}
               fill
-              sizes="(max-width:768px) 50vw, 300px"
+              sizes="(max-width:1023px) 50vw, (max-width:1279px) 33vw, 300px"
               priority={priority}
-              className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+              className="object-cover object-center transition-[scale] duration-[450ms] ease-out-expo group-hover:scale-[1.05]"
             />
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night-2 to-transparent" />
           </>
         ) : (
           <Placeholder accent={ac} season={product.season} />
         )}
-        <span
-          className="absolute bottom-3 left-3 rounded-full bg-night/70 px-2.5 py-0.5 font-mono text-[0.58rem] uppercase tracking-wide backdrop-blur"
-          style={{ color: ac }}
-        >
+        {/* Saison neutral in Mondlicht — die Sortenfarbe lebt im Ambient-Glow,
+            nicht in der Sachinformation (Design-Review, D25). */}
+        <span className="absolute bottom-3 left-3 rounded-full bg-night/70 px-2.5 py-0.5 font-mono text-[0.66rem] uppercase tracking-wide text-moon-dim backdrop-blur">
           {product.season}
         </span>
       </Link>
@@ -102,21 +95,28 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           {product.flavor}
         </p>
 
-        <div className="mt-3 flex items-baseline gap-1.5">
-          <span className="font-display text-2xl text-honey">
+        <div className="mt-3 flex items-baseline gap-1.5 whitespace-nowrap">
+          <span className="font-display text-xl text-honey sm:text-2xl">
             {formatMoney(active.price)}
           </span>
-          <span className="font-mono text-[0.66rem] text-moon-mute">/ {active.label}</span>
+          <span className="font-mono text-[0.68rem] text-moon-mute">
+            / {active.label}
+          </span>
         </div>
 
         {product.sizes.length > 1 && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
+          <div
+            className="mt-3 flex flex-wrap gap-1.5"
+            role="group"
+            aria-label="Größe wählen"
+          >
             {product.sizes.map((s) => (
               <button
                 key={s.label}
                 onClick={() => setSize(s.label)}
+                aria-pressed={s.label === size}
                 className={cn(
-                  "rounded-full border px-2.5 py-1 font-mono text-[0.62rem] transition-colors",
+                  "rounded-full border px-2.5 py-1 font-mono text-[0.7rem] transition-[color,border-color,background-color,scale] duration-150 active:scale-95",
                   s.label === size
                     ? "border-honey bg-honey/15 text-honey"
                     : "border-honey/15 text-moon-dim hover:border-honey/40",
@@ -130,25 +130,27 @@ export function ProductCard({ product, priority = false }: { product: Product; p
 
         {product.comingSoon ? (
           <div className="mt-auto pt-4">
-            <div className="flex h-10 items-center justify-center gap-1.5 rounded-lg border border-honey/25 bg-honey/5 text-[0.8rem] font-semibold text-honey/80">
+            <div className="flex h-10 items-center justify-center gap-1.5 rounded-xl border border-honey/25 bg-honey/5 text-[0.8rem] font-semibold text-honey/80">
               <Icon name="check" size={15} /> Bald verfügbar
             </div>
           </div>
         ) : (
-          <div className="mt-auto flex items-center gap-2 pt-4">
-            <div className="flex items-center rounded-lg border border-honey/15">
+          <div className="mt-auto flex flex-col gap-2 pt-4 sm:flex-row sm:items-center">
+            <div className="flex items-center self-start rounded-lg border border-honey/15">
               <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
                 aria-label="Weniger"
-                className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
+                className="flex h-10 w-10 items-center justify-center text-moon transition-[color,scale] duration-150 active:scale-90 hover:text-honey md:h-9 md:w-9"
               >
                 <Icon name="minus" size={16} />
               </button>
-              <span className="w-6 text-center text-sm tabular-nums">{qty}</span>
+              <span className="w-6 text-center text-sm tabular-nums" aria-live="polite">
+                {qty}
+              </span>
               <button
                 onClick={() => setQty((q) => q + 1)}
                 aria-label="Mehr"
-                className="flex h-10 w-10 items-center justify-center text-moon transition-colors hover:text-honey md:h-9 md:w-9"
+                className="flex h-10 w-10 items-center justify-center text-moon transition-[color,scale] duration-150 active:scale-90 hover:text-honey md:h-9 md:w-9"
               >
                 <Icon name="plus" size={16} />
               </button>
@@ -157,10 +159,10 @@ export function ProductCard({ product, priority = false }: { product: Product; p
               onClick={onAdd}
               data-cursor="drop"
               className={cn(
-                "flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg text-[0.8rem] font-semibold transition-colors md:h-9",
+                "flex h-10 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl text-[0.8rem] font-semibold transition-[background-color,color,scale] duration-150 ease-out-expo active:scale-[0.97] sm:w-auto sm:flex-1 md:h-9",
                 added
                   ? "bg-sage text-ink"
-                  : "bg-honey text-ink hover:bg-honey-glow",
+                  : "bg-honey text-ink shadow-[0_8px_22px_-8px_rgba(232,178,94,0.35)] hover:bg-honey-glow",
               )}
             >
               {added ? (
@@ -219,7 +221,15 @@ function Placeholder({ accent, season }: { accent: string; season: string }) {
             strokeWidth="1.1"
           />
           {/* Verschluss */}
-          <rect x="23" y="2" width="14" height="6" rx="2" fill="currentColor" fillOpacity="0.45" />
+          <rect
+            x="23"
+            y="2"
+            width="14"
+            height="6"
+            rx="2"
+            fill="currentColor"
+            fillOpacity="0.45"
+          />
           {/* Etikett-Feld */}
           <rect
             x="19"

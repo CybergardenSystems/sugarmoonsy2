@@ -7,14 +7,7 @@
 
 export type SeasonKey = "gj" | "fs" | "he" | "wi";
 export type AccentKey =
-  | "honey"
-  | "amber"
-  | "cinnamon"
-  | "sage"
-  | "lavender"
-  | "plum"
-  | "moon"
-  | "pumpkin";
+  "honey" | "amber" | "cinnamon" | "sage" | "lavender" | "plum" | "moon" | "pumpkin";
 
 export interface Size {
   label: string;
@@ -44,6 +37,18 @@ export interface Product {
   pairing: string;
 }
 
+/** Akzentfarbe je Sorte als CSS-Variable (server-safe, von Karten & Detailseite genutzt). */
+export const accentVar: Record<AccentKey, string> = {
+  honey: "var(--color-honey)",
+  amber: "var(--color-amber)",
+  cinnamon: "var(--color-cinnamon)",
+  sage: "var(--color-sage)",
+  lavender: "var(--color-lavender)",
+  plum: "var(--color-plum)",
+  moon: "var(--color-silver)",
+  pumpkin: "var(--color-pumpkin)",
+};
+
 export const SEASONS: { key: SeasonKey | "all"; label: string }[] = [
   { key: "all", label: "Alle Sorten" },
   { key: "gj", label: "Ganzjährig" },
@@ -52,17 +57,15 @@ export const SEASONS: { key: SeasonKey | "all"; label: string }[] = [
   { key: "wi", label: "Winter" },
 ];
 
-const P = (p: Product) => p;
-
 export const products: Product[] = [
-  P({
+  {
     id: "vanille",
     slug: "bio-vanille",
     name: "Bio-Vanille",
     flavor: "Klassisch, weich & natürlich",
-    description: "Der zeitlose Allrounder — warme Vanille aus echter Schote.",
+    description: "Der zeitlose Allrounder — klassisch, weich und natürlich.",
     story:
-      "Unsere Vanille ist der ruhige Vollmond im Sortiment: weich, rund, immer da. Aus echter Bourbon-Vanille, ohne künstliche Aromen — der Sirup, der in jeden Kaffee, jedes Dessert und jeden Teig passt.",
+      "Unsere Vanille ist der ruhige Vollmond im Sortiment: weich, rund, immer da. Ohne künstliche Aromen — der Sirup, der in jeden Kaffee, jedes Dessert und jeden Teig passt.",
     season: "Ganzjährig",
     seasonKeys: ["gj"],
     sizes: [
@@ -72,15 +75,15 @@ export const products: Product[] = [
     accent: "honey",
     photo: "vanille.jpg",
     pairing: "Latte · Panna Cotta · Pancakes",
-  }),
-  P({
+  },
+  {
     id: "pistazie",
     slug: "bio-pistazie",
     name: "Bio-Pistazie",
     flavor: "Nussig, edel & intensiv",
-    description: "Für besondere Momente — geröstete Pistazie, fein und tief.",
+    description: "Für besondere Momente — nussige Pistazie, fein und intensiv.",
     story:
-      "Edel und intensiv: geröstete Pistazien, behutsam zu Sirup gebracht. Ein Hauch Mittelmeer für den Flat White oder den Aperitif unter Sternen.",
+      "Edel und intensiv: Pistazie, behutsam zu Sirup gebracht. Ein Hauch Mittelmeer für den Flat White oder den Aperitif unter Sternen.",
     season: "März – August",
     seasonKeys: ["fs"],
     sizes: [
@@ -90,15 +93,15 @@ export const products: Product[] = [
     accent: "sage",
     photo: "pistazie.jpg",
     pairing: "Flat White · Tiramisu · Spritz",
-  }),
-  P({
+  },
+  {
     id: "lavendel-blaubeere",
     slug: "bio-lavendel-blaubeere",
     name: "Bio-Lavendel mit Blaubeere",
-    flavor: "Fein-blumig & fruchtig",
+    flavor: "Fein-blumig & aromatisch",
     description: "Ein Hauch Provence bei Nacht — Lavendel trifft dunkle Blaubeere.",
     story:
-      "Blühender Lavendel und dunkle Blaubeere — die Sorte, die unsere Kund:innen am häufigsten ihren Lieblingssirup nennen. Provence-Romantik in einem nächtlichen Violett. Ganzjährig erhältlich und besonders beliebt in Frühling & Sommer.",
+      "Blühender Lavendel und dunkle Blaubeere — Provence-Romantik in einem nächtlichen Violett. Ganzjährig erhältlich und besonders beliebt in Frühling & Sommer.",
     season: "Ganzjährig",
     seasonKeys: ["gj", "fs"],
     sizes: [
@@ -108,15 +111,15 @@ export const products: Product[] = [
     accent: "lavender",
     photo: "lavendel-blaubeere.jpg",
     pairing: "Latte · Limonade · Gin Tonic",
-  }),
-  P({
+  },
+  {
     id: "blaubeer-basilikum",
     slug: "bio-blaubeer-basilikum",
     name: "Bio-Blaubeer-Basilikum",
     flavor: "Dunkle Beere & frisches Kraut",
     description: "Überraschend, tief, elegant — Beere trifft Basilikum.",
     story:
-      "Dunkle Blaubeere, frisches Basilikum — ein Kontrast, der wach macht. Tiefviolett, krautig, überraschend erwachsen. Unser Geheimtipp für Cocktails.",
+      "Dunkle Blaubeere, frisches Basilikum — ein Kontrast, der wach macht. Tiefviolett, krautig, überraschend erwachsen. Wie gemacht für Cocktails.",
     season: "März – August",
     seasonKeys: ["fs"],
     sizes: [
@@ -126,15 +129,15 @@ export const products: Product[] = [
     accent: "plum",
     photo: "blaubeer-basilikum.jpg",
     pairing: "Tonic · Sekt · Soda",
-  }),
-  P({
+  },
+  {
     id: "kokos",
     slug: "bio-kokos",
     name: "Bio-Kokos",
     flavor: "Cremig-exotisch mit Kokosraspeln",
     description: "Sonne im Glas — milde Kokos mit echten Raspeln.",
     story:
-      "Mild, cremig, mit echten Kokosraspeln: der hellste Sirup im Sortiment, fast milchig wie ein Neumond. Macht aus jedem Kaffee einen kleinen Urlaub — unsere Sommer-Sorte.",
+      "Mild und cremig, mit echten Kokosraspeln — hell und sanft wie Mondlicht. Macht aus jedem Kaffee einen kleinen Urlaub: unsere Sommer-Sorte.",
     season: "Juni – August",
     seasonKeys: ["fs"],
     sizes: [
@@ -144,15 +147,15 @@ export const products: Product[] = [
     accent: "moon",
     photo: "kokos.jpg",
     pairing: "Iced Latte · Curry · Smoothie",
-  }),
-  P({
+  },
+  {
     id: "bratapfel",
     slug: "bio-bratapfel",
     name: "Bio-Bratapfel",
     flavor: "Fruchtig, zimtig & winterlich",
     description: "Apfel trifft Zimt — der Duft von Herbstabenden.",
     story:
-      "Gebackener Apfel, Zimt, eine Spur Nelke: der Geschmack von Herbstabenden mit Kerzenlicht. Warm in den Tee, großzügig über den Milchreis.",
+      "Gebackener Apfel und Zimt: der Geschmack von Herbstabenden mit Kerzenlicht. Warm in den Tee, großzügig über den Milchreis.",
     season: "Sep – Nov",
     seasonKeys: ["he"],
     sizes: [
@@ -164,15 +167,15 @@ export const products: Product[] = [
     comingSoon: true,
     photo: null,
     pairing: "Tee · Milchreis · Punsch",
-  }),
-  P({
+  },
+  {
     id: "pumpkin-spice",
     slug: "bio-pumpkin-spice",
     name: "Bio-Pumpkin Spice",
     flavor: "Würzig, herbstlich & wohlig",
     description: "Unser Bestseller — der Sirup, mit dem alles begann.",
     story:
-      "Der Sirup, mit dem alles begann: An einem Herbstmorgen in Fulda suchte Jessica vergeblich nach einem Pumpkin Spice Latte — und begann, ihn selbst zu machen. Kürbis, Zimt, Muskat, Ingwer. Unser Bestseller.",
+      "Der Sirup, mit dem alles begann: An einem Herbstmorgen in Fulda suchte Jessica vergeblich nach einem Pumpkin Spice Latte — und begann, ihn selbst zu machen. Würzig, herbstlich, wohlig — unser Bestseller.",
     season: "Sep – Nov",
     seasonKeys: ["he"],
     sizes: [
@@ -183,13 +186,13 @@ export const products: Product[] = [
     badge: "Bestseller",
     photo: null,
     pairing: "Latte · Cheesecake · Chai",
-  }),
-  P({
+  },
+  {
     id: "spekulatius",
     slug: "bio-spekulatius",
     name: "Bio-Spekulatius",
     flavor: "Fein, buttrig & zimtig",
-    description: "Gewürzkeks im Glas — der dunkelste Sirup im Sortiment.",
+    description: "Gewürzkeks im Glas — tief, dunkel, weihnachtlich.",
     story:
       "Buttriger Gewürzkeks, eingefangen als Sirup — fast schwarz, tief und weihnachtlich. Ein Löffel im Kaffee und die Küche riecht nach Dezember.",
     season: "Dez – Jan",
@@ -201,15 +204,15 @@ export const products: Product[] = [
     accent: "cinnamon",
     photo: "spekulatius.jpg",
     pairing: "Kaffee · Kakao · Waffeln",
-  }),
-  P({
+  },
+  {
     id: "lebkuchen",
     slug: "bio-lebkuchen",
     name: "Bio-Lebkuchen",
     flavor: "Kräftig & würzig",
-    description: "Voller Weihnachtsstimmung — Honig, Nelke, Zimt.",
+    description: "Kräftig & würzig — voller Weihnachtsstimmung.",
     story:
-      "Honig, Nelke, Zimt, Piment: der ganze Weihnachtsmarkt in einer Flasche. Kräftig und würzig — auch als 50 ml Geschenk im Lebkuchenmännchen-Glas erhältlich.",
+      "Der ganze Weihnachtsmarkt in einer Flasche: kräftig, würzig, voller Weihnachtsstimmung — auch als 50-ml-Fläschchen zum Verschenken erhältlich.",
     season: "Dez – Jan",
     seasonKeys: ["wi"],
     sizes: [
@@ -219,15 +222,15 @@ export const products: Product[] = [
     accent: "cinnamon",
     photo: "lebkuchen.jpg",
     pairing: "Glühwein · Kakao · Plätzchen",
-  }),
-  P({
+  },
+  {
     id: "zimt",
     slug: "bio-zimt",
     name: "Bio-Zimt",
     flavor: "Warm & aromatisch",
-    description: "Der Geschmack von Winter — echte Ceylon-Zimtstangen.",
+    description: "Der Geschmack von Winter — warm und aromatisch.",
     story:
-      "Echte Zimtstangen, langsam ausgezogen: warm, aromatisch, beruhigend. Der Sirup für lange Winterabende und cremigen Milchschaum.",
+      "Warm, aromatisch, beruhigend: der Sirup für lange Winterabende und cremigen Milchschaum.",
     season: "Nov – Feb",
     seasonKeys: ["wi"],
     sizes: [
@@ -237,22 +240,22 @@ export const products: Product[] = [
     accent: "cinnamon",
     photo: "zimt.jpg",
     pairing: "Latte · Apfelsaft · Porridge",
-  }),
-  P({
+  },
+  {
     id: "vanille-extrakt",
     slug: "bio-vanille-extrakt",
     name: "Bio-Vanille-Extrakt",
     flavor: "Pur zum Backen & Verfeinern",
-    description: "Konzentrierte Vanille aus echter Schote — fürs Backen gemacht.",
+    description: "Konzentrierte Vanille — perfekt zum Backen, Verfeinern & Genießen.",
     story:
-      "Kein Sirup, sondern pure Tiefe: konzentrierter Vanille-Extrakt aus echter Schote, im eleganten schwarzen Mond-Etikett. Zum Backen, Verfeinern und Genießen.",
+      "Kein Sirup, sondern pure Tiefe: konzentrierter Vanille-Extrakt im eleganten schwarzen Mond-Etikett. Zum Backen, Verfeinern und Genießen.",
     season: "Ganzjährig",
     seasonKeys: ["gj"],
     sizes: [{ label: "100 ml", price: 7.8 }],
     accent: "honey",
     photo: "vanille-extrakt.jpg",
     pairing: "Teig · Creme · Eis",
-  }),
+  },
 ];
 
 export function getProduct(slug: string): Product | undefined {
@@ -270,6 +273,8 @@ export const heroPicks = [
   "vanille",
   "pistazie",
   "spekulatius",
-].map((id) => products.find((p) => p.id === id)!);
-
-export const PRICE_FROM = 5.5;
+].map((id) => {
+  const p = products.find((x) => x.id === id);
+  if (!p) throw new Error(`heroPick "${id}" existiert nicht im Katalog`);
+  return p;
+});

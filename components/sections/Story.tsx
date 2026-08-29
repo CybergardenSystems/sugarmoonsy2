@@ -3,7 +3,15 @@ import { Reveal } from "@/components/ui/Reveal";
 import { stats } from "@/data/site";
 import { storyImage } from "@/data/media";
 
-export function Story({ full = false }: { full?: boolean }) {
+export function Story({
+  full = false,
+  headingLevel = "h2",
+}: {
+  full?: boolean;
+  /** Auf /story trägt der PageHeader die h1 — die Section rendert dann h2 weiter unten. */
+  headingLevel?: "h1" | "h2";
+}) {
+  const Heading = headingLevel;
   return (
     <section id="story" className="section relative overflow-hidden">
       <div className="glow-blob left-1/2 top-0 -translate-x-1/2 bg-honey/[0.04]" />
@@ -12,7 +20,11 @@ export function Story({ full = false }: { full?: boolean }) {
           <Reveal>
             <span className="eyebrow">Unsere Geschichte</span>
           </Reveal>
-          <Reveal as="h2" delay={0.05} className="mt-4 font-display text-[clamp(2rem,4vw,3.2rem)] text-moon">
+          <Reveal
+            as={Heading}
+            delay={0.05}
+            className="mt-4 font-display text-[clamp(2rem,4vw,3.2rem)] text-moon"
+          >
             Von einer Küche in Fulda in eure Tassen
           </Reveal>
 
@@ -20,13 +32,15 @@ export function Story({ full = false }: { full?: boolean }) {
             <Reveal as="p" delay={0.1}>
               Ich bin <strong className="font-medium text-honey">Jessica</strong>, eine
               Amerikanerin, die der Liebe wegen nach Fulda kam. Mein Mann{" "}
-              <strong className="font-medium text-honey">Sebastian</strong> ist waschechter
-              Deutscher — praktisch, gründlich und voller Ideen.
+              <strong className="font-medium text-honey">Sebastian</strong> ist
+              waschechter Deutscher — praktisch, gründlich und voller Ideen.
             </Reveal>
             <Reveal as="p" delay={0.15}>
               Als ich eines Herbstmorgens vergeblich nach einem Pumpkin Spice Latte
               suchte, begann ich zu experimentieren. Sebastian dachte größer:{" "}
-              <em className="text-moon">„Was, wenn wir diesen Geschmack mit anderen teilen?"</em>
+              <em className="text-moon">
+                „Was, wenn wir diesen Geschmack mit anderen teilen?“
+              </em>
             </Reveal>
             <Reveal as="p" delay={0.2}>
               Heute bringen wir mit handgemachten Sirups viele kreative
@@ -34,9 +48,9 @@ export function Story({ full = false }: { full?: boolean }) {
             </Reveal>
             {full && (
               <Reveal as="p" delay={0.25}>
-                Jede Flasche entsteht in kleinen Chargen, von Hand abgefüllt und mit
-                unserem Mond-Etikett versehen. Bio-zertifiziert, saisonal gedacht, ohne
-                künstliche Zusätze — so, wie wir es selbst trinken möchten.
+                Jede Flasche entsteht in unserer Manufaktur — familiengeführt, mit
+                Herzblut und Sorgfalt — und trägt unser Mond-Etikett. Bio-zertifiziert,
+                saisonal gedacht, ohne künstliche Zusätze.
               </Reveal>
             )}
           </div>
@@ -47,7 +61,7 @@ export function Story({ full = false }: { full?: boolean }) {
             <div className="relative aspect-[4/3] bg-night-3">
               <Image
                 src={storyImage}
-                alt="Jessica und Sebastian von Sugar Moon Sweets an ihrem Stand auf dem Adventsmarkt in Fulda"
+                alt="Jessica und Sebastian von Sugar Moon Sweets an ihrem Stand auf dem Adventsmarkt in Rothemann"
                 fill
                 sizes="(max-width:1024px) 100vw, 560px"
                 className="object-cover object-center"
@@ -61,7 +75,9 @@ export function Story({ full = false }: { full?: boolean }) {
                   key={s.label}
                   className={`px-3 py-4 text-center ${i < 2 ? "border-r border-honey/10" : ""}`}
                 >
-                  <span className="block font-display text-2xl text-honey">{s.value}</span>
+                  <span className="block font-display text-2xl text-honey">
+                    {s.value}
+                  </span>
                   <span className="mt-0.5 block font-mono text-[0.58rem] uppercase tracking-wide text-moon-mute">
                     {s.label}
                   </span>
@@ -70,7 +86,7 @@ export function Story({ full = false }: { full?: boolean }) {
             </div>
           </div>
           <p className="mt-3 text-center font-mono text-[0.6rem] uppercase tracking-wide text-moon-mute">
-            Jessica &amp; Sebastian · Adventsmarkt Fulda
+            Jessica &amp; Sebastian · Adventsmarkt Rothemann
           </p>
         </Reveal>
       </div>

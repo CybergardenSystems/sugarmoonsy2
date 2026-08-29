@@ -12,7 +12,7 @@ export function PageHeader({
 }) {
   return (
     <header className="relative overflow-hidden pt-40 pb-12">
-      <div className="pointer-events-none absolute -top-20 right-[8%] opacity-50">
+      <div className="pointer-events-none absolute right-[6%] top-16 opacity-35">
         <MoonMark size={220} />
       </div>
       <div className="shell relative">

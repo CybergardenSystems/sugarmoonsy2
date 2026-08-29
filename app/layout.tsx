@@ -25,7 +25,8 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} – Bio-Sirup-Manufaktur Fulda`,
+    // Legacy-Parität: „| Online Shop" trug das Kauf-Keyword im Titel.
+    default: `${site.name} – Bio-Sirup-Manufaktur Fulda | Online Shop`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -37,6 +38,7 @@ export const metadata: Metadata = {
     locale: "de_DE",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
   icons: { icon: "/favicon.svg" },
 };
 
@@ -45,17 +47,19 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="de"
       className={`${fraunces.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body>
+        {/* html.js vor dem ersten Paint: .reveal versteckt nur mit JS. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
         <CartProvider>
           <SmoothScroll>
             <a
@@ -64,11 +68,12 @@ export default function RootLayout({
             >
               Zum Inhalt springen
             </a>
-            <div className="vignette" aria-hidden />
             <div className="grain" aria-hidden />
             <Cursor />
             <Nav />
-            <main id="main">{children}</main>
+            <main id="main" tabIndex={-1} className="outline-none">
+              {children}
+            </main>
             <Footer />
             <CartLayer />
             <FlyToCart />

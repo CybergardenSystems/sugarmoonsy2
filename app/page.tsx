@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/hero/Hero";
 import { Marquee } from "@/components/sections/Marquee";
 import { Manifest } from "@/components/sections/Manifest";
@@ -9,12 +10,15 @@ import { CTA } from "@/components/sections/CTA";
 import { GoldenSpine } from "@/components/layout/GoldenSpine";
 import { site } from "@/data/site";
 
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: site.name,
-  description:
-    "Bio-Sirup-Manufaktur aus Fulda. Handgemachte Sirupe und Limonaden.",
+  description: "Bio-Sirup-Manufaktur aus Fulda. Handgemachte Sirupe und Limonaden.",
   url: site.url,
   email: site.email,
   address: {
@@ -30,7 +34,9 @@ export default function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
       <GoldenSpine />
       <Hero />
