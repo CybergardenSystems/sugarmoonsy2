@@ -13,6 +13,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { FlyToCart } from "@/components/layout/FlyToCart";
 import { Toast } from "@/components/ui/Toast";
+import { Analytics } from "@vercel/analytics/next";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Toast />
           </SmoothScroll>
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
