@@ -129,3 +129,21 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   erfunden (§2-Regel) — falls gewünscht, muss der Inhaber sie liefern.
   Keine Rechtsberatung; finale Prüfung beim Inhaber/Anwalt.
 
+- **D29:** Zwei Bilder durch nachgelieferte Inhaber-Aufnahmen ersetzt: das
+  Stand-Foto (`public/media/story.jpg`) und Bio-Pumpkin Spice
+  (`public/media/relit/pumpkin-spice.webp`). Damit ist Pumpkin Spice **kein
+  KI-Rendering mehr**, sondern ein echtes Produktfoto — Bratapfel bleibt als
+  einziges Rendering übrig. Regel wie bisher: Originale werden nie
+  überschrieben. Die Neuzugänge liegen unangetastet in
+  `source-assets/products/` (`marktstand-jessica-sebastian.jpg`,
+  `pumpkin-spice.jpg`), das abgelöste Rendering unter
+  `source-assets/ai-renders/pumpkin-spice.webp`; das bisherige Stand-Foto
+  bleibt als `source-assets/products/adventsmarkt-jessica-sebastian.jpg`
+  erhalten. Ausgeliefert werden nur Ableitungen (JPEG q82 / WebP q82) unter
+  den **unveränderten Dateinamen** — kein Codepfad ändert sich. Die
+  Bildunterschriften waren bereits neutral (ohne Ortsangabe) formuliert und
+  passen deshalb unverändert auf das neue, sommerliche Stand-Foto. Am
+  Pumpkin-Foto wurde ausschließlich der **Ausschnitt** angepasst (Flasche von
+  98 % auf 86 % Bildhöhe, Rand durch Fortsetzen der Randpixel aufgefüllt),
+  damit die Flasche in der Shop-Kachel dieselbe Größe hat wie die
+  Geschwisterbilder — kein Retuschieren, keine Farbänderung.

@@ -21,5 +21,5 @@ export const limoPhotos: Record<string, string> = {
   "kraut-heiter": "/media/products/kraut-heiter.jpg",
 };
 
-/** Atmosphäre-Bild für die „Über uns"-Story: Jessica & Sebastian am Adventsmarkt. */
+/** Atmosphäre-Bild für die „Über uns"-Story: Jessica & Sebastian am Marktstand. */
 export const storyImage = "/media/story.jpg";

@@ -154,9 +154,9 @@ wurden nur neu durchnummeriert (5→9, 6→10, 7→11, 8→12).
 | Alt-Text `/story`: „… an ihrem Stand auf dem Adventsmarkt in Rothemann" | „… an ihrem Marktstand" | wie oben |
 | Alt-Text `/ausstellungen`: „… Adventsmarkt Rothemann" | „… am Sugar-Moon-Marktstand" | wie oben |
 
-Hinweis: Die Datei `public/media/story.jpg` zeigt zum Zeitpunkt dieser Änderung
-**noch** das Rothemann-Foto; die Caption ist dafür weiterhin richtig, nur
-weniger spezifisch. Der Bildtausch erfolgt, sobald die Datei vorliegt
-(ASSET_INVENTORY wird dann nachgezogen). Die Ortsangabe „Rothemann" bleibt als
-Korrektur des erfundenen „Fulda" in der Historie oben dokumentiert.
+Nachtrag: Der Bildtausch ist erfolgt — `public/media/story.jpg` zeigt jetzt die
+neue Aufnahme am Marktstand (D29, ASSET_INVENTORY §1/§5 nachgezogen). Die oben
+beschriebenen neutralen Captions und Alt-Texte passen unverändert; **kein
+Textbaustein musste erneut geändert werden.** Die Ortsangabe „Rothemann" bleibt
+als Korrektur des erfundenen „Fulda" in der Historie oben dokumentiert.
 
