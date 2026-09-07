@@ -146,3 +146,17 @@ wurden nur neu durchnummeriert (5→9, 6→10, 7→11, 8→12).
    der Auftragsverarbeitungsverträge sind zu bestätigen; §5/§6 setzen beide
    AVV als geschlossen voraus.
 
+### Bildunterschrift Stand-Foto: Ortsangabe entfernt (Inhaber-Entscheidung)
+
+| Vorher | Nachher | Grund |
+|---|---|---|
+| Caption `/story` + Startseite: „Jessica & Sebastian · Adventsmarkt Rothemann" | „Jessica & Sebastian" | Der Inhaber ersetzt das Stand-Foto durch eine neuere Aufnahme, die **nicht** auf dem Adventsmarkt entstand (Sommerlicht, Lavendel, keine Weihnachtsdeko). Auf Nachfrage entschied er sich für die **neutrale** Variante ohne Ortsangabe — sie bleibt für jedes Stand-Foto zutreffend. |
+| Alt-Text `/story`: „… an ihrem Stand auf dem Adventsmarkt in Rothemann" | „… an ihrem Marktstand" | wie oben |
+| Alt-Text `/ausstellungen`: „… Adventsmarkt Rothemann" | „… am Sugar-Moon-Marktstand" | wie oben |
+
+Nachtrag: Der Bildtausch ist erfolgt — `public/media/story.jpg` zeigt jetzt die
+neue Aufnahme am Marktstand (D29, ASSET_INVENTORY §1/§5 nachgezogen). Die oben
+beschriebenen neutralen Captions und Alt-Texte passen unverändert; **kein
+Textbaustein musste erneut geändert werden.** Die Ortsangabe „Rothemann" bleibt
+als Korrektur des erfundenen „Fulda" in der Historie oben dokumentiert.
+

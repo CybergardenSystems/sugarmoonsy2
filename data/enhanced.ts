@@ -19,7 +19,10 @@ export const enhancedPhotos: Record<string, string> = {
   "vanille-extrakt": "/media/relit/vanille-extrakt.webp",
   "geschenk-lebkuchenmann": "/media/relit/geschenk-lebkuchenmann.webp",
 
-  // Studio-Renderings (text-to-image) für die Sorten ohne Originalfoto.
-  bratapfel: "/media/relit/bratapfel.webp",
+  // Echtes Inhaber-Produktfoto (nachgeliefert), nur skaliert/konvertiert —
+  // kein Relighting, kein Rendering.
   "pumpkin-spice": "/media/relit/pumpkin-spice.webp",
+
+  // Studio-Rendering (text-to-image) für die Sorte ohne Originalfoto.
+  bratapfel: "/media/relit/bratapfel.webp",
 };

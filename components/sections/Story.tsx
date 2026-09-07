@@ -61,7 +61,7 @@ export function Story({
             <div className="relative aspect-[4/3] bg-night-3">
               <Image
                 src={storyImage}
-                alt="Jessica und Sebastian von Sugar Moon Sweets an ihrem Stand auf dem Adventsmarkt in Rothemann"
+                alt="Jessica und Sebastian von Sugar Moon Sweets an ihrem Marktstand"
                 fill
                 sizes="(max-width:1024px) 100vw, 560px"
                 className="object-cover object-center"
@@ -86,7 +86,7 @@ export function Story({
             </div>
           </div>
           <p className="mt-3 text-center font-mono text-[0.6rem] uppercase tracking-wide text-moon-mute">
-            Jessica &amp; Sebastian · Adventsmarkt Rothemann
+            Jessica &amp; Sebastian
           </p>
         </Reveal>
       </div>

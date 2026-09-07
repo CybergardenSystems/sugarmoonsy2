@@ -5,9 +5,11 @@ Image-Slot-System ein (`lib/products.ts` → Feld `photo`). Bis Dateien hier
 liegen, zeigt die Seite elegante Platzhalter (Mond/Glas-Art-Direction).
 
 > ⚠️ **Wichtig:** In den Chat gepastete Bilder landen **nicht** automatisch im
-> Repo-Dateisystem — ich (Claude) kann ihre Bytes nicht lesen. Damit die echten
-> Fotos auf der Seite erscheinen, müssen die Dateien hier als echte Dateien
-> liegen (per Git committen oder in `./source-assets/products/` ablegen).
+> Repo-Dateisystem. Damit die echten Fotos auf der Seite erscheinen, müssen die
+> Dateien hier als echte Dateien liegen — per Git committen, in
+> `./source-assets/products/` ablegen oder über die Upload-Seite hochladen, die
+> in der Session gebaut wurde (die Bytes landen dann im Artifact-Speicher und
+> werden von dort ins Repo geschrieben).
 
 ## Erwartete Dateien (`source-assets/products/`)
 Benenne die Fotos exakt so — dann werden sie automatisch verdrahtet:
@@ -33,6 +35,11 @@ Benenne die Fotos exakt so — dann werden sie automatisch verdrahtet:
 Format egal (jpg/png/webp/heic) — die Build-Pipeline (`scripts/optimize-media`)
 konvertiert nach WebP/AVIF und legt sie unter `public/media/products/` ab.
 Fehlende Dateien → Platzhalter, kein Fehler.
+
+## ai-renders/
+Abgelöste KI-Renderings, die durch echte Inhaber-Fotos ersetzt wurden. Sie
+werden **nicht gelöscht**, damit jederzeit nachvollziehbar bleibt, was vorher
+auf der Seite stand (aktuell: `pumpkin-spice.webp`, siehe `DECISIONS.md` D29).
 
 ## legacy/
 Inventar der Legacy-URL-Assets (nicht ladbar in dieser Umgebung, Host blockiert).

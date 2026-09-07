@@ -75,9 +75,10 @@ ausgelegt (CLS 0, Poster-LCP, kein Render-Blocking durch GSAP).
   Fraunces-Varianten (normal/italic) auf eine reduzieren.
 - **Echtes Checkout** (Stripe) — die Architektur ist vorbereitet (G3/D17);
   der mailto-Flow ist jetzt ehrlich, bleibt aber ein manueller Prozess.
-- **Fotos für Bratapfel & Pumpkin Spice** — aktuell KI-Studio-Renderings
-  (dokumentiert); echte Flaschenfotos ersetzen sie ohne Codeänderung
-  (gleiche Dateinamen in `public/media/relit/`).
+- **Foto für Bratapfel** — die letzte verbliebene KI-Studio-Rendering
+  (dokumentiert); ein echtes Flaschenfoto ersetzt sie ohne Codeänderung
+  (gleicher Dateiname in `public/media/relit/`). Pumpkin Spice und das
+  Stand-Foto wurden inzwischen durch Inhaber-Aufnahmen ersetzt (D29).
 - Optional: Produkt-JSON-LD um `shippingDetails`/`hasMerchantReturnPolicy`
   ergänzen, wenn Merchant-Rich-Results gewünscht sind.
 
