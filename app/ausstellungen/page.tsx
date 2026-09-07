@@ -52,12 +52,14 @@ export default function AusstellungenPage() {
               </p>
             </div>
 
-            {/* So sieht das aus: der echte Stand in Rothemann — füllt die
-                vorher leere Kartenhälfte (Design-Review). */}
+            {/* So sieht das aus: der echte Marktstand — füllt die vorher
+                leere Kartenhälfte (Design-Review). Bildunterschrift/Alt
+                bewusst ohne Ortsangabe, damit sie zu jedem Stand-Foto passt
+                (Inhaber-Entscheidung). */}
             <div className="relative hidden min-h-[300px] md:block">
               <Image
                 src={storyImage}
-                alt="Jessica und Sebastian am Sugar-Moon-Stand, Adventsmarkt Rothemann"
+                alt="Jessica und Sebastian am Sugar-Moon-Marktstand"
                 fill
                 sizes="(min-width: 768px) 45vw, 100vw"
                 className="object-cover object-center"
