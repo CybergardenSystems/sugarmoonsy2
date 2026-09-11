@@ -52,18 +52,22 @@ ebenfalls unangetastet im Repo.
   alle anderen; Bildinhalt und Farben bleiben unangetastet.
 - *Story-Foto:* nur auf 1400 px Breite skaliert, JPEG q82 (mozjpeg,
   progressiv) — keine Tonwert-Bearbeitung.
+- Seit D30 liegt in `public/media/relit/` **ausschließlich** Material, das auf
+  echten Flaschenfotos beruht.
 
-## 2. KI-Renderings (keine Original-Basis)
+## 2. KI-Renderings
 
-| Motiv | Datei | Herkunft |
+**Auf der Website ist keines mehr im Einsatz.** Beide ausgemusterten Dateien
+sind nicht gelöscht, sondern liegen unter `source-assets/ai-renders/`:
+
+| Motiv | Archiv-Datei | Warum abgelöst |
 |---|---|---|
-| Bio-Bratapfel (Coming Soon) | `public/media/relit/bratapfel.webp` | Higgsfield Text-to-Image-Studio-Rendering (kein Inhaber-Foto vorhanden) |
+| Bio-Pumpkin Spice | `source-assets/ai-renders/pumpkin-spice.webp` | echtes Inhaber-Foto nachgeliefert (D29) |
+| Bio-Bratapfel | `source-assets/ai-renders/bratapfel-rendering.webp` | Etikett trug sichtbar „BIO BRATAPFEL"; nach der Umbenennung in **Bio-Apple Spice** (D30) wäre das ein Widerspruch gewesen |
 
-**Abgelöst:** Bio-Pumpkin Spice war bis D29 ebenfalls ein solches Rendering.
-Seit der Nachlieferung des echten Produktfotos steht es in §1; das ausgemusterte
-Rendering ist nicht gelöscht, sondern liegt unter
-`source-assets/ai-renders/pumpkin-spice.webp`. Damit bleibt **Bratapfel das
-einzige KI-Bild der Website**.
+Bio-Apple Spice rendert deshalb den Mond-Platzhalter aus `ProductCard`, bis ein
+echtes Flaschenfoto vorliegt — das ist der einzige verbliebene Bild-Platzhalter
+der Website.
 
 ## 3. Limonaden (Hunfelt-Bräu-Flaschen)
 
@@ -89,6 +93,7 @@ einzige KI-Bild der Website**.
 | Logo/Emblem | `components/brand/MoonMark.tsx`, `Logo.tsx`, `Drop.tsx` | Vektor-Neuzeichnung nach echtem Etikett (kein Bitmap) |
 | OG-Image | `app/opengraph-image.tsx` → statisch generiert | 1200×630, Fraunces-600 (`assets/fonts/`, OFL) |
 | Legacy-Website | `source-assets/legacy/index.html` | vollständiges Backup, read-only |
+| Veranstaltungs-Flyer | `public/media/events/` | Flyer zu einzelnen Terminen, verknüpft über das Feld `flyer` in `data/events.ts`; werden unbeschnitten gezeigt (`object-contain`), Klick öffnet die volle Auflösung |
 
 ## 6. Alt-Texte
 

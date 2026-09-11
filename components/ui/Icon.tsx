@@ -19,7 +19,11 @@ export type IconName =
   | "spark"
   | "alert"
   | "pause"
-  | "play";
+  | "play"
+  | "calendar"
+  | "pin"
+  | "instagram"
+  | "facebook";
 
 const STROKE: Record<string, React.ReactNode> = {
   leaf: (
@@ -58,6 +62,29 @@ const STROKE: Record<string, React.ReactNode> = {
       <circle cx="9.5" cy="20" r="1.3" />
       <circle cx="17.5" cy="20" r="1.3" />
     </>
+  ),
+  calendar: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2.5" />
+      <path d="M8 3v4M16 3v4M3 10.5h18" />
+    </>
+  ),
+  pin: (
+    <>
+      <path d="M12 21.2c4.2-4.2 6.3-7.4 6.3-10.2a6.3 6.3 0 1 0-12.6 0c0 2.8 2.1 6 6.3 10.2z" />
+      <circle cx="12" cy="10.6" r="2.4" />
+    </>
+  ),
+  // Standard-Outline-Glyphen der beiden Netzwerke, auf das 24er-Grid gelegt.
+  instagram: (
+    <>
+      <rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2" />
+      <circle cx="12" cy="12" r="4" />
+      <path d="M17.4 6.6h.01" />
+    </>
+  ),
+  facebook: (
+    <path d="M18 2.8h-2.8a4.7 4.7 0 0 0-4.7 4.7v2.8H7.7v4h2.8v8h4v-8h2.8l.8-4h-3.6V7.5c0-.6.4-1 1-1H18z" />
   ),
 };
 

@@ -25,7 +25,7 @@ Benenne die Fotos exakt so — dann werden sie automatisch verdrahtet:
 | `lavendel-blaubeere.jpg` | Bio-Lavendelsirup mit Blaubeere |
 | `kokos.jpg` | Bio-Sirup mit Kokosraspeln |
 | `blaubeer-basilikum.jpg` | Bio-Blaubeer-Basilikumsirup |
-| `bratapfel.jpg` | Bio-Bratapfel |
+| `apple-spice.jpg` | Bio-Apple Spice |
 | `pumpkin-spice.jpg` | Bio-Pumpkin Spice |
 | `vanille-extrakt.jpg` | Bio-Vanille-Extrakt |
 | `geschenk-lebkuchenmann.jpg` | 50ml Geschenkflasche (Lebkuchenmännchen) |

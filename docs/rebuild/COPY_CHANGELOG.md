@@ -160,3 +160,54 @@ beschriebenen neutralen Captions und Alt-Texte passen unverändert; **kein
 Textbaustein musste erneut geändert werden.** Die Ortsangabe „Rothemann" bleibt
 als Korrektur des erfundenen „Fulda" in der Historie oben dokumentiert.
 
+
+### Sorten-Umbenennung: Bratapfel → Apple Spice (Inhaber-Wunsch, D30)
+
+| Stelle | Vorher | Nachher |
+|---|---|---|
+| Produktname (Karte, PDP, `<title>`, JSON-LD) | „Bio-Bratapfel" | „Bio-Apple Spice" |
+| Produkt-URL | `/shop/bio-bratapfel` | `/shop/bio-apple-spice` (alte URL → 301) |
+
+**Nicht** geändert: Kurzbeschreibung („Fruchtig, zimtig & winterlich"),
+Beschreibung („Apfel trifft Zimt — der Duft von Herbstabenden.") und der
+Story-Text („Gebackener Apfel und Zimt …"). Sie beschreiben weiterhin
+zutreffend, was in der Flasche ist; neue Geschmackstexte würden erfunden
+(§2-Regel). Der Inhaber kann sie jederzeit liefern.
+
+### Neue Seite: „Termine & Märkte" (D31)
+
+Die Seite hieß „Wo wir ausstellen" und hatte keinen einzigen Termin.
+
+| Stelle | Vorher | Nachher |
+|---|---|---|
+| Navigations-/Seitentitel | „Wo wir ausstellen" (nur im Footer verlinkt) | „Termine & Märkte" — zusätzlich in der Hauptnavigation |
+| PageHeader-Sub | „Ihr kennt eine Ausstellung oder Veranstaltung, auf der wir nicht fehlen sollten? …" | „Am liebsten treffen wir euch persönlich — hier steht, wo unser Stand als Nächstes aufgebaut ist." (der alte Satz lebt unverändert im Block „Schlag uns ein Event vor" weiter) |
+| Meta-Description | „Triff Sugar Moon Sweets auf Märkten …" | „Hier trefft ihr Sugar Moon Sweets: kommende Märkte und Veranstaltungen rund um Fulda …" |
+| Footer-Link | „Ausstellungen" | „Termine & Märkte" |
+
+Neue Texte, alle als solche dokumentiert:
+- Hinweis unter der Terminliste: „Angaben ohne Gewähr — kurzfristige Änderungen
+  kündigen wir auf unseren Kanälen an."
+- Leerzustand (kein Termin geplant): „Gerade ist kein Termin geplant" /
+  „Sobald der nächste Markt feststeht, steht er hier — und zuerst auf Instagram
+  und Facebook."
+- Zwischenüberschrift „Beim Fest außerdem" — trennt das Programm der
+  Veranstalter sichtbar von unserem Angebot.
+- „Da waren wir schon" — Archiv gelaufener Termine (erscheint erst, wenn es
+  welche gibt).
+
+Termin-Inhalte (Veranstaltungsnamen, Daten, Orte, Programmpunkte) stammen
+**wörtlich von den Flyern des Inhabers**. Offen: Das Jahr des Keuloser
+Apfelweinfests steht nicht auf dem Flyer — angesetzt ist 2026, bitte bestätigen.
+
+### Social-Kanäle (D32)
+
+Neuer Satz, an drei Stellen identisch verwendet (Quelle: `socialLine` in
+`data/site.ts`):
+
+> „Aktuelle Infos, neue Sorten und wo wir als Nächstes stehen, findet ihr bei
+> uns auf Instagram und Facebook."
+
+Dazu die Überschrift „Bleibt auf dem Laufenden" (Terminseite), „Folgt uns"
+(Footer) und „Nächster Markt" (Band auf der Startseite). Die Profil-Adressen
+kamen vom Inhaber.

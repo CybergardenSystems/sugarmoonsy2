@@ -147,3 +147,34 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   98 % auf 86 % Bildhöhe, Rand durch Fortsetzen der Randpixel aufgefüllt),
   damit die Flasche in der Shop-Kachel dieselbe Größe hat wie die
   Geschwisterbilder — kein Retuschieren, keine Farbänderung.
+- **D30:** Sorte **Bio-Bratapfel → Bio-Apple Spice** umbenannt (Inhaber-Wunsch).
+  Mitgezogen: `id`/`slug` (`bio-bratapfel` → `bio-apple-spice`) und ein
+  301-Redirect in `next.config.ts`, damit die alte Produkt-URL erreichbar
+  bleibt. Geschmackstexte („Gebackener Apfel und Zimt …") sind **unverändert**
+  — sie beschreiben weiterhin korrekt, was in der Flasche ist, und werden
+  nicht neu erfunden (§2-Regel). Das bisherige Studio-Rendering musste
+  **raus**: Es trug „BIO BRATAPFEL" sichtbar auf dem Etikett und hätte unter
+  der Überschrift „Bio-Apple Spice" wie ein Fehler gewirkt. Es ist nicht
+  gelöscht, sondern liegt als
+  `source-assets/ai-renders/bratapfel-rendering.webp`. Die Sorte rendert bis
+  zu einem echten Flaschenfoto den Mond-Platzhalter — damit steht auf der
+  Website **kein einziges KI-Bild mehr**.
+- **D31:** Aus „Wo wir ausstellen" wird **„Termine & Märkte"** mit echten
+  Terminen aus `data/events.ts`. Abgelaufene Termine fallen automatisch raus
+  (Datumsvergleich in Europe/Berlin); Startseite und Terminseite revalidieren
+  deshalb stündlich, sonst bliebe ein gelaufener Markt bis zum nächsten Deploy
+  stehen. Alle Angaben stammen wörtlich von den Flyern des Inhabers —
+  Uhrzeiten, Adressen und Ortsteile fehlen bewusst, solange sie dort nicht
+  stehen. Das Fest-Programm (Wildgulasch, Wildbratwurst …) steht getrennt
+  unter „Beim Fest außerdem", damit es nicht als unser Angebot gelesen wird.
+  Beim Apfelweinfest nennt der Flyer nur „20. September" ohne Jahr; angesetzt
+  ist der nächste passende Termin (So, 20.09.2026) — **vom Inhaber zu
+  bestätigen**. Zusatz: „Termin merken" liefert über `app/api/kalender/[id]`
+  einen ganztägigen iCalendar-Eintrag (RFC 5545, statisch vorgerendert) — ohne
+  erfundene Uhrzeit, weil die Flyer keine nennen.
+- **D32:** **Instagram und Facebook** sind ab jetzt auf jeder Seite erreichbar
+  (Footer), prominent auf der Terminseite und im Termin-Band der Startseite;
+  die Profile stehen zusätzlich als `sameAs` im LocalBusiness-JSON-LD. Eine
+  Quelle für alles: `social` und `socialLine` in `data/site.ts`. „Termine" ist
+  neu in der Hauptnavigation — die Seite hing vorher nur im Footer, obwohl
+  dort jetzt die zeitkritischste Information der Website steht.
