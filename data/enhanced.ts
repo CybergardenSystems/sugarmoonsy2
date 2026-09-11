@@ -24,5 +24,9 @@ export const enhancedPhotos: Record<string, string> = {
   "pumpkin-spice": "/media/relit/pumpkin-spice.webp",
 
   // Studio-Rendering (text-to-image) für die Sorte ohne Originalfoto.
-  bratapfel: "/media/relit/bratapfel.webp",
+  // Achtung: Auf dem Etikett steht sichtbar „BIO BRATAPFEL" — der alte
+  // Sortenname. Das Bild bleibt auf ausdrücklichen Wunsch des Inhabers
+  // trotzdem stehen (D30); ein echtes Flaschenfoto ersetzt es später unter
+  // demselben Dateinamen.
+  "apple-spice": "/media/relit/apple-spice.webp",
 };

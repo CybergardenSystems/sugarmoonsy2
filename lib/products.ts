@@ -149,9 +149,9 @@ export const products: Product[] = [
     pairing: "Iced Latte · Curry · Smoothie",
   },
   {
-    id: "bratapfel",
-    slug: "bio-bratapfel",
-    name: "Bio-Bratapfel",
+    id: "apple-spice",
+    slug: "bio-apple-spice",
+    name: "Bio-Apple Spice",
     flavor: "Fruchtig, zimtig & winterlich",
     description: "Apfel trifft Zimt — der Duft von Herbstabenden.",
     story:

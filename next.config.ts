@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
     return [
       { source: "/datenschutzerklaerung", destination: "/datenschutz", statusCode: 301 },
       { source: "/wo-wir-ausstellen", destination: "/ausstellungen", statusCode: 301 },
+      // Sorte umbenannt (D30) — alte Produkt-URL bleibt erreichbar.
+      {
+        source: "/shop/bio-bratapfel",
+        destination: "/shop/bio-apple-spice",
+        statusCode: 301,
+      },
     ];
   },
   async headers() {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
+import { SocialRow } from "@/components/ui/SocialLinks";
 import { site, footerLinks } from "@/data/site";
 
 const columns: { title: string; links: { href: string; label: string }[] }[] = [
@@ -26,6 +27,13 @@ export function Footer() {
             >
               {site.email}
             </a>
+
+            {/* Die Kanäle stehen auf jeder Seite — dort laufen die aktuellen
+                Infos und die kurzfristigen Markt-Ankündigungen. */}
+            <p className="mt-7 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-moon-mute">
+              Folgt uns
+            </p>
+            <SocialRow className="mt-3" />
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:contents">

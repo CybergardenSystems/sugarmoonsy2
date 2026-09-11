@@ -147,3 +147,43 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   98 % auf 86 % Bildhöhe, Rand durch Fortsetzen der Randpixel aufgefüllt),
   damit die Flasche in der Shop-Kachel dieselbe Größe hat wie die
   Geschwisterbilder — kein Retuschieren, keine Farbänderung.
+- **D30:** Sorte **Bio-Bratapfel → Bio-Apple Spice** umbenannt (Inhaber-Wunsch).
+  Mitgezogen: `id`/`slug` (`bio-bratapfel` → `bio-apple-spice`) und ein
+  301-Redirect in `next.config.ts`, damit die alte Produkt-URL erreichbar
+  bleibt. Geschmackstexte („Gebackener Apfel und Zimt …") sind **unverändert**
+  — sie beschreiben weiterhin korrekt, was in der Flasche ist, und werden
+  nicht neu erfunden (§2-Regel). Das Studio-Rendering **bleibt** unter dem
+  neuen Dateinamen `public/media/relit/apple-spice.webp` in Betrieb. Dazu ein
+  dokumentierter Vorbehalt: Auf dem gerenderten Etikett steht sichtbar
+  „BIO BRATAPFEL" — auf der Produktseite in Lesegröße. Wir haben den Inhaber
+  darauf hingewiesen und vorübergehend auf den Mond-Platzhalter umgestellt; er
+  hat ausdrücklich entschieden, dass das Bild drin bleibt und nur der Name
+  wechselt. Das ist seine Entscheidung, die Abweichung ist hier festgehalten.
+  Ein echtes Flaschenfoto ersetzt das Rendering ohne Codeänderung unter
+  demselben Dateinamen. Bratapfel/Apple Spice bleibt damit das **einzige
+  KI-Bild der Website**.
+- **D31:** Aus „Wo wir ausstellen" wird **„Termine & Märkte"** mit echten
+  Terminen aus `data/events.ts`. Abgelaufene Termine fallen automatisch raus
+  (Datumsvergleich in Europe/Berlin); Startseite und Terminseite revalidieren
+  deshalb stündlich, sonst bliebe ein gelaufener Markt bis zum nächsten Deploy
+  stehen. Alle Angaben stammen wörtlich von den Flyern des Inhabers —
+  Uhrzeiten, Adressen und Ortsteile fehlen bewusst, solange sie dort nicht
+  stehen. Das Fest-Programm (Wildgulasch, Wildbratwurst …) steht getrennt
+  unter „Beim Fest außerdem", damit es nicht als unser Angebot gelesen wird.
+  Beim Apfelweinfest nennt der Flyer selbst nur „20. September" ohne Jahr;
+  belegt ist 2026 durch den Dateinamen der Inhaber-Vorlage („Ausstellung
+  Keulos 20.09.2026") — passend dazu ist der 20.09.2026 ein Sonntag, wie der
+  Tag der Regionen eine Woche später. Die Flyer selbst liegen als WebP q85
+  unter `public/media/events/`; sie werden **unbeschnitten** gezeigt
+  (`object-contain`, echte Maße im Datensatz gegen Layout-Shift), weil sie
+  textlastig sind und ein Zuschnitt Informationen abschneiden würde. Ein Klick
+  öffnet die volle Auflösung. Zusatz: „Termin merken" liefert über
+  `app/api/kalender/[id]`
+  einen ganztägigen iCalendar-Eintrag (RFC 5545, statisch vorgerendert) — ohne
+  erfundene Uhrzeit, weil die Flyer keine nennen.
+- **D32:** **Instagram und Facebook** sind ab jetzt auf jeder Seite erreichbar
+  (Footer), prominent auf der Terminseite und im Termin-Band der Startseite;
+  die Profile stehen zusätzlich als `sameAs` im LocalBusiness-JSON-LD. Eine
+  Quelle für alles: `social` und `socialLine` in `data/site.ts`. „Termine" ist
+  neu in der Hauptnavigation — die Seite hing vorher nur im Footer, obwohl
+  dort jetzt die zeitkritischste Information der Website steht.

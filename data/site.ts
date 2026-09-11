@@ -15,9 +15,33 @@ export const site = {
 export const nav = [
   { href: "/shop", label: "Shop" },
   { href: "/limonaden", label: "Bio-Limo" },
+  { href: "/ausstellungen", label: "Termine" },
   { href: "/story", label: "Über uns" },
   { href: "/#bewertungen", label: "Bewertungen" },
 ] as const;
+
+/**
+ * Social-Profile des Inhabers. Einzige Quelle für Footer, Termin-Seite,
+ * Startseite und das `sameAs`-Feld im JSON-LD.
+ */
+export const social = [
+  {
+    key: "instagram",
+    label: "Instagram",
+    handle: "@sugarmoonsweets_fd",
+    href: "https://www.instagram.com/sugarmoonsweets_fd/",
+  },
+  {
+    key: "facebook",
+    label: "Facebook",
+    handle: "Sugar Moon Sweets",
+    href: "https://www.facebook.com/p/Sugar-Moon-Sweets-61573744955640/",
+  },
+] as const;
+
+/** Ein Satz, der überall gleich lautet, wo wir auf die Kanäle zeigen. */
+export const socialLine =
+  "Aktuelle Infos, neue Sorten und wo wir als Nächstes stehen, findet ihr bei uns auf Instagram und Facebook.";
 
 export const usps = [
   {
@@ -62,7 +86,7 @@ export const footerLinks = {
   unternehmen: [
     { href: "/story", label: "Über uns" },
     { href: "/#bewertungen", label: "Bewertungen" },
-    { href: "/ausstellungen", label: "Ausstellungen" },
+    { href: "/ausstellungen", label: "Termine & Märkte" },
   ],
   // Legacy-Parität: die Kontakt-Spalte (Mail + sichtbare Domain) stand im
   // Original-Footer und bleibt erhalten (Council R1, Content#7).
