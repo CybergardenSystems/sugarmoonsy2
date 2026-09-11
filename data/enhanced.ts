@@ -23,9 +23,10 @@ export const enhancedPhotos: Record<string, string> = {
   // kein Relighting, kein Rendering.
   "pumpkin-spice": "/media/relit/pumpkin-spice.webp",
 
-  // Bio-Apple Spice hat bewusst KEINEN Eintrag: Das frühere Studio-Rendering
-  // trug „BIO BRATAPFEL" auf dem Etikett und hätte dem neuen Namen
-  // widersprochen (D30). Bis ein echtes Flaschenfoto vorliegt, rendert die
-  // Sorte den Mond-Platzhalter — damit steht auf der Seite kein einziges
-  // KI-Bild mehr.
+  // Studio-Rendering (text-to-image) für die Sorte ohne Originalfoto.
+  // Achtung: Auf dem Etikett steht sichtbar „BIO BRATAPFEL" — der alte
+  // Sortenname. Das Bild bleibt auf ausdrücklichen Wunsch des Inhabers
+  // trotzdem stehen (D30); ein echtes Flaschenfoto ersetzt es später unter
+  // demselben Dateinamen.
+  "apple-spice": "/media/relit/apple-spice.webp",
 };

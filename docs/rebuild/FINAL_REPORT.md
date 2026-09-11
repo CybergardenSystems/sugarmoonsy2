@@ -75,12 +75,12 @@ ausgelegt (CLS 0, Poster-LCP, kein Render-Blocking durch GSAP).
   Fraunces-Varianten (normal/italic) auf eine reduzieren.
 - **Echtes Checkout** (Stripe) — die Architektur ist vorbereitet (G3/D17);
   der mailto-Flow ist jetzt ehrlich, bleibt aber ein manueller Prozess.
-- **Foto für Bio-Apple Spice** — die Sorte zeigt aktuell den Mond-Platzhalter.
-  Das frühere KI-Rendering trug „BIO BRATAPFEL" auf dem Etikett und wurde mit
-  der Umbenennung ausgemustert (D30); damit ist **kein KI-Bild mehr auf der
-  Website**. Ein echtes Flaschenfoto wird ohne Codeänderung aktiv, sobald es
-  als `public/media/relit/apple-spice.webp` liegt und in `data/enhanced.ts`
-  eingetragen ist.
+- **Foto für Bio-Apple Spice** — die letzte verbliebene KI-Studio-Rendering.
+  Sie trägt „BIO BRATAPFEL" auf dem Etikett, also den Sortennamen vor der
+  Umbenennung (D30); der Inhaber hat entschieden, sie vorerst zu behalten. Ein
+  echtes Flaschenfoto ersetzt sie ohne Codeänderung unter demselben
+  Dateinamen (`public/media/relit/apple-spice.webp`) — **das ist die
+  wirksamste offene Verbesserung an der Seite.**
 - Optional: Produkt-JSON-LD um `shippingDetails`/`hasMerchantReturnPolicy`
   ergänzen, wenn Merchant-Rich-Results gewünscht sind.
 

@@ -52,22 +52,25 @@ ebenfalls unangetastet im Repo.
   alle anderen; Bildinhalt und Farben bleiben unangetastet.
 - *Story-Foto:* nur auf 1400 px Breite skaliert, JPEG q82 (mozjpeg,
   progressiv) — keine Tonwert-Bearbeitung.
-- Seit D30 liegt in `public/media/relit/` **ausschließlich** Material, das auf
-  echten Flaschenfotos beruht.
+- In `public/media/relit/` liegt bis auf `apple-spice.webp` (§2)
+  ausschließlich Material, das auf echten Flaschenfotos beruht.
 
-## 2. KI-Renderings
+## 2. KI-Renderings (keine Original-Basis)
 
-**Auf der Website ist keines mehr im Einsatz.** Beide ausgemusterten Dateien
-sind nicht gelöscht, sondern liegen unter `source-assets/ai-renders/`:
-
-| Motiv | Archiv-Datei | Warum abgelöst |
+| Motiv | Datei | Herkunft |
 |---|---|---|
-| Bio-Pumpkin Spice | `source-assets/ai-renders/pumpkin-spice.webp` | echtes Inhaber-Foto nachgeliefert (D29) |
-| Bio-Bratapfel | `source-assets/ai-renders/bratapfel-rendering.webp` | Etikett trug sichtbar „BIO BRATAPFEL"; nach der Umbenennung in **Bio-Apple Spice** (D30) wäre das ein Widerspruch gewesen |
+| Bio-Apple Spice (Coming Soon) | `public/media/relit/apple-spice.webp` | Higgsfield Text-to-Image-Studio-Rendering (kein Inhaber-Foto vorhanden) |
 
-Bio-Apple Spice rendert deshalb den Mond-Platzhalter aus `ProductCard`, bis ein
-echtes Flaschenfoto vorliegt — das ist der einzige verbliebene Bild-Platzhalter
-der Website.
+> ⚠️ **Bekannte Abweichung:** Auf dem gerenderten Etikett steht „BIO
+> BRATAPFEL" — der Sortenname vor der Umbenennung (D30). Auf der Produktseite
+> ist das in Lesegröße sichtbar. Der Inhaber wurde darauf hingewiesen und hat
+> entschieden, das Bild zu behalten. Ein echtes Flaschenfoto ersetzt es ohne
+> Codeänderung unter demselben Dateinamen.
+
+**Abgelöst:** Bio-Pumpkin Spice war bis D29 ebenfalls ein solches Rendering.
+Seit der Nachlieferung des echten Produktfotos steht es in §1; das ausgemusterte
+Rendering ist nicht gelöscht, sondern liegt unter
+`source-assets/ai-renders/pumpkin-spice.webp`.
 
 ## 3. Limonaden (Hunfelt-Bräu-Flaschen)
 
@@ -93,7 +96,13 @@ der Website.
 | Logo/Emblem | `components/brand/MoonMark.tsx`, `Logo.tsx`, `Drop.tsx` | Vektor-Neuzeichnung nach echtem Etikett (kein Bitmap) |
 | OG-Image | `app/opengraph-image.tsx` → statisch generiert | 1200×630, Fraunces-600 (`assets/fonts/`, OFL) |
 | Legacy-Website | `source-assets/legacy/index.html` | vollständiges Backup, read-only |
-| Veranstaltungs-Flyer | `public/media/events/` | Flyer zu einzelnen Terminen, verknüpft über das Feld `flyer` in `data/events.ts`; werden unbeschnitten gezeigt (`object-contain`), Klick öffnet die volle Auflösung |
+| Flyer Keulos | `public/media/events/keulos-apfelweinfest-2026.webp` | 1254×1254, WebP q85 (209 KB); Original `source-assets/events/keulos-apfelweinfest-2026.png` (PNG, 2,4 MB) |
+| Flyer Hosenfeld | `public/media/events/hosenfeld-tag-der-regionen-2026.webp` | 1024×1536, WebP q85 (360 KB); Original `source-assets/events/hosenfeld-tag-der-regionen-2026.jpg` (JPEG, 612 KB) |
+
+Beide Flyer kommen vom Inhaber, sind über das Feld `flyer` in `data/events.ts`
+verknüpft und werden **unbeschnitten** gezeigt — sie sind textlastig, ein
+Zuschnitt würde Angaben abschneiden. Klick öffnet die volle Auflösung. Die
+Originale bleiben unangetastet unter `source-assets/events/`.
 
 ## 6. Alt-Texte
 

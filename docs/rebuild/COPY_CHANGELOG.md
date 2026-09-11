@@ -168,6 +168,10 @@ als Korrektur des erfundenen „Fulda" in der Historie oben dokumentiert.
 | Produktname (Karte, PDP, `<title>`, JSON-LD) | „Bio-Bratapfel" | „Bio-Apple Spice" |
 | Produkt-URL | `/shop/bio-bratapfel` | `/shop/bio-apple-spice` (alte URL → 301) |
 
+Das Produktbild bleibt auf Wunsch des Inhabers unverändert — obwohl darauf
+„BIO BRATAPFEL" steht. Der Hinweis darauf ist in `DECISIONS.md` D30 und
+`ASSET_INVENTORY.md` §2 festgehalten.
+
 **Nicht** geändert: Kurzbeschreibung („Fruchtig, zimtig & winterlich"),
 Beschreibung („Apfel trifft Zimt — der Duft von Herbstabenden.") und der
 Story-Text („Gebackener Apfel und Zimt …"). Sie beschreiben weiterhin
@@ -197,8 +201,10 @@ Neue Texte, alle als solche dokumentiert:
   welche gibt).
 
 Termin-Inhalte (Veranstaltungsnamen, Daten, Orte, Programmpunkte) stammen
-**wörtlich von den Flyern des Inhabers**. Offen: Das Jahr des Keuloser
-Apfelweinfests steht nicht auf dem Flyer — angesetzt ist 2026, bitte bestätigen.
+**wörtlich von den Flyern des Inhabers**. Das Jahr des Keuloser Apfelweinfests
+steht nicht im Flyer-Layout, ist aber durch den Dateinamen der gelieferten
+Vorlage belegt („Ausstellung Keulos 20.09.2026"). Beide Flyer sind als Bild in
+die Termin-Karten eingebunden.
 
 ### Social-Kanäle (D32)
 

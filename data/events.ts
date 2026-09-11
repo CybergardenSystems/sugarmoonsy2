@@ -37,18 +37,22 @@ export interface MarketEvent {
   flyer?: EventFlyer;
 }
 
-/**
- * Chronologisch. Beim Apfelweinfest nennt der Flyer nur „20. September" ohne
- * Jahr; angesetzt ist der nächste passende Termin (2026) — vom Inhaber zu
- * bestätigen (DECISIONS D31).
- */
+/** Chronologisch. */
 export const events: MarketEvent[] = [
   {
     id: "keuloser-apfelweinfest-2026",
     title: "Keuloser Apfelweinfest & Heimatmarkt",
     place: "Keulos",
+    // Der Flyer selbst nennt nur „20. September"; das Jahr ist durch den
+    // Dateinamen der Inhaber-Vorlage belegt (Keulos 20.09.2026).
     date: "2026-09-20",
     note: "Besucht uns an unserem Stand und entdeckt unsere handgemachten Bio-Sirupe.",
+    flyer: {
+      src: "/media/events/keulos-apfelweinfest-2026.webp",
+      alt: "Flyer zum Keuloser Apfelweinfest & Heimatmarkt am 20. September: Jessica und Sebastian am Sugar-Moon-Stand, davor Lavendel-, Vanille- und Karamellsirup und eine Tafel „Bio-Manufaktur aus Fulda“.",
+      width: 1254,
+      height: 1254,
+    },
   },
   {
     id: "tag-der-regionen-hosenfeld-2026",
@@ -63,6 +67,12 @@ export const events: MarketEvent[] = [
       "Wildbratwurst",
       "Getränke",
     ],
+    flyer: {
+      src: "/media/events/hosenfeld-tag-der-regionen-2026.webp",
+      alt: "Herbstlicher Flyer zum Tag der Regionen in Hosenfeld am 27. September 2026: Herbstmarkt bei dem Blumenmädchen mit Wildgulasch, Wildbratwurst und Getränken, daneben vier Sugar-Moon-Sirupe — Lavendel, Vanille, Kürbis und Zimt.",
+      width: 1024,
+      height: 1536,
+    },
   },
 ];
 
