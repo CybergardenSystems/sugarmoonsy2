@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { SocialRow } from "@/components/ui/SocialLinks";
-import { dateParts, formatEventDate, upcomingEvents } from "@/data/events";
+import { eventBadge, formatEventDates, upcomingEvents } from "@/data/events";
 import { socialLine } from "@/data/site";
 
 /**
@@ -14,7 +14,9 @@ import { socialLine } from "@/data/site";
  */
 export function NextEvent() {
   const next = upcomingEvents()[0];
-  const { day, monthShort } = next ? dateParts(next.date) : { day: "", monthShort: "" };
+  const { day, monthShort, range } = next
+    ? eventBadge(next)
+    : { day: "", monthShort: "", range: false };
 
   return (
     <section className="section-tight relative">
@@ -36,7 +38,11 @@ export function NextEvent() {
                         className="flex h-[4.4rem] w-[3.9rem] shrink-0 flex-col items-center justify-center rounded-xl border border-honey/20 bg-night-3/60"
                         aria-hidden="true"
                       >
-                        <span className="font-display text-[1.8rem] leading-none text-honey">
+                        <span
+                          className={`font-display leading-none text-honey ${
+                            range ? "text-[1.25rem] tracking-tight" : "text-[1.8rem]"
+                          }`}
+                        >
                           {day}
                         </span>
                         <span className="mt-1 font-mono text-[0.56rem] uppercase tracking-[0.18em] text-moon-mute">
@@ -48,7 +54,7 @@ export function NextEvent() {
                           {next.title}
                         </h2>
                         <p className="mt-1.5 text-sm text-moon-dim">
-                          {formatEventDate(next.date)} · {next.place}
+                          {formatEventDates(next)} · {next.place}
                         </p>
                       </div>
                     </div>

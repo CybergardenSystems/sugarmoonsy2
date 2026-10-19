@@ -1,15 +1,19 @@
 import Image from "next/image";
 import { Icon } from "@/components/ui/Icon";
 import {
-  dateParts,
-  formatEventDate,
-  formatEventWeekday,
-  formatEventWeekdayShort,
+  eventBadge,
+  formatEventDates,
+  formatEventWeekdays,
   type MarketEvent,
 } from "@/data/events";
 
 /**
  * Eine Markt-/Veranstaltungskarte.
+ *
+ * Termine ohne Flyer, Begleittext und Programm (reine Terminliste des
+ * Inhabers) werden als kompakte Zeile gesetzt — Datum, Titel, Ort und rechts
+ * „Termin merken". Eine große, leere Karte pro Termin würde die Liste
+ * unnötig strecken.
  *
  * Das Datum trägt die Karte, deshalb steht es als eigenes Schild links —
  * nicht als Dekoration, sondern weil es die Information ist, nach der man auf
@@ -27,7 +31,20 @@ export function EventCard({
   /** Bereits gelaufen: ruhiger, ohne Kalender-Link. */
   past?: boolean;
 }) {
-  const { day, monthShort } = dateParts(event.date);
+  const { day, monthShort, range } = eventBadge(event);
+  const compact = !event.flyer && !event.note && !event.programme?.length;
+
+  const calendarLink = !past && (
+    <a
+      href={`/api/kalender/${event.id}`}
+      className={`${
+        compact ? "self-start sm:self-auto" : "mt-7"
+      } inline-flex shrink-0 items-center gap-2 rounded-full border border-honey/20 px-4 py-2.5 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-moon-dim transition-colors hover:border-honey/50 hover:text-honey`}
+    >
+      <Icon name="calendar" size={15} />
+      Termin merken
+    </a>
+  );
 
   return (
     <article
@@ -37,52 +54,71 @@ export function EventCard({
     >
       {highlighted && <div className="glow-blob -right-16 -top-16 bg-honey/6" />}
 
-      <div className="relative p-7 sm:p-9">
+      <div className={`relative ${compact ? "p-6 sm:p-7" : "p-7 sm:p-9"}`}>
         {highlighted && (
           <span className="mb-5 inline-block rounded-full border border-honey/35 bg-honey/10 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-honey">
             Nächster Termin
           </span>
         )}
 
-        <div className="flex gap-5">
-          <div
-            className="flex h-[4.6rem] w-[4.1rem] shrink-0 flex-col items-center justify-center rounded-xl border border-honey/20 bg-night-3/60"
-            aria-hidden="true"
-          >
-            <span className="font-display text-[1.85rem] leading-none text-honey">
-              {day}
-            </span>
-            <span className="mt-1 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-moon-mute">
-              {monthShort}
-            </span>
-          </div>
-
-          <div className="min-w-0">
-            <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-moon-mute sm:tracking-[0.2em]">
-              <span className="sm:hidden">{formatEventWeekdayShort(event.date)}</span>
-              <span className="hidden sm:inline">{formatEventWeekday(event.date)}</span>
-              {" · "}
-              {formatEventDate(event.date)}
-            </p>
-            <h3 className="mt-2 text-balance font-display text-[clamp(1.25rem,2.3vw,1.7rem)] leading-tight text-moon">
-              {event.title}
-            </h3>
-            <p className="mt-2 flex items-start gap-1.5 text-sm text-moon-dim">
-              <Icon name="pin" size={15} className="mt-0.5 shrink-0 text-honey/70" />
-              <span>
-                {event.place}
-                {event.venue && (
-                  <>
-                    {" · "}
-                    <span className="text-moon-mute">{event.venue}</span>
-                  </>
-                )}
+        <div
+          className={
+            compact
+              ? "flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8"
+              : ""
+          }
+        >
+          <div className="flex gap-5">
+            <div
+              className="flex h-[4.6rem] w-[4.1rem] shrink-0 flex-col items-center justify-center rounded-xl border border-honey/20 bg-night-3/60"
+              aria-hidden="true"
+            >
+              {/* Spannen („12–13") brauchen eine kleinere Ziffer, damit alle
+                Schilder dieselbe Breite behalten und die Titel fluchten. */}
+              <span
+                className={`font-display leading-none text-honey ${
+                  range ? "text-[1.28rem] tracking-tight" : "text-[1.85rem]"
+                }`}
+              >
+                {day}
               </span>
-            </p>
+              <span className="mt-1 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-moon-mute">
+                {monthShort}
+              </span>
+            </div>
+
+            <div className="min-w-0">
+              <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-moon-mute sm:tracking-[0.2em]">
+                <span className="sm:hidden">{formatEventWeekdays(event, "short")}</span>
+                <span className="hidden sm:inline">
+                  {formatEventWeekdays(event, "long")}
+                </span>
+                {" · "}
+                {/* Datum als Einheit: Bei Spannen bricht die Zeile auf dem Handy
+                  sauber nach dem Wochentag statt vor der Jahreszahl. */}
+                <span className="whitespace-nowrap">{formatEventDates(event)}</span>
+              </p>
+              <h3 className="mt-2 text-balance font-display text-[clamp(1.25rem,2.3vw,1.7rem)] leading-tight text-moon">
+                {event.title}
+              </h3>
+              <p className="mt-2 flex items-start gap-1.5 text-sm text-moon-dim">
+                <Icon name="pin" size={15} className="mt-0.5 shrink-0 text-honey/70" />
+                <span>
+                  {event.place}
+                  {event.venue && (
+                    <>
+                      {" · "}
+                      <span className="text-moon-mute">{event.venue}</span>
+                    </>
+                  )}
+                </span>
+              </p>
+            </div>
           </div>
+          {compact && calendarLink}
         </div>
 
-        <p className="lede mt-6">{event.note}</p>
+        {event.note && <p className="lede mt-6">{event.note}</p>}
 
         {event.programme && event.programme.length > 0 && (
           <div className="mt-6 border-t border-honey/10 pt-5">
@@ -102,15 +138,7 @@ export function EventCard({
           </div>
         )}
 
-        {!past && (
-          <a
-            href={`/api/kalender/${event.id}`}
-            className="mt-7 inline-flex items-center gap-2 rounded-full border border-honey/20 px-4 py-2.5 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-moon-dim transition-colors hover:border-honey/50 hover:text-honey"
-          >
-            <Icon name="calendar" size={15} />
-            Termin merken
-          </a>
-        )}
+        {!compact && calendarLink}
       </div>
 
       {event.flyer && (

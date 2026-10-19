@@ -7,7 +7,7 @@ import { SocialPanel } from "@/components/ui/SocialLinks";
 import { EventCard } from "@/components/events/EventCard";
 import { site } from "@/data/site";
 import { storyImage } from "@/data/media";
-import { formatEventDate, pastEvents, upcomingEvents } from "@/data/events";
+import { formatEventDates, pastEvents, upcomingEvents } from "@/data/events";
 
 export const metadata: Metadata = {
   title: "Termine & Märkte",
@@ -79,7 +79,7 @@ export default function AusstellungenPage() {
                   <EventCard key={e.id} event={e} highlighted={i === 0} />
                 ))}
               </div>
-              <p className="mx-auto mt-6 max-w-lg text-center text-[0.82rem] leading-relaxed text-moon-mute">
+              <p className="mx-auto mt-6 max-w-lg text-balance text-center text-[0.82rem] leading-relaxed text-moon-mute">
                 Angaben ohne Gewähr — kurzfristige Änderungen kündigen wir auf unseren
                 Kanälen an.
               </p>
@@ -163,7 +163,7 @@ export default function AusstellungenPage() {
                     <span className="text-moon-mute"> · {e.place}</span>
                   </span>
                   <span className="font-mono text-[0.68rem] uppercase tracking-wide text-moon-mute">
-                    {formatEventDate(e.date)}
+                    {formatEventDates(e)}
                   </span>
                 </li>
               ))}

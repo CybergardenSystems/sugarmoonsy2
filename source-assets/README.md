@@ -37,9 +37,10 @@ konvertiert nach WebP/AVIF und legt sie unter `public/media/products/` ab.
 Fehlende Dateien → Platzhalter, kein Fehler.
 
 ## ai-renders/
-Abgelöste KI-Renderings, die durch echte Inhaber-Fotos ersetzt wurden. Sie
-werden **nicht gelöscht**, damit jederzeit nachvollziehbar bleibt, was vorher
-auf der Seite stand (aktuell: `pumpkin-spice.webp`, siehe `DECISIONS.md` D29).
+Abgelöste KI-Renderings und KI-bearbeitete (relightete) Bilder, die durch
+Bilder des Inhabers ersetzt wurden. Sie werden **nicht gelöscht**, damit
+jederzeit nachvollziehbar bleibt, was vorher auf der Seite stand (aktuell:
+`pumpkin-spice.webp` — D29, `vanille-extrakt-relit.webp` — D34).
 
 ## legacy/
 Inventar der Legacy-URL-Assets (nicht ladbar in dieser Umgebung, Host blockiert).

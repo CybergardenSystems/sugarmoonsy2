@@ -217,3 +217,20 @@ Neuer Satz, an drei Stellen identisch verwendet (Quelle: `socialLine` in
 Dazu die Überschrift „Bleibt auf dem Laufenden" (Terminseite), „Folgt uns"
 (Footer) und „Nächster Markt" (Band auf der Startseite). Die Profil-Adressen
 kamen vom Inhaber.
+
+### Weitere Termine (Terminliste des Inhabers, Oktober 2026 — D33)
+
+Neu auf „Termine & Märkte", **wortgetreu** aus der Liste des Inhabers:
+
+| Datum | Titel | Ort |
+|---|---|---|
+| So, 15. November 2026 | Voradventsverkauf beim Blumenmädchen | Hosenfeld |
+| So, 29. November 2026 | Adventsmarkt Villa Löwe | Bad Brückenau |
+| Sa & So, 5. & 6. Dezember 2026 | Weihnachtsmarkt Weintenne | Hammelburg · Weingut Müller |
+| So, 6. Dezember 2026 | Nikolausmarkt | Bad Salzschlirf · Kurpark |
+| Sa & So, 12. & 13. Dezember 2026 | Adventsmarkt „Unter der Linde“ | Dietershausen |
+
+Keine neuen Begleittexte: Die Liste enthält keine, also zeigen die Karten
+keine. Die Wochentage sind berechnet, nicht geliefert. Beim Weihnachtsmarkt
+Weintenne fehlt in der Liste das Jahr; gesetzt ist 2026 (steht zwischen zwei
+2026er-Terminen).
