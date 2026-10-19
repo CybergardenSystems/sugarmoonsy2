@@ -26,7 +26,7 @@ ebenfalls unangetastet im Repo.
 | Bio-Lavendel m. Blaubeere | `…/lavendel-blaubeere.jpg` | `…/lavendel-blaubeere.jpg` | `…/lavendel-blaubeere.webp` |
 | Bio-Blaubeer-Basilikum | `…/blaubeer-basilikum.jpg` | `…/blaubeer-basilikum.jpg` | `…/blaubeer-basilikum.webp` |
 | Bio-Kokos | `…/kokos.jpg` | `…/kokos.jpg` | `…/kokos.webp` |
-| Bio-Vanille-Extrakt | `…/vanille-extrakt.jpg` | `…/vanille-extrakt.jpg` | `…/vanille-extrakt.webp` |
+| Bio-Vanille-Extrakt *(neues Etikett, D34)* | `…/vanille-extrakt-neues-etikett.webp` (1158×1358) — alte Flasche weiterhin als `…/vanille-extrakt.jpg` | `…/vanille-extrakt.jpg` (zeigt noch die alte Flasche, wird nicht ausgeliefert) | `…/vanille-extrakt.webp` (1045×1400, 55 KB) |
 | 50ml-Geschenk (Lebkuchenmann) | `…/geschenk-lebkuchenmann.jpg` | `…/geschenk-lebkuchenmann.jpg` | `…/geschenk-lebkuchenmann.webp` |
 | Bio-Pumpkin Spice *(nachgeliefert, D29)* | `…/pumpkin-spice.jpg` (1084×1451) | — | `…/pumpkin-spice.webp` (1045×1400, 61 KB) |
 | Limonaden-Gruppenfoto | `…/limonaden-original.jpg` | — | — (Quelle für Limo-Einzelbilder) |
@@ -52,8 +52,13 @@ ebenfalls unangetastet im Repo.
   alle anderen; Bildinhalt und Farben bleiben unangetastet.
 - *Story-Foto:* nur auf 1400 px Breite skaliert, JPEG q82 (mozjpeg,
   progressiv) — keine Tonwert-Bearbeitung.
+- *Vanille-Extrakt (seit D34):* vom Inhaber geliefertes Produktbild der neuen
+  100-ml-Flasche, kam bereits im Studio-Look — **nicht** relightet, nur per
+  Zuschnitt (mittig, 1045×1400) aufs Shop-Format gebracht und als WebP q82
+  gespeichert. Die bisherige, relightete Fassung liegt unter
+  `source-assets/ai-renders/vanille-extrakt-relit.webp`.
 - In `public/media/relit/` liegt bis auf `apple-spice.webp` (§2)
-  ausschließlich Material, das auf echten Flaschenfotos beruht.
+  ausschließlich Material, das auf Bildern des Inhabers beruht.
 
 ## 2. KI-Renderings (keine Original-Basis)
 
@@ -70,7 +75,8 @@ ebenfalls unangetastet im Repo.
 **Abgelöst:** Bio-Pumpkin Spice war bis D29 ebenfalls ein solches Rendering.
 Seit der Nachlieferung des echten Produktfotos steht es in §1; das ausgemusterte
 Rendering ist nicht gelöscht, sondern liegt unter
-`source-assets/ai-renders/pumpkin-spice.webp`.
+`source-assets/ai-renders/pumpkin-spice.webp`. Ebenso archiviert: die
+relightete Fassung des Vanille-Extrakts (`vanille-extrakt-relit.webp`, D34).
 
 ## 3. Limonaden (Hunfelt-Bräu-Flaschen)
 

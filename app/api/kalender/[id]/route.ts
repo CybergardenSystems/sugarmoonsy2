@@ -92,7 +92,7 @@ export async function GET(
     `DTEND;VALUE=DATE:${dayAfter(event.endDate ?? event.date)}`,
     `SUMMARY:${esc(`${site.name} — ${event.title}`)}`,
     `LOCATION:${esc(location)}`,
-    `DESCRIPTION:${esc(`${event.note}\n\nAlle Termine: ${url}`)}`,
+    `DESCRIPTION:${esc([event.note, `Alle Termine: ${url}`].filter(Boolean).join("\n\n"))}`,
     `URL:${url}`,
     "END:VEVENT",
     "END:VCALENDAR",

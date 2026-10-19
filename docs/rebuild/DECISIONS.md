@@ -187,3 +187,48 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   Quelle für alles: `social` und `socialLine` in `data/site.ts`. „Termine" ist
   neu in der Hauptnavigation — die Seite hing vorher nur im Footer, obwohl
   dort jetzt die zeitkritischste Information der Website steht.
+- **D33:** Fünf weitere Termine aus der Terminliste des Inhabers (Oktober
+  2026): Voradventsverkauf beim Blumenmädchen (Hosenfeld, 15.11.), Adventsmarkt
+  Villa Löwe (Bad Brückenau, 29.11.), Weihnachtsmarkt Weintenne (Hammelburg,
+  Weingut Müller, 5.–6.12.), Nikolausmarkt (Bad Salzschlirf, Kurpark, 6.12.),
+  Adventsmarkt „Unter der Linde“ (Dietershausen, 12.–13.12.). Wortgetreu
+  übernommen; die Liste hat weder Flyer noch Begleittexte, deshalb ist `note`
+  jetzt optional und wird nicht mit erfundenen Sätzen aufgefüllt. Bei der
+  Weintenne fehlt das Jahr — sie steht zwischen zwei 2026er-Terminen, also
+  2026. **Mehrtägige Termine** werden jetzt durchgängig unterstützt:
+  Datums-Schild „5–6", Zeile „Samstag & Sonntag · 5. & 6. Dezember 2026" (zwei
+  Folgetage mit „&", wie der Inhaber schreibt; längere Spannen mit
+  Gedankenstrich; monatsübergreifend korrekt), Kalenderdatei mit
+  `DTEND` am Folgetag des letzten Markttags, Archiv-Zeile, Startseiten-Band.
+  Karten ohne Flyer, Begleittext und Programm werden als **kompakte Zeile**
+  gesetzt (Datum · Titel · Ort · „Termin merken" rechts) — fünf große, leere
+  Karten hätten die Liste unnötig gestreckt. Die beiden September-Termine sind
+  gelaufen und stehen automatisch unter „Da waren wir schon".
+- **D34:** Neues Produktbild für den **Bio-Vanille-Extrakt** (neue 100-ml-Flasche
+  mit dunklem Etikett, „Mit echter Bourbon-Vanille"). Kam bereits im
+  Studio-Look derselben Bildsprache wie die bisherige Fassung (Licht von links
+  oben, dunkle Tischkante mit Spiegelung) — deshalb **kein** Relighting, nur
+  ein mittiger Zuschnitt auf 1045×1400 und WebP q82 (55 KB) unter dem
+  unveränderten Dateinamen, also ohne Codeänderung. Original unangetastet als
+  `source-assets/products/vanille-extrakt-neues-etikett.webp`; die bisherige,
+  relightete Fassung archiviert unter
+  `source-assets/ai-renders/vanille-extrakt-relit.webp`. Der Katalog führte
+  bereits „100 ml" — passt zum neuen Etikett. Die Getönt-Fallback-Datei
+  (`public/media/products/vanille-extrakt.jpg`) zeigt noch die alte Flasche,
+  wird aber nicht ausgeliefert, solange das Shop-Bild existiert.
+- **D35:** Die Terminliste wird zum **Marktkalender** (Inhaber-Wunsch „Termine
+  schöner"). Statt einer Karte pro Termin: Monate als Kapitel (kursiver
+  Monatsname, auf dem Desktop mitlaufend), darunter eine goldene Zeitleiste;
+  das Datum steht groß in einer eigenen Spalte wie in einem gedruckten
+  Almanach. Als Knoten auf der Leiste sitzt pro Termin **der Mond in der
+  Phase, die er an diesem Tag tatsächlich hat** (`lib/moon.ts`, Mittelwert-
+  Methode, gegen vier Finsternisse auf < 1 Tag geprüft). Das greift das
+  Mondphasen-Motiv der USP-Sektion auf und ist ein Detail, das nur diese Marke
+  haben kann. Die Phase wird bewusst **nur gezeichnet, nicht benannt** — ein
+  Name wie „Vollmond" könnte an Phasengrenzen um einen Tag danebenliegen; eine
+  Legende unter dem Kalender erklärt das Symbol. Der nächste Termin bekommt
+  einen Lichthof um seinen Mond und einen Countdown („In 27 Tagen" / „Morgen"
+  / „Heute" / „Läuft gerade"), tagesgenau dank stündlicher Revalidierung.
+  Das Startseiten-Band spricht dieselbe Sprache. `EventCard` ist durch
+  `EventCalendar` ersetzt; Flyer, Begleittext und Programm erscheinen
+  weiterhin, sobald ein Termin sie hat.
