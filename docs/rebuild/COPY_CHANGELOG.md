@@ -234,3 +234,12 @@ Keine neuen Begleittexte: Die Liste enthält keine, also zeigen die Karten
 keine. Die Wochentage sind berechnet, nicht geliefert. Beim Weihnachtsmarkt
 Weintenne fehlt in der Liste das Jahr; gesetzt ist 2026 (steht zwischen zwei
 2026er-Terminen).
+
+### Marktkalender (D35)
+
+Neue Texte:
+- Monatskopf: „November" / „2026 · 2 Termine" (aus den Daten erzeugt)
+- Countdown am nächsten Termin: „Nächster Termin · In 27 Tagen" bzw.
+  „Morgen", „Heute", „Läuft gerade" (berechnet)
+- Legende: „Der kleine Mond an jedem Termin zeigt, wie er an diesem Tag am
+  Himmel steht."

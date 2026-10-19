@@ -4,7 +4,8 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Icon } from "@/components/ui/Icon";
 import { SocialPanel } from "@/components/ui/SocialLinks";
-import { EventCard } from "@/components/events/EventCard";
+import { EventCalendar } from "@/components/events/EventCalendar";
+import { MoonPhase } from "@/components/events/MoonPhase";
 import { site } from "@/data/site";
 import { storyImage } from "@/data/media";
 import { formatEventDates, pastEvents, upcomingEvents } from "@/data/events";
@@ -73,16 +74,22 @@ export default function AusstellungenPage() {
         <div className="shell">
           {upcoming.length > 0 ? (
             <>
-              <h2 className="sr-only">Kommende Termine</h2>
-              <div className="flex flex-col gap-6">
-                {upcoming.map((e, i) => (
-                  <EventCard key={e.id} event={e} highlighted={i === 0} />
-                ))}
+              <EventCalendar events={upcoming} />
+
+              {/* Legende zum Mond + Hinweis — eine ruhige Fußzeile unter dem Kalender. */}
+              <div className="mt-14 flex flex-col gap-3 border-t border-honey/10 pt-6 text-[0.82rem] leading-relaxed text-moon-mute sm:flex-row sm:items-start sm:justify-between sm:gap-10">
+                <p className="flex items-start gap-2.5">
+                  <MoonPhase phase={0.3} size={16} className="mt-0.5" />
+                  <span>
+                    Der kleine Mond an jedem Termin zeigt, wie er an diesem Tag am Himmel
+                    steht.
+                  </span>
+                </p>
+                <p className="text-balance sm:max-w-sm sm:text-right">
+                  Angaben ohne Gewähr — kurzfristige Änderungen kündigen wir auf unseren
+                  Kanälen an.
+                </p>
               </div>
-              <p className="mx-auto mt-6 max-w-lg text-balance text-center text-[0.82rem] leading-relaxed text-moon-mute">
-                Angaben ohne Gewähr — kurzfristige Änderungen kündigen wir auf unseren
-                Kanälen an.
-              </p>
             </>
           ) : (
             <div className="rounded-2xl border border-honey/12 bg-night-2/60 p-10 text-center">

@@ -2,7 +2,14 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { SocialRow } from "@/components/ui/SocialLinks";
-import { eventBadge, formatEventDates, upcomingEvents } from "@/data/events";
+import { MoonPhase } from "@/components/events/MoonPhase";
+import {
+  countdownLabel,
+  eventBadge,
+  formatEventDates,
+  upcomingEvents,
+} from "@/data/events";
+import { moonPhase } from "@/lib/moon";
 import { socialLine } from "@/data/site";
 
 /**
@@ -33,28 +40,41 @@ export function NextEvent() {
 
                 {next ? (
                   <>
-                    <div className="mt-4 flex gap-5">
+                    {/* Gleiche Sprache wie der Marktkalender: großes Datum,
+                        daneben der Mond dieses Tages. */}
+                    <div className="mt-5 flex items-start gap-4 sm:gap-5">
                       <div
-                        className="flex h-[4.4rem] w-[3.9rem] shrink-0 flex-col items-center justify-center rounded-xl border border-honey/20 bg-night-3/60"
                         aria-hidden="true"
+                        className="w-[3.6rem] shrink-0 text-right sm:w-[4.4rem]"
                       >
                         <span
-                          className={`font-display leading-none text-honey ${
-                            range ? "text-[1.25rem] tracking-tight" : "text-[1.8rem]"
+                          className={`block whitespace-nowrap font-display leading-[0.9] tabular-nums text-honey ${
+                            range
+                              ? "pt-[0.3rem] text-[1.35rem] tracking-tight sm:text-[1.7rem]"
+                              : "text-[2.3rem] sm:text-[2.7rem]"
                           }`}
                         >
                           {day}
                         </span>
-                        <span className="mt-1 font-mono text-[0.56rem] uppercase tracking-[0.18em] text-moon-mute">
+                        <span className="mt-2 block font-mono text-[0.58rem] uppercase tracking-[0.18em] text-moon-mute">
                           {monthShort}
                         </span>
                       </div>
+                      <MoonPhase
+                        phase={moonPhase(next.date)}
+                        glow
+                        size={22}
+                        className="mt-[0.55rem] sm:mt-[0.7rem]"
+                      />
                       <div className="min-w-0">
                         <h2 className="text-balance font-display text-[clamp(1.3rem,2.6vw,1.9rem)] leading-tight text-moon">
                           {next.title}
                         </h2>
                         <p className="mt-1.5 text-sm text-moon-dim">
                           {formatEventDates(next)} · {next.place}
+                        </p>
+                        <p className="mt-3 inline-flex rounded-full border border-honey/30 bg-honey/10 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-honey">
+                          {countdownLabel(next)}
                         </p>
                       </div>
                     </div>

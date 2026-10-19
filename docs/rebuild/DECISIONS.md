@@ -216,3 +216,19 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   bereits „100 ml" — passt zum neuen Etikett. Die Getönt-Fallback-Datei
   (`public/media/products/vanille-extrakt.jpg`) zeigt noch die alte Flasche,
   wird aber nicht ausgeliefert, solange das Shop-Bild existiert.
+- **D35:** Die Terminliste wird zum **Marktkalender** (Inhaber-Wunsch „Termine
+  schöner"). Statt einer Karte pro Termin: Monate als Kapitel (kursiver
+  Monatsname, auf dem Desktop mitlaufend), darunter eine goldene Zeitleiste;
+  das Datum steht groß in einer eigenen Spalte wie in einem gedruckten
+  Almanach. Als Knoten auf der Leiste sitzt pro Termin **der Mond in der
+  Phase, die er an diesem Tag tatsächlich hat** (`lib/moon.ts`, Mittelwert-
+  Methode, gegen vier Finsternisse auf < 1 Tag geprüft). Das greift das
+  Mondphasen-Motiv der USP-Sektion auf und ist ein Detail, das nur diese Marke
+  haben kann. Die Phase wird bewusst **nur gezeichnet, nicht benannt** — ein
+  Name wie „Vollmond" könnte an Phasengrenzen um einen Tag danebenliegen; eine
+  Legende unter dem Kalender erklärt das Symbol. Der nächste Termin bekommt
+  einen Lichthof um seinen Mond und einen Countdown („In 27 Tagen" / „Morgen"
+  / „Heute" / „Läuft gerade"), tagesgenau dank stündlicher Revalidierung.
+  Das Startseiten-Band spricht dieselbe Sprache. `EventCard` ist durch
+  `EventCalendar` ersetzt; Flyer, Begleittext und Programm erscheinen
+  weiterhin, sobald ein Termin sie hat.

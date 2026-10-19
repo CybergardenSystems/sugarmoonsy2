@@ -248,3 +248,50 @@ export function eventBadge(e: MarketEvent): {
   }
   return { day: String(a.d), monthShort, range: false };
 }
+
+/**
+ * „In 27 Tagen" · „Morgen" · „Heute" · „Läuft gerade" — für den nächsten
+ * Termin. Stimmt tagesgenau, weil die Seiten stündlich neu erzeugt werden.
+ */
+export function countdownLabel(e: MarketEvent): string {
+  const today = utc(berlinToday()).getTime();
+  const start = utc(e.date).getTime();
+  const end = utc(e.endDate ?? e.date).getTime();
+  if (today > start && today <= end) return "Läuft gerade";
+  const days = Math.round((start - today) / 86_400_000);
+  if (days <= 0) return "Heute";
+  if (days === 1) return "Morgen";
+  return `In ${days} Tagen`;
+}
+
+export interface EventMonth {
+  /** „2026-11" */
+  key: string;
+  /** „November" */
+  month: string;
+  year: string;
+  events: MarketEvent[];
+}
+
+/** Termine nach Startmonat bündeln — Reihenfolge der Eingabe bleibt erhalten. */
+export function groupByMonth(list: MarketEvent[]): EventMonth[] {
+  const groups = new Map<string, EventMonth>();
+  for (const e of list) {
+    const key = e.date.slice(0, 7);
+    let group = groups.get(key);
+    if (!group) {
+      group = {
+        key,
+        month: new Intl.DateTimeFormat("de-DE", {
+          month: "long",
+          timeZone: "UTC",
+        }).format(utc(e.date)),
+        year: e.date.slice(0, 4),
+        events: [],
+      };
+      groups.set(key, group);
+    }
+    group.events.push(e);
+  }
+  return [...groups.values()];
+}
