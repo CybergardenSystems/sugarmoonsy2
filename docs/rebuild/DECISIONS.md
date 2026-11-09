@@ -232,3 +232,29 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   Das Startseiten-Band spricht dieselbe Sprache. `EventCard` ist durch
   `EventCalendar` ersetzt; Flyer, Begleittext und Programm erscheinen
   weiterhin, sobald ein Termin sie hat.
+- **D36:** Drei weitere Termine aus der Liste des Inhabers (November 2026),
+  diesmal **mit Uhrzeiten**: N4 Events Adventsmarkt (14.11. 15–21 Uhr, 15.11.
+  12–19 Uhr), 10. Wald-Weihnachtsmarkt im Grillrestaurant Kneshecke (21.11. ab
+  13 Uhr), Weihnachtsmarkt im Wildpark Gersfeld (28. & 29.11. 11–19 Uhr).
+  Termine haben dafür optionale **Uhrzeiten je Markttag** (`hours`); gezeigt
+  werden sie kompakt mit Uhr-Symbol („ab 13 Uhr", „an beiden Tagen 11–19 Uhr",
+  „Sa 15–21 Uhr · So 12–19 Uhr"), im Kalender und im Startseiten-Band.
+  „Termin merken" legt bei Terminen mit Uhrzeit **pro Markttag einen Eintrag
+  mit genau diesen Zeiten** an (in UTC umgerechnet, damit kein VTIMEZONE-Block
+  nötig ist); „ab 13 Uhr" bekommt bewusst kein erfundenes Ende. Im Event-JSON-LD
+  stehen Beginn und Ende mit Uhrzeit und Berliner Versatz. **Der Ort ist jetzt
+  optional:** Steht keine Gemeinde fest, steht nur, was geliefert ist (z. B.
+  nur der Veranstaltungsort), und die strukturierten Daten bekommen dann keine
+  geratene Adresse. Für N4 Events und die Kneshecke kamen die Gemeinden
+  nachgereicht: „N4 ist Fulda Eventlocation", Kneshecke „müsste Dipperz sein"
+  (gegengeprüft: Knesheckenweg, Dipperz-Dörmbach). Zusammengesetzte Namen
+  sind aufgeteilt wie beim Nikolausmarkt im Kurpark — Titel, Ort,
+  Veranstaltungsort: „N4 Events Adventsmarkt" → Adventsmarkt · Fulda · N4
+  Events; „Wildpark Gersfeld Weihnachtsmarkt" → Weihnachtsmarkt · Gersfeld ·
+  Wildpark; 10. Wald-Weihnachtsmarkt · Dipperz · Grillrestaurant Kneshecke. Zwei Tage überschneiden sich mit bestehenden
+  Terminen (15.11. Voradventsverkauf, 29.11. Villa Löwe) — wie schon am 6.12.
+  zwei Stände parallel, nichts geändert. Nebenbei behoben: Die Spaltenmaße des
+  Kalenders standen als Inline-Style und überstimmten die breiteren
+  Desktop-Werte; zweistellige Spannen wie „28–29" ragten dadurch in die
+  Mond-Spalte. Jetzt als Klassen gesetzt, auf dem Handy mit etwas kleinerer
+  Spannen-Ziffer.

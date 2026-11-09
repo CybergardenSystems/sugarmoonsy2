@@ -2,10 +2,12 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { SocialRow } from "@/components/ui/SocialLinks";
+import { EventHours } from "@/components/events/EventHours";
 import { MoonPhase } from "@/components/events/MoonPhase";
 import {
   countdownLabel,
   eventBadge,
+  eventLocation,
   formatEventDates,
   upcomingEvents,
 } from "@/data/events";
@@ -24,6 +26,7 @@ export function NextEvent() {
   const { day, monthShort, range } = next
     ? eventBadge(next)
     : { day: "", monthShort: "", range: false };
+  const location = next ? eventLocation(next) : undefined;
 
   return (
     <section className="section-tight relative">
@@ -71,8 +74,10 @@ export function NextEvent() {
                           {next.title}
                         </h2>
                         <p className="mt-1.5 text-sm text-moon-dim">
-                          {formatEventDates(next)} · {next.place}
+                          {formatEventDates(next)}
+                          {location && ` · ${location.primary}`}
                         </p>
+                        <EventHours event={next} className="mt-1" />
                         <p className="mt-3 inline-flex rounded-full border border-honey/30 bg-honey/10 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-honey">
                           {countdownLabel(next)}
                         </p>

@@ -22,6 +22,7 @@ export type IconName =
   | "play"
   | "calendar"
   | "pin"
+  | "clock"
   | "instagram"
   | "facebook";
 
@@ -73,6 +74,12 @@ const STROKE: Record<string, React.ReactNode> = {
     <>
       <path d="M12 21.2c4.2-4.2 6.3-7.4 6.3-10.2a6.3 6.3 0 1 0-12.6 0c0 2.8 2.1 6 6.3 10.2z" />
       <circle cx="12" cy="10.6" r="2.4" />
+    </>
+  ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="8.6" />
+      <path d="M12 7.4V12l3 1.9" />
     </>
   ),
   // Standard-Outline-Glyphen der beiden Netzwerke, auf das 24er-Grid gelegt.

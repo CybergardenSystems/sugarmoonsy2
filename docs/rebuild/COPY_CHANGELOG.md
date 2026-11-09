@@ -243,3 +243,19 @@ Neue Texte:
   „Morgen", „Heute", „Läuft gerade" (berechnet)
 - Legende: „Der kleine Mond an jedem Termin zeigt, wie er an diesem Tag am
   Himmel steht."
+
+### Weitere Termine mit Uhrzeiten (Liste des Inhabers, November 2026 — D36)
+
+Neu auf „Termine & Märkte", **wortgetreu** aus der Nachricht des Inhabers:
+
+| Datum | Titel | Ort | Uhrzeit (Anzeige) |
+|---|---|---|---|
+| Sa & So, 14. & 15. November 2026 | Adventsmarkt | Fulda · N4 Events | Sa 15–21 Uhr · So 12–19 Uhr |
+| Sa, 21. November 2026 | 10. Wald-Weihnachtsmarkt | Dipperz · Grillrestaurant Kneshecke | ab 13 Uhr |
+| Sa & So, 28. & 29. November 2026 | Weihnachtsmarkt | Gersfeld · Wildpark | an beiden Tagen 11–19 Uhr |
+
+Neue Mikrotexte: „Uhrzeiten: …" in der Beschreibung der Kalenderdatei. Die
+Wochentage sind berechnet, nicht geliefert. Die Gemeinden für N4 Events
+(Fulda) und die Kneshecke (Dipperz) hat der Inhaber nachgereicht; „N4 Events
+Adventsmarkt" und „Wildpark Gersfeld Weihnachtsmarkt" sind in Titel, Ort und
+Veranstaltungsort aufgeteilt (wie „Nikolausmarkt im Kurpark").
