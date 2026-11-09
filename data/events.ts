@@ -18,12 +18,23 @@ export interface EventFlyer {
   height: number;
 }
 
+/** Öffnungszeit an einem Markttag — nur, wenn der Inhaber sie genannt hat. */
+export interface EventHours {
+  /** ISO-Datum des Markttags. */
+  date: string;
+  /** „15:00" */
+  from: string;
+  /** „21:00" — fehlt bei „ab 13 Uhr". */
+  to?: string;
+}
+
 export interface MarketEvent {
   id: string;
   /** Name der Veranstaltung, wie auf dem Flyer. */
   title: string;
-  /** Ort — nur so genau, wie der Flyer es hergibt. */
-  place: string;
+  /** Ort — nur so genau, wie der Inhaber ihn genannt hat. Fehlt er, steht
+   *  keiner da (lieber kein Ort als ein geratener). */
+  place?: string;
   /** Genauerer Veranstaltungsort, falls auf dem Flyer genannt. */
   venue?: string;
   /** ISO-Datum (Europe/Berlin gedacht), ganztägig. */
@@ -36,6 +47,8 @@ export interface MarketEvent {
   /** Programm der Veranstaltung selbst — nicht unser Angebot. */
   programme?: string[];
   flyer?: EventFlyer;
+  /** Uhrzeiten je Markttag. Ohne Angabe bleibt der Termin ganztägig. */
+  hours?: EventHours[];
 }
 
 /** Chronologisch. */
@@ -76,13 +89,49 @@ export const events: MarketEvent[] = [
     },
   },
 
-  // Ab hier: Terminliste des Inhabers (Oktober 2026), ohne Flyer und ohne
-  // Begleittext — wortgetreu übernommen.
+  // Ab hier: Terminlisten des Inhabers (Oktober und November 2026), ohne
+  // Flyer und ohne Begleittext — wortgetreu übernommen. Uhrzeiten nur dort,
+  // wo der Inhaber sie genannt hat (Liste vom November, DECISIONS D36).
+  {
+    // Der Inhaber nennt nur den Veranstalter, keinen Ort — bleibt leer, bis
+    // er ihn liefert.
+    id: "n4-events-adventsmarkt-2026",
+    title: "N4 Events Adventsmarkt",
+    date: "2026-11-14",
+    endDate: "2026-11-15",
+    hours: [
+      { date: "2026-11-14", from: "15:00", to: "21:00" },
+      { date: "2026-11-15", from: "12:00", to: "19:00" },
+    ],
+  },
   {
     id: "voradventsverkauf-hosenfeld-2026",
     title: "Voradventsverkauf beim Blumenmädchen",
     place: "Hosenfeld",
     date: "2026-11-15",
+  },
+  {
+    // „ab 13 Uhr" — ein Ende nennt der Inhaber nicht. Ort: nur das
+    // Restaurant, keine Gemeinde (DECISIONS D36).
+    id: "wald-weihnachtsmarkt-kneshecke-2026",
+    title: "10. Wald-Weihnachtsmarkt",
+    venue: "Grillrestaurant Kneshecke",
+    date: "2026-11-21",
+    hours: [{ date: "2026-11-21", from: "13:00" }],
+  },
+  {
+    // Inhaber: „Wildpark Gersfeld Weihnachtsmarkt" — aufgeteilt wie beim
+    // Nikolausmarkt im Kurpark: Titel, Ort, Veranstaltungsort.
+    id: "weihnachtsmarkt-wildpark-gersfeld-2026",
+    title: "Weihnachtsmarkt",
+    place: "Gersfeld",
+    venue: "Wildpark",
+    date: "2026-11-28",
+    endDate: "2026-11-29",
+    hours: [
+      { date: "2026-11-28", from: "11:00", to: "19:00" },
+      { date: "2026-11-29", from: "11:00", to: "19:00" },
+    ],
   },
   {
     id: "adventsmarkt-villa-loewe-2026",
@@ -262,6 +311,98 @@ export function countdownLabel(e: MarketEvent): string {
   if (days <= 0) return "Heute";
   if (days === 1) return "Morgen";
   return `In ${days} Tagen`;
+}
+
+/**
+ * Ort für Fließtext und Kalender: „Hammelburg · Weingut Müller",
+ * „Grillrestaurant Kneshecke" — oder `undefined`, wenn keiner genannt ist.
+ */
+export function eventLocation(
+  e: MarketEvent,
+): { primary: string; secondary?: string } | undefined {
+  if (e.place) return { primary: e.place, secondary: e.venue };
+  if (e.venue) return { primary: e.venue };
+  return undefined;
+}
+
+/** Alle Markttage eines Termins als ISO-Daten. */
+export function eventDays(e: MarketEvent): string[] {
+  const days: string[] = [];
+  const end = utc(lastDay(e)).getTime();
+  for (let t = utc(e.date).getTime(); t <= end; t += 86_400_000) {
+    days.push(new Date(t).toISOString().slice(0, 10));
+  }
+  return days;
+}
+
+/** „15:00" → „15", „15:30" → „15:30" */
+function clock(time: string): string {
+  return time.endsWith(":00") ? String(Number(time.slice(0, 2))) : time.replace(/^0/, "");
+}
+
+function hoursLabel(h: EventHours): string {
+  return h.to ? `${clock(h.from)}–${clock(h.to)} Uhr` : `ab ${clock(h.from)} Uhr`;
+}
+
+/**
+ * Uhrzeiten in Abschnitten — oder `undefined`, wenn keine genannt sind:
+ * ["ab 13 Uhr"] · ["15–21 Uhr"] · ["an beiden Tagen 11–19 Uhr"] ·
+ * ["Sa 15–21 Uhr", "So 12–19 Uhr"]. Die Anzeige bricht nur zwischen
+ * Abschnitten um, nie mitten in einer Zeitangabe.
+ */
+export function eventHoursSegments(e: MarketEvent): string[] | undefined {
+  const hours = e.hours ?? [];
+  if (hours.length === 0) return undefined;
+
+  const labels = hours.map(hoursLabel);
+  const allDays = eventDays(e);
+  const coversAll = allDays.every((d) => hours.some((h) => h.date === d));
+  if (labels.length === 1 && allDays.length === 1) return labels;
+  if (coversAll && labels.every((l) => l === labels[0])) {
+    return [`${allDays.length === 2 ? "an beiden Tagen" : "täglich"} ${labels[0]}`];
+  }
+
+  const weekday = new Intl.DateTimeFormat("de-DE", { weekday: "short", timeZone: "UTC" });
+  return hours.map(
+    (h, i) => `${weekday.format(utc(h.date)).replace(".", "")} ${labels[i]}`,
+  );
+}
+
+/** Dieselben Uhrzeiten als eine Zeile: „Sa 15–21 Uhr · So 12–19 Uhr". */
+export function formatEventHours(e: MarketEvent): string | undefined {
+  return eventHoursSegments(e)?.join(" · ");
+}
+
+/** UTC-Versatz in Berlin an diesem Tag (Mittag), z. B. „+01:00". */
+export function berlinOffset(iso: string): string {
+  const { y, m, d } = parts(iso);
+  const name = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Berlin",
+    timeZoneName: "longOffset",
+  })
+    .formatToParts(new Date(Date.UTC(y, m - 1, d, 12)))
+    .find((p) => p.type === "timeZoneName")?.value;
+  const offset = name?.replace("GMT", "");
+  return offset ? offset : "+00:00";
+}
+
+/** Berliner Ortszeit („2026-11-14", „15:00") als ISO-8601 mit Versatz. */
+export function berlinDateTime(iso: string, time: string): string {
+  return `${iso}T${time}:00${berlinOffset(iso)}`;
+}
+
+/**
+ * Beginn und Ende für strukturierte Daten: mit Uhrzeit, wo eine genannt ist,
+ * sonst reines Datum. „ab 13 Uhr" hat kein Ende — dann fehlt `end`, statt
+ * eines Datums, das vor dem Beginn zu liegen scheint.
+ */
+export function eventSpan(e: MarketEvent): { start: string; end?: string } {
+  const first = e.hours?.find((h) => h.date === e.date);
+  const last = e.hours?.find((h) => h.date === lastDay(e));
+  return {
+    start: first ? berlinDateTime(first.date, first.from) : e.date,
+    end: last ? (last.to ? berlinDateTime(last.date, last.to) : undefined) : lastDay(e),
+  };
 }
 
 export interface EventMonth {

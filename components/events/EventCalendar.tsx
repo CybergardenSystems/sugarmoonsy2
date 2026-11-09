@@ -1,11 +1,12 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
+import { EventHours } from "@/components/events/EventHours";
 import { MoonPhase } from "@/components/events/MoonPhase";
 import {
   countdownLabel,
   eventBadge,
+  eventLocation,
   formatEventDates,
   formatEventWeekdays,
   groupByMonth,
@@ -24,14 +25,6 @@ import { moonPhase } from "@/lib/moon";
  * Almanach. Flyer, Begleittext und Programm erscheinen nur, wenn der Inhaber
  * sie geliefert hat.
  */
-
-// Spaltenmaße als CSS-Variablen, damit die Zeitleiste exakt durch die
-// Mitte der Mond-Spalte läuft — auf jeder Breite.
-const COLUMNS = {
-  "--date": "3.6rem",
-  "--node": "1.5rem",
-  "--gap": "0.9rem",
-} as CSSProperties;
 
 export function EventCalendar({ events }: { events: MarketEvent[] }) {
   const months = groupByMonth(events);
@@ -58,10 +51,10 @@ export function EventCalendar({ events }: { events: MarketEvent[] }) {
               </p>
             </header>
 
-            <ol
-              className="relative sm:[--date:5.75rem] sm:[--gap:1.4rem] sm:[--node:2rem]"
-              style={COLUMNS}
-            >
+            {/* Spaltenmaße als CSS-Variablen (als Klassen, nicht inline — ein
+                Inline-Style würde die sm:-Werte überstimmen), damit die
+                Zeitleiste exakt durch die Mitte der Mond-Spalte läuft. */}
+            <ol className="relative [--date:3.6rem] [--gap:0.9rem] [--node:1.5rem] sm:[--date:5.75rem] sm:[--gap:1.4rem] sm:[--node:2rem]">
               {/* Zeitleiste: beginnt am ersten Mond, läuft am Monatsende aus. */}
               <span
                 aria-hidden="true"
@@ -81,6 +74,7 @@ export function EventCalendar({ events }: { events: MarketEvent[] }) {
 
 function EventEntry({ event, next }: { event: MarketEvent; next: boolean }) {
   const { day, range } = eventBadge(event);
+  const location = eventLocation(event);
   const hasExtras = Boolean(event.note || event.programme?.length || event.flyer);
 
   return (
@@ -103,7 +97,7 @@ function EventEntry({ event, next }: { event: MarketEvent; next: boolean }) {
         <span
           className={`block whitespace-nowrap font-display leading-[0.9] tabular-nums text-honey ${
             range
-              ? "pt-[0.3rem] text-[1.3rem] tracking-tight sm:text-[1.75rem]"
+              ? "pt-[0.3rem] text-[1.2rem] tracking-tight sm:text-[1.75rem]"
               : "text-[2.1rem] sm:text-[2.85rem]"
           }`}
         >
@@ -129,13 +123,18 @@ function EventEntry({ event, next }: { event: MarketEvent; next: boolean }) {
             <h3 className="text-balance font-display text-[clamp(1.2rem,2.2vw,1.65rem)] leading-tight text-moon">
               {event.title}
             </h3>
-            <p className="mt-2 flex items-start gap-1.5 text-sm text-moon-dim">
-              <Icon name="pin" size={15} className="mt-0.5 shrink-0 text-honey/70" />
-              <span>
-                {event.place}
-                {event.venue && <span className="text-moon-mute"> · {event.venue}</span>}
-              </span>
-            </p>
+            {location && (
+              <p className="mt-2 flex items-start gap-1.5 text-sm text-moon-dim">
+                <Icon name="pin" size={15} className="mt-0.5 shrink-0 text-honey/70" />
+                <span>
+                  {location.primary}
+                  {location.secondary && (
+                    <span className="text-moon-mute"> · {location.secondary}</span>
+                  )}
+                </span>
+              </p>
+            )}
+            <EventHours event={event} className={location ? "mt-1" : "mt-2"} />
             {next && (
               <p className="mt-3 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-honey/30 bg-honey/10 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.12em] text-honey sm:tracking-[0.2em]">
                 Nächster Termin · {countdownLabel(event)}

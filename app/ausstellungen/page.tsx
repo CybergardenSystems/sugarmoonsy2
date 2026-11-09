@@ -8,7 +8,13 @@ import { EventCalendar } from "@/components/events/EventCalendar";
 import { MoonPhase } from "@/components/events/MoonPhase";
 import { site } from "@/data/site";
 import { storyImage } from "@/data/media";
-import { formatEventDates, pastEvents, upcomingEvents } from "@/data/events";
+import {
+  eventLocation,
+  eventSpan,
+  formatEventDates,
+  pastEvents,
+  upcomingEvents,
+} from "@/data/events";
 
 export const metadata: Metadata = {
   title: "Termine & Märkte",
@@ -33,25 +39,34 @@ export default function AusstellungenPage() {
     "Hallo Sugar Moon Sweets,\n\nich habe einen Vorschlag für eine Ausstellung / Veranstaltung:\n\nName der Veranstaltung:\nOrt:\nDatum:\nLink / Infos:\n\nViele Grüße",
   )}`;
 
-  const jsonLd = upcoming.map((e) => ({
-    "@context": "https://schema.org",
-    "@type": "Event",
-    name: e.title,
-    startDate: e.date,
-    endDate: e.endDate ?? e.date,
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    description: e.note,
-    location: {
-      "@type": "Place",
-      name: e.venue ?? e.place,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: e.place,
-        addressCountry: "DE",
-      },
-    },
-  }));
+  const jsonLd = upcoming.map((e) => {
+    const { start, end } = eventSpan(e);
+    const name = e.venue ?? e.place;
+    return {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: e.title,
+      startDate: start,
+      endDate: end,
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      description: e.note,
+      // Ohne genannten Ort keine Ortsangabe — nichts Geratenes in den Daten.
+      location: name
+        ? {
+            "@type": "Place",
+            name,
+            ...(e.place && {
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: e.place,
+                addressCountry: "DE",
+              },
+            }),
+          }
+        : undefined,
+    };
+  });
 
   return (
     <>
@@ -160,20 +175,23 @@ export default function AusstellungenPage() {
               Da waren wir schon
             </h2>
             <ul className="mt-5 divide-y divide-honey/8 border-y border-honey/8">
-              {past.map((e) => (
-                <li
-                  key={e.id}
-                  className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3.5"
-                >
-                  <span className="text-sm text-moon-dim">
-                    {e.title}
-                    <span className="text-moon-mute"> · {e.place}</span>
-                  </span>
-                  <span className="font-mono text-[0.68rem] uppercase tracking-wide text-moon-mute">
-                    {formatEventDates(e)}
-                  </span>
-                </li>
-              ))}
+              {past.map((e) => {
+                const where = eventLocation(e)?.primary;
+                return (
+                  <li
+                    key={e.id}
+                    className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3.5"
+                  >
+                    <span className="text-sm text-moon-dim">
+                      {e.title}
+                      {where && <span className="text-moon-mute"> · {where}</span>}
+                    </span>
+                    <span className="font-mono text-[0.68rem] uppercase tracking-wide text-moon-mute">
+                      {formatEventDates(e)}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>

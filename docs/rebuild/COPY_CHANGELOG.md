@@ -243,3 +243,17 @@ Neue Texte:
   „Morgen", „Heute", „Läuft gerade" (berechnet)
 - Legende: „Der kleine Mond an jedem Termin zeigt, wie er an diesem Tag am
   Himmel steht."
+
+### Weitere Termine mit Uhrzeiten (Liste des Inhabers, November 2026 — D36)
+
+Neu auf „Termine & Märkte", **wortgetreu** aus der Nachricht des Inhabers:
+
+| Datum | Titel | Ort | Uhrzeit (Anzeige) |
+|---|---|---|---|
+| Sa & So, 14. & 15. November 2026 | N4 Events Adventsmarkt | — (nicht genannt) | Sa 15–21 Uhr · So 12–19 Uhr |
+| Sa, 21. November 2026 | 10. Wald-Weihnachtsmarkt | Grillrestaurant Kneshecke | ab 13 Uhr |
+| Sa & So, 28. & 29. November 2026 | Weihnachtsmarkt | Gersfeld · Wildpark | an beiden Tagen 11–19 Uhr |
+
+Neue Mikrotexte: „Uhrzeiten: …" in der Beschreibung der Kalenderdatei. Die
+Wochentage sind berechnet, nicht geliefert. Für N4 Events und die Kneshecke
+fehlt die Gemeinde — sie wird ergänzt, sobald der Inhaber sie nennt.

@@ -1,10 +1,20 @@
-import { events, getEvent } from "@/data/events";
+import {
+  berlinDateTime,
+  eventDays,
+  events,
+  formatEventHours,
+  getEvent,
+  type MarketEvent,
+} from "@/data/events";
 import { site } from "@/data/site";
 
 /**
  * „Termin merken" — liefert einen Kalendereintrag (iCalendar/RFC 5545) zum
- * Markt-Termin. Ganztägig, ohne Uhrzeit: Die Flyer nennen keine, und eine
- * erfundene Uhrzeit im Kalender des Kunden wäre schlimmer als keine.
+ * Markt-Termin. Hat der Inhaber Uhrzeiten genannt, bekommt jeder Markttag
+ * einen eigenen Eintrag mit genau diesen Zeiten (in UTC, damit kein
+ * VTIMEZONE-Block nötig ist); „ab 13 Uhr" ohne Ende bleibt ohne DTEND.
+ * Sonst ganztägig — eine erfundene Uhrzeit im Kalender des Kunden wäre
+ * schlimmer als keine.
  *
  * Statisch vorgerendert — die Termine ändern sich nur mit einem Deploy.
  */
@@ -51,11 +61,57 @@ function icsDate(iso: string): string {
   return iso.replace(/-/g, "");
 }
 
+/** „2026-11-14T15:00:00+01:00" → „20261114T140000Z" */
+function icsUtc(isoWithOffset: string): string {
+  return new Date(isoWithOffset)
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}/, "");
+}
+
 /** Ganztägige Termine enden am Folgetag (DTEND ist exklusiv). */
 function dayAfter(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
   const next = new Date(Date.UTC(y, m - 1, d + 1));
   return icsDate(next.toISOString().slice(0, 10));
+}
+
+/**
+ * Ohne Uhrzeiten: ein ganztägiger Eintrag über alle Markttage.
+ * Mit Uhrzeiten: ein Eintrag pro Markttag; ein Tag ohne genannte Zeit bleibt
+ * ganztägig.
+ */
+function vevents(event: MarketEvent): { uid: string; when: string[] }[] {
+  if (!event.hours?.length) {
+    return [
+      {
+        uid: event.id,
+        when: [
+          `DTSTART;VALUE=DATE:${icsDate(event.date)}`,
+          `DTEND;VALUE=DATE:${dayAfter(event.endDate ?? event.date)}`,
+        ],
+      },
+    ];
+  }
+
+  const days = eventDays(event);
+  return days.map((day) => {
+    const uid = days.length > 1 ? `${event.id}-${day}` : event.id;
+    const h = event.hours?.find((x) => x.date === day);
+    if (!h) {
+      return {
+        uid,
+        when: [`DTSTART;VALUE=DATE:${icsDate(day)}`, `DTEND;VALUE=DATE:${dayAfter(day)}`],
+      };
+    }
+    return {
+      uid,
+      when: [
+        `DTSTART:${icsUtc(berlinDateTime(day, h.from))}`,
+        ...(h.to ? [`DTEND:${icsUtc(berlinDateTime(day, h.to))}`] : []),
+      ],
+    };
+  });
 }
 
 export async function GET(
@@ -74,10 +130,11 @@ export async function GET(
 
   const location = [event.venue, event.place].filter(Boolean).join(", ");
   const url = `${site.url}/ausstellungen`;
-  const stamp = new Date()
-    .toISOString()
-    .replace(/[-:]/g, "")
-    .replace(/\.\d{3}/, "");
+  const hours = formatEventHours(event);
+  const description = [event.note, hours && `Uhrzeiten: ${hours}`, `Alle Termine: ${url}`]
+    .filter(Boolean)
+    .join("\n\n");
+  const stamp = icsUtc(new Date().toISOString());
 
   const lines = [
     "BEGIN:VCALENDAR",
@@ -85,16 +142,17 @@ export async function GET(
     `PRODID:-//${site.name}//Termine//DE`,
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    "BEGIN:VEVENT",
-    `UID:${event.id}@${site.domain}`,
-    `DTSTAMP:${stamp}`,
-    `DTSTART;VALUE=DATE:${icsDate(event.date)}`,
-    `DTEND;VALUE=DATE:${dayAfter(event.endDate ?? event.date)}`,
-    `SUMMARY:${esc(`${site.name} — ${event.title}`)}`,
-    `LOCATION:${esc(location)}`,
-    `DESCRIPTION:${esc([event.note, `Alle Termine: ${url}`].filter(Boolean).join("\n\n"))}`,
-    `URL:${url}`,
-    "END:VEVENT",
+    ...vevents(event).flatMap(({ uid, when }) => [
+      "BEGIN:VEVENT",
+      `UID:${uid}@${site.domain}`,
+      `DTSTAMP:${stamp}`,
+      ...when,
+      `SUMMARY:${esc(`${site.name} — ${event.title}`)}`,
+      ...(location ? [`LOCATION:${esc(location)}`] : []),
+      `DESCRIPTION:${esc(description)}`,
+      `URL:${url}`,
+      "END:VEVENT",
+    ]),
     "END:VCALENDAR",
   ];
 
