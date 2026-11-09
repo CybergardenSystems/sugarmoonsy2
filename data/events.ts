@@ -93,10 +93,13 @@ export const events: MarketEvent[] = [
   // Flyer und ohne Begleittext — wortgetreu übernommen. Uhrzeiten nur dort,
   // wo der Inhaber sie genannt hat (Liste vom November, DECISIONS D36).
   {
-    // Der Inhaber nennt nur den Veranstalter, keinen Ort — bleibt leer, bis
-    // er ihn liefert.
+    // Inhaber: „N4 Events Adventsmarkt", nachgereicht: „N4 ist Fulda
+    // Eventlocation". Aufgeteilt wie Wildpark und Kurpark: Titel, Ort,
+    // Veranstaltungsort (DECISIONS D36).
     id: "n4-events-adventsmarkt-2026",
-    title: "N4 Events Adventsmarkt",
+    title: "Adventsmarkt",
+    place: "Fulda",
+    venue: "N4 Events",
     date: "2026-11-14",
     endDate: "2026-11-15",
     hours: [
@@ -111,10 +114,11 @@ export const events: MarketEvent[] = [
     date: "2026-11-15",
   },
   {
-    // „ab 13 Uhr" — ein Ende nennt der Inhaber nicht. Ort: nur das
-    // Restaurant, keine Gemeinde (DECISIONS D36).
+    // „ab 13 Uhr" — ein Ende nennt der Inhaber nicht. Gemeinde Dipperz
+    // nachgereicht (DECISIONS D36).
     id: "wald-weihnachtsmarkt-kneshecke-2026",
     title: "10. Wald-Weihnachtsmarkt",
+    place: "Dipperz",
     venue: "Grillrestaurant Kneshecke",
     date: "2026-11-21",
     hours: [{ date: "2026-11-21", from: "13:00" }],

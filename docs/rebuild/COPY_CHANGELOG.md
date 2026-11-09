@@ -250,10 +250,12 @@ Neu auf „Termine & Märkte", **wortgetreu** aus der Nachricht des Inhabers:
 
 | Datum | Titel | Ort | Uhrzeit (Anzeige) |
 |---|---|---|---|
-| Sa & So, 14. & 15. November 2026 | N4 Events Adventsmarkt | — (nicht genannt) | Sa 15–21 Uhr · So 12–19 Uhr |
-| Sa, 21. November 2026 | 10. Wald-Weihnachtsmarkt | Grillrestaurant Kneshecke | ab 13 Uhr |
+| Sa & So, 14. & 15. November 2026 | Adventsmarkt | Fulda · N4 Events | Sa 15–21 Uhr · So 12–19 Uhr |
+| Sa, 21. November 2026 | 10. Wald-Weihnachtsmarkt | Dipperz · Grillrestaurant Kneshecke | ab 13 Uhr |
 | Sa & So, 28. & 29. November 2026 | Weihnachtsmarkt | Gersfeld · Wildpark | an beiden Tagen 11–19 Uhr |
 
 Neue Mikrotexte: „Uhrzeiten: …" in der Beschreibung der Kalenderdatei. Die
-Wochentage sind berechnet, nicht geliefert. Für N4 Events und die Kneshecke
-fehlt die Gemeinde — sie wird ergänzt, sobald der Inhaber sie nennt.
+Wochentage sind berechnet, nicht geliefert. Die Gemeinden für N4 Events
+(Fulda) und die Kneshecke (Dipperz) hat der Inhaber nachgereicht; „N4 Events
+Adventsmarkt" und „Wildpark Gersfeld Weihnachtsmarkt" sind in Titel, Ort und
+Veranstaltungsort aufgeteilt (wie „Nikolausmarkt im Kurpark").

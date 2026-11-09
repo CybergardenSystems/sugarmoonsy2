@@ -243,12 +243,15 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   mit genau diesen Zeiten** an (in UTC umgerechnet, damit kein VTIMEZONE-Block
   nötig ist); „ab 13 Uhr" bekommt bewusst kein erfundenes Ende. Im Event-JSON-LD
   stehen Beginn und Ende mit Uhrzeit und Berliner Versatz. **Der Ort ist jetzt
-  optional:** Für Kneshecke und N4 Events hat der Inhaber keine Gemeinde
-  genannt — es steht nur, was er geliefert hat (Kneshecke: das Restaurant; N4
-  Events: kein Ort), und die strukturierten Daten bekommen dann keine
-  geratene Adresse. „Wildpark Gersfeld Weihnachtsmarkt" ist aufgeteilt wie der
-  Nikolausmarkt im Kurpark: Titel „Weihnachtsmarkt", Ort Gersfeld,
-  Veranstaltungsort Wildpark. Zwei Tage überschneiden sich mit bestehenden
+  optional:** Steht keine Gemeinde fest, steht nur, was geliefert ist (z. B.
+  nur der Veranstaltungsort), und die strukturierten Daten bekommen dann keine
+  geratene Adresse. Für N4 Events und die Kneshecke kamen die Gemeinden
+  nachgereicht: „N4 ist Fulda Eventlocation", Kneshecke „müsste Dipperz sein"
+  (gegengeprüft: Knesheckenweg, Dipperz-Dörmbach). Zusammengesetzte Namen
+  sind aufgeteilt wie beim Nikolausmarkt im Kurpark — Titel, Ort,
+  Veranstaltungsort: „N4 Events Adventsmarkt" → Adventsmarkt · Fulda · N4
+  Events; „Wildpark Gersfeld Weihnachtsmarkt" → Weihnachtsmarkt · Gersfeld ·
+  Wildpark; 10. Wald-Weihnachtsmarkt · Dipperz · Grillrestaurant Kneshecke. Zwei Tage überschneiden sich mit bestehenden
   Terminen (15.11. Voradventsverkauf, 29.11. Villa Löwe) — wie schon am 6.12.
   zwei Stände parallel, nichts geändert. Nebenbei behoben: Die Spaltenmaße des
   Kalenders standen als Inline-Style und überstimmten die breiteren
