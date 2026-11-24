@@ -3,16 +3,16 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { Icon } from "@/components/ui/Icon";
-import { products } from "@/lib/products";
+import { isOrderable, products } from "@/lib/products";
 import { hasPhoto } from "@/lib/photos";
 
-/** Auswahl fürs Schaufenster auf der Startseite — Foto-Sorten zuerst.
- *  Wichtig: hasPhoto() berücksichtigt auch die relighteten Bilder —
- *  die Rohfeld-Sortierung ließ ausgerechnet den Bestseller verschwinden
- *  (Council R1). */
-const featured = [...products]
-  .sort((a, b) => Number(hasPhoto(b)) - Number(hasPhoto(a)))
-  .slice(0, 8);
+/** Auswahl fürs Schaufenster auf der Startseite — bestellbare Sorten zuerst,
+ *  darin Foto-Sorten zuerst. Wichtig: hasPhoto() berücksichtigt auch die
+ *  relighteten Bilder — die Rohfeld-Sortierung ließ ausgerechnet den
+ *  Bestseller verschwinden (Council R1). */
+const rank = (p: (typeof products)[number]) =>
+  Number(isOrderable(p)) * 2 + Number(hasPhoto(p));
+const featured = [...products].sort((a, b) => rank(b) - rank(a)).slice(0, 8);
 
 export function ShopTeaser() {
   return (
@@ -42,7 +42,7 @@ export function ShopTeaser() {
 
         <p className="mt-6 text-center text-sm text-moon-dim">
           Die 50-ml-Fläschchen findest du bei jeder Sorte als Größenoption — perfekt zum
-          Verschenken!
+          Verschenken! Gerade gibt es sie nur nach Verfügbarkeit.
         </p>
 
         <div className="mt-10 flex justify-center md:hidden">

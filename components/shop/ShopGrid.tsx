@@ -8,7 +8,10 @@ import { cn } from "@/lib/cn";
 /** Filterbare Produktliste mit Saison-Tabs (Ambient bleibt im Card-Accent). */
 export function ShopGrid() {
   const [filter, setFilter] = useState<SeasonKey | "all">("all");
-  const list = filter === "all" ? products : productsBySeason(filter);
+  // Ausverkauftes rückt ans Ende — erst kommt, was man gerade bestellen kann.
+  const list = [...(filter === "all" ? products : productsBySeason(filter))].sort(
+    (a, b) => Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)),
+  );
 
   return (
     <div>

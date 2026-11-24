@@ -12,7 +12,13 @@ export type AccentKey =
 export interface Size {
   label: string;
   price: number;
+  /** Nur noch Restbestand: bestellbar, aber mit Hinweis „nach Verfügbarkeit"
+   *  (Inhaber, November 2026: 50-ml-Fläschchen fast ausverkauft). */
+  limited?: boolean;
 }
+
+/** Hinweistext für Größen mit `limited`. */
+export const LIMITED_NOTE = "nach Verfügbarkeit";
 
 export interface Product {
   id: string;
@@ -31,6 +37,9 @@ export interface Product {
   badge?: string;
   /** Noch nicht bestellbar — wird als „Bald verfügbar" gezeigt. */
   comingSoon?: boolean;
+  /** Gerade ausverkauft (alle Größen) — nicht bestellbar. Der Text sagt, wann
+   *  es die Sorte wieder gibt, wortgetreu vom Inhaber. */
+  soldOut?: string;
   /** Dateiname in /media/products/ oder null (→ Platzhalter). */
   photo: string | null;
   /** Pairing-Idee (Kaffee / Cocktail / Dessert). */
@@ -70,7 +79,7 @@ export const products: Product[] = [
     seasonKeys: ["gj"],
     sizes: [
       { label: "250 ml", price: 15 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "honey",
     photo: "vanille.jpg",
@@ -88,9 +97,10 @@ export const products: Product[] = [
     seasonKeys: ["fs"],
     sizes: [
       { label: "250 ml", price: 16 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "sage",
+    soldOut: "Im Frühjahr wieder erhältlich",
     photo: "pistazie.jpg",
     pairing: "Flat White · Tiramisu · Spritz",
   },
@@ -106,7 +116,7 @@ export const products: Product[] = [
     seasonKeys: ["gj", "fs"],
     sizes: [
       { label: "250 ml", price: 16 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "lavender",
     photo: "lavendel-blaubeere.jpg",
@@ -124,7 +134,7 @@ export const products: Product[] = [
     seasonKeys: ["fs"],
     sizes: [
       { label: "250 ml", price: 16 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "plum",
     photo: "blaubeer-basilikum.jpg",
@@ -142,7 +152,7 @@ export const products: Product[] = [
     seasonKeys: ["fs"],
     sizes: [
       { label: "250 ml", price: 15 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "moon",
     photo: "kokos.jpg",
@@ -160,7 +170,7 @@ export const products: Product[] = [
     seasonKeys: ["he"],
     sizes: [
       { label: "250 ml", price: 16 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "pumpkin",
     badge: "Coming Soon",
@@ -180,10 +190,11 @@ export const products: Product[] = [
     seasonKeys: ["he"],
     sizes: [
       { label: "250 ml", price: 16 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "pumpkin",
     badge: "Bestseller",
+    soldOut: "Ab September wieder erhältlich",
     photo: null,
     pairing: "Latte · Cheesecake · Chai",
   },
@@ -199,7 +210,7 @@ export const products: Product[] = [
     seasonKeys: ["wi"],
     sizes: [
       { label: "250 ml", price: 15 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "cinnamon",
     photo: "spekulatius.jpg",
@@ -217,7 +228,7 @@ export const products: Product[] = [
     seasonKeys: ["wi"],
     sizes: [
       { label: "250 ml", price: 15 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "cinnamon",
     photo: "lebkuchen.jpg",
@@ -235,7 +246,7 @@ export const products: Product[] = [
     seasonKeys: ["wi"],
     sizes: [
       { label: "250 ml", price: 15 },
-      { label: "50 ml", price: 5.5 },
+      { label: "50 ml", price: 5.5, limited: true },
     ],
     accent: "cinnamon",
     photo: "zimt.jpg",
@@ -266,15 +277,33 @@ export function productsBySeason(key: SeasonKey | "all"): Product[] {
   return key === "all" ? products : products.filter((p) => p.seasonKeys.includes(key));
 }
 
-/** Die „beliebten Sorten" für den Hero-Quickpick. */
+/** Kann man die Sorte gerade bestellen? */
+export function isOrderable(p: Product): boolean {
+  return !p.comingSoon && !p.soldOut;
+}
+
+/** Ist diese Größe nur noch nach Verfügbarkeit zu haben? */
+export function isLimited(productId: string, sizeLabel: string): boolean {
+  const p = products.find((x) => x.id === productId);
+  return Boolean(p?.sizes.find((s) => s.label === sizeLabel)?.limited);
+}
+
+/** Die „beliebten Sorten" für den Hero-Quickpick: die ersten fünf, die gerade
+ *  bestellbar sind. Ausverkaufte rücken automatisch zurück, sobald `soldOut`
+ *  wieder entfernt wird; die hinteren Einträge sind Ersatz. */
 export const heroPicks = [
   "pumpkin-spice",
   "lavendel-blaubeere",
   "vanille",
   "pistazie",
   "spekulatius",
-].map((id) => {
-  const p = products.find((x) => x.id === id);
-  if (!p) throw new Error(`heroPick "${id}" existiert nicht im Katalog`);
-  return p;
-});
+  "lebkuchen",
+  "zimt",
+]
+  .map((id) => {
+    const p = products.find((x) => x.id === id);
+    if (!p) throw new Error(`heroPick "${id}" existiert nicht im Katalog`);
+    return p;
+  })
+  .filter(isOrderable)
+  .slice(0, 5);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Product } from "@/lib/products";
+import { LIMITED_NOTE, type Product } from "@/lib/products";
 import { photoSrc } from "@/lib/photos";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
@@ -28,7 +28,9 @@ export function BuyPanel({ product }: { product: Product }) {
       },
       qty,
     );
-    toast(`${qty}× ${product.name} (${active.label}) hinzugefügt`);
+    toast(
+      `${qty}× ${product.name} (${active.label}) hinzugefügt${active.limited ? ` · ${LIMITED_NOTE}` : ""}`,
+    );
     setQty(1);
   };
 
@@ -63,10 +65,21 @@ export function BuyPanel({ product }: { product: Product }) {
               </button>
             ))}
           </div>
+          {active.limited && !product.soldOut && (
+            <p className="mt-3 text-sm text-moon-dim">
+              Die {active.label.replace(" ", "-")}-Fläschchen gibt es gerade nur{" "}
+              {LIMITED_NOTE}.
+            </p>
+          )}
         </div>
       )}
 
-      {product.comingSoon ? (
+      {product.soldOut ? (
+        <div className="mt-6 rounded-lg border border-moon/15 bg-night-3/50 px-4 py-3.5 text-center">
+          <p className="text-sm font-semibold text-moon">Ausverkauft</p>
+          <p className="mt-0.5 text-sm text-moon-dim">{product.soldOut}</p>
+        </div>
+      ) : product.comingSoon ? (
         <div className="mt-6 flex items-center justify-center gap-2 rounded-lg border border-honey/25 bg-honey/5 py-3.5 text-sm font-semibold text-honey/80">
           <Icon name="check" size={16} /> Bald verfügbar — Coming Soon
         </div>

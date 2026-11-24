@@ -13,6 +13,7 @@ import { useVisualViewportHeight } from "@/lib/useVisualViewport";
 import { primaryBtn, secondaryBtn } from "@/lib/buttonStyles";
 import { Icon } from "@/components/ui/Icon";
 import { MoonMark } from "@/components/brand/MoonMark";
+import { isLimited, LIMITED_NOTE } from "@/lib/products";
 
 /** Ab dieser mailto-Länge verweigern manche Clients (Outlook ~2048) die URL. */
 const MAILTO_SAFE_LENGTH = 1800;
@@ -117,6 +118,11 @@ export function CartLayer() {
                       {it.size}
                       {it.qty > 1 && <> · {formatMoney(it.price)} / Stück</>}
                     </p>
+                    {isLimited(it.id, it.size) && (
+                      <p className="mt-0.5 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-honey/75">
+                        {LIMITED_NOTE}
+                      </p>
+                    )}
                     <div className="mt-2 flex items-center gap-2">
                       <QtyBtn onClick={() => setQty(it.key, it.qty - 1)} label="Weniger">
                         <Icon name="minus" size={14} />
@@ -584,6 +590,11 @@ function OrderModal({
                 <p className="mt-1 text-right text-xs text-moon-mute">
                   Versandkosten werden individuell berechnet.
                 </p>
+                {items.some((i) => isLimited(i.id, i.size)) && (
+                  <p className="mt-2 text-xs leading-relaxed text-moon-dim">
+                    Die 50-ml-Fläschchen gibt es gerade nur {LIMITED_NOTE}.
+                  </p>
+                )}
               </div>
 
               <form ref={formRef} onSubmit={submit} noValidate className="space-y-3">

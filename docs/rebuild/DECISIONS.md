@@ -258,3 +258,18 @@ Laufendes Log getroffener Entscheidungen (begründete Defaults statt Blockaden).
   Desktop-Werte; zweistellige Spannen wie „28–29" ragten dadurch in die
   Mond-Spalte. Jetzt als Klassen gesetzt, auf dem Handy mit etwas kleinerer
   Spannen-Ziffer.
+- **D37:** Bestand (Inhaber, 24.11.2026): **Bio-Pistazie** und **Bio-Pumpkin Spice**
+  sind in beiden Größen ausverkauft, mit Hinweis „Im Frühjahr wieder
+  erhältlich" bzw. „Ab September wieder erhältlich" (wortgetreu). Dafür hat
+  eine Sorte jetzt `soldOut` (der Hinweistext); sie ist nicht bestellbar, die
+  Karte zeigt „Ausverkauft" statt Badge und Warenkorb-Knopf, das Foto ist
+  gedimmt, im Shop rückt sie ans Ende, im „Weitere Sorten"-Regal und im
+  Startseiten-Schaufenster nach hinten; die „Beliebten Sorten" im Hero
+  überspringen sie und füllen mit Lebkuchen und Zimt auf (kommt automatisch
+  zurück, sobald `soldOut` entfernt ist). Produkt-JSON-LD meldet
+  `SoldOut`. Ein gespeicherter Warenkorb verliert ausverkaufte Sorten beim
+  Laden, damit sie nicht weiter bestellt werden. **Alle 50-ml-Fläschchen**
+  sind fast ausverkauft: weiter bestellbar, aber mit „nach Verfügbarkeit" (an
+  der Karte, auf der Produktseite, im Warenkorb, im Bestellformular, in der
+  Toast-Meldung; JSON-LD `LimitedAvailability`). Zurücknehmen: `soldOut` bzw.
+  `limited: true` in `lib/products.ts` entfernen.

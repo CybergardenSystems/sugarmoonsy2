@@ -259,3 +259,16 @@ Wochentage sind berechnet, nicht geliefert. Die Gemeinden für N4 Events
 (Fulda) und die Kneshecke (Dipperz) hat der Inhaber nachgereicht; „N4 Events
 Adventsmarkt" und „Wildpark Gersfeld Weihnachtsmarkt" sind in Titel, Ort und
 Veranstaltungsort aufgeteilt (wie „Nikolausmarkt im Kurpark").
+
+### Ausverkauft & „nach Verfügbarkeit" (Inhaber, 24.11.2026 — D37)
+
+| Wo | Text |
+|---|---|
+| Bio-Pistazie (Karte, Produktseite) | „Ausverkauft" · „Im Frühjahr wieder erhältlich" |
+| Bio-Pumpkin Spice (Karte, Produktseite) | „Ausverkauft" · „Ab September wieder erhältlich" |
+| 50 ml gewählt (Karte, Warenkorb) | „nach Verfügbarkeit" |
+| 50 ml gewählt (Produktseite) | „Die 50-ml-Fläschchen gibt es gerade nur nach Verfügbarkeit." |
+| Bestellformular (wenn 50 ml im Warenkorb) | „Die 50-ml-Fläschchen gibt es gerade nur nach Verfügbarkeit." |
+| Startseite, Shop-Schaufenster | „… perfekt zum Verschenken! Gerade gibt es sie nur nach Verfügbarkeit." |
+
+„Ausverkauft" ersetzt bei Pumpkin Spice vorübergehend das Badge „Bestseller".
