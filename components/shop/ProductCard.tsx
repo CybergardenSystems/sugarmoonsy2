@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { accentVar, type Product } from "@/lib/products";
+import { accentVar, LIMITED_NOTE, type Product } from "@/lib/products";
 import { useCart, formatMoney } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
 import { photoSrc } from "@/lib/photos";
@@ -39,7 +39,9 @@ export function ProductCard({
       },
       qty,
     );
-    toast(`${qty}× ${product.name} (${active.label}) hinzugefügt`);
+    toast(
+      `${qty}× ${product.name} (${active.label}) hinzugefügt${active.limited ? ` · ${LIMITED_NOTE}` : ""}`,
+    );
     setAdded(true);
     setQty(1);
     setTimeout(() => setAdded(false), 1300);
@@ -50,10 +52,16 @@ export function ProductCard({
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-honey/10 bg-night-2/70 transition-[translate,border-color] duration-200 ease-out-expo hover:-translate-y-1.5 hover:border-honey/30"
       style={{ ["--ac" as string]: ac }}
     >
-      {product.badge && (
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-honey px-2.5 py-0.5 font-mono text-[0.66rem] font-bold uppercase tracking-wide text-ink">
-          {product.badge}
+      {product.soldOut ? (
+        <span className="absolute left-3 top-3 z-10 rounded-full border border-moon/25 bg-night/80 px-2.5 py-0.5 font-mono text-[0.66rem] font-bold uppercase tracking-wide text-moon backdrop-blur">
+          Ausverkauft
         </span>
+      ) : (
+        product.badge && (
+          <span className="absolute left-3 top-3 z-10 rounded-full bg-honey px-2.5 py-0.5 font-mono text-[0.66rem] font-bold uppercase tracking-wide text-ink">
+            {product.badge}
+          </span>
+        )
       )}
 
       <Link
@@ -71,7 +79,10 @@ export function ProductCard({
               fill
               sizes="(max-width:1023px) 50vw, (max-width:1279px) 33vw, 300px"
               priority={priority}
-              className="object-cover object-center transition-[scale] duration-[450ms] ease-out-expo group-hover:scale-[1.05]"
+              className={cn(
+                "object-cover object-center transition-[scale] duration-[450ms] ease-out-expo group-hover:scale-[1.05]",
+                product.soldOut && "opacity-60 saturate-[0.6]",
+              )}
             />
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night-2 to-transparent" />
           </>
@@ -103,6 +114,11 @@ export function ProductCard({
             / {active.label}
           </span>
         </div>
+        {active.limited && !product.soldOut && (
+          <p className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-honey/75">
+            {LIMITED_NOTE}
+          </p>
+        )}
 
         {product.sizes.length > 1 && (
           <div
@@ -128,7 +144,18 @@ export function ProductCard({
           </div>
         )}
 
-        {product.comingSoon ? (
+        {product.soldOut ? (
+          <div className="mt-auto pt-4">
+            <div className="flex min-h-10 flex-col items-center justify-center rounded-xl border border-moon/15 bg-night-3/50 px-3 py-1.5 text-center">
+              <span className="text-[0.8rem] font-semibold text-moon-dim">
+                Ausverkauft
+              </span>
+              <span className="text-[0.72rem] leading-snug text-moon-mute">
+                {product.soldOut}
+              </span>
+            </div>
+          </div>
+        ) : product.comingSoon ? (
           <div className="mt-auto pt-4">
             <div className="flex h-10 items-center justify-center gap-1.5 rounded-xl border border-honey/25 bg-honey/5 text-[0.8rem] font-semibold text-honey/80">
               <Icon name="check" size={15} /> Bald verfügbar

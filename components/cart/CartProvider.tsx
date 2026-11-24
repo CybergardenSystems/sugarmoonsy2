@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { lockScroll, unlockScroll } from "@/lib/scrollLock";
+import { products } from "@/lib/products";
 
 export interface CartItem {
   key: string;
@@ -55,11 +56,17 @@ function isCartItem(x: unknown): x is CartItem {
   );
 }
 
+/** Was inzwischen ausverkauft ist, fällt beim Laden aus einem gespeicherten
+ *  Warenkorb heraus — sonst ließe es sich weiter bestellen. */
+const soldOutIds = new Set(products.filter((p) => p.soldOut).map((p) => p.id));
+
 function parseStoredCart(raw: string): CartItem[] | null {
   try {
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed) || !parsed.every(isCartItem)) return null;
-    return parsed.map((i) => ({ ...i, qty: Math.min(MAX_QTY, i.qty) }));
+    return parsed
+      .filter((i) => !soldOutIds.has(i.id))
+      .map((i) => ({ ...i, qty: Math.min(MAX_QTY, i.qty) }));
   } catch {
     return null;
   }

@@ -12,12 +12,12 @@ import { hasPhoto, photoSrc } from "@/lib/photos";
 import { site } from "@/data/site";
 
 /** Deterministische Auswahl fürs „Weitere Sorten"-Regal: gleiche Saison
- *  zuerst, dann Sorten mit Foto; Coming-Soon ans Ende. */
+ *  zuerst, dann Sorten mit Foto; Coming-Soon und Ausverkauftes ans Ende. */
 function relatedProducts(current: Product, count = 4): Product[] {
   const score = (p: Product) =>
     (p.season === current.season ? 4 : 0) +
     (hasPhoto(p) ? 2 : 0) +
-    (p.comingSoon ? -3 : 0);
+    (p.comingSoon || p.soldOut ? -3 : 0);
   return products
     .filter((p) => p.slug !== current.slug)
     .sort((a, b) => score(b) - score(a))
@@ -70,9 +70,13 @@ export default async function ProductPage({
       name: s.label,
       price: s.price.toFixed(2),
       priceCurrency: "EUR",
-      availability: product.comingSoon
-        ? "https://schema.org/PreOrder"
-        : "https://schema.org/InStock",
+      availability: product.soldOut
+        ? "https://schema.org/SoldOut"
+        : product.comingSoon
+          ? "https://schema.org/PreOrder"
+          : s.limited
+            ? "https://schema.org/LimitedAvailability"
+            : "https://schema.org/InStock",
       url: `${site.url}/shop/${product.slug}`,
     })),
   };
